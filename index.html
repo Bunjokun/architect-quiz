@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一級建築士 自分専用問題集</title>
+<style>
+  :root {
+    --blue: #2563eb;
+    --green: #16a34a;
+    --red: #dc2626;
+    --orange: #ea580c;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-500: #6b7280;
+    --gray-700: #374151;
+    --gray-900: #111827;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Sans", "Meiryo", sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-900);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: #1e3a5f;
+    color: white;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  header h1 { font-size: 17px; font-weight: 700; flex: 1; }
+  #navBack {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: none;
+  }
+  #navBack:hover { background: rgba(255,255,255,0.28); }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  /* ── Screen ── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── Shared ── */
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 10px;
+  }
+
+  /* ── Home ── */
+  .greeting { font-size: 21px; font-weight: 700; margin-bottom: 4px; }
+  .greeting-sub { color: var(--gray-500); font-size: 14px; margin-bottom: 20px; }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+    border: 1px solid var(--gray-200);
+  }
+  .stat-value { font-size: 26px; font-weight: 800; color: var(--blue); }
+  .stat-label { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+
+  .subject-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .subject-card {
+    background: white;
+    border: 2px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 18px;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s, transform .15s;
+    text-align: left;
+    user-select: none;
+  }
+  .subject-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(37,99,235,.15);
+  }
+  .subject-icon { font-size: 26px; margin-bottom: 6px; }
+  .subject-name { font-size: 17px; font-weight: 700; }
+  .subject-count { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+  .subject-accuracy {
+    margin-top: 10px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .accuracy-bar { flex: 1; height: 5px; background: var(--gray-200); border-radius: 3px; overflow: hidden; }
+  .accuracy-fill { height: 100%; border-radius: 3px; transition: width .5s; }
+  .badge-weak { background: #fee2e2; color: var(--red); font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 10px; display: inline-block; }
+
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .action-btn {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 13px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all .15s;
+    color: var(--gray-700);
+    text-align: left;
+  }
+  .action-btn:hover { background: var(--gray-50); border-color: var(--blue); color: var(--blue); }
+  .action-btn.danger:hover { border-color: var(--red); color: var(--red); }
+  .action-btn-icon { font-size: 18px; }
+
+  /* ── Subject ── */
+  .subject-header-card {
+    background: white;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+    border: 1px solid var(--gray-200);
+  }
+  .subject-header-title { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+  .subject-header-sub { font-size: 13px; color: var(--gray-500); }
+
+  .config-section {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    border: 1px solid var(--gray-200);
+  }
+  .config-section .section-title { margin-bottom: 10px; }
+
+  .mode-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .mode-card {
+    border: 2px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 13px;
+    cursor: pointer;
+    transition: all .12s;
+    background: white;
+  }
+  .mode-card:hover { border-color: var(--blue); }
+  .mode-card.selected { border-color: var(--blue); background: #eff6ff; }
+  .mode-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .mode-desc { font-size: 11px; color: var(--gray-500); }
+
+  .order-toggle {
+    display: flex;
+    gap: 8px;
+  }
+  .order-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid var(--gray-200);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    background: white;
+    text-align: center;
+    transition: all .12s;
+    color: var(--gray-700);
+  }
+  .order-btn:hover { border-color: var(--blue); }
+  .order-btn.selected { border-color: var(--blue); background: #eff6ff; color: var(--blue); }
+
+  .topic-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--gray-300);
+    font-size: 12px;
+    cursor: pointer;
+    background: white;
+    transition: all .12s;
+    color: var(--gray-700);
+    user-select: none;
+  }
+  .chip:hover { border-color: var(--blue); color: var(--blue); }
+  .chip.active { background: var(--blue); border-color: var(--blue); color: white; }
+
+  .start-btn {
+    width: 100%;
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background .2s;
+  }
+  .start-btn:hover { background: #1d4ed8; }
+  .drill-btn {
+    width: 100%;
+    background: transparent;
+    color: var(--blue);
+    border: 2px solid var(--blue);
+    padding: 13px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background .15s;
+  }
+  .drill-btn:hover { background: #eff6ff; }
+
+  /* ── Quiz ── */
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .progress-bar-wrap { flex: 1; height: 7px; background: var(--gray-200); border-radius: 4px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--blue); border-radius: 4px; transition: width .3s; }
+  .progress-text { font-size: 13px; color: var(--gray-500); white-space: nowrap; }
+  .q-number { font-size: 12px; font-weight: 700; color: var(--gray-500); white-space: nowrap; }
+
+  .question-card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    border: 1px solid var(--gray-200);
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  .question-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .tag {
+    padding: 2px 9px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .tag-topic { background: #dbeafe; color: #1e40af; }
+  .tag-format { background: #d1fae5; color: #065f46; }
+  .tag-weak { background: #fee2e2; color: #991b1b; }
+  .tag-new { background: #fef3c7; color: #92400e; }
+  .tag-diff-a { background: #dcfce7; color: #166534; }
+  .tag-diff-b { background: #f3f4f6; color: #374151; }
+  .tag-diff-c { background: #fce7f3; color: #9d174d; }
+
+  .question-text {
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+
+  /* 4択 */
+  .choices { display: flex; flex-direction: column; gap: 9px; }
+  .choice-btn {
+    background: var(--gray-50);
+    border: 2px solid var(--gray-200);
+    border-radius: 9px;
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
+    cursor: pointer;
+    transition: all .12s;
+    color: var(--gray-700);
+    width: 100%;
+  }
+  .choice-btn:hover:not(:disabled) { border-color: var(--blue); background: #eff6ff; }
+  .choice-btn.correct { border-color: var(--green) !important; background: #dcfce7 !important; color: #14532d; }
+  .choice-btn.wrong { border-color: var(--red) !important; background: #fee2e2 !important; color: #7f1d1d; }
+  .choice-btn.reveal { border-color: var(--green) !important; background: #dcfce7 !important; }
+  .choice-btn.pending { border-color: var(--blue) !important; background: #dbeafe !important; color: #1e3a8a; }
+  .choice-label { font-weight: 700; margin-right: 7px; }
+
+  /* 回答確認バー */
+  .confirm-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: #eff6ff;
+    border: 1.5px solid var(--blue);
+    border-radius: 10px;
+  }
+  .confirm-bar span { flex: 1; font-size: 13px; color: #1e40af; font-weight: 600; }
+  .confirm-btn {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .confirm-btn:hover { background: #1d4ed8; }
+  .confirm-cancel {
+    background: transparent;
+    color: var(--gray-500);
+    border: 1.5px solid var(--gray-300);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .confirm-cancel:hover { background: var(--gray-100); }
+
+  /* 数値 */
+  .blank-question { font-size: 15px; line-height: 2.2; }
+  .blank-input {
+    display: inline-block;
+    border: none;
+    border-bottom: 2px solid var(--blue);
+    width: 80px;
+    text-align: center;
+    font-size: 15px;
+    padding: 2px 4px;
+    margin: 0 4px;
+    background: transparent;
+    color: var(--gray-900);
+    outline: none;
+  }
+  .blank-input.correct { border-color: var(--green); color: var(--green); }
+  .blank-input.wrong { border-color: var(--red); color: var(--red); }
+  .submit-btn {
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 11px 26px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background .2s;
+  }
+  .submit-btn:hover { background: #1d4ed8; }
+  .submit-btn:disabled { background: var(--gray-300); cursor: default; }
+
+  /* 正誤 */
+  .truefalse-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+  .tf-btn {
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid var(--gray-200);
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .12s;
+    background: white;
+  }
+  .tf-btn.true-btn:hover:not(:disabled) { border-color: var(--green); color: var(--green); background: #f0fdf4; }
+  .tf-btn.false-btn:hover:not(:disabled) { border-color: var(--red); color: var(--red); background: #fef2f2; }
+  .tf-btn.correct { border-color: var(--green) !important; background: #dcfce7 !important; color: #14532d; }
+  .tf-btn.wrong { border-color: var(--red) !important; background: #fee2e2 !important; color: #7f1d1d; }
+  .tf-btn.reveal { border-color: var(--green) !important; background: #dcfce7 !important; color: #14532d; }
+  .tf-btn.pending { border-color: var(--blue) !important; background: #dbeafe !important; color: #1e3a8a !important; }
+
+  /* 解説 */
+  .explanation-card {
+    border-radius: 11px;
+    padding: 18px;
+    margin-bottom: 14px;
+    border-left: 4px solid;
+    display: none;
+  }
+  .explanation-card.correct { background: #f0fdf4; border-color: var(--green); }
+  .explanation-card.wrong { background: #fef2f2; border-color: var(--red); }
+  .explanation-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+  .explanation-body { font-size: 13px; line-height: 1.8; white-space: pre-wrap; color: var(--gray-700); }
+  .note-box {
+    margin-top: 12px;
+    background: #fef3c7;
+    border-radius: 7px;
+    padding: 9px 12px;
+    font-size: 12px;
+    color: #78350f;
+    display: flex;
+    gap: 7px;
+    align-items: flex-start;
+  }
+
+  .quiz-actions { display: flex; gap: 10px; margin-bottom: 20px; }
+  .btn-primary {
+    flex: 1;
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .btn-primary:hover { background: #1d4ed8; }
+  .btn-secondary {
+    background: white;
+    color: var(--gray-700);
+    border: 1px solid var(--gray-300);
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all .15s;
+    font-weight: 600;
+  }
+  .btn-secondary:hover { background: var(--gray-100); }
+
+  /* ── Results ── */
+  .result-hero {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 16px;
+    border: 1px solid var(--gray-200);
+  }
+  .result-score { font-size: 60px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+  .result-score.excellent { color: var(--green); }
+  .result-score.good { color: var(--blue); }
+  .result-score.poor { color: var(--orange); }
+  .result-score.bad { color: var(--red); }
+  .result-label { font-size: 15px; color: var(--gray-500); margin-bottom: 22px; }
+  .result-stats { display: flex; justify-content: center; gap: 28px; }
+  .result-stat { text-align: center; }
+  .result-stat-value { font-size: 22px; font-weight: 700; }
+  .result-stat-label { font-size: 11px; color: var(--gray-500); }
+
+  .panel {
+    background: white;
+    border-radius: 13px;
+    padding: 18px;
+    margin-bottom: 14px;
+    border: 1px solid var(--gray-200);
+  }
+  .panel-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--gray-700); }
+  .weak-item {
+    padding: 11px 0;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: 13px;
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+  }
+  .weak-item:last-child { border-bottom: none; }
+  .weak-badge {
+    min-width: 30px;
+    height: 22px;
+    border-radius: 11px;
+    background: #fee2e2;
+    color: var(--red);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .weak-text { flex: 1; line-height: 1.5; color: var(--gray-700); }
+  .weak-note { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+
+  /* ── Stats ── */
+  .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+  .stats-subject-card { background: white; border-radius: 12px; padding: 14px; border: 1px solid var(--gray-200); }
+  .stats-subject-name { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+  .topic-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .topic-row:last-child { border: none; }
+  .topic-acc { font-weight: 700; }
+  .topic-acc.good { color: var(--green); }
+  .topic-acc.mid { color: var(--orange); }
+  .topic-acc.bad { color: var(--red); }
+
+  .empty-state { text-align: center; padding: 32px 16px; color: var(--gray-500); }
+  .empty-icon { font-size: 40px; margin-bottom: 10px; }
+
+  @media (max-width: 480px) {
+    .subject-grid, .stats-bar, .mode-grid, .stats-grid, .quick-actions { grid-template-columns: 1fr; }
+    .result-stats { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <button id="navBack" onclick="goBack()">← 戻る</button>
+  <h1 id="headerTitle">一級建築士 問題集</h1>
+</header>
+
+<div class="container">
+
+  <!-- ── Home ── -->
+  <div class="screen active" id="screen-home">
+    <div class="greeting" id="greeting">おはようございます</div>
+    <div class="greeting-sub">今日も一問一問、着実に積み上げましょう。</div>
+
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-value" id="totalAnswered">0</div>
+        <div class="stat-label">解答済み</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="totalAccuracy">－</div>
+        <div class="stat-label">正解率</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="weakCount">0</div>
+        <div class="stat-label">苦手問題</div>
+      </div>
+    </div>
+
+    <div class="section-title">科目を選ぶ</div>
+    <div class="subject-grid" id="subjectGrid"></div>
+
+    <div class="section-title">クイックアクション</div>
+    <div class="quick-actions">
+      <button class="action-btn" onclick="startWeakMode()">
+        <span class="action-btn-icon">🎯</span>苦手問題のみ
+      </button>
+      <button class="action-btn" onclick="startAllRandom()">
+        <span class="action-btn-icon">🔀</span>全科目ランダム
+      </button>
+      <button class="action-btn" onclick="navTo('screen-stats')">
+        <span class="action-btn-icon">📊</span>成績を見る
+      </button>
+      <button class="action-btn" onclick="navTo('screen-stats')">
+        <span class="action-btn-icon">📈</span>全トピック成績
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Subject ── -->
+  <div class="screen" id="screen-subject">
+    <div class="subject-header-card">
+      <div class="subject-header-title" id="subjectHeaderTitle"></div>
+      <div class="subject-header-sub" id="subjectHeaderSub"></div>
+    </div>
+
+    <div class="config-section">
+      <div class="section-title">出題モード</div>
+      <div class="mode-grid">
+        <div class="mode-card selected" data-mode="all" onclick="selectMode(this)">
+          <div class="mode-title">📋 全問</div>
+          <div class="mode-desc">全ての問題を出題</div>
+        </div>
+        <div class="mode-card" data-mode="weak" onclick="selectMode(this)">
+          <div class="mode-title">🎯 苦手集中</div>
+          <div class="mode-desc">2回以上ミスした問題</div>
+        </div>
+        <div class="mode-card" data-mode="unanswered" onclick="selectMode(this)">
+          <div class="mode-title">🆕 未解答</div>
+          <div class="mode-desc">まだ解いていない問題</div>
+        </div>
+        <div class="mode-card" data-mode="review" onclick="selectMode(this)">
+          <div class="mode-title">🔄 直近の間違い</div>
+          <div class="mode-desc">前回間違えた問題</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="config-section">
+      <div class="section-title">出題順</div>
+      <div class="order-toggle">
+        <button class="order-btn selected" id="orderRandom" onclick="selectOrder('random')">🔀 ランダム</button>
+        <button class="order-btn" id="orderSeq" onclick="selectOrder('sequential')">📋 問題番号順</button>
+      </div>
+    </div>
+
+    <div class="config-section">
+      <div class="section-title">トピック絞り込み</div>
+      <div class="topic-chips" id="topicChips"></div>
+    </div>
+
+    <button class="start-btn" onclick="startQuiz()">スタート</button>
+    <button class="drill-btn" id="drillBtn" onclick="startDrill()">🔢 数値ドリル</button>
+  </div>
+
+  <!-- ── Drill ── -->
+  <div class="screen" id="screen-drill">
+    <div class="quiz-header">
+      <div class="q-number" id="drillNumber"></div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="drillProgressFill"></div></div>
+      <div class="progress-text" id="drillProgressText"></div>
+    </div>
+    <div class="question-card" id="drillCard">
+      <div class="question-meta" id="drillMeta"></div>
+      <div class="question-text" style="font-size:16px;font-weight:600;line-height:1.7" id="drillFront"></div>
+      <div id="drillRevealArea" style="display:none">
+        <div style="border-top:1px solid var(--gray-200);margin:14px 0"></div>
+        <div style="font-size:15px;color:#15803d;font-weight:700" id="drillBack"></div>
+      </div>
+    </div>
+    <div class="quiz-actions" style="flex-direction:column;gap:10px">
+      <button class="btn-primary" id="drillRevealBtn" onclick="drillReveal()">答えを見る</button>
+      <div id="drillJudge" style="display:none;gap:10px;width:100%">
+        <button class="tf-btn false-btn" style="flex:1" onclick="drillNext(false)">✕ 覚えてない</button>
+        <button class="tf-btn true-btn" style="flex:1" onclick="drillNext(true)">⭕ 覚えた</button>
+      </div>
+      <button class="btn-secondary" onclick="goBack()">終了</button>
+    </div>
+  </div>
+
+  <!-- ── Quiz ── -->
+  <div class="screen" id="screen-quiz">
+    <div class="quiz-header">
+      <div class="q-number" id="qNumber"></div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" id="progressText"></div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-meta" id="questionMeta"></div>
+      <div class="question-text" id="questionText"></div>
+      <div id="questionBody"></div>
+    </div>
+
+    <div class="explanation-card" id="explanationCard">
+      <div class="explanation-title" id="explanationTitle"></div>
+      <div class="explanation-body" id="explanationBody"></div>
+      <div class="note-box" id="noteBox" style="display:none">
+        <span>💡</span><span id="noteText"></span>
+      </div>
+    </div>
+
+    <div class="quiz-actions">
+      <button class="btn-secondary" id="btnSkip" onclick="skipQuestion()">スキップ</button>
+      <button class="btn-primary" id="btnNext" onclick="nextQuestion()" style="display:none">次の問題 →</button>
+    </div>
+  </div>
+
+  <!-- ── Results ── -->
+  <div class="screen" id="screen-results">
+    <div class="result-hero">
+      <div class="result-score" id="resultScore"></div>
+      <div class="result-label" id="resultLabel"></div>
+      <div class="result-stats">
+        <div class="result-stat">
+          <div class="result-stat-value" id="resultCorrect"></div>
+          <div class="result-stat-label">正解</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="resultWrong"></div>
+          <div class="result-stat-label">不正解</div>
+        </div>
+        <div class="result-stat">
+          <div class="result-stat-value" id="resultSkipped"></div>
+          <div class="result-stat-label">スキップ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="wrongListPanel"></div>
+
+    <div class="quiz-actions">
+      <button class="btn-secondary" onclick="goHome()">ホームへ</button>
+      <button class="btn-primary" id="btnRetry" onclick="retryWrong()">間違いを復習</button>
+    </div>
+  </div>
+
+  <!-- ── Stats ── -->
+  <div class="screen" id="screen-stats">
+    <div class="section-title">科目別成績</div>
+    <div class="stats-grid" id="statsGrid"></div>
+
+    <div class="section-title">苦手問題リスト（間違い回数順）</div>
+    <div class="panel" id="weakListStats"></div>
+
+    <button class="btn-secondary" onclick="goHome()" style="width:100%;margin-top:8px;">ホームへ戻る</button>
+  </div>
+
+</div>
+
+<script src="questions.js"></script>
+<script>
+// ─────────────────────────────────────────
+//  State
+// ─────────────────────────────────────────
+const state = {
+  subject: null,
+  mode: 'all',
+  order: 'random',
+  topics: [],
+  queue: [],
+  idx: 0,
+  results: [],
+  lastWrongIds: [],
+};
+
+// ─────────────────────────────────────────
+//  Storage
+// ─────────────────────────────────────────
+function loadData() {
+  try { return JSON.parse(localStorage.getItem('architect_v2') || '{}'); }
+  catch(e) { return {}; }
+}
+function saveData(d) {
+  localStorage.setItem('architect_v2', JSON.stringify(d));
+}
+function updateRecord(id, isCorrect) {
+  const d = loadData();
+  if (!d[id]) d[id] = { correct: 0, wrong: 0, lastResult: null };
+  if (isCorrect) { d[id].correct++; d[id].lastResult = 'correct'; }
+  else            { d[id].wrong++;   d[id].lastResult = 'wrong'; }
+  saveData(d);
+}
+
+// ─────────────────────────────────────────
+//  Navigation
+// ─────────────────────────────────────────
+let history = ['screen-home'];
+
+function navTo(id) {
+  _switchScreen(id);
+  history.push(id);
+  if (id === 'screen-stats') renderStats();
+}
+
+function goBack() {
+  history.pop();
+  const prev = history[history.length - 1] || 'screen-home';
+  _switchScreen(prev);
+  if (prev === 'screen-home') renderHome();
+}
+
+function goHome() {
+  history = ['screen-home'];
+  _switchScreen('screen-home');
+  renderHome();
+}
+
+function _switchScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  const titles = {
+    'screen-home':    ['一級建築士 問題集', false],
+    'screen-subject': ['科目設定', true],
+    'screen-quiz':    ['問題演習', true],
+    'screen-results': ['結果', true],
+    'screen-stats':   ['成績・統計', true],
+  };
+  const [title, showBack] = titles[id] || ['', false];
+  document.getElementById('headerTitle').textContent = title;
+  document.getElementById('navBack').style.display = showBack ? 'inline-block' : 'none';
+  window.scrollTo(0, 0);
+}
+
+// ─────────────────────────────────────────
+//  Home
+// ─────────────────────────────────────────
+function renderHome() {
+  const d = loadData();
+  const allQ = getAllQuestions();
+
+  let totalAns = 0, totalCorrect = 0, weakCount = 0;
+  allQ.forEach(q => {
+    const r = d[q.id];
+    if (r) {
+      totalAns   += r.correct + r.wrong;
+      totalCorrect += r.correct;
+      if (r.wrong >= 2) weakCount++;
+    }
+  });
+
+  document.getElementById('totalAnswered').textContent = totalAns;
+  document.getElementById('totalAccuracy').textContent =
+    totalAns > 0 ? Math.round(totalCorrect / totalAns * 100) + '%' : '－';
+  document.getElementById('weakCount').textContent = weakCount;
+
+  const h = new Date().getHours();
+  document.getElementById('greeting').textContent =
+    h < 11 ? 'おはようございます 🌅' :
+    h < 17 ? 'こんにちは 📐' : 'お疲れさまです 🌙';
+
+  const grid = document.getElementById('subjectGrid');
+  grid.innerHTML = '';
+  Object.entries(SUBJECTS).forEach(([key, sub]) => {
+    const qs = QUESTIONS[key] || [];
+    let c = 0, tot = 0;
+    qs.forEach(q => { const r = d[q.id]; if (r) { c += r.correct; tot += r.correct + r.wrong; } });
+    const acc = tot > 0 ? Math.round(c / tot * 100) : null;
+    const weakN = qs.filter(q => (d[q.id]?.wrong || 0) >= 2).length;
+    const accColor = acc === null ? '#e5e7eb' : acc >= 80 ? '#16a34a' : acc >= 60 ? '#f59e0b' : '#dc2626';
+
+    const card = document.createElement('div');
+    card.className = 'subject-card';
+    card.innerHTML = `
+      <div class="subject-icon">${sub.icon}</div>
+      <div class="subject-name">${sub.name}</div>
+      <div class="subject-count">${qs.length}問
+        ${weakN > 0 ? `&nbsp;<span class="badge-weak">苦手${weakN}</span>` : ''}
+      </div>
+      <div class="subject-accuracy">
+        <span style="color:var(--gray-500)">${acc !== null ? acc + '%' : '未解答'}</span>
+        <div class="accuracy-bar">
+          <div class="accuracy-fill" style="width:${acc || 0}%;background:${accColor}"></div>
+        </div>
+      </div>`;
+    card.addEventListener('click', () => openSubject(key));
+    grid.appendChild(card);
+  });
+}
+
+// ─────────────────────────────────────────
+//  Subject Setup
+// ─────────────────────────────────────────
+function openSubject(key) {
+  state.subject = key;
+  state.mode    = 'all';
+  state.order   = 'random';
+  state.topics  = [];
+
+  const sub = SUBJECTS[key];
+  const qs  = QUESTIONS[key] || [];
+  const d   = loadData();
+
+  let c = 0, tot = 0;
+  qs.forEach(q => { const r = d[q.id]; if (r) { c += r.correct; tot += r.correct + r.wrong; } });
+  const done = qs.filter(q => d[q.id]).length;
+
+  document.getElementById('subjectHeaderTitle').textContent = `${sub.icon} ${sub.name}`;
+  document.getElementById('subjectHeaderSub').textContent =
+    `${done}/${qs.length}問解答済　正解率 ${tot > 0 ? Math.round(c/tot*100) + '%' : '－'}`;
+
+  // Reset mode UI
+  document.querySelectorAll('.mode-card').forEach(el => el.classList.remove('selected'));
+  document.querySelector('[data-mode="all"]').classList.add('selected');
+
+  // Reset order UI
+  document.getElementById('orderRandom').classList.add('selected');
+  document.getElementById('orderSeq').classList.remove('selected');
+
+  // Topics
+  const chips = document.getElementById('topicChips');
+  chips.innerHTML = '';
+  const allChip = document.createElement('span');
+  allChip.className = 'chip active';
+  allChip.textContent = 'すべて';
+  allChip.dataset.topic = '__all__';
+  allChip.addEventListener('click', () => toggleTopic(allChip));
+  chips.appendChild(allChip);
+
+  (TOPICS[key] || []).forEach(t => {
+    const chip = document.createElement('span');
+    chip.className = 'chip';
+    chip.textContent = t;
+    chip.dataset.topic = t;
+    chip.addEventListener('click', () => toggleTopic(chip));
+    chips.appendChild(chip);
+  });
+
+  navTo('screen-subject');
+}
+
+function selectMode(el) {
+  document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.mode = el.dataset.mode;
+}
+
+function selectOrder(o) {
+  state.order = o;
+  document.getElementById('orderRandom').classList.toggle('selected', o === 'random');
+  document.getElementById('orderSeq').classList.toggle('selected', o === 'sequential');
+}
+
+function toggleTopic(el) {
+  const topic = el.dataset.topic;
+  if (topic === '__all__') {
+    document.querySelectorAll('#topicChips .chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    state.topics = [];
+    return;
+  }
+  document.querySelector('[data-topic="__all__"]').classList.remove('active');
+  el.classList.toggle('active');
+  state.topics = [...document.querySelectorAll('#topicChips .chip.active')]
+    .map(c => c.dataset.topic)
+    .filter(t => t !== '__all__');
+  if (state.topics.length === 0) {
+    document.querySelector('[data-topic="__all__"]').classList.add('active');
+  }
+}
+
+// ─────────────────────────────────────────
+//  Queue building
+// ─────────────────────────────────────────
+function getAllQuestions() {
+  return Object.values(QUESTIONS).flat();
+}
+
+function buildQueue(subject, mode, order, topics) {
+  const d = loadData();
+  let qs = subject === '__all__' ? getAllQuestions() : (QUESTIONS[subject] || []);
+  if (topics.length > 0) qs = qs.filter(q => topics.includes(q.topic));
+
+  if      (mode === 'weak')       qs = qs.filter(q => (d[q.id]?.wrong || 0) >= 2);
+  else if (mode === 'unanswered') qs = qs.filter(q => !d[q.id]);
+  else if (mode === 'review')     qs = qs.filter(q => d[q.id]?.lastResult === 'wrong');
+
+  return order === 'sequential' ? [...qs] : shuffle(qs);
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ─────────────────────────────────────────
+//  Start quiz
+// ─────────────────────────────────────────
+function startQuiz() {
+  const queue = buildQueue(state.subject, state.mode, state.order, state.topics);
+  if (queue.length === 0) { alert('該当する問題がありません。条件を変更してください。'); return; }
+  _launchQuiz(queue);
+}
+
+// ── 数値ドリル ──
+const drillState = { queue: [], idx: 0, revealed: false };
+
+function startDrill() {
+  const cards = shuffle([...(DRILLS[state.subject] || [])]);
+  if (cards.length === 0) { alert('この科目の数値ドリルはまだありません。'); return; }
+  drillState.queue = cards;
+  drillState.idx = 0;
+  navTo('screen-drill');
+  renderDrillCard();
+}
+
+function renderDrillCard() {
+  const card = drillState.queue[drillState.idx];
+  const total = drillState.queue.length;
+  const i = drillState.idx;
+  document.getElementById('drillNumber').textContent = `数値ドリル ${i + 1} / ${total}`;
+  document.getElementById('drillProgressFill').style.width = `${(i / total) * 100}%`;
+  document.getElementById('drillProgressText').textContent = `${i + 1} / ${total}`;
+  document.getElementById('drillMeta').textContent = card.topic;
+  document.getElementById('drillFront').textContent = card.front;
+  document.getElementById('drillBack').textContent = card.back;
+  document.getElementById('drillRevealArea').style.display = 'none';
+  document.getElementById('drillRevealBtn').style.display = 'block';
+  document.getElementById('drillJudge').style.display = 'none';
+  drillState.revealed = false;
+}
+
+function drillReveal() {
+  document.getElementById('drillRevealArea').style.display = 'block';
+  document.getElementById('drillRevealBtn').style.display = 'none';
+  document.getElementById('drillJudge').style.display = 'flex';
+  drillState.revealed = true;
+}
+
+function drillNext(remembered) {
+  if (!drillState.revealed) return;
+  // 覚えてないカードは末尾に再追加
+  if (!remembered) drillState.queue.push(drillState.queue[drillState.idx]);
+  drillState.idx++;
+  if (drillState.idx >= drillState.queue.length) {
+    alert('数値ドリル完了！すべて覚えました🎉');
+    goBack();
+    return;
+  }
+  renderDrillCard();
+}
+
+function startWeakMode() {
+  const d = loadData();
+  const weak = getAllQuestions().filter(q => (d[q.id]?.wrong || 0) >= 2);
+  if (weak.length === 0) { alert('苦手問題はまだありません！どんどん解いてみましょう。'); return; }
+  state.subject = '__all__';
+  _launchQuiz(shuffle(weak));
+}
+
+function startAllRandom() {
+  state.subject = '__all__';
+  _launchQuiz(shuffle(getAllQuestions()));
+}
+
+function _launchQuiz(queue) {
+  state.queue   = queue;
+  state.idx     = 0;
+  state.results = [];
+  navTo('screen-quiz');
+  renderQuestion();
+}
+
+// ─────────────────────────────────────────
+//  Quiz render
+// ─────────────────────────────────────────
+function getQuestionLabel(q) {
+  // e.g. "ko001" → "構造 No.001"
+  const map = { ko: '構造', se: '施工', ke: '計画', ev: '環境設備', ki: '環境設備', ho: '法規' };
+  const prefix = q.id.replace(/[0-9]/g, '');
+  const num    = q.id.replace(/[^0-9]/g, '');
+  const label  = map[prefix] || prefix;
+  return `${label} No.${num}`;
+}
+
+function renderQuestion() {
+  const q    = state.queue[state.idx];
+  const d    = loadData();
+  const rec  = d[q.id] || { correct: 0, wrong: 0 };
+  const total = state.queue.length;
+
+  // Header
+  document.getElementById('qNumber').textContent = getQuestionLabel(q);
+  document.getElementById('progressFill').style.width = `${(state.idx / total) * 100}%`;
+  document.getElementById('progressText').textContent  = `${state.idx + 1} / ${total}`;
+
+  // Meta
+  const isWeak = rec.wrong >= 2;
+  const isNew  = !d[q.id];
+  const fmtMap = { '4choice': '4択', 'numerical': '数値記入', 'truefalse': '正誤判定' };
+  const diffLabel = { A: '🟢 A 基礎', B: '🟡 B 標準', C: '🔴 C 応用' };
+  const diffClass = { A: 'tag-diff-a', B: 'tag-diff-b', C: 'tag-diff-c' };
+  const diff = q.difficulty || 'B';
+  let meta = `<span class="tag tag-topic">${q.topic}</span><span class="tag tag-format">${fmtMap[q.format] || q.format}</span><span class="tag ${diffClass[diff]}">${diffLabel[diff]}</span>`;
+  if (isWeak) meta += `<span class="tag tag-weak">⚠ 苦手（${rec.wrong}回ミス）</span>`;
+  if (isNew)  meta += `<span class="tag tag-new">NEW</span>`;
+  document.getElementById('questionMeta').innerHTML = meta;
+
+  // Question text（数値記入は本文中に穴埋めを表示するため非表示）
+  const qtEl = document.getElementById('questionText');
+  if (q.format === 'numerical') {
+    qtEl.style.display = 'none';
+  } else {
+    qtEl.style.display = '';
+    qtEl.textContent = q.question;
+  }
+
+  // Body
+  const body = document.getElementById('questionBody');
+  body.innerHTML = '';
+
+  if (q.format === '4choice') {
+    const wrap = document.createElement('div');
+    wrap.className = 'choices';
+    const labels = ['①', '②', '③', '④'];
+    (q.choices || []).forEach((text, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'choice-btn';
+      btn.id = `choice${i}`;
+      btn.innerHTML = `<span class="choice-label">${labels[i]}</span>${text}`;
+      btn.addEventListener('click', () => answer4Choice(i));
+      wrap.appendChild(btn);
+    });
+    body.appendChild(wrap);
+
+  } else if (q.format === 'numerical') {
+    let idx = 0;
+    const div = document.createElement('div');
+    div.className = 'blank-question';
+    div.innerHTML = q.question.replace(/（　）/g,
+      () => `<input class="blank-input" id="blank${idx++}" type="text" placeholder="?">`);
+    body.appendChild(div);
+    const btn = document.createElement('button');
+    btn.className = 'submit-btn';
+    btn.textContent = '答え合わせ';
+    btn.addEventListener('click', answerNumerical);
+    body.appendChild(btn);
+
+  } else if (q.format === 'truefalse') {
+    const wrap = document.createElement('div');
+    wrap.className = 'truefalse-btns';
+    const trueBtn = document.createElement('button');
+    trueBtn.className = 'tf-btn true-btn';
+    trueBtn.id = 'tfTrue';
+    trueBtn.textContent = '⭕ 正しい';
+    trueBtn.addEventListener('click', () => answerTF(true));
+    const falseBtn = document.createElement('button');
+    falseBtn.className = 'tf-btn false-btn';
+    falseBtn.id = 'tfFalse';
+    falseBtn.textContent = '✕ 誤り';
+    falseBtn.addEventListener('click', () => answerTF(false));
+    wrap.appendChild(trueBtn);
+    wrap.appendChild(falseBtn);
+    body.appendChild(wrap);
+  }
+
+  document.getElementById('explanationCard').style.display = 'none';
+  document.getElementById('btnNext').style.display  = 'none';
+  document.getElementById('btnSkip').style.display  = 'inline-block';
+}
+
+// ─────────────────────────────────────────
+//  Answers
+// ─────────────────────────────────────────
+function showExplanation(isCorrect) {
+  const q = state.queue[state.idx];
+  const card = document.getElementById('explanationCard');
+  card.className = `explanation-card ${isCorrect ? 'correct' : 'wrong'}`;
+  card.style.display = 'block';
+  document.getElementById('explanationTitle').textContent = isCorrect ? '✅ 正解！' : '❌ 不正解';
+  document.getElementById('explanationBody').textContent = q.explanation || '';
+  const noteBox = document.getElementById('noteBox');
+  if (q.note) {
+    document.getElementById('noteText').textContent = q.note;
+    noteBox.style.display = 'flex';
+  } else {
+    noteBox.style.display = 'none';
+  }
+  document.getElementById('btnNext').style.display = 'inline-block';
+  document.getElementById('btnSkip').style.display = 'none';
+  updateRecord(q.id, isCorrect);
+  state.results.push({ id: q.id, correct: isCorrect, skipped: false });
+}
+
+let pendingChoice = null;
+
+function select4Choice(i) {
+  // highlight selection, show confirm bar
+  document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('pending'));
+  document.getElementById(`choice${i}`).classList.add('pending');
+  pendingChoice = i;
+
+  let bar = document.getElementById('confirmBar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'confirmBar';
+    bar.className = 'confirm-bar';
+    bar.innerHTML = `<span>この選択肢で回答しますか？</span>
+      <button class="confirm-cancel" id="confirmCancel">キャンセル</button>
+      <button class="confirm-btn" id="confirmOk">回答する</button>`;
+    document.getElementById('questionBody').appendChild(bar);
+    document.getElementById('confirmCancel').addEventListener('click', cancel4Choice);
+    document.getElementById('confirmOk').addEventListener('click', commit4Choice);
+  }
+  bar.style.display = 'flex';
+}
+
+function cancel4Choice() {
+  document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('pending'));
+  pendingChoice = null;
+  const bar = document.getElementById('confirmBar');
+  if (bar) bar.style.display = 'none';
+}
+
+function commit4Choice() {
+  if (pendingChoice === null) return;
+  const i = pendingChoice;
+  const q = state.queue[state.idx];
+  document.querySelectorAll('.choice-btn').forEach(b => { b.disabled = true; b.classList.remove('pending'); });
+  const bar = document.getElementById('confirmBar');
+  if (bar) bar.remove();
+  pendingChoice = null;
+  const ok = i === q.answer;
+  document.getElementById(`choice${i}`).classList.add(ok ? 'correct' : 'wrong');
+  if (!ok) document.getElementById(`choice${q.answer}`).classList.add('reveal');
+  showExplanation(ok);
+}
+
+function answer4Choice(i) {
+  select4Choice(i);
+}
+
+function answerNumerical() {
+  const q = state.queue[state.idx];
+  let allOk = true;
+  (q.blanks || []).forEach((ans, i) => {
+    const inp = document.getElementById(`blank${i}`);
+    if (!inp) return;
+    inp.disabled = true;
+    const ok = inp.value.trim() === ans;
+    if (!ok) allOk = false;
+    inp.classList.add(ok ? 'correct' : 'wrong');
+  });
+  const btn = document.querySelector('.submit-btn');
+  if (btn) btn.disabled = true;
+  showExplanation(allOk);
+}
+
+let pendingTF = null;
+
+function selectTF(val) {
+  pendingTF = val;
+  document.getElementById('tfTrue').classList.toggle('pending', val === true);
+  document.getElementById('tfFalse').classList.toggle('pending', val === false);
+
+  let bar = document.getElementById('confirmBarTF');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'confirmBarTF';
+    bar.className = 'confirm-bar';
+    bar.innerHTML = `<span>この判定で回答しますか？</span>
+      <button class="confirm-cancel" id="confirmCancelTF">キャンセル</button>
+      <button class="confirm-btn" id="confirmOkTF">回答する</button>`;
+    document.getElementById('questionBody').appendChild(bar);
+    document.getElementById('confirmCancelTF').addEventListener('click', cancelTF);
+    document.getElementById('confirmOkTF').addEventListener('click', commitTF);
+  }
+  bar.style.display = 'flex';
+}
+
+function cancelTF() {
+  pendingTF = null;
+  document.getElementById('tfTrue').classList.remove('pending');
+  document.getElementById('tfFalse').classList.remove('pending');
+  const bar = document.getElementById('confirmBarTF');
+  if (bar) bar.style.display = 'none';
+}
+
+function commitTF() {
+  if (pendingTF === null) return;
+  const val = pendingTF;
+  const q = state.queue[state.idx];
+  const ok = val === q.answer;
+  document.getElementById('tfTrue').disabled  = true;
+  document.getElementById('tfFalse').disabled = true;
+  document.getElementById('tfTrue').classList.remove('pending');
+  document.getElementById('tfFalse').classList.remove('pending');
+  const bar = document.getElementById('confirmBarTF');
+  if (bar) bar.remove();
+  pendingTF = null;
+  document.getElementById(val ? 'tfTrue' : 'tfFalse').classList.add(ok ? 'correct' : 'wrong');
+  if (!ok) document.getElementById(q.answer ? 'tfTrue' : 'tfFalse').classList.add('reveal');
+  showExplanation(ok);
+}
+
+function answerTF(val) {
+  selectTF(val);
+}
+
+function skipQuestion() {
+  const q = state.queue[state.idx];
+  state.results.push({ id: q.id, correct: false, skipped: true });
+  nextQuestion();
+}
+
+function nextQuestion() {
+  state.idx++;
+  if (state.idx >= state.queue.length) showResults();
+  else { renderQuestion(); window.scrollTo(0, 0); }
+}
+
+// ─────────────────────────────────────────
+//  Results
+// ─────────────────────────────────────────
+function showResults() {
+  const res      = state.results;
+  const correct  = res.filter(r => r.correct).length;
+  const wrong    = res.filter(r => !r.correct && !r.skipped).length;
+  const skipped  = res.filter(r => r.skipped).length;
+  const total    = res.length;
+  const pct      = total > 0 ? Math.round(correct / total * 100) : 0;
+
+  const scoreEl = document.getElementById('resultScore');
+  scoreEl.textContent = pct + '%';
+  scoreEl.className = 'result-score ' +
+    (pct >= 80 ? 'excellent' : pct >= 60 ? 'good' : pct >= 40 ? 'poor' : 'bad');
+
+  const labels = ['もう一息…💪', '復習あるのみ📖', 'いい調子！🙂', '素晴らしい！🎉'];
+  document.getElementById('resultLabel').textContent = labels[pct >= 80 ? 3 : pct >= 60 ? 2 : pct >= 40 ? 1 : 0];
+  document.getElementById('resultCorrect').textContent = correct;
+  document.getElementById('resultWrong').textContent   = wrong;
+  document.getElementById('resultSkipped').textContent = skipped;
+
+  const wrongIds = res.filter(r => !r.correct).map(r => r.id);
+  state.lastWrongIds = wrongIds;
+
+  const panel = document.getElementById('wrongListPanel');
+  if (wrongIds.length === 0) {
+    panel.innerHTML = '<div class="empty-state"><div class="empty-icon">🎉</div>全問正解！完璧です</div>';
+  } else {
+    panel.innerHTML = `<div class="panel-title">間違えた問題（${wrongIds.length}問）</div>`;
+    const allQ = getAllQuestions();
+    const d = loadData();
+    wrongIds.forEach(id => {
+      const q  = allQ.find(x => x.id === id);
+      if (!q) return;
+      const wc = d[id]?.wrong || 0;
+      const item = document.createElement('div');
+      item.className = 'weak-item';
+      item.innerHTML = `
+        <div class="weak-badge">${wc}回</div>
+        <div class="weak-text">
+          <strong>${getQuestionLabel(q)}</strong> ${q.topic}<br>
+          ${q.question.slice(0, 45)}…
+          ${q.note ? `<div class="weak-note">💡 ${q.note}</div>` : ''}
+        </div>`;
+      panel.appendChild(item);
+    });
+  }
+
+  document.getElementById('btnRetry').style.display = wrongIds.length > 0 ? 'inline-block' : 'none';
+  navTo('screen-results');
+}
+
+function retryWrong() {
+  if (state.lastWrongIds.length === 0) { goHome(); return; }
+  const allQ = getAllQuestions();
+  _launchQuiz(shuffle(allQ.filter(q => state.lastWrongIds.includes(q.id))));
+}
+
+// ─────────────────────────────────────────
+//  Stats
+// ─────────────────────────────────────────
+function renderStats() {
+  const d    = loadData();
+  const grid = document.getElementById('statsGrid');
+  grid.innerHTML = '';
+
+  Object.entries(SUBJECTS).forEach(([key, sub]) => {
+    const card = document.createElement('div');
+    card.className = 'stats-subject-card';
+    let html = `<div class="stats-subject-name">${sub.icon} ${sub.name}</div>`;
+    (TOPICS[key] || []).forEach(topic => {
+      const qs = (QUESTIONS[key] || []).filter(q => q.topic === topic);
+      let c = 0, tot = 0;
+      qs.forEach(q => { const r = d[q.id]; if (r) { c += r.correct; tot += r.correct + r.wrong; } });
+      const acc = tot > 0 ? Math.round(c / tot * 100) : null;
+      const cls = acc === null ? '' : acc >= 80 ? 'good' : acc >= 60 ? 'mid' : 'bad';
+      html += `<div class="topic-row">
+        <span>${topic}</span>
+        <span class="topic-acc ${cls}">${acc !== null ? acc + '%' : '－'} <span style="font-weight:400;color:var(--gray-500)">(${tot}問)</span></span>
+      </div>`;
+    });
+    card.innerHTML = html;
+    grid.appendChild(card);
+  });
+
+  const allQ = getAllQuestions();
+  const weak = allQ
+    .filter(q => (d[q.id]?.wrong || 0) >= 1)
+    .sort((a, b) => (d[b.id]?.wrong || 0) - (d[a.id]?.wrong || 0))
+    .slice(0, 20);
+
+  const panel = document.getElementById('weakListStats');
+  panel.innerHTML = '';
+  if (weak.length === 0) {
+    panel.innerHTML = '<div class="empty-state"><div class="empty-icon">✨</div>苦手問題はまだありません</div>';
+  } else {
+    weak.forEach(q => {
+      const wc = d[q.id]?.wrong   || 0;
+      const cc = d[q.id]?.correct || 0;
+      const item = document.createElement('div');
+      item.className = 'weak-item';
+      item.innerHTML = `
+        <div class="weak-badge">${wc}回</div>
+        <div class="weak-text">
+          <strong>${getQuestionLabel(q)}</strong> ${q.topic}
+          <div class="weak-note">正解${cc}回 / 間違い${wc}回${q.note ? ` | 💡 ${q.note}` : ''}</div>
+        </div>`;
+      panel.appendChild(item);
+    });
+  }
+}
+
+// ─────────────────────────────────────────
+//  Utils
+// ─────────────────────────────────────────
+function confirmReset() {
+  if (confirm('全ての学習記録をリセットします。よろしいですか？')) {
+    localStorage.removeItem('architect_v2');
+    renderHome();
+  }
+}
+
+// ─────────────────────────────────────────
+//  Init
+// ─────────────────────────────────────────
+renderHome();
+</script>
+</body>
+</html>
