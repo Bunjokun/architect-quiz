@@ -266,10 +266,18 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 // ═══════════════════════════════════════════
-// Firebase 初期化
+// Firebase 初期化（Config埋め込み済み）
 // ═══════════════════════════════════════════
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCruCxXx8GuJ1PQ3hIJuFShtF5KOk41E2g",
+  authDomain: "architect-kakomon.firebaseapp.com",
+  projectId: "architect-kakomon",
+  storageBucket: "architect-kakomon.firebasestorage.app",
+  messagingSenderId: "1049865830305",
+  appId: "1:1049865830305:web:0689fe3aedfceaf94315e0"
+};
+
 let db = null;
-let unsubscribe = null;
 
 function initFirebase(config) {
   try {
@@ -286,16 +294,10 @@ function initFirebase(config) {
   }
 }
 
-// 起動時: 保存済みconfigがあれば自動接続
-const savedConfig = localStorage.getItem('fb_config');
-if (savedConfig) {
-  try {
-    initFirebase(JSON.parse(savedConfig));
-    document.getElementById('setup-connected').style.display = 'block';
-    document.getElementById('setup-guide').style.display = 'none';
-    updateConnectedMsg();
-  } catch(e) {}
-}
+// 起動時に自動接続
+initFirebase(FIREBASE_CONFIG);
+// 設定ページ用にlocalStorageにも保存
+localStorage.setItem('fb_config', JSON.stringify(FIREBASE_CONFIG));
 
 // ─── 設定ページ関数をwindowに公開 ───
 window.saveFirebaseConfig = function() {
