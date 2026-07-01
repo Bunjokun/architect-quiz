@@ -74,6 +74,15 @@ select{padding:8px 10px;border:1px solid #d0d5e0;border-radius:6px;font-size:14p
 .subject-bar{margin-top:6px;background:#eee;border-radius:4px;height:8px;overflow:hidden}
 .subject-bar .fill{height:100%;background:#4f8ef7;border-radius:4px}
 
+/* ホーム成績表 */
+.home-table{width:100%;border-collapse:collapse;font-size:13px}
+.home-table th{background:#1a2744;color:#fff;padding:8px 10px;text-align:center;font-size:12px;white-space:nowrap}
+.home-table td{padding:7px 10px;text-align:center;border-bottom:1px solid #eee;white-space:nowrap}
+.home-table tr:hover td{background:#f5f7fb}
+.home-table td.year-col{font-weight:700;color:#1a2744;text-align:left}
+.cell-pass{background:#d5f5e3;color:#1e8449;font-weight:700;border-radius:4px;padding:2px 6px;display:inline-block}
+.cell-fail{background:#fde8e8;color:#c0392b;font-weight:700;border-radius:4px;padding:2px 6px;display:inline-block}
+.cell-none{color:#ccc}
 /* 設定ページ */
 .setup-box{background:#fff;border-radius:10px;padding:20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .setup-box h3{font-size:15px;font-weight:700;margin-bottom:10px;color:#1a2744}
@@ -94,14 +103,24 @@ input.id-input{width:100%;padding:10px 12px;border:1.5px solid #d0d5e0;border-ra
   <span class="sync-status sync-off" id="sync-badge">● オフライン</span>
 </header>
 <nav>
-  <button class="active" onclick="showPage('p-input')">📝 解答入力</button>
+  <button class="active" onclick="showPage('p-home')">🏠 ホーム</button>
+  <button onclick="showPage('p-input')">📝 解答入力</button>
   <button onclick="showPage('p-history')">📋 履歴</button>
   <button onclick="showPage('p-stats')">📊 統計</button>
   <button onclick="showPage('p-setup')">⚙️ 設定</button>
 </nav>
 
+<!-- ═══ ホーム ═══ -->
+<div class="page active" id="p-home">
+  <div class="card">
+    <h2>受験記録 一覧</h2>
+    <p style="font-size:12px;color:#888;margin-bottom:12px">各科目の最高点を表示。緑＝基準超、赤＝未達、−＝未受験</p>
+    <div style="overflow-x:auto"><div id="home-table"></div></div>
+  </div>
+</div>
+
 <!-- ═══ 解答入力 ═══ -->
-<div class="page active" id="p-input">
+<div class="page" id="p-input">
   <div class="card">
     <h2>年度・科目を選択</h2>
     <div class="sel-row">
@@ -407,8 +426,9 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const idx = ['p-input','p-history','p-stats','p-setup'].indexOf(id);
+  const idx = ['p-home','p-input','p-history','p-stats','p-setup'].indexOf(id);
   document.querySelectorAll('nav button')[idx].classList.add('active');
+  if (id === 'p-home')    renderHome();
   if (id === 'p-history') renderHistory();
   if (id === 'p-stats')   renderStats();
   if (id === 'p-setup')   initSetupPage();
@@ -434,10 +454,16 @@ function buildGrid() {
   document.getElementById('grid-title').textContent = `${year}年 ${SUB_NAMES[sub]}（全${n}問）`;
   const grid = document.getElementById('ans-grid');
   grid.innerHTML = '';
-  for (let i = 1; i <= n; i++) {
+  const half = Math.ceil(n / 2);
+  const order = [];
+  for (let r = 0; r < half; r++) {
+    order.push(r + 1);
+    if (r + half + 1 <= n) order.push(r + half + 1);
+  }
+  for (const i of order) {
     const div = document.createElement('div');
     div.className = 'ans-item';
-    div.innerHTML = `<label class="qlabel">問 ${i}</label><div class="radio-group">` +
+    div.innerHTML = `<label class="qlabel">問${i}</label><div class="radio-group">` +
       [1,2,3,4].map(v =>
         `<input type="radio" name="q${i}" id="q${i}_${v}" value="${v}">` +
         `<label for="q${i}_${v}">${v}</label>`).join('') + '</div>';
@@ -571,6 +597,7 @@ async function renderHistory() {
         <span class="hist-score">${e.score}/${e.total}</span>
         <span style="font-size:12px;color:${ok?'#27ae60':'#e74c3c'}">${ok?'✓ 基準超':'✗ 未達'}</span>
         <span class="hist-date">${ds}</span>
+        <button class="btn btn-danger btn-sm" style="margin-left:auto;flex-shrink:0" onclick="event.stopPropagation();deleteHistoryEntry('${e.date}')">削除</button>
       </div>
       <div class="hist-wrongs">${wrStr}</div>
       <div class="hist-detail">
@@ -590,6 +617,62 @@ async function clearHistory() {
   renderHistory();
 }
 window.clearHistory = clearHistory;
+
+async function deleteHistoryEntry(date) {
+  if (!confirm('この記録を削除しますか？')) return;
+  let h = getLocalHistory();
+  h = h.filter(e => e.date !== date);
+  setLocalHistory(h);
+  if (window.__deleteEntryFromCloud) await window.__deleteEntryFromCloud(date);
+  renderHistory();
+  renderHome();
+}
+window.deleteHistoryEntry = deleteHistoryEntry;
+
+// ═══════════════════════════════════════════════
+// ホーム成績表
+// ═══════════════════════════════════════════════
+function renderHome() {
+  const h = getLocalHistory();
+  const el = document.getElementById('home-table');
+  const years = Object.keys(ANSWERS).sort().reverse();
+  const subs = ['I','II','III','IV','V'];
+  const subLabels = {'I':'計画','II':'環境・設備','III':'法規','IV':'構造','V':'施工'};
+
+  // 年度×科目の最高点を集計
+  const best = {};
+  h.forEach(e => {
+    const k = e.year + '_' + e.sub;
+    if (!best[k] || e.score > best[k].score) best[k] = e;
+  });
+
+  if (h.length === 0) {
+    el.innerHTML = '<div class="empty">まだ記録がありません。<br>解答入力から受験を記録しましょう。</div>';
+    return;
+  }
+
+  let html = `<table class="home-table"><thead><tr>
+    <th style="text-align:left">年度</th>
+    ${subs.map(s=>`<th>${subLabels[s]}</th>`).join('')}
+  </tr></thead><tbody>`;
+
+  years.forEach(y => {
+    const rowData = subs.map(s => best[y+'_'+s]);
+    if (rowData.every(d => !d)) return;
+    html += `<tr><td class="year-col">${y}年</td>`;
+    subs.forEach(s => {
+      const d = best[y+'_'+s];
+      if (!d) { html += `<td><span class="cell-none">−</span></td>`; return; }
+      const pass = d.score >= SUB_PASS[s];
+      html += `<td><span class="${pass?'cell-pass':'cell-fail'}">${d.score}/${d.total}</span></td>`;
+    });
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+window.renderHome = renderHome;
 
 // ═══════════════════════════════════════════════
 // 統計
@@ -661,6 +744,7 @@ window.saveStudyId = function() {
 
 // 初期化
 buildGrid();
+renderHome();
 </script>
 </body>
 </html>
