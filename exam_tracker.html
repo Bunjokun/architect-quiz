@@ -54,7 +54,14 @@ select{padding:8px 10px;border:1px solid #d0d5e0;border-radius:6px;font-size:14p
 .q-btn.ng:hover{background:#e74c3c;color:#fff}
 .q-btn.skip{background:#f0f0f0;color:#999;cursor:default}
 .explanation{background:#fff7e6;border:1px solid #f39c12;border-radius:8px;padding:14px;margin-top:12px;font-size:13px;line-height:1.8}
-.explanation .ex-title{font-weight:700;color:#c0392b;font-size:14px;margin-bottom:6px}
+.explanation .ex-title{font-weight:700;color:#c0392b;font-size:14px;margin-bottom:10px}
+.ex-q{font-size:13px;color:#1a2744;margin-bottom:10px;line-height:1.7;font-weight:600}
+.ex-choices{list-style:none;margin-bottom:10px}
+.ex-choices li{padding:6px 10px;border-radius:6px;margin-bottom:4px;font-size:13px;line-height:1.6;border:1px solid #e8e8e8;background:#fff}
+.ex-choices li.correct{background:#d5f5e3;border-color:#27ae60;font-weight:700;color:#1e8449}
+.ex-choices li.wrong-chosen{background:#fde8e8;border-color:#e74c3c;color:#c0392b}
+.ex-exp{font-size:13px;color:#555;line-height:1.8;border-top:1px solid #f0d9a0;padding-top:8px;margin-top:4px}
+.ex-no-data{color:#888;font-size:12px;font-style:italic}
 
 .hist-item{background:#fff;border-radius:8px;padding:12px 14px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.07);cursor:pointer;transition:box-shadow .15s}
 .hist-item:hover{box-shadow:0 3px 10px rgba(0,0,0,.12)}
@@ -171,7 +178,7 @@ input.id-input{width:100%;padding:10px 12px;border:1.5px solid #d0d5e0;border-ra
       <div style="font-size:13px;color:#8fa3c8" id="res-pass"></div>
     </div>
     <div class="card">
-      <h2>問題別結果 <span style="font-size:12px;font-weight:400;color:#888">— 赤をタップ→正解表示</span></h2>
+      <h2>問題別結果 <span style="font-size:12px;font-weight:400;color:#888">— 番号をタップ→問題・解説表示</span></h2>
       <div class="q-grid" id="q-grid"></div>
       <div id="ex-area"></div>
     </div>
@@ -283,6 +290,7 @@ input.id-input{width:100%;padding:10px 12px;border:1.5px solid #d0d5e0;border-ra
 </div>
 
 <!-- Firebase SDK -->
+<script src="questions_data_2024.js"></script>
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
@@ -516,10 +524,11 @@ function grade() {
   for (let i = 1; i <= n; i++) {
     const a = myAnswers[i-1];
     const btn = document.createElement('button');
-    btn.className = 'q-btn ' + (a === null ? 'skip' : a === correct[i-1] ? 'ok' : 'ng');
+    const cls = a === null ? 'skip' : a === correct[i-1] ? 'ok' : 'ng';
+    btn.className = 'q-btn ' + cls;
     btn.textContent = `Q${i}`;
-    if (a !== null && a !== correct[i-1]) {
-      btn.onclick = () => showEx(i, a, correct[i-1], btn);
+    if (a !== null) {
+      btn.onclick = () => showEx(i, a, correct[i-1], btn, year, sub);
     }
     qGrid.appendChild(btn);
   }
@@ -532,18 +541,42 @@ function grade() {
 }
 window.grade = grade;
 
-function showEx(qNum, myAns, correctAns, btn) {
+function showEx(qNum, myAns, correctAns, btn, year, sub) {
   const exArea = document.getElementById('ex-area');
   if (exArea.dataset.q == qNum) { exArea.innerHTML = ''; exArea.dataset.q = ''; btn.style.outline=''; return; }
-  document.querySelectorAll('.q-btn.ng').forEach(b => b.style.outline = '');
-  btn.style.outline = '2px solid #e74c3c';
+  document.querySelectorAll('.q-btn').forEach(b => b.style.outline = '');
+  btn.style.outline = '2px solid #1a2744';
   exArea.dataset.q = qNum;
-  exArea.innerHTML = `<div class="explanation">
-    <div class="ex-title">No.${qNum} — あなた: ${myAns}　正解: ${correctAns}</div>
-    <div>「最も不適当なものはどれか」形式の問題です。<br>
-    正解（不適当な選択肢）は <strong>選択肢 ${correctAns}</strong> でした。<br>
-    <span style="font-size:12px;color:#888">詳細解説は過去問PDFのNo.${qNum}を参照してください。</span>
-    </div></div>`;
+
+  // 問題データを取得（2024年のみデータあり）
+  const dataKey = `QUESTION_DATA_${year}`;
+  const qData = window[dataKey] && window[dataKey][sub] && window[dataKey][sub][qNum - 1];
+
+  const isWrong = myAns !== correctAns;
+  const titleColor = isWrong ? '#c0392b' : '#1e8449';
+  const titleMark = isWrong ? '✗ 不正解' : '✓ 正解';
+
+  let inner = `<div class="ex-title" style="color:${titleColor}">No.${qNum}　${titleMark} — あなた: ④${myAns}　正解: ③${correctAns}</div>`;
+  inner = `<div class="ex-title" style="color:${titleColor}">No.${qNum}　${titleMark}　あなた:【${myAns}】　正解:【${correctAns}】</div>`;
+
+  if (qData) {
+    inner += `<div class="ex-q">${qData.q}</div>`;
+    inner += `<ul class="ex-choices">`;
+    qData.choices.forEach((c, idx) => {
+      const num = idx + 1;
+      let cls = '';
+      if (num === correctAns) cls = 'correct';
+      else if (num === myAns && isWrong) cls = 'wrong-chosen';
+      inner += `<li class="${cls}"><span style="font-weight:700;margin-right:6px">${num}.</span>${c}</li>`;
+    });
+    inner += `</ul>`;
+    inner += `<div class="ex-exp"><strong>解説：</strong>${qData.exp}</div>`;
+  } else {
+    inner += `<div class="ex-no-data">正解は選択肢【${correctAns}】です。<br>（${year}年の問題データは準備中です。解説は過去問テキストをご参照ください。）</div>`;
+  }
+
+  exArea.innerHTML = `<div class="explanation">${inner}</div>`;
+  exArea.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
 // ═══════════════════════════════════════════════
