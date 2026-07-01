@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一級建築士 過去問トラッカー</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hiragino Sans','Meiryo',sans-serif;background:#f0f2f5;color:#222;font-size:15px;line-height:1.7}
+header{background:#1a2744;color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+header h1{font-size:18px;font-weight:700}
+.sync-status{font-size:11px;padding:4px 10px;border-radius:20px;font-weight:600}
+.sync-ok{background:#27ae60;color:#fff}
+.sync-off{background:#7f8c8d;color:#fff}
+.sync-err{background:#e74c3c;color:#fff}
+nav{display:flex;background:#243057;border-bottom:1px solid #344170;overflow-x:auto}
+nav button{padding:10px 18px;color:#8fa3c8;background:none;border:none;cursor:pointer;font-size:13px;font-weight:600;border-bottom:3px solid transparent;white-space:nowrap;flex-shrink:0}
+nav button.active{color:#fff;border-bottom-color:#4f8ef7}
+.page{display:none;padding:16px;max-width:900px;margin:0 auto}
+.page.active{display:block}
+
+.card{background:#fff;border-radius:10px;padding:18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:15px;font-weight:700;color:#1a2744;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #eee}
+.sel-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+select{padding:8px 10px;border:1px solid #d0d5e0;border-radius:6px;font-size:14px;background:#fff;cursor:pointer;max-width:100%}
+
+.ans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-top:12px}
+.ans-item{display:flex;align-items:center;gap:8px}
+.ans-item label.qlabel{font-size:13px;color:#555;width:52px;flex-shrink:0}
+.radio-group{display:flex;gap:3px}
+.radio-group input[type=radio]{display:none}
+.radio-group label{width:30px;height:30px;border:1.5px solid #c8cedd;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;font-weight:700;color:#666;transition:all .12s;user-select:none}
+.radio-group input[type=radio]:checked + label{background:#1a2744;border-color:#1a2744;color:#fff}
+.radio-group label:hover{border-color:#4f8ef7;color:#4f8ef7}
+
+.btn{padding:10px 22px;border:none;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:#1a2744;color:#fff}
+.btn-primary:hover{background:#243057}
+.btn-danger{background:#e74c3c;color:#fff}
+.btn-sm{padding:6px 14px;font-size:12px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+.result-summary{background:#1a2744;color:#fff;border-radius:10px;padding:16px 18px;margin-bottom:14px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.score-big{font-size:38px;font-weight:700;color:#f1c40f}
+.score-sub{font-size:13px;color:#8fa3c8}
+
+.q-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(46px,1fr));gap:5px}
+.q-btn{padding:7px 4px;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;text-align:center}
+.q-btn.ok{background:#d5f5e3;color:#1e8449}
+.q-btn.ng{background:#fde8e8;color:#c0392b}
+.q-btn.ng:hover{background:#e74c3c;color:#fff}
+.q-btn.skip{background:#f0f0f0;color:#999;cursor:default}
+.explanation{background:#fff7e6;border:1px solid #f39c12;border-radius:8px;padding:14px;margin-top:12px;font-size:13px;line-height:1.8}
+.explanation .ex-title{font-weight:700;color:#c0392b;font-size:14px;margin-bottom:6px}
+
+.hist-item{background:#fff;border-radius:8px;padding:12px 14px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.07);cursor:pointer;transition:box-shadow .15s}
+.hist-item:hover{box-shadow:0 3px 10px rgba(0,0,0,.12)}
+.hist-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hist-tag{background:#1a2744;color:#fff;border-radius:4px;padding:3px 8px;font-size:11px;font-weight:700;white-space:nowrap}
+.hist-score{font-size:18px;font-weight:700;color:#1a2744}
+.hist-date{font-size:11px;color:#999;margin-left:auto}
+.hist-wrongs{font-size:12px;color:#e74c3c;margin-top:4px}
+.hist-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid #eee}
+.hist-item.open .hist-detail{display:block}
+.empty{color:#999;font-size:14px;text-align:center;padding:40px 0}
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.stat-card{background:#fff;border-radius:8px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.07);text-align:center}
+.stat-card .num{font-size:26px;font-weight:700;color:#1a2744}
+.stat-card .lbl{font-size:11px;color:#888;margin-top:4px}
+.subject-bar{margin-top:6px;background:#eee;border-radius:4px;height:8px;overflow:hidden}
+.subject-bar .fill{height:100%;background:#4f8ef7;border-radius:4px}
+
+/* 設定ページ */
+.setup-box{background:#fff;border-radius:10px;padding:20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.setup-box h3{font-size:15px;font-weight:700;margin-bottom:10px;color:#1a2744}
+.setup-box p{font-size:13px;color:#555;margin-bottom:10px;line-height:1.8}
+.step{display:flex;gap:12px;margin-bottom:12px;font-size:13px}
+.step-num{width:24px;height:24px;background:#1a2744;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px}
+textarea.config-input{width:100%;height:130px;border:1.5px solid #d0d5e0;border-radius:8px;padding:10px;font-size:12px;font-family:monospace;resize:vertical;margin-top:8px}
+input.id-input{width:100%;padding:10px 12px;border:1.5px solid #d0d5e0;border-radius:8px;font-size:15px;margin-top:6px}
+.alert{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:10px}
+.alert-ok{background:#d5f5e3;color:#1e8449;border:1px solid #a9dfbf}
+.alert-err{background:#fde8e8;color:#c0392b;border:1px solid #f5b7b1}
+.alert-info{background:#ebf5fb;color:#1a5276;border:1px solid #aed6f1}
+</style>
+</head>
+<body>
+<header>
+  <h1>一級建築士 過去問トラッカー</h1>
+  <span class="sync-status sync-off" id="sync-badge">● オフライン</span>
+</header>
+<nav>
+  <button class="active" onclick="showPage('p-input')">📝 解答入力</button>
+  <button onclick="showPage('p-history')">📋 履歴</button>
+  <button onclick="showPage('p-stats')">📊 統計</button>
+  <button onclick="showPage('p-setup')">⚙️ 設定</button>
+</nav>
+
+<!-- ═══ 解答入力 ═══ -->
+<div class="page active" id="p-input">
+  <div class="card">
+    <h2>年度・科目を選択</h2>
+    <div class="sel-row">
+      <div>
+        <div style="font-size:12px;color:#888;margin-bottom:4px">年度</div>
+        <select id="sel-year" onchange="buildGrid()">
+          <option value="2025">2025年（令和7年）</option>
+          <option value="2024">2024年（令和6年）</option>
+          <option value="2023">2023年（令和5年）</option>
+          <option value="2022">2022年（令和4年）</option>
+          <option value="2021">2021年（令和3年）</option>
+          <option value="2019">2019年（令和元年）</option>
+          <option value="2018">2018年（平成30年）</option>
+          <option value="2017">2017年（平成29年）</option>
+          <option value="2016">2016年（平成28年）</option>
+          <option value="2015">2015年（平成27年）</option>
+          <option value="2014">2014年（平成26年）</option>
+        </select>
+      </div>
+      <div>
+        <div style="font-size:12px;color:#888;margin-bottom:4px">科目</div>
+        <select id="sel-sub" onchange="buildGrid()">
+          <option value="I">学科Ⅰ 計画（20問）</option>
+          <option value="II">学科Ⅱ 環境・設備（20問）</option>
+          <option value="III">学科Ⅲ 法規（30問）</option>
+          <option value="IV">学科Ⅳ 構造（30問）</option>
+          <option value="V">学科Ⅴ 施工（25問）</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 id="grid-title">解答を入力してください</h2>
+    <div class="ans-grid" id="ans-grid"></div>
+    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="grade()">採点する</button>
+      <button class="btn" style="background:#f0f2f5;color:#555" onclick="clearGrid()">クリア</button>
+    </div>
+  </div>
+
+  <div id="result-area" style="display:none">
+    <div class="result-summary">
+      <div>
+        <div class="score-big" id="res-score"></div>
+        <div class="score-sub" id="res-label"></div>
+      </div>
+      <div style="font-size:13px;color:#8fa3c8" id="res-pass"></div>
+    </div>
+    <div class="card">
+      <h2>問題別結果 <span style="font-size:12px;font-weight:400;color:#888">— 赤をタップ→正解表示</span></h2>
+      <div class="q-grid" id="q-grid"></div>
+      <div id="ex-area"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 履歴 ═══ -->
+<div class="page" id="p-history">
+  <div class="card">
+    <h2 style="display:flex;justify-content:space-between;align-items:center">
+      解答履歴
+      <button class="btn btn-danger btn-sm" onclick="clearHistory()">全削除</button>
+    </h2>
+    <div id="sync-note" style="display:none" class="alert alert-info">☁️ クラウドから読み込み中…</div>
+    <div id="hist-list"></div>
+  </div>
+</div>
+
+<!-- ═══ 統計 ═══ -->
+<div class="page" id="p-stats">
+  <div class="card"><h2>全体統計</h2><div class="stat-grid" id="stat-overall"></div></div>
+  <div class="card"><h2>科目別 平均正答率</h2><div id="stat-subs"></div></div>
+  <div class="card"><h2>年度別 受験記録</h2><div id="stat-years"></div></div>
+</div>
+
+<!-- ═══ 設定 ═══ -->
+<div class="page" id="p-setup">
+  <!-- Firebase未設定時のガイド -->
+  <div id="setup-guide">
+    <div class="setup-box">
+      <h3>☁️ クラウド同期の設定（Firebase）</h3>
+      <p>スマホとPCで履歴を自動同期するには、無料のFirebaseを使います。<br>
+      Googleアカウントがあれば5分で設定できます。</p>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div><strong>Firebaseコンソールを開く</strong><br>
+          <a href="https://console.firebase.google.com" target="_blank" style="color:#4f8ef7">https://console.firebase.google.com</a><br>
+          Googleアカウントでログインしてください。
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div><strong>新しいプロジェクトを作成</strong><br>
+          「プロジェクトを追加」→ 名前は何でもOK（例: architect-quiz）<br>
+          Googleアナリティクスは「無効」でOK
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div><strong>Firestoreデータベースを作成</strong><br>
+          左メニュー「Firestore Database」→「データベースの作成」<br>
+          「テストモードで開始」を選択 → 「有効にする」
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div><strong>ウェブアプリを追加してConfig取得</strong><br>
+          左上のプロジェクト概要 → 「&lt;/&gt;（ウェブ）」アイコン → アプリ名を入力して登録<br>
+          表示される <code style="background:#f0f0f0;padding:2px 5px;border-radius:3px">firebaseConfig = { ... }</code> の<br>
+          <strong>{ } の中身だけ</strong>をコピーして下の欄に貼り付けてください。
+        </div>
+      </div>
+
+      <div id="config-alert"></div>
+      <label style="font-size:13px;color:#555;font-weight:600">firebaseConfig の内容を貼り付け：</label>
+      <textarea class="config-input" id="firebase-config-input" placeholder='{
+  "apiKey": "AIza...",
+  "authDomain": "your-app.firebaseapp.com",
+  "projectId": "your-app",
+  "storageBucket": "your-app.appspot.com",
+  "messagingSenderId": "123456789",
+  "appId": "1:123:web:abc"
+}'></textarea>
+      <div style="margin-top:10px;display:flex;gap:10px">
+        <button class="btn btn-primary" onclick="saveFirebaseConfig()">保存して接続</button>
+        <button class="btn" style="background:#f0f2f5;color:#555" id="btn-disconnect" onclick="disconnectFirebase()" style="display:none">接続解除</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 接続済み表示 -->
+  <div class="setup-box" id="setup-connected" style="display:none">
+    <h3>☁️ クラウド同期：接続中</h3>
+    <div class="alert alert-ok" id="connected-msg"></div>
+    <p style="font-size:13px;color:#555;margin-top:10px">
+      解答を採点するたびに自動でクラウドに保存されます。<br>
+      スマホでこのページ（GitHub Pages）を開いて、同じ学習IDを入力すれば同期されます。
+    </p>
+    <div style="margin-top:12px;display:flex;gap:10px">
+      <button class="btn btn-danger btn-sm" onclick="disconnectFirebase()">接続解除</button>
+    </div>
+  </div>
+
+  <!-- 学習ID設定 -->
+  <div class="setup-box">
+    <h3>🔑 学習ID（デバイス間共有キー）</h3>
+    <p style="font-size:13px;color:#555">
+      スマホとPCで同じ履歴を共有するための合言葉です。<br>
+      覚えやすい文字列を設定してください（例: tanaka2025 など）。<br>
+      ※ 他の人が同じIDを使うと履歴が混在するので、ユニークな文字列を推奨します。
+    </p>
+    <input class="id-input" id="study-id-input" type="text" placeholder="例: tanaka-kenchiku-2025" maxlength="50">
+    <div style="margin-top:10px">
+      <button class="btn btn-primary" onclick="saveStudyId()">学習IDを保存</button>
+    </div>
+    <div id="id-alert" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+// ═══════════════════════════════════════════
+// Firebase 初期化
+// ═══════════════════════════════════════════
+let db = null;
+let unsubscribe = null;
+
+function initFirebase(config) {
+  try {
+    const app = initializeApp(config);
+    db = getFirestore(app);
+    window.__db = db;
+    window.__fs = { collection, addDoc, getDocs, deleteDoc, doc, query, where, orderBy, onSnapshot };
+    setBadge('ok');
+    return true;
+  } catch(e) {
+    console.error(e);
+    setBadge('err');
+    return false;
+  }
+}
+
+// 起動時: 保存済みconfigがあれば自動接続
+const savedConfig = localStorage.getItem('fb_config');
+if (savedConfig) {
+  try {
+    initFirebase(JSON.parse(savedConfig));
+    document.getElementById('setup-connected').style.display = 'block';
+    document.getElementById('setup-guide').style.display = 'none';
+    updateConnectedMsg();
+  } catch(e) {}
+}
+
+// ─── 設定ページ関数をwindowに公開 ───
+window.saveFirebaseConfig = function() {
+  const raw = document.getElementById('firebase-config-input').value.trim();
+  const alertEl = document.getElementById('config-alert');
+  let parsed;
+  try {
+    // { } の中身だけの場合も対応
+    const str = raw.startsWith('{') ? raw : '{' + raw + '}';
+    parsed = JSON.parse(str);
+    if (!parsed.apiKey || !parsed.projectId) throw new Error('apiKeyまたはprojectIdがありません');
+  } catch(e) {
+    alertEl.innerHTML = `<div class="alert alert-err">❌ 形式エラー: ${e.message}<br>{ } の中身のJSONを確認してください。</div>`;
+    return;
+  }
+  localStorage.setItem('fb_config', JSON.stringify(parsed));
+  const ok = initFirebase(parsed);
+  if (ok) {
+    alertEl.innerHTML = '<div class="alert alert-ok">✅ Firebaseに接続しました！</div>';
+    document.getElementById('setup-connected').style.display = 'block';
+    document.getElementById('setup-guide').style.display = 'none';
+    updateConnectedMsg();
+  } else {
+    alertEl.innerHTML = '<div class="alert alert-err">❌ 接続失敗。Configを確認してください。</div>';
+  }
+};
+
+window.disconnectFirebase = function() {
+  if (!confirm('接続を解除しますか？（ローカルの履歴は残ります）')) return;
+  localStorage.removeItem('fb_config');
+  db = null; window.__db = null;
+  setBadge('off');
+  document.getElementById('setup-connected').style.display = 'none';
+  document.getElementById('setup-guide').style.display = 'block';
+};
+
+function updateConnectedMsg() {
+  const id = localStorage.getItem('study_id') || '未設定';
+  document.getElementById('connected-msg').textContent = `✅ Firebase接続済み　学習ID: ${id}`;
+}
+
+// ─── Cloud save/load ───
+window.__saveToCloud = async function(entry) {
+  if (!window.__db) return;
+  const studyId = localStorage.getItem('study_id');
+  if (!studyId) return;
+  try {
+    const { collection, addDoc } = window.__fs;
+    await addDoc(collection(window.__db, 'histories'), { ...entry, studyId });
+  } catch(e) { console.warn('Cloud save failed:', e); }
+};
+
+window.__loadFromCloud = async function() {
+  if (!window.__db) return null;
+  const studyId = localStorage.getItem('study_id');
+  if (!studyId) return null;
+  try {
+    const { collection, getDocs, query, where, orderBy } = window.__fs;
+    const q = query(
+      collection(window.__db, 'histories'),
+      where('studyId', '==', studyId),
+      orderBy('date', 'desc')
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  } catch(e) { console.warn('Cloud load failed:', e); return null; }
+};
+
+window.__deleteFromCloud = async function(studyId) {
+  if (!window.__db) return;
+  try {
+    const { collection, getDocs, deleteDoc, doc, query, where } = window.__fs;
+    const q = query(collection(window.__db, 'histories'), where('studyId', '==', studyId));
+    const snap = await getDocs(q);
+    await Promise.all(snap.docs.map(d => deleteDoc(doc(window.__db, 'histories', d.id))));
+  } catch(e) { console.warn('Cloud delete failed:', e); }
+};
+</script>
+
+<script>
+// ═══════════════════════════════════════════════
+// 正答データ
+// ═══════════════════════════════════════════════
+const ANSWERS = {
+  "2014":{"I":[4,4,3,3,2,1,3,2,1,1,4,4,3,2,2,2,4,1,4,1],"II":[2,3,3,1,4,4,1,4,3,2,3,4,3,2,1,2,1,4,2,4],"III":[2,1,3,4,2,1,2,4,3,2,4,3,3,2,3,3,2,4,3,4,4,2,4,1,2,1,1,1,4,3],"IV":[3,3,1,2,1,3,4,2,4,4,2,1,3,4,2,4,1,1,2,4,2,3,3,1,2,3,2,4,1,4],"V":[4,2,2,1,1,3,3,4,4,2,4,1,1,2,3,2,3,4,1,1,1,2,4,3,4]},
+  "2015":{"I":[4,2,4,3,3,4,2,3,1,4,1,2,2,3,4,3,1,4,3,2],"II":[2,2,1,3,4,3,1,4,1,4,4,1,3,4,4,2,3,2,4,1],"III":[1,4,2,3,4,1,4,2,4,1,2,4,3,2,4,3,2,4,1,2,1,3,2,3,1,4,3,4,3,3],"IV":[3,3,4,3,3,2,1,2,2,3,2,1,2,4,4,1,3,3,1,4,2,3,1,4,1,4,1,4,4,4],"V":[1,4,3,1,4,2,3,2,4,2,4,1,1,3,4,3,2,2,4,4,1,1,2,2,4]},
+  "2016":{"I":[2,3,3,2,4,4,2,2,4,1,4,3,1,1,3,1,3,1,3,3],"II":[2,4,3,4,3,2,3,2,4,3,2,2,1,1,3,1,4,2,3,4],"III":[4,1,3,4,3,4,4,1,2,2,2,2,2,3,2,2,2,4,3,1,3,3,4,3,4,3,1,1,1,3],"IV":[4,2,4,2,4,1,3,4,2,1,3,2,4,3,3,2,1,1,2,2,4,3,3,4,1,1,4,1,3,3],"V":[2,1,1,2,3,2,3,3,1,4,2,3,4,2,1,3,2,4,3,1,4,4,1,3,4]},
+  "2017":{"I":[2,4,4,4,2,2,3,4,3,3,1,3,4,1,4,2,1,4,3,2],"II":[1,4,3,4,1,4,3,3,2,2,2,3,4,2,1,4,1,2,4,2],"III":[2,1,3,3,4,4,2,3,3,1,2,1,3,4,2,3,3,1,1,2,3,4,4,4,3,4,2,1,1,2],"IV":[2,3,1,4,4,3,1,1,3,4,2,2,1,2,1,4,3,1,4,1,2,4,3,3,4,3,2,4,3,1],"V":[3,2,4,3,4,3,1,1,3,2,4,2,3,2,2,3,4,2,1,1,1,1,3,3,4]},
+  "2018":{"I":[3,1,4,2,3,3,1,2,1,1,1,2,4,3,1,2,3,3,4,4],"II":[3,4,3,3,3,1,1,2,4,1,1,2,2,4,2,2,4,2,3,3],"III":[3,2,3,1,2,3,1,2,4,4,3,1,2,3,2,4,2,4,2,4,4,1,2,1,3,1,3,4,4,3],"IV":[4,2,2,4,3,2,4,3,1,1,3,1,3,1,4,2,3,1,2,2,1,4,1,3,4,3,4,1,3,2],"V":[1,1,1,2,1,3,2,4,3,4,2,4,4,3,1,2,4,3,1,3,4,4,3,2,2]},
+  "2019":{"I":[1,4,1,4,3,3,2,2,3,4,2,3,2,2,3,3,4,3,1,4],"II":[2,3,2,2,1,3,4,3,1,2,3,4,1,3,4,3,1,4,1,4],"III":[4,2,4,3,4,2,3,2,1,4,1,2,3,4,1,2,4,3,2,3,2,4,1,2,3,4,1,3,3,1],"IV":[3,2,1,4,2,3,4,2,1,2,2,1,3,3,3,1,2,1,4,4,4,4,1,1,3,4,3,2,1,4],"V":[4,3,4,1,4,3,3,3,2,4,2,2,4,2,3,2,1,2,1,3,3,1,1,4,1]},
+  "2021":{"I":[3,3,3,4,2,2,2,1,2,4,1,2,4,1,4,3,1,2,3,1],"II":[2,1,3,3,4,2,3,2,4,1,1,4,3,1,1,4,2,4,4,1],"III":[4,4,3,2,1,1,2,4,1,4,3,2,2,2,4,4,3,3,1,2,4,3,3,1,3,3,1,1,2,3],"IV":[2,4,2,4,3,3,1,1,3,1,2,2,1,4,2,4,1,2,3,4,1,2,3,3,2,1,4,4,3,4],"V":[3,3,3,4,4,1,1,2,3,1,4,2,4,2,2,2,1,2,4,2,1,4,3,3,1]},
+  "2022":{"I":[3,3,2,2,3,4,4,1,1,2,4,4,4,1,4,3,1,2,3,2],"II":[4,4,3,1,3,1,2,4,1,3,1,2,4,3,4,2,2,3,1,2],"III":[1,4,3,2,4,3,2,2,1,3,4,1,4,4,3,4,3,3,2,3,1,4,2,1,1,2,1,2,2,4],"IV":[2,4,3,3,1,4,1,4,2,2,2,2,3,3,4,2,1,4,3,2,3,4,1,2,3,4,1,4,3,1],"V":[3,2,4,1,3,2,3,1,4,2,4,4,2,4,3,1,3,2,4,4,2,1,1,1,3]},
+  "2023":{"I":[4,2,4,2,4,2,4,3,1,1,1,3,3,4,3,2,4,2,1,3],"II":[4,1,1,3,1,2,2,4,3,3,2,3,4,3,3,1,2,2,4,2],"III":[1,4,3,1,2,3,2,4,4,3,2,3,4,2,4,4,3,3,1,3,1,1,4,2,1,1,1,1,4,2],"IV":[3,2,3,3,3,1,1,2,2,1,4,2,3,2,2,4,4,3,1,3,1,1,4,2,4,4,1,4,3,2],"V":[2,1,4,2,1,2,4,1,3,3,4,4,3,2,4,3,1,2,1,3,1,3,1,4,2]},
+  "2024":{"I":[3,3,4,2,2,3,1,3,2,4,4,3,3,4,2,4,1,4,1,1],"II":[2,4,2,4,3,1,2,3,1,4,4,1,3,1,2,4,1,4,1,3],"III":[3,2,2,4,2,3,2,1,2,4,2,1,4,4,1,1,3,3,1,3,4,4,1,3,2,3,1,4,3,4],"IV":[4,3,4,1,4,2,4,4,3,2,1,2,2,3,2,1,2,1,4,1,3,2,3,1,3,3,2,4,1,4],"V":[1,2,4,3,4,2,1,3,2,1,2,1,4,1,3,2,1,2,4,4,3,3,3,1,4]},
+  "2025":{"I":[4,2,1,3,4,2,2,3,1,2,3,4,4,1,4,4,2,2,1,3],"II":[1,2,2,4,4,4,1,1,4,2,3,3,3,2,3,2,1,4,3,4],"III":[3,2,3,4,3,1,3,4,2,1,1,4,2,3,2,4,3,2,4,3,2,3,2,4,1,1,3,4,4,1],"IV":[1,2,2,3,4,2,1,4,3,4,4,1,1,3,2,1,3,4,2,3,2,2,1,4,3,4,3,1,3,3],"V":[2,1,3,4,2,4,1,1,3,2,2,4,4,2,3,3,4,2,4,1,1,1,3,3,1]}
+};
+const SUB_NAMES = {"I":"学科Ⅰ 計画","II":"学科Ⅱ 環境・設備","III":"学科Ⅲ 法規","IV":"学科Ⅳ 構造","V":"学科Ⅴ 施工"};
+const SUB_PASS  = {"I":11,"II":11,"III":16,"IV":16,"V":13};
+
+// ═══════════════════════════════════════════════
+// ページ切替
+// ═══════════════════════════════════════════════
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = ['p-input','p-history','p-stats','p-setup'].indexOf(id);
+  document.querySelectorAll('nav button')[idx].classList.add('active');
+  if (id === 'p-history') renderHistory();
+  if (id === 'p-stats')   renderStats();
+  if (id === 'p-setup')   initSetupPage();
+}
+window.showPage = showPage;
+
+function setBadge(state) {
+  const b = document.getElementById('sync-badge');
+  b.className = 'sync-status';
+  if (state === 'ok')  { b.classList.add('sync-ok');  b.textContent = '☁ 同期中'; }
+  if (state === 'off') { b.classList.add('sync-off'); b.textContent = '● オフライン'; }
+  if (state === 'err') { b.classList.add('sync-err'); b.textContent = '⚠ 接続エラー'; }
+}
+window.setBadge = setBadge;
+
+// ═══════════════════════════════════════════════
+// 解答グリッド
+// ═══════════════════════════════════════════════
+function buildGrid() {
+  const year = document.getElementById('sel-year').value;
+  const sub  = document.getElementById('sel-sub').value;
+  const n    = ANSWERS[year][sub].length;
+  document.getElementById('grid-title').textContent = `${year}年 ${SUB_NAMES[sub]}（全${n}問）`;
+  const grid = document.getElementById('ans-grid');
+  grid.innerHTML = '';
+  for (let i = 1; i <= n; i++) {
+    const div = document.createElement('div');
+    div.className = 'ans-item';
+    div.innerHTML = `<label class="qlabel">問 ${i}</label><div class="radio-group">` +
+      [1,2,3,4].map(v =>
+        `<input type="radio" name="q${i}" id="q${i}_${v}" value="${v}">` +
+        `<label for="q${i}_${v}">${v}</label>`).join('') + '</div>';
+    grid.appendChild(div);
+  }
+  document.getElementById('result-area').style.display = 'none';
+}
+window.buildGrid = buildGrid;
+
+function clearGrid() {
+  document.querySelectorAll('#ans-grid input[type=radio]').forEach(r => r.checked = false);
+  document.getElementById('result-area').style.display = 'none';
+}
+window.clearGrid = clearGrid;
+
+// ═══════════════════════════════════════════════
+// 採点
+// ═══════════════════════════════════════════════
+function grade() {
+  const year = document.getElementById('sel-year').value;
+  const sub  = document.getElementById('sel-sub').value;
+  const correct = ANSWERS[year][sub];
+  const n = correct.length;
+  const myAnswers = [];
+  const wrongs = [];
+  let score = 0, answered = 0;
+  for (let i = 1; i <= n; i++) {
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    if (sel) {
+      const v = parseInt(sel.value);
+      myAnswers.push(v);
+      answered++;
+      if (v === correct[i-1]) score++;
+      else wrongs.push(i);
+    } else { myAnswers.push(null); }
+  }
+
+  document.getElementById('res-score').textContent = `${score} / ${n}`;
+  document.getElementById('res-label').textContent =
+    `正答率 ${Math.round(score/n*100)}%　（回答済み ${answered}問 / 未回答 ${n-answered}問）`;
+  const pass = SUB_PASS[sub];
+  const ok = score >= pass;
+  document.getElementById('res-pass').innerHTML =
+    `合格基準点: <strong>${pass}点</strong><br>` +
+    `<span style="color:${ok?'#2ecc71':'#e74c3c'};font-size:16px;font-weight:700">` +
+    (ok ? '✓ 合格ライン超え' : '✗ 合格ライン未達') + '</span>';
+
+  const qGrid = document.getElementById('q-grid');
+  qGrid.innerHTML = '';
+  for (let i = 1; i <= n; i++) {
+    const a = myAnswers[i-1];
+    const btn = document.createElement('button');
+    btn.className = 'q-btn ' + (a === null ? 'skip' : a === correct[i-1] ? 'ok' : 'ng');
+    btn.textContent = `Q${i}`;
+    if (a !== null && a !== correct[i-1]) {
+      btn.onclick = () => showEx(i, a, correct[i-1], btn);
+    }
+    qGrid.appendChild(btn);
+  }
+  document.getElementById('ex-area').innerHTML = '';
+  document.getElementById('result-area').style.display = 'block';
+  document.getElementById('result-area').scrollIntoView({behavior:'smooth'});
+
+  const entry = {year, sub, score, total:n, myAnswers, wrongs, date: new Date().toISOString()};
+  saveHistory(entry);
+}
+window.grade = grade;
+
+function showEx(qNum, myAns, correctAns, btn) {
+  const exArea = document.getElementById('ex-area');
+  if (exArea.dataset.q == qNum) { exArea.innerHTML = ''; exArea.dataset.q = ''; btn.style.outline=''; return; }
+  document.querySelectorAll('.q-btn.ng').forEach(b => b.style.outline = '');
+  btn.style.outline = '2px solid #e74c3c';
+  exArea.dataset.q = qNum;
+  exArea.innerHTML = `<div class="explanation">
+    <div class="ex-title">No.${qNum} — あなた: ${myAns}　正解: ${correctAns}</div>
+    <div>「最も不適当なものはどれか」形式の問題です。<br>
+    正解（不適当な選択肢）は <strong>選択肢 ${correctAns}</strong> でした。<br>
+    <span style="font-size:12px;color:#888">詳細解説は過去問PDFのNo.${qNum}を参照してください。</span>
+    </div></div>`;
+}
+
+// ═══════════════════════════════════════════════
+// 履歴（ローカル + クラウド）
+// ═══════════════════════════════════════════════
+function getLocalHistory() { return JSON.parse(localStorage.getItem('exam_history') || '[]'); }
+function setLocalHistory(h) { localStorage.setItem('exam_history', JSON.stringify(h)); }
+
+async function saveHistory(entry) {
+  const h = getLocalHistory();
+  h.unshift(entry);
+  setLocalHistory(h.slice(0, 500));
+  // クラウド保存
+  if (window.__saveToCloud) await window.__saveToCloud(entry);
+}
+
+async function renderHistory() {
+  let h = getLocalHistory();
+
+  // クラウドが使えれば結合して最新化
+  if (window.__loadFromCloud && localStorage.getItem('study_id')) {
+    document.getElementById('sync-note').style.display = 'block';
+    const cloud = await window.__loadFromCloud();
+    if (cloud) {
+      // ローカルとクラウドをマージ（dateで重複除去）
+      const merged = [...cloud.map(e => {const {id,...r}=e;return r;}), ...h];
+      const seen = new Set();
+      const deduped = merged.filter(e => {
+        const k = e.year + e.sub + e.date;
+        if (seen.has(k)) return false;
+        seen.add(k); return true;
+      });
+      deduped.sort((a,b) => new Date(b.date) - new Date(a.date));
+      setLocalHistory(deduped.slice(0, 500));
+      h = deduped;
+    }
+    document.getElementById('sync-note').style.display = 'none';
+  }
+
+  const el = document.getElementById('hist-list');
+  if (h.length === 0) { el.innerHTML = '<div class="empty">まだ記録がありません</div>'; return; }
+  el.innerHTML = h.map((e, idx) => {
+    const d = new Date(e.date);
+    const ds = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+    const pass = SUB_PASS[e.sub];
+    const ok = e.score >= pass;
+    const wrStr = e.wrongs.length > 0 ? 'No.' + e.wrongs.slice(0,20).join('・') + (e.wrongs.length>20?'…':'') : '全問正解！';
+    return `<div class="hist-item" onclick="this.classList.toggle('open')">
+      <div class="hist-top">
+        <span class="hist-tag">${e.year} ${SUB_NAMES[e.sub]}</span>
+        <span class="hist-score">${e.score}/${e.total}</span>
+        <span style="font-size:12px;color:${ok?'#27ae60':'#e74c3c'}">${ok?'✓ 基準超':'✗ 未達'}</span>
+        <span class="hist-date">${ds}</span>
+      </div>
+      <div class="hist-wrongs">${wrStr}</div>
+      <div class="hist-detail">
+        <div style="font-size:12px;color:#666;margin-bottom:8px">間違い: ${e.wrongs.length}問</div>
+        <div class="q-grid">${e.wrongs.map(n=>`<div class="q-btn ng" style="cursor:default">Q${n}</div>`).join('')}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+window.renderHistory = renderHistory;
+
+async function clearHistory() {
+  if (!confirm('全履歴を削除しますか？')) return;
+  const studyId = localStorage.getItem('study_id');
+  localStorage.removeItem('exam_history');
+  if (window.__deleteFromCloud && studyId) await window.__deleteFromCloud(studyId);
+  renderHistory();
+}
+window.clearHistory = clearHistory;
+
+// ═══════════════════════════════════════════════
+// 統計
+// ═══════════════════════════════════════════════
+function renderStats() {
+  const h = getLocalHistory();
+  const oEl = document.getElementById('stat-overall');
+  const sEl = document.getElementById('stat-subs');
+  const yEl = document.getElementById('stat-years');
+  if (h.length === 0) {
+    oEl.innerHTML = '<div class="empty" style="grid-column:1/-1">記録がまだありません</div>';
+    sEl.innerHTML = yEl.innerHTML = ''; return;
+  }
+  const total = h.length;
+  const passed = h.filter(e => e.score >= SUB_PASS[e.sub]).length;
+  oEl.innerHTML = `
+    <div class="stat-card"><div class="num">${total}</div><div class="lbl">受験回数</div></div>
+    <div class="stat-card"><div class="num">${passed}</div><div class="lbl">合格基準超</div></div>
+    <div class="stat-card"><div class="num">${Math.round(passed/total*100)}%</div><div class="lbl">合格基準超率</div></div>
+    <div class="stat-card"><div class="num">${Math.round(h.reduce((a,e)=>a+e.score/e.total,0)/total*100)}%</div><div class="lbl">平均正答率</div></div>`;
+  sEl.innerHTML = ['I','II','III','IV','V'].map(s => {
+    const es = h.filter(e => e.sub === s);
+    if (!es.length) return '';
+    const avg = Math.round(es.reduce((a,e)=>a+e.score/e.total,0)/es.length*100);
+    return `<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px">
+        <span>${SUB_NAMES[s]}</span><span><strong>${avg}%</strong>（${es.length}回）</span>
+      </div>
+      <div class="subject-bar"><div class="fill" style="width:${avg}%"></div></div>
+    </div>`;
+  }).join('');
+  const byY = {};
+  h.forEach(e => { if(!byY[e.year]) byY[e.year]=[]; byY[e.year].push(e); });
+  yEl.innerHTML = Object.keys(byY).sort().reverse().map(y => {
+    const es = byY[y];
+    const subs = [...new Set(es.map(e=>e.sub))].map(s=>SUB_NAMES[s].split('　')[0]).join('・');
+    return `<div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #eee;font-size:13px">
+      <span style="font-weight:700;color:#1a2744;width:55px">${y}年</span>
+      <span style="color:#555">${es.length}科目: ${subs}</span>
+    </div>`;
+  }).join('');
+}
+window.renderStats = renderStats;
+
+// ═══════════════════════════════════════════════
+// 設定ページ初期化
+// ═══════════════════════════════════════════════
+function initSetupPage() {
+  const id = localStorage.getItem('study_id') || '';
+  document.getElementById('study-id-input').value = id;
+  if (localStorage.getItem('fb_config')) {
+    document.getElementById('setup-connected').style.display = 'block';
+    document.getElementById('setup-guide').style.display = 'none';
+    document.getElementById('connected-msg').textContent =
+      `✅ Firebase接続済み　学習ID: ${id || '未設定'}`;
+  }
+}
+window.initSetupPage = initSetupPage;
+
+window.saveStudyId = function() {
+  const v = document.getElementById('study-id-input').value.trim();
+  const alertEl = document.getElementById('id-alert');
+  if (!v) { alertEl.innerHTML = '<div class="alert alert-err">IDを入力してください</div>'; return; }
+  localStorage.setItem('study_id', v);
+  alertEl.innerHTML = `<div class="alert alert-ok">✅ 学習ID「${v}」を保存しました</div>`;
+  if (document.getElementById('connected-msg'))
+    document.getElementById('connected-msg').textContent = `✅ Firebase接続済み　学習ID: ${v}`;
+};
+
+// 初期化
+buildGrid();
+</script>
+</body>
+</html>
