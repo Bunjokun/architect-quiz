@@ -758,18 +758,33 @@ function renderHome() {
   let html = `<table class="home-table"><thead><tr>
     <th style="text-align:left">年度</th>
     ${subs.map(s=>`<th>${subLabels[s]}</th>`).join('')}
+    <th>合計</th><th>ボーダー</th>
   </tr></thead><tbody>`;
 
   years.forEach(y => {
     const rowData = subs.map(s => best[y+'_'+s]);
     if (rowData.every(d => !d)) return;
     html += `<tr><td class="year-col">${y}年</td>`;
+    let totalScore = 0, totalMax = 0, allDone = true;
     subs.forEach(s => {
       const d = best[y+'_'+s];
-      if (!d) { html += `<td><span class="cell-none">−</span></td>`; return; }
+      if (!d) { html += `<td><span class="cell-none">−</span></td>`; allDone = false; return; }
       const pass = d.score >= SUB_PASS[s];
       html += `<td><span class="${pass?'cell-pass':'cell-fail'}">${d.score}/${d.total}</span></td>`;
+      totalScore += d.score;
+      totalMax += d.total;
     });
+    const border = YEAR_TOTAL_PASS[y];
+    const borderStr = border != null ? border + '点' : '未公表';
+    if (totalMax > 0) {
+      const totalOk = border != null && allDone && totalScore >= border;
+      const totalNg = border != null && allDone && totalScore < border;
+      const cls = totalOk ? 'cell-pass' : totalNg ? 'cell-fail' : '';
+      html += `<td><span class="${cls}">${totalScore}/${totalMax}</span></td>`;
+    } else {
+      html += `<td><span class="cell-none">−</span></td>`;
+    }
+    html += `<td style="font-size:12px;color:#666">${borderStr}</td>`;
     html += '</tr>';
   });
 
