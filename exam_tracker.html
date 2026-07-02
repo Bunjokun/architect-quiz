@@ -580,6 +580,51 @@ function showEx(qNum, myAns, correctAns, btn, year, sub) {
   exArea.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
+function showHistEx(btn, year, sub, qNum, myAns) {
+  const exArea = btn.closest('.hist-detail').querySelector('.hist-ex-area');
+  // 同じボタンを再クリックで閉じる
+  if (btn.dataset.open === '1') {
+    btn.dataset.open = '';
+    btn.style.outline = '';
+    exArea.innerHTML = '';
+    return;
+  }
+  // 他のボタンのハイライトをリセット
+  btn.closest('.q-grid').querySelectorAll('.q-btn').forEach(b => { b.dataset.open = ''; b.style.outline = ''; });
+  btn.dataset.open = '1';
+  btn.style.outline = '2px solid #1a2744';
+
+  const dataKey = `QUESTION_DATA_${year}`;
+  const qData = window[dataKey] && window[dataKey][sub] && window[dataKey][sub][qNum - 1];
+
+  if (!qData) {
+    exArea.innerHTML = `<div class="explanation"><div class="ex-no-data">No.${qNum}（${year}年 ${sub}）の問題データは準備中です。</div></div>`;
+    return;
+  }
+
+  const correctAns = qData.ans;
+  const isWrong = myAns !== correctAns;
+  const titleColor = isWrong ? '#c0392b' : '#1e8449';
+  const titleMark = isWrong ? '✗ 不正解' : '✓ 正解';
+
+  let inner = `<div class="ex-title" style="color:${titleColor}">No.${qNum}　${titleMark}　あなた:【${myAns || '未回答'}】　正解:【${correctAns}】</div>`;
+  inner += `<div class="ex-q">${qData.q}</div>`;
+  inner += `<ul class="ex-choices">`;
+  qData.choices.forEach((c, idx) => {
+    const num = idx + 1;
+    let cls = '';
+    if (num === correctAns) cls = 'correct';
+    else if (num === myAns && isWrong) cls = 'wrong-chosen';
+    inner += `<li class="${cls}"><span style="font-weight:700;margin-right:6px">${num}.</span>${c}</li>`;
+  });
+  inner += `</ul>`;
+  inner += `<div class="ex-exp"><strong>解説：</strong>${qData.exp}</div>`;
+
+  exArea.innerHTML = `<div class="explanation">${inner}</div>`;
+  exArea.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+window.showHistEx = showHistEx;
+
 // ═══════════════════════════════════════════════
 // 履歴（ローカル + クラウド）
 // ═══════════════════════════════════════════════
@@ -635,8 +680,9 @@ async function renderHistory() {
       </div>
       <div class="hist-wrongs">${wrStr}</div>
       <div class="hist-detail">
-        <div style="font-size:12px;color:#666;margin-bottom:8px">間違い: ${e.wrongs.length}問</div>
-        <div class="q-grid">${e.wrongs.map(n=>`<div class="q-btn ng" style="cursor:default">Q${n}</div>`).join('')}</div>
+        <div style="font-size:12px;color:#666;margin-bottom:8px">間違い: ${e.wrongs.length}問　<span style="color:#888">（問題番号をクリックで問題文・解説を表示）</span></div>
+        <div class="q-grid">${e.wrongs.map(n=>`<div class="q-btn ng" onclick="event.stopPropagation();showHistEx(this,'${e.year}','${e.sub}',${n},${e.myAnswers?.[n-1]??0})">Q${n}</div>`).join('')}</div>
+        <div class="hist-ex-area"></div>
       </div>
     </div>`;
   }).join('');
