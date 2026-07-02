@@ -431,6 +431,7 @@ const ANSWERS = {
 };
 const SUB_NAMES = {"I":"学科Ⅰ 計画","II":"学科Ⅱ 環境・設備","III":"学科Ⅲ 法規","IV":"学科Ⅳ 構造","V":"学科Ⅴ 施工"};
 const SUB_PASS  = {"I":11,"II":11,"III":16,"IV":16,"V":13};
+const YEAR_TOTAL_PASS = {"2019":91,"2020":97,"2021":97,"2022":87,"2023":91,"2024":97,"2025":null};
 
 // ═══════════════════════════════════════════════
 // ページ切替
@@ -668,20 +669,39 @@ async function renderHistory() {
 
   const el = document.getElementById('hist-list');
   if (h.length === 0) { el.innerHTML = '<div class="empty">まだ記録がありません</div>'; return; }
+
+  // 年度ごとの合計点を集計（全科目分）
+  const yearTotals = {};
+  h.forEach(e => {
+    if (!yearTotals[e.year]) yearTotals[e.year] = {score:0, total:0, subs:new Set()};
+    yearTotals[e.year].score += e.score;
+    yearTotals[e.year].total += e.total;
+    yearTotals[e.year].subs.add(e.sub);
+  });
+
   el.innerHTML = h.map((e, idx) => {
     const d = new Date(e.date);
     const ds = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
     const pass = SUB_PASS[e.sub];
     const ok = e.score >= pass;
     const wrStr = e.wrongs.length > 0 ? 'No.' + e.wrongs.slice(0,20).join('・') + (e.wrongs.length>20?'…':'') : '全問正解！';
+    const yt = yearTotals[e.year];
+    const allDone = yt && yt.subs.size === 5;
+    const borderTotal = YEAR_TOTAL_PASS[e.year];
+    const totalOk = allDone && borderTotal !== null && yt.score >= borderTotal;
+    const totalLine = allDone
+      ? `<span style="font-size:12px;color:#555;margin-left:6px">合計 <strong>${yt.score}/125</strong>　ボーダー <strong>${borderTotal != null ? borderTotal+'点' : '未公表'}</strong>　<span style="color:${totalOk?'#27ae60':'#e74c3c'}">${totalOk?'✓ 総合合格圏':'✗ 総合未達'}</span></span>`
+      : `<span style="font-size:12px;color:#aaa;margin-left:6px">合計 ${yt.score}点（${yt.subs.size}/5科目）　ボーダー ${borderTotal != null ? borderTotal+'点' : '未公表'}</span>`;
     return `<div class="hist-item" onclick="this.classList.toggle('open')">
       <div class="hist-top">
         <span class="hist-tag">${e.year} ${SUB_NAMES[e.sub]}</span>
         <span class="hist-score">${e.score}/${e.total}</span>
-        <span style="font-size:12px;color:${ok?'#27ae60':'#e74c3c'}">${ok?'✓ 基準超':'✗ 未達'}</span>
+        <span style="font-size:12px;color:#888">基準${pass}点</span>
+        <span style="font-size:12px;color:${ok?'#27ae60':'#e74c3c'}">${ok?'✓':'✗'}</span>
         <span class="hist-date">${ds}</span>
         <button class="btn btn-danger btn-sm" style="margin-left:auto;flex-shrink:0" onclick="event.stopPropagation();deleteHistoryEntry('${e.date}')">削除</button>
       </div>
+      <div style="padding:4px 0 2px;display:flex;align-items:center;flex-wrap:wrap;gap:4px">${totalLine}</div>
       <div class="hist-wrongs">${wrStr}</div>
       <div class="hist-detail">
         <div style="font-size:12px;color:#666;margin-bottom:8px">間違い: ${e.wrongs.length}問　<span style="color:#888">（問題番号をクリックで問題文・解説を表示）</span></div>
