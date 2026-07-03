@@ -708,7 +708,7 @@ async function renderHistory() {
       <div class="hist-top">
         <span class="hist-tag">${e.year} ${SUB_NAMES[e.sub]}</span>
         <span class="hist-score">${e.score}/${e.total}</span>
-        <span style="font-size:12px;color:#888">基準${pass}点</span>
+        <span style="font-size:12px;color:#888">足切${pass}点</span>
         <span style="font-size:12px;color:${ok?'#27ae60':'#e74c3c'}">${ok?'✓':'✗'}</span>
         <span class="hist-date">${ds}</span>
         <button class="btn btn-danger btn-sm" style="margin-left:auto;flex-shrink:0" onclick="event.stopPropagation();deleteHistoryEntry('${e.date}')">削除</button>
@@ -769,7 +769,7 @@ function renderHome() {
 
   let html = `<table class="home-table"><thead><tr>
     <th style="text-align:left">年度</th>
-    ${subs.map(s=>`<th>${subLabels[s]}<br><span style="font-size:10px;font-weight:400;opacity:.8">基準${SUB_PASS[s]}</span></th>`).join('')}
+    ${subs.map(s=>`<th>${subLabels[s]}<br><span style="font-size:10px;font-weight:400;opacity:.8">足切${SUB_PASS[s]}</span></th>`).join('')}
     <th>合計</th><th>ボーダー</th>
   </tr></thead><tbody>`;
 
