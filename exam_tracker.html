@@ -116,6 +116,7 @@ input.id-input{width:100%;padding:10px 12px;border:1.5px solid #d0d5e0;border-ra
   <button onclick="showPage('p-input')">📝 解答入力</button>
   <button onclick="showPage('p-history')">📋 履歴</button>
   <button onclick="showPage('p-stats')">📊 統計</button>
+  <button onclick="showPage('p-notes')">📖 まとめ資料</button>
   <button onclick="showPage('p-setup')">⚙️ 設定</button>
 </nav>
 
@@ -125,6 +126,34 @@ input.id-input{width:100%;padding:10px 12px;border:1.5px solid #d0d5e0;border-ra
     <h2>受験記録 一覧</h2>
     <p style="font-size:12px;color:#888;margin-bottom:12px">各科目の最高点を表示。緑＝基準超、赤＝未達、−＝未受験</p>
     <div style="overflow-x:auto"><div id="home-table"></div></div>
+  </div>
+</div>
+
+<!-- ═══ まとめ資料 ═══ -->
+<div class="page" id="p-notes">
+  <div class="card">
+    <h2>まとめ資料</h2>
+    <p style="font-size:12px;color:#888;margin-bottom:16px">各資料は別タブで開きます</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <a href="構造まとめ_RC_SRC_鉄骨.html" target="_blank"
+         style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#f0f4ff;border:1.5px solid #aac4de;border-radius:8px;text-decoration:none;color:#1a3a5c;">
+        <span style="font-size:22px;">🏗️</span>
+        <div>
+          <div style="font-weight:700;font-size:14px;">構造まとめ（RC・SRC・鉄骨）</div>
+          <div style="font-size:12px;color:#666;margin-top:2px;">耐震計算ルート・配筋規定・風圧力・ガスト影響係数 など</div>
+        </div>
+        <span style="margin-left:auto;color:#888;font-size:13px;">↗</span>
+      </a>
+      <a href="施工まとめ_材料保管.html" target="_blank"
+         style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:#f0fff4;border:1.5px solid #a5d6a7;border-radius:8px;text-decoration:none;color:#1a4a1a;">
+        <span style="font-size:22px;">🔩</span>
+        <div>
+          <div style="font-weight:700;font-size:14px;">施工まとめ（材料保管）</div>
+          <div style="font-size:12px;color:#666;margin-top:2px;">各種材料の保管条件・仮設工事 など</div>
+        </div>
+        <span style="margin-left:auto;color:#888;font-size:13px;">↗</span>
+      </a>
+    </div>
   </div>
 </div>
 

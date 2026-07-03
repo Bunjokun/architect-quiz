@@ -1,0 +1,2615 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>構造まとめ資料 ― RC・SRC・鉄骨</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 15mm 12mm 15mm 12mm;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
+    font-size: 9.5pt;
+    color: #111;
+    background: #fff;
+    width: 210mm;
+    margin: 0 auto;
+    padding: 10mm 12mm;
+    overflow-x: hidden;
+  }
+
+  /* ========== ページ区切り ========== */
+  .page {
+    width: 186mm;
+    min-height: 267mm;
+    page-break-after: always;
+    padding-bottom: 6mm;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* ========== 大見出し ========== */
+  .page-title {
+    font-size: 13pt;
+    font-weight: bold;
+    background: #1a3a5c;
+    color: #fff;
+    padding: 4px 10px;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ========== セクション見出し ========== */
+  h2 {
+    font-size: 10.5pt;
+    font-weight: bold;
+    color: #fff;
+    background: #2e6da4;
+    padding: 3px 8px;
+    margin: 10px 0 5px 0;
+    letter-spacing: 0.03em;
+  }
+  h3 {
+    font-size: 9.5pt;
+    font-weight: bold;
+    color: #1a3a5c;
+    border-left: 4px solid #2e6da4;
+    padding-left: 6px;
+    margin: 8px 0 4px 0;
+  }
+
+  /* ========== 表共通 ========== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.5pt;
+    margin-bottom: 6px;
+  }
+  th {
+    background: #dbe8f5;
+    font-weight: bold;
+    border: 1px solid #7aaacf;
+    padding: 4px 5px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  td {
+    border: 1px solid #aac4de;
+    padding: 3px 5px;
+    vertical-align: middle;
+  }
+  tr:nth-child(even) td { background: #f4f9ff; }
+
+  /* ========== 色クラス ========== */
+  .red    { color: #cc0000; font-weight: bold; }
+  .blue   { color: #0055aa; font-weight: bold; }
+  .green  { color: #006600; font-weight: bold; }
+  .bold   { font-weight: bold; }
+  .center { text-align: center; }
+  .small  { font-size: 7.5pt; }
+
+  /* ========== ポイントボックス ========== */
+  .point-box {
+    border: 1.5px solid #cc0000;
+    background: #fff8f8;
+    border-radius: 3px;
+    padding: 4px 8px;
+    margin: 5px 0;
+    font-size: 8.5pt;
+  }
+  .point-box .label {
+    font-weight: bold;
+    color: #cc0000;
+    margin-right: 4px;
+  }
+
+  .note-box {
+    border: 1px solid #2e6da4;
+    background: #f0f6ff;
+    border-radius: 3px;
+    padding: 4px 8px;
+    margin: 4px 0;
+    font-size: 8pt;
+  }
+
+  /* ========== 2カラム ========== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .col-card {
+    border: 1px solid #aac4de;
+    border-radius: 3px;
+    padding: 4px 6px;
+    background: #fafdff;
+  }
+  .col-card .card-title {
+    font-weight: bold;
+    font-size: 8.5pt;
+    background: #dbe8f5;
+    margin: -4px -6px 4px -6px;
+    padding: 2px 6px;
+    color: #1a3a5c;
+  }
+
+  /* ========== 矢印表記 ========== */
+  .arrow { color: #cc0000; font-weight: bold; }
+
+  ul.notes {
+    list-style: "▶ ";
+    padding-left: 1.2em;
+    font-size: 8pt;
+    margin: 3px 0;
+  }
+  ul.notes li { margin: 1px 0; }
+
+  .highlight-row td { background: #fff3cd !important; }
+  .red-row td { background: #fde8e8 !important; }
+
+  /* ========== 縦分数スタイル ========== */
+  .frac {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    font-weight: bold;
+    line-height: 1.2;
+    margin: 0 2px;
+  }
+  .frac .num {
+    border-bottom: 1.5px solid currentColor;
+    padding: 1px 4px 2px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .frac .den {
+    padding: 2px 4px 1px;
+    text-align: center;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================= PAGE 0: 計算公式集 ============================= -->
+<div class="page">
+  <div class="page-title">構造まとめ資料①　重要計算公式まとめ</div>
+
+  <!-- ① 安定・不安定の判別 -->
+  <h2>1. 安定・不安定・静定・不静定の判別</h2>
+
+  <!-- 方法① 判別式 -->
+  <h3>① 判別式法（汎用）</h3>
+  <div style="background:#fffde7;border:2px solid #e6c100;border-radius:6px;padding:7px 12px;margin-bottom:6px;">
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <div style="text-align:center;min-width:160px;">
+        <div class="small bold" style="color:#555;margin-bottom:3px;">判別式</div>
+        <div style="font-size:14pt;font-weight:bold;color:#8b1a1a;letter-spacing:1px;">n + s + r − 2k</div>
+      </div>
+      <div class="small" style="color:#333;line-height:1.9;border-left:2px solid #ccc;padding-left:10px;">
+        <span class="bold">n</span>＝反力数（ローラー1・ピン2・固定端3）<br>
+        <span class="bold">s</span>＝部材数<br>
+        <span class="bold">r</span>＝各節点においてある1本の材に剛接合されている部材数<br>
+        <span class="bold">k</span>＝支点と節点の数
+      </div>
+    </div>
+  </div>
+  <table style="margin-bottom:8px;">
+    <colgroup>
+      <col style="width:14%"><col style="width:24%"><col style="width:30%"><col style="width:32%">
+    </colgroup>
+    <thead><tr><th>判定</th><th>判別式の値</th><th>意味</th><th>例</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="bold center" style="background:#fff8e1;">安定・静定</td>
+        <td class="center bold" style="font-size:10pt;">＝ 0</td>
+        <td class="small">釣合い式の数と未知数が等しい</td>
+        <td class="small">単純梁・静定トラスなど</td>
+      </tr>
+      <tr>
+        <td class="bold center" style="background:#e8f5e9;">安定・不静定</td>
+        <td class="center bold red" style="font-size:10pt;">＞ 0（その値が不静定次数）</td>
+        <td class="small">余剰拘束がある</td>
+        <td class="small">固定梁・連続梁・不静定ラーメン</td>
+      </tr>
+      <tr>
+        <td class="bold center" style="background:#fde8e8;">不安定</td>
+        <td class="center bold" style="font-size:10pt;">＜ 0</td>
+        <td class="small">拘束不足→変形・崩壊</td>
+        <td class="small">メカニズム状態</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ② 断面の公式 -->
+  <h2>2. 断面の公式・応力度の基本</h2>
+  <table>
+    <colgroup>
+      <col style="width:22%"><col style="width:28%"><col style="width:26%"><col style="width:24%">
+    </colgroup>
+    <thead>
+      <tr><th>項目</th><th>公式</th><th>記号の意味</th><th>備考</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="small bold">断面2次モーメント<br>（矩形断面）</td>
+        <td class="center" style="color:#c00;">
+          I ＝ <span class="frac" style="font-size:9pt;"><span class="num">bh³</span><span class="den">12</span></span>
+        </td>
+        <td class="small">b：幅　h：せい（高さ）</td>
+        <td class="small">せいに敏感（3乗）</td>
+      </tr>
+      <tr>
+        <td class="small bold">断面係数（矩形）</td>
+        <td class="center" style="color:#c00;">
+          Z ＝ <span class="frac" style="font-size:9pt;"><span class="num">bh²</span><span class="den">6</span></span>
+        </td>
+        <td class="small">Z ＝ I/y　（y＝h/2）</td>
+        <td class="small">曲げ耐力の指標</td>
+      </tr>
+      <tr>
+        <td class="small bold">曲げ応力度</td>
+        <td class="center" style="color:#c00;">
+          σ ＝ <span class="frac" style="font-size:9pt;"><span class="num">M</span><span class="den">Z</span></span>
+          ＝ <span class="frac" style="font-size:9pt;"><span class="num">M・y</span><span class="den">I</span></span>
+        </td>
+        <td class="small">M：曲げモーメント</td>
+        <td class="small">外縁で最大</td>
+      </tr>
+      <tr>
+        <td class="small bold">せん断応力度<br>（矩形断面最大）</td>
+        <td class="center" style="color:#c00;">
+          τ ＝ <span class="frac" style="font-size:9pt;"><span class="num">3Q</span><span class="den">2A</span></span>
+          ＝ 1.5 × <span class="frac" style="font-size:9pt;"><span class="num">Q</span><span class="den">A</span></span>
+        </td>
+        <td class="small">Q：せん断力　A：断面積</td>
+        <td class="small">中立軸で最大</td>
+      </tr>
+      <tr>
+        <td class="small bold">断面2次半径</td>
+        <td class="center" style="color:#c00;">
+          i ＝ √<span class="frac" style="font-size:9pt;"><span class="num">I</span><span class="den">A</span></span>
+        </td>
+        <td class="small">座屈計算に使用</td>
+        <td class="small">矩形：i ≒ 0.289h</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ③ たわみ角・たわみ公式 -->
+  <h2>3. たわみ（δ）・たわみ角（θ）の公式</h2>
+  <table>
+    <colgroup>
+      <col style="width:16%"><col style="width:20%"><col style="width:22%"><col style="width:22%"><col style="width:20%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>梁の種類</th><th>荷重条件</th>
+        <th>最大たわみ δ<sub>max</sub></th>
+        <th>最大たわみ角 θ<sub>max</sub></th>
+        <th>発生位置</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="3" class="bold center" style="background:#eef4fb;">片持ち梁<br>（長さ L）</td>
+        <td class="small">先端に曲げモーメント M</td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">ML²</span><span class="den">2EI</span></span>
+        </td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">ML</span><span class="den">EI</span></span>
+        </td>
+        <td class="center small">先端</td>
+      </tr>
+      <tr style="border-top:1px dashed #aac4de;">
+        <td class="small">先端に集中荷重 P</td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">PL³</span><span class="den">3EI</span></span>
+        </td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">PL²</span><span class="den">2EI</span></span>
+        </td>
+        <td class="center small">先端</td>
+      </tr>
+      <tr style="border-top:1px dashed #aac4de;">
+        <td class="small">全長に等分布荷重 w</td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">wL⁴</span><span class="den">8EI</span></span>
+        </td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">wL³</span><span class="den">6EI</span></span>
+        </td>
+        <td class="center small">先端</td>
+      </tr>
+      <tr>
+        <td rowspan="3" class="bold center" style="background:#eef4fb;">単純梁<br>（スパン L）</td>
+        <td class="small">一端に曲げモーメント M</td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">ML²</span><span class="den">9√3·EI</span></span>
+        </td>
+        <td class="center" style="color:#c00;">
+          M端：<span class="frac"><span class="num">ML</span><span class="den">3EI</span></span>
+          　他端：<span class="frac"><span class="num">ML</span><span class="den">6EI</span></span>
+        </td>
+        <td class="center small">M端から<br>L/√3の位置（δ）<br>M端支点（θ大）</td>
+      </tr>
+      <tr style="border-top:1px dashed #aac4de;">
+        <td class="small">中央に集中荷重 P</td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">PL³</span><span class="den">48EI</span></span>
+        </td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">PL²</span><span class="den">16EI</span></span>
+        </td>
+        <td class="center small">支点（θ）・中央（δ）</td>
+      </tr>
+      <tr style="border-top:1px dashed #aac4de;">
+        <td class="small">全長に等分布荷重 w</td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">5wL⁴</span><span class="den">384EI</span></span>
+        </td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">wL³</span><span class="den">24EI</span></span>
+        </td>
+        <td class="center small">支点（θ）・中央（δ）</td>
+      </tr>
+      <tr>
+        <td rowspan="2" class="bold center" style="background:#eef4fb;">両端固定梁<br>（スパン L）</td>
+        <td class="small">中央に集中荷重 P</td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">PL³</span><span class="den">192EI</span></span>
+        </td>
+        <td class="center small" style="color:#555;">0<br>（固定端は回転しない）</td>
+        <td class="center small">中央（δ）・固定端（θ=0）</td>
+      </tr>
+      <tr style="border-top:1px dashed #aac4de;">
+        <td class="small">全長に等分布荷重 w</td>
+        <td class="center" style="color:#c00;">
+          <span class="frac"><span class="num">wL⁴</span><span class="den">384EI</span></span>
+        </td>
+        <td class="center small" style="color:#555;">0<br>（固定端は回転しない）</td>
+        <td class="center small">中央（δ）・固定端（θ=0）</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="point-box" style="margin-top:4px;">
+    <span class="label">★ 暗記のコツ</span>
+    片持ち先端集中：分母は <span class="red">2→3</span>（θ が 2EI、δ が 3EI）
+    単純梁中央集中：δ の分母 <span class="red">48＝16×3</span>
+    等分布は分子に <span class="red">5</span> がつく（単純梁のδのみ）
+  </div>
+
+  <!-- ④ 弾性座屈荷重 -->
+  <h2>4. 弾性座屈荷重（オイラー座屈）</h2>
+  <div style="display:flex;gap:10px;align-items:flex-start;">
+    <div style="flex:1.15;">
+      <table>
+        <colgroup>
+          <col style="width:32%"><col style="width:28%"><col style="width:40%">
+        </colgroup>
+        <thead>
+          <tr><th>端部条件</th><th>座屈長さ l<sub>k</sub></th><th>備考（Pe の比）</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="small">両端ピン</td>
+            <td class="center bold" style="color:#c00;">l<sub>k</sub> ＝ L</td>
+            <td class="small">基準ケース（×1）</td>
+          </tr>
+          <tr>
+            <td class="small">両端固定</td>
+            <td class="center bold" style="color:#c00;">l<sub>k</sub> ＝
+              <span class="frac" style="font-size:8.5pt;"><span class="num">L</span><span class="den">2</span></span>
+            </td>
+            <td class="small">最も強い（×4）</td>
+          </tr>
+          <tr>
+            <td class="small">一端固定・他端ピン</td>
+            <td class="center bold" style="color:#c00;">l<sub>k</sub> ≒ 0.7L</td>
+            <td class="small">
+              <span class="frac" style="font-size:8pt;"><span class="num">L</span><span class="den">√2</span></span>
+              ≒ 0.707L（×2）
+            </td>
+          </tr>
+          <tr>
+            <td class="small">一端固定・他端自由</td>
+            <td class="center bold" style="color:#c00;">l<sub>k</sub> ＝ 2L</td>
+            <td class="small">最も弱い（×¼）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="flex:0.85;background:#fffde7;border:1.5px solid #e6c100;border-radius:6px;padding:8px 10px;">
+      <div class="bold" style="font-size:9pt;margin-bottom:6px;">オイラー座屈荷重の式</div>
+      <div style="text-align:center;color:#8b1a1a;">
+        <span style="font-size:11pt;font-weight:bold;">P<sub>e</sub> ＝</span>
+        <span class="frac" style="font-size:11pt;color:#8b1a1a;">
+          <span class="num">π²EI</span>
+          <span class="den">l<sub>k</sub>²</span>
+        </span>
+      </div>
+      <div class="small" style="margin-top:6px;color:#444;">
+        E：ヤング係数　I：断面2次モーメント<br>
+        l<sub>k</sub>：座屈長さ（有効長さ）<br><br>
+        <span class="red bold">細長比　λ ＝</span>
+        <span class="frac red" style="font-size:8.5pt;"><span class="num">l<sub>k</sub></span><span class="den">i</span></span>
+        <span class="small">　i ＝ √(I/A)</span><br>
+        λ が大きいほど座屈しやすい
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 柱の水平剛性 -->
+  <h2>5. 柱の水平剛性（せん断剛性）</h2>
+  <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:6px;">
+    <!-- 両端固定 -->
+    <div style="flex:1;background:#eef4fb;border:1.5px solid #7aaacf;border-radius:6px;padding:8px 10px;">
+      <div class="bold small" style="color:#1a3a5c;margin-bottom:6px;text-align:center;">両端固定柱</div>
+      <div style="text-align:center;margin-bottom:6px;">
+        <svg width="60" height="80" viewBox="0 0 60 80" style="display:block;margin:0 auto;">
+          <line x1="30" y1="8" x2="30" y2="72" stroke="#333" stroke-width="3"/>
+          <!-- 上端固定 -->
+          <rect x="10" y="2" width="40" height="8" fill="#555"/>
+          <!-- 下端固定 -->
+          <rect x="10" y="70" width="40" height="8" fill="#555"/>
+          <!-- 水平力 -->
+          <line x1="2" y1="12" x2="18" y2="12" stroke="#c00" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="4" y="10" font-size="7" fill="#c00">Q</text>
+          <!-- 変位 δ -->
+          <text x="34" y="44" font-size="7" fill="#555">h</text>
+          <defs>
+            <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#c00"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <div style="text-align:center;color:#8b1a1a;font-weight:bold;font-size:11pt;">
+        k ＝ <span class="frac" style="font-size:10pt;"><span class="num">12EI</span><span class="den">h³</span></span>
+      </div>
+      <div class="small" style="margin-top:6px;color:#444;text-align:center;">
+        上下端ともに回転拘束あり<br>
+        反曲点は柱の<span class="red bold">中央</span>（h/2）
+      </div>
+    </div>
+    <!-- 一端ピン他端固定 -->
+    <div style="flex:1;background:#eef4fb;border:1.5px solid #7aaacf;border-radius:6px;padding:8px 10px;">
+      <div class="bold small" style="color:#1a3a5c;margin-bottom:6px;text-align:center;">一端ピン・他端固定柱</div>
+      <div style="text-align:center;margin-bottom:6px;">
+        <svg width="60" height="80" viewBox="0 0 60 80" style="display:block;margin:0 auto;">
+          <line x1="30" y1="8" x2="30" y2="72" stroke="#333" stroke-width="3"/>
+          <!-- 上端ピン（三角形） -->
+          <polygon points="30,4 22,14 38,14" fill="none" stroke="#333" stroke-width="1.5"/>
+          <line x1="18" y1="14" x2="42" y2="14" stroke="#333" stroke-width="1.5"/>
+          <!-- 下端固定 -->
+          <rect x="10" y="70" width="40" height="8" fill="#555"/>
+          <!-- 水平力 -->
+          <line x1="2" y1="8" x2="18" y2="8" stroke="#c00" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="4" y="6" font-size="7" fill="#c00">Q</text>
+          <!-- 高さ -->
+          <text x="34" y="44" font-size="7" fill="#555">h</text>
+          <defs>
+            <marker id="arr2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#c00"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <div style="text-align:center;color:#8b1a1a;font-weight:bold;font-size:11pt;">
+        k ＝ <span class="frac" style="font-size:10pt;"><span class="num">3EI</span><span class="den">h³</span></span>
+      </div>
+      <div class="small" style="margin-top:6px;color:#444;text-align:center;">
+        一端が自由に回転できる<br>
+        両端固定の<span class="red bold">1/4</span>の剛性
+      </div>
+    </div>
+    <!-- 比較まとめ -->
+    <div style="flex:0.9;background:#fff8e1;border:2px solid #e6c100;border-radius:6px;padding:8px 10px;">
+      <div class="bold small" style="color:#7a4000;margin-bottom:6px;">比較・覚え方</div>
+      <table style="width:100%;font-size:8pt;border-collapse:collapse;">
+        <tr style="background:#f5e6c8;">
+          <th style="padding:3px 4px;border:1px solid #ccc;">条件</th>
+          <th style="padding:3px 4px;border:1px solid #ccc;">剛性 k</th>
+          <th style="padding:3px 4px;border:1px solid #ccc;">比率</th>
+        </tr>
+        <tr>
+          <td style="padding:3px 4px;border:1px solid #ddd;">両端固定</td>
+          <td style="padding:3px 4px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">12EI/h³</td>
+          <td style="padding:3px 4px;border:1px solid #ddd;text-align:center;">4</td>
+        </tr>
+        <tr>
+          <td style="padding:3px 4px;border:1px solid #ddd;">一端ピン<br>他端固定</td>
+          <td style="padding:3px 4px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">3EI/h³</td>
+          <td style="padding:3px 4px;border:1px solid #ddd;text-align:center;">1</td>
+        </tr>
+      </table>
+      <div class="small" style="margin-top:6px;color:#444;line-height:1.7;">
+        <span class="red bold">12 と 3</span> が分子<br>
+        （分母は同じ h³）<br><br>
+        剛比は <span class="red bold">4:1</span><br>
+        固定端が増えるほど<br>水平変位しにくい
+      </div>
+    </div>
+  </div>
+  <div class="point-box">
+    <span class="label">★ 使い方</span>
+    各層の柱の水平剛性を合計し、水平力を剛性比で分配（剛性の大きい柱ほど多く負担）<br>
+    層間変位 δ ＝ Q/（Σk）　　層せん断力 Q<sub>i</sub> ＝ k<sub>i</sub> × δ
+  </div>
+
+</div>
+<div class="page-break"></div>
+
+<!-- ============================= PAGE 0b ============================= -->
+<div class="page">
+  <div class="page-title">構造まとめ資料①b　風圧力・地震力の計算</div>
+
+  <!-- ═══ 風圧力 ═══ -->
+  <h2 style="margin-bottom:4px;">1. 風圧力　W ＝ q × C<sub>f</sub></h2>
+
+  <!-- 共通前提 -->
+  <div style="background:#fffde7;border:2px solid #e6c100;border-radius:6px;padding:5px 10px;margin-bottom:6px;display:flex;align-items:center;gap:16px;">
+    <div style="text-align:center;min-width:130px;">
+      <div style="font-size:13pt;font-weight:bold;color:#8b1a1a;">W ＝ q × C<sub>f</sub></div>
+      <div style="font-size:7.5pt;color:#555;">単位面積あたりの風圧力（N/m²）</div>
+    </div>
+    <div style="font-size:8pt;color:#333;line-height:1.8;border-left:2px solid #ddb;padding-left:10px;">
+      <span class="bold">q</span>：速度圧 — 風の運動エネルギーに相当。<span class="red bold">計算式が構造骨組と外装材で異なる</span><br>
+      <span class="bold">C<sub>f</sub></span>：風力係数 — 建物形状・部位・風向きで決まる。<span class="red bold">用途により係数の種類が異なる</span>
+    </div>
+    <div style="background:#fff0f0;border:1px solid #f5a0a0;border-radius:4px;padding:4px 8px;font-size:7.5pt;color:#8b1a1a;line-height:1.6;white-space:nowrap;">
+      💨 なぜ V₀² と E<sub>r</sub>²？<br>
+      風圧∝運動E ＝ ½mv²<br>
+      → 速度が2倍で<span class="bold">4倍</span>！
+    </div>
+  </div>
+
+  <!-- 2列比較：構造骨組 vs 外装材 -->
+  <div style="display:flex;gap:7px;margin-bottom:6px;">
+
+    <!-- 構造骨組用 -->
+    <div style="flex:1;border:2px solid #2e6da4;border-radius:6px;overflow:hidden;">
+      <div style="background:#2e6da4;color:#fff;font-weight:bold;font-size:9pt;padding:4px 8px;text-align:center;">
+        ① 構造骨組用（主体構造の設計）
+      </div>
+      <div style="padding:6px 8px;background:#eef4fb;">
+        <div style="text-align:center;font-size:11pt;font-weight:bold;color:#1a3a5c;margin-bottom:4px;">
+          q ＝ 0.6 × E<sub>r</sub>² × G<sub>f</sub> × V<sub>0</sub>²
+        </div>
+        <table style="font-size:7.5pt;width:100%;">
+          <colgroup><col style="width:12%"><col style="width:22%"><col style="width:66%"></colgroup>
+          <thead><tr><th>記号</th><th>名称</th><th>内容・大きくなる条件</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="center bold">V<sub>0</sub></td>
+              <td>基準風速</td>
+              <td>地域ごとに告示規定（30〜46 m/s）。台風常襲地ほど大 → <span class="red">沖縄・九州南部</span><br>
+                <span style="color:#555;font-size:7pt;"><span class="bold">稀に発生する暴風</span>を想定した<span class="bold">地上10mにおける10分間平均風速</span>に相当する値（令87条）</span></td>
+            </tr>
+            <tr>
+              <td class="center bold">E<sub>r</sub></td>
+              <td>平均風速の<br>高さ分布係数</td>
+              <td>地表面粗度区分（Ⅰ〜Ⅳ）と高さで決まる平均的な風速比<br>
+                高いほど・粗度Ⅰ（海岸）ほど大 → <span class="red">上層階・開けた立地</span></td>
+            </tr>
+            <tr>
+              <td class="center bold">G<sub>f</sub></td>
+              <td>ガスト影響係数<br>（建物全体用）</td>
+              <td>建物全体が受けるガスト（突風）の動的増幅効果<br>
+                建物規模が大きいほど<span class="red bold">小さく</span>なる（大きな面では平均化されるため）<br>
+                告示の計算式または規模別簡略値（1.8〜3.0程度）を使用</td>
+            </tr>
+            <tr>
+              <td class="center bold">C<sub>f</sub></td>
+              <td>風力係数<br>（全体用）</td>
+              <td>建物全体の形状・アスペクト比・風向きで決まる<br>
+                例）矩形平面：D/B比、屋根勾配などで告示値を引く</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="background:#dbeafe;border-radius:4px;padding:4px 6px;margin-top:4px;font-size:7.5pt;color:#1a3a5c;">
+          <span class="bold">使い道：</span>柱・梁・耐震壁など<span class="red bold">骨組全体</span>に作用する水平力の計算。転倒モーメント・柱脚力の算定など。
+        </div>
+      </div>
+    </div>
+
+    <!-- 外装材用 -->
+    <div style="flex:1;border:2px solid #8b3a00;border-radius:6px;overflow:hidden;">
+      <div style="background:#8b3a00;color:#fff;font-weight:bold;font-size:9pt;padding:4px 8px;text-align:center;">
+        ② 外装材用（外壁・屋根仕上げ材の設計）
+      </div>
+      <div style="padding:6px 8px;background:#fff5ee;">
+        <div style="text-align:center;font-size:11pt;font-weight:bold;color:#8b3a00;margin-bottom:2px;">
+          q ＝ 0.6 × E<sub>r</sub>² × V<sub>0</sub>²
+        </div>
+        <div style="text-align:center;font-size:7.5pt;color:#8b3a00;margin-bottom:5px;font-weight:bold;">
+          ※ 平均速度圧 — G<sub>f</sub> は含まない
+        </div>
+        <table style="font-size:7.5pt;width:100%;">
+          <colgroup><col style="width:12%"><col style="width:22%"><col style="width:66%"></colgroup>
+          <thead><tr><th>記号</th><th>名称</th><th>内容・大きくなる条件</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="center bold">V<sub>0</sub></td>
+              <td>基準風速</td>
+              <td>構造骨組用と同じ（地域・告示値による）</td>
+            </tr>
+            <tr>
+              <td class="center bold">E<sub>r</sub></td>
+              <td>平均風速の<br>高さ分布係数</td>
+              <td>構造骨組用と同じ計算式。<span class="red bold">部位の高さ</span>で評価する<br>（外壁最上部・コーナー付近など部位ごとに確認）</td>
+            </tr>
+            <tr>
+              <td class="center bold" style="color:#8b3a00;">G<sub>f</sub><br>なし</td>
+              <td style="color:#8b3a00;font-weight:bold;">速度圧には<br>含めない</td>
+              <td>外装材は<span class="red bold">平均速度圧</span>を使う<br>局部突風の影響はCf（風力係数）の値に<span class="red bold">織り込み済み</span><br>→ 速度圧にGfを掛けると二重計上になってしまう</td>
+            </tr>
+            <tr>
+              <td class="center bold">C<sub>f</sub></td>
+              <td>風力係数<br>（局部用）</td>
+              <td>外圧係数 C<sub>pe</sub>（外側）± 内圧係数 C<sub>pi</sub>（内側）の差<br>
+                → 外壁が<span class="red bold">内外から押し引き</span>される力を考慮<br>
+                コーナー・開口部周辺・屋根端部で係数が大。<span class="red bold">突風の影響がここに反映されている</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="background:#fde8d8;border-radius:4px;padding:4px 6px;margin-top:4px;font-size:7.5pt;color:#8b3a00;">
+          <span class="bold">使い道：</span>外壁パネル・カーテンウォール・ガラス・屋根葺き材など<span class="red bold">部材個別</span>の設計。剥落・破損防止が目的。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 違いの整理 + 粗度図 -->
+  <div style="display:flex;gap:7px;margin-bottom:5px;">
+    <div style="flex:1.1;background:#f7fbff;border:1px solid #aac4de;border-radius:5px;padding:5px 8px;">
+      <div class="bold small" style="color:#1a3a5c;margin-bottom:3px;text-align:center;">地表面粗度区分と風速・風圧力の大小（同じ高さで比較）</div>
+      <svg viewBox="0 0 280 62" width="100%" style="display:block;">
+        <defs>
+          <marker id="wb1" markerWidth="5" markerHeight="4" refX="4" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#c00"/></marker>
+          <marker id="wb2" markerWidth="5" markerHeight="4" refX="4" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#c06000"/></marker>
+          <marker id="wb3" markerWidth="5" markerHeight="4" refX="4" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#336600"/></marker>
+          <marker id="wb4" markerWidth="5" markerHeight="4" refX="4" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#003399"/></marker>
+        </defs>
+        <!-- 列ラベル -->
+        <text x="35" y="9" text-anchor="middle" font-size="8" fill="#8b1a1a" font-weight="bold">Ⅰ 海岸</text>
+        <text x="105" y="9" text-anchor="middle" font-size="8" fill="#c06000" font-weight="bold">Ⅱ 郊外</text>
+        <text x="175" y="9" text-anchor="middle" font-size="8" fill="#336600" font-weight="bold">Ⅲ 市街地</text>
+        <text x="245" y="9" text-anchor="middle" font-size="8" fill="#003399" font-weight="bold">Ⅳ 大都市</text>
+        <!-- 列区切り -->
+        <line x1="70" y1="9" x2="70" y2="53" stroke="#ddd" stroke-width="0.5"/>
+        <line x1="140" y1="9" x2="140" y2="53" stroke="#ddd" stroke-width="0.5"/>
+        <line x1="210" y1="9" x2="210" y2="53" stroke="#ddd" stroke-width="0.5"/>
+        <!-- Zone Ⅰ: 海岸 ― 横向き矢印 長い（Er大） -->
+        <line x1="4" y1="19" x2="60" y2="19" stroke="#c00" stroke-width="2" marker-end="url(#wb1)"/>
+        <line x1="4" y1="28" x2="60" y2="28" stroke="#c00" stroke-width="1.8" marker-end="url(#wb1)"/>
+        <line x1="4" y1="38" x2="60" y2="38" stroke="#c00" stroke-width="1.5" marker-end="url(#wb1)"/>
+        <path d="M4,48 Q15,44 26,48 Q37,52 48,48 Q59,44 68,48" fill="none" stroke="#6b9fd4" stroke-width="1.2"/>
+        <!-- Zone Ⅱ: 郊外 ― 中程度の矢印 -->
+        <line x1="73" y1="18" x2="118" y2="18" stroke="#c06000" stroke-width="2" marker-end="url(#wb2)"/>
+        <line x1="73" y1="27" x2="112" y2="27" stroke="#c06000" stroke-width="1.5" marker-end="url(#wb2)"/>
+        <rect x="76" y="40" width="8" height="13" fill="#aaa" rx="1"/>
+        <rect x="88" y="36" width="8" height="17" fill="#aaa" rx="1"/>
+        <rect x="100" y="42" width="7" height="11" fill="#bbb" rx="1"/>
+        <rect x="112" y="39" width="7" height="14" fill="#aaa" rx="1"/>
+        <!-- Zone Ⅲ: 市街地 ― 短い矢印 -->
+        <line x1="143" y1="14" x2="172" y2="14" stroke="#336600" stroke-width="2" marker-end="url(#wb3)"/>
+        <line x1="143" y1="23" x2="165" y2="23" stroke="#336600" stroke-width="1.5" marker-end="url(#wb3)"/>
+        <rect x="143" y="34" width="10" height="19" fill="#888" rx="1"/>
+        <rect x="155" y="28" width="10" height="25" fill="#888" rx="1"/>
+        <rect x="168" y="36" width="10" height="17" fill="#999" rx="1"/>
+        <rect x="182" y="31" width="9" height="22" fill="#888" rx="1"/>
+        <!-- Zone Ⅳ: 大都市 ― 非常に短い矢印（ビル群が遮蔽） -->
+        <line x1="213" y1="12" x2="228" y2="12" stroke="#003399" stroke-width="2" marker-end="url(#wb4)"/>
+        <rect x="210" y="26" width="10" height="27" fill="#666" rx="1"/>
+        <rect x="223" y="20" width="10" height="33" fill="#666" rx="1"/>
+        <rect x="237" y="28" width="10" height="25" fill="#777" rx="1"/>
+        <rect x="250" y="22" width="10" height="31" fill="#666" rx="1"/>
+        <!-- 地面線 -->
+        <line x1="4" y1="53" x2="276" y2="53" stroke="#555" stroke-width="1.5"/>
+        <!-- 下部ラベル -->
+        <text x="4" y="61" font-size="7" fill="#555">Er・風圧力：</text>
+        <text x="52" y="61" font-size="7" fill="#c00" font-weight="bold">大 ←―――――――――――――――――→ 小</text>
+      </svg>
+    </div>
+    <div style="flex:0.85;background:#fff8e1;border:1.5px solid #e6c100;border-radius:5px;padding:5px 8px;">
+      <div class="bold small" style="color:#7a4000;margin-bottom:3px;">① vs ② 違いの核心</div>
+      <table style="font-size:7.5pt;width:100%;border-collapse:collapse;">
+        <tr style="background:#f5e6c8;">
+          <th style="padding:2px 4px;border:1px solid #ddd;"></th>
+          <th style="padding:2px 4px;border:1px solid #ddd;text-align:center;">構造骨組</th>
+          <th style="padding:2px 4px;border:1px solid #ddd;text-align:center;">外装材</th>
+        </tr>
+        <tr>
+          <td style="padding:2px 4px;border:1px solid #ddd;font-weight:bold;">速度圧</td>
+          <td style="padding:2px 4px;border:1px solid #ddd;text-align:center;">Er²×<span style="color:#c00;font-weight:bold;">Gf</span>×V₀²</td>
+          <td style="padding:2px 4px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">Er²×V₀²<br>（平均速度圧）</td>
+        </tr>
+        <tr>
+          <td style="padding:2px 4px;border:1px solid #ddd;font-weight:bold;">Gfの<br>扱い</td>
+          <td style="padding:2px 4px;border:1px solid #ddd;text-align:center;">速度圧に含む</td>
+          <td style="padding:2px 4px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">Cfに織り込み済</td>
+        </tr>
+        <tr>
+          <td style="padding:2px 4px;border:1px solid #ddd;font-weight:bold;">Cf</td>
+          <td style="padding:2px 4px;border:1px solid #ddd;text-align:center;">全体形状係数</td>
+          <td style="padding:2px 4px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">内外圧差<br>(Cpe±Cpi)</td>
+        </tr>
+      </table>
+      <div style="font-size:7.5pt;color:#555;margin-top:4px;line-height:1.6;">
+        外装材はGfを速度圧に掛けると<br>
+        <span class="red bold">二重計上</span>になる。<br>
+        突風の影響はCfの値に<br>
+        すでに反映されている
+      </div>
+    </div>
+  </div>
+
+  <!-- ガスト影響係数 コンパクト版 -->
+  <div style="border:2px solid #5a3e8b;border-radius:6px;overflow:hidden;margin-bottom:6px;">
+    <div style="background:#5a3e8b;color:#fff;font-weight:bold;font-size:9pt;padding:4px 10px;">
+      ★ ガスト影響係数 G<sub>f</sub> ― 平均風圧に対する突風ピークの倍率
+    </div>
+    <div style="padding:6px 10px;background:#f5f0ff;">
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+
+        <!-- 左：概念説明（コンパクト） -->
+        <div style="flex:1;background:#fff;border:1px solid #c4b0e8;border-radius:4px;padding:5px 8px;font-size:7.5pt;color:#333;line-height:1.8;">
+          <span class="bold" style="color:#5a3e8b;">G<sub>f</sub> ＝ 瞬間最大風圧 ÷ 平均風圧</span>（のイメージ）<br>
+          → 骨組には「ピーク時の風圧」を用いるため速度圧に掛ける<br>
+          <span style="color:#888;font-size:7pt;">※ 外装材は C<sub>f</sub>（局部風力係数）に織り込み済みのため速度圧には含めない</span><br><br>
+          <span class="bold">💧 川の比喩：</span><br>
+          　地上付近 ＝ 渓流（岩や草で乱流）→ 突風が多い → <span class="red bold">Gf 大</span><br>
+          　上空　　 ＝ 大河（障害物なし）　→ 安定した流れ → <span style="color:#336600;font-weight:bold;">Gf 小</span>
+        </div>
+
+        <!-- 中：SVGダイアグラム -->
+        <div style="flex:1.1;background:#fff;border:1px solid #c4b0e8;border-radius:4px;padding:5px 7px;">
+          <div style="font-size:7pt;color:#5a3e8b;font-weight:bold;text-align:center;margin-bottom:3px;">高さと G<sub>f</sub>・E<sub>r</sub> の関係</div>
+          <svg viewBox="0 0 175 108" width="100%" style="display:block;">
+            <text x="5" y="22" font-size="7" fill="#555">高</text>
+            <text x="5" y="80" font-size="7" fill="#555">低</text>
+            <rect x="75" y="16" width="17" height="12" fill="#dbeafe" stroke="#7aaacf" stroke-width="0.8"/>
+            <text x="83" y="25" font-size="5.5" fill="#1a3a5c" text-anchor="middle">5F</text>
+            <rect x="75" y="29" width="17" height="12" fill="#dbeafe" stroke="#7aaacf" stroke-width="0.8"/>
+            <text x="83" y="38" font-size="5.5" fill="#1a3a5c" text-anchor="middle">4F</text>
+            <rect x="75" y="42" width="17" height="12" fill="#c8dff5" stroke="#7aaacf" stroke-width="0.8"/>
+            <text x="83" y="51" font-size="5.5" fill="#1a3a5c" text-anchor="middle">3F</text>
+            <rect x="75" y="55" width="17" height="12" fill="#c8dff5" stroke="#7aaacf" stroke-width="0.8"/>
+            <text x="83" y="64" font-size="5.5" fill="#1a3a5c" text-anchor="middle">2F</text>
+            <rect x="75" y="68" width="17" height="12" fill="#b8d4f0" stroke="#7aaacf" stroke-width="0.8"/>
+            <text x="83" y="77" font-size="5.5" fill="#1a3a5c" text-anchor="middle">1F</text>
+            <line x1="62" y1="82" x2="103" y2="82" stroke="#8b6020" stroke-width="2"/>
+            <text x="83" y="91" font-size="5.5" fill="#8b6020" text-anchor="middle">GL</text>
+            <rect x="69" y="18" width="6" height="8" fill="#7c5fbf" opacity="0.35" rx="1"/>
+            <rect x="57" y="31" width="18" height="8" fill="#7c5fbf" opacity="0.5" rx="1"/>
+            <rect x="44" y="44" width="31" height="8" fill="#7c5fbf" opacity="0.65" rx="1"/>
+            <rect x="30" y="57" width="45" height="8" fill="#7c5fbf" opacity="0.8" rx="1"/>
+            <rect x="15" y="70" width="60" height="8" fill="#7c5fbf" opacity="0.9" rx="1"/>
+            <rect x="92" y="18" width="60" height="8" fill="#2255aa" opacity="0.8" rx="1"/>
+            <rect x="92" y="31" width="45" height="8" fill="#2255aa" opacity="0.65" rx="1"/>
+            <rect x="92" y="44" width="31" height="8" fill="#2255aa" opacity="0.5" rx="1"/>
+            <rect x="92" y="57" width="18" height="8" fill="#2255aa" opacity="0.4" rx="1"/>
+            <rect x="92" y="70" width="6" height="8" fill="#2255aa" opacity="0.3" rx="1"/>
+            <text x="38" y="10" font-size="7" fill="#5a3e8b" font-weight="bold" text-anchor="middle">← Gf</text>
+            <text x="11" y="77" font-size="6.5" fill="#5a3e8b" font-weight="bold">大</text>
+            <text x="67" y="24" font-size="6" fill="#5a3e8b">小</text>
+            <text x="130" y="10" font-size="7" fill="#2255aa" font-weight="bold" text-anchor="middle">Er →</text>
+            <text x="155" y="24" font-size="6.5" fill="#2255aa" font-weight="bold">大</text>
+            <text x="93" y="77" font-size="6" fill="#2255aa">小</text>
+            <text x="38" y="101" font-size="6" fill="#5a3e8b" text-anchor="middle">Gf：低いほど大</text>
+            <text x="130" y="101" font-size="6" fill="#2255aa" text-anchor="middle">Er：高いほど大</text>
+          </svg>
+        </div>
+
+        <!-- 右：粗度区分表（コンパクト） -->
+        <div style="flex:0.9;background:#fff;border:1px solid #c4b0e8;border-radius:4px;padding:5px 7px;">
+          <div style="font-size:7pt;color:#5a3e8b;font-weight:bold;text-align:center;margin-bottom:3px;">粗度区分と G<sub>f</sub>・E<sub>r</sub></div>
+          <table style="font-size:7pt;width:100%;border-collapse:collapse;">
+            <thead>
+              <tr style="background:#e8e0f8;">
+                <th style="padding:2px 4px;border:1px solid #c4b0e8;">粗度</th>
+                <th style="padding:2px 4px;border:1px solid #c4b0e8;">地形</th>
+                <th style="padding:2px 4px;border:1px solid #c4b0e8;">G<sub>f</sub></th>
+                <th style="padding:2px 4px;border:1px solid #c4b0e8;">E<sub>r</sub></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="center bold" style="padding:2px 4px;border:1px solid #e0d8f0;color:#8b1a1a;">Ⅰ</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;">海岸・平坦</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;text-align:center;color:#336600;font-weight:bold;">小</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;text-align:center;color:#c00;font-weight:bold;">大</td>
+              </tr>
+              <tr>
+                <td class="center bold" style="padding:2px 4px;border:1px solid #e0d8f0;color:#c06000;">Ⅱ</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;">郊外・田畑</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;text-align:center;">やや小</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;text-align:center;">やや大</td>
+              </tr>
+              <tr>
+                <td class="center bold" style="padding:2px 4px;border:1px solid #e0d8f0;color:#336600;">Ⅲ</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;">市街地</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;text-align:center;">中</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;text-align:center;">中</td>
+              </tr>
+              <tr>
+                <td class="center bold" style="padding:2px 4px;border:1px solid #e0d8f0;color:#003399;">Ⅳ</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;">大都市中心</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;text-align:center;color:#c00;font-weight:bold;">大</td>
+                <td style="padding:2px 4px;border:1px solid #e0d8f0;text-align:center;color:#336600;font-weight:bold;">小</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="background:#ede8fa;border-radius:3px;padding:3px 5px;margin-top:4px;font-size:7pt;color:#5a3e8b;">
+            GfとErは<span class="red bold">逆向き</span>の関係<br>
+            粗度Ⅰ：Er大・Gf小<br>
+            粗度Ⅳ：Er小・Gf大
+          </div>
+        </div>
+
+      </div>
+      <div style="background:#ede8fa;border-radius:4px;padding:4px 9px;font-size:7.5pt;color:#333;line-height:1.7;margin-top:5px;">
+        <span class="bold" style="color:#5a3e8b;">★ 試験ポイント</span>
+        ① G<sub>f</sub> は高さが上がると<span class="red bold">小さく</span>なるが、速度圧 q は高いほど<span class="red bold">大きく</span>なる（E<sub>r</sub>² の効果が勝るため）
+        ② 粗度Ⅳ（都市）はGf<span class="red bold">大</span>・Er<span class="red bold">小</span>、粗度Ⅰ（海岸）はGf<span class="red bold">小</span>・Er<span class="red bold">大</span>　— 逆向きに注意
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 地震力 ═══ -->
+  <h2 style="margin-bottom:5px;">2. 地震力　Q<sub>i</sub> ＝ C<sub>i</sub> × W<sub>i</sub></h2>
+
+  <div style="display:flex;gap:7px;margin-bottom:6px;">
+    <!-- 公式ボックス -->
+    <div style="flex:1.6;background:#fffde7;border:2px solid #e6c100;border-radius:6px;padding:7px 10px;">
+      <div style="text-align:center;margin-bottom:6px;">
+        <span style="font-size:15pt;font-weight:bold;color:#8b1a1a;">Q<sub>i</sub> ＝ C<sub>i</sub> × W<sub>i</sub></span>
+        <span style="font-size:8pt;color:#555;margin-left:8px;">（i 層に作用する地震層せん断力）</span>
+      </div>
+      <div style="text-align:center;margin-bottom:5px;font-size:11pt;font-weight:bold;color:#2255aa;">
+        C<sub>i</sub> ＝ Z × R<sub>t</sub> × A<sub>i</sub> × C<sub>0</sub>
+      </div>
+      <table style="font-size:8pt;">
+        <colgroup><col style="width:9%"><col style="width:15%"><col style="width:38%"><col style="width:38%"></colgroup>
+        <thead><tr><th>記号</th><th>名称</th><th>内容・値の範囲</th><th>大きくなる条件</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="center bold" style="font-size:10pt;">W<sub>i</sub></td>
+            <td class="small">建物重量</td>
+            <td class="small">i 層以上の総重量（固定荷重＋積載荷重）</td>
+            <td class="small" style="background:#fff8f0;">重い建物・上層が重いほど大<br>（RC造はS造の約3倍重い）</td>
+          </tr>
+          <tr>
+            <td class="center bold" style="font-size:10pt;">Z</td>
+            <td class="small">地震地域係数</td>
+            <td class="small">地域ごとに告示規定：0.7〜1.0<br>沖縄0.7、関東・東海・近畿＝1.0</td>
+            <td class="small" style="background:#fff8f0;">地震活動が活発な地域（太平洋側）</td>
+          </tr>
+          <tr>
+            <td class="center bold" style="font-size:10pt;">R<sub>t</sub></td>
+            <td class="small">振動特性係数</td>
+            <td class="small">固有周期 T と地盤種別で決まる（0〜1.0）<br>T 短い（剛な建物）→ R<sub>t</sub>＝1.0（最大）</td>
+            <td class="small" style="background:#fff8f0;"><span class="red bold">軟弱地盤</span>では長周期建物でも<br>R<sub>t</sub> が下がりにくく危険</td>
+          </tr>
+          <tr>
+            <td class="center bold" style="font-size:10pt;">A<sub>i</sub></td>
+            <td class="small">層せん断力<br>分布係数</td>
+            <td class="small">1階＝1.0（最小）、上層ほど大きくなる<br>高層建物では最上層で1を大きく超える</td>
+            <td class="small" style="background:#fff8f0;"><span class="red bold">上層ほど大</span>（鞭振り効果）<br>高い・細長い建物で顕著</td>
+          </tr>
+          <tr>
+            <td class="center bold" style="font-size:10pt;">C<sub>0</sub></td>
+            <td class="small">標準せん断<br>力係数</td>
+            <td class="small">一次設計：<span class="red bold">0.2以上</span>　壁量設計：<span class="red bold">0.3以上</span><br>二次設計（保有水平耐力）：<span class="red bold">1.0以上</span></td>
+            <td class="small" style="background:#fff8f0;">設計レベルが上がるほど大<br>大地震確認時（二次設計）で最大</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- コラム群 -->
+    <div style="flex:0.9;display:flex;flex-direction:column;gap:6px;">
+      <div style="background:#fff0f0;border-left:4px solid #c00;border-radius:0 5px 5px 0;padding:6px 8px;">
+        <div class="bold small" style="color:#8b1a1a;margin-bottom:3px;">🏋 W×C のイメージ</div>
+        <div style="font-size:8pt;color:#333;line-height:1.7;">
+          重いカートを押す時、<br>
+          急に止まると前にのめる<br>
+          → <span class="red bold">重い建物＝慣性力大</span><br><br>
+          RC造は鉄骨の3倍重い<br>→ 地震力も大きくなりやすい
+        </div>
+      </div>
+      <div style="background:#f0f4ff;border-left:4px solid #336;border-radius:0 5px 5px 0;padding:6px 8px;">
+        <div class="bold small" style="color:#1a3a5c;margin-bottom:3px;">🎣 A<sub>i</sub>の鞭振り効果</div>
+        <div style="font-size:8pt;color:#333;line-height:1.7;">
+          釣り竿を根本で動かすと<br>先端は大きく揺れる<br>→ 高層建物の上層は<br>　<span class="red bold">地面より激しく揺れる</span><br><br>
+          A<sub>i</sub>＝1.0（1階）→ 上へ行くほど↑<br>最上層が最も大きい
+        </div>
+      </div>
+      <div style="background:#f0fff4;border-left:4px solid #2a7a3a;border-radius:0 5px 5px 0;padding:6px 8px;">
+        <div class="bold small" style="color:#1a4a2a;margin-bottom:3px;">🌊 R<sub>t</sub>と共振のイメージ</div>
+        <div style="font-size:8pt;color:#333;line-height:1.7;">
+          ブランコは押すタイミング<br>が合うと大きく揺れる<br>→ 地盤の揺れ周期と<br>　建物周期が<span class="red bold">一致すると共振</span><br><br>
+          軟弱地盤は周期が長い<br>鉄骨・木造も周期が長い<br>→ 組み合わせると危険
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 固有周期 + C0 まとめ + 鞭図 -->
+  <div style="display:flex;gap:7px;">
+    <div style="flex:1;">
+      <table style="font-size:8pt;">
+        <colgroup><col style="width:42%"><col style="width:20%"><col style="width:38%"></colgroup>
+        <thead><tr><th colspan="3" style="background:#c8dff5;text-align:center;">標準せん断力係数 C₀ の使い分け</th></tr>
+        <tr><th>設計段階</th><th>C<sub>0</sub></th><th>意味</th></tr></thead>
+        <tbody>
+          <tr><td class="small">一次設計（許容応力度）</td><td class="center bold red">0.2以上</td><td class="small">頻繁に起こる地震で壊れない</td></tr>
+          <tr><td class="small">耐震壁なし・ルート1</td><td class="center bold red">0.3以上</td><td class="small">より安全側の設計</td></tr>
+          <tr><td class="small">二次設計（保有水平耐力）</td><td class="center bold red">1.0以上</td><td class="small">大地震でも倒壊させない</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="flex:1;">
+      <table style="font-size:8pt;">
+        <colgroup><col style="width:42%"><col style="width:58%"></colgroup>
+        <thead><tr><th colspan="2" style="background:#c8dff5;text-align:center;">固有周期 T の略算式</th></tr>
+        <tr><th>構造種別</th><th>T の式（H：建物高さ m）</th></tr></thead>
+        <tbody>
+          <tr><td class="small">RC造・SRC造</td><td class="center bold red">T ＝ 0.02H（固い→周期短）</td></tr>
+          <tr><td class="small">鉄骨造・木造</td><td class="center bold red">T ＝ 0.03H（柔い→周期長）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="flex:0.7;background:#fff8e1;border:1.5px solid #e6c100;border-radius:5px;padding:5px 7px;">
+      <div class="bold small" style="color:#7a4000;margin-bottom:3px;text-align:center;">Ai の分布イメージ</div>
+      <svg viewBox="0 0 90 65" width="100%" style="display:block;">
+        <!-- building floors -->
+        <rect x="25" y="5" width="30" height="10" fill="#dbeafe" stroke="#7aaacf" stroke-width="1"/>
+        <rect x="25" y="16" width="30" height="10" fill="#dbeafe" stroke="#7aaacf" stroke-width="1"/>
+        <rect x="25" y="27" width="30" height="10" fill="#dbeafe" stroke="#7aaacf" stroke-width="1"/>
+        <rect x="25" y="38" width="30" height="10" fill="#dbeafe" stroke="#7aaacf" stroke-width="1"/>
+        <rect x="25" y="49" width="30" height="10" fill="#c8dff5" stroke="#7aaacf" stroke-width="1"/>
+        <!-- labels -->
+        <text x="40" y="13" text-anchor="middle" font-size="7" fill="#1a3a5c">5F</text>
+        <text x="40" y="24" text-anchor="middle" font-size="7" fill="#1a3a5c">4F</text>
+        <text x="40" y="35" text-anchor="middle" font-size="7" fill="#1a3a5c">3F</text>
+        <text x="40" y="46" text-anchor="middle" font-size="7" fill="#1a3a5c">2F</text>
+        <text x="40" y="57" text-anchor="middle" font-size="7" fill="#1a3a5c">1F</text>
+        <!-- Ai bars -->
+        <rect x="56" y="7" width="25" height="7" fill="#c00" rx="1" opacity="0.85"/>
+        <rect x="56" y="18" width="20" height="7" fill="#e06000" rx="1" opacity="0.85"/>
+        <rect x="56" y="29" width="15" height="7" fill="#e0a000" rx="1" opacity="0.85"/>
+        <rect x="56" y="40" width="10" height="7" fill="#cccc00" rx="1" opacity="0.85"/>
+        <rect x="56" y="51" width="6" height="7" fill="#aaa" rx="1" opacity="0.85"/>
+        <text x="83" y="13" font-size="6" fill="#c00" font-weight="bold">大</text>
+        <text x="83" y="57" font-size="6" fill="#888">1.0</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="point-box" style="margin-top:5px;">
+    <span class="label">★ まとめ：どちらも「掛け算」の構造</span>
+    <span class="bold">風圧力</span>：地域（V₀）× 周辺環境・高さ（E²）× 形状（Cf）の積 → 1つでも大きければ全体が大<br>
+    <span class="bold">地震力</span>：地域（Z）× 地盤×建物（Rt）× 上層補正（Ai）× 設計レベル（C₀）× 重さ（Wi）の積<br>
+    共通の教訓：<span class="red bold">不利な条件が重なると地震力・風圧力は一気に増大する</span>
+  </div>
+
+</div>
+<div class="page-break"></div>
+
+<!-- ============================= PAGE 0c ============================= -->
+<div class="page">
+  <div class="page-title">構造まとめ資料①c　耐震計算の全体フロー（令81条・82条）</div>
+
+  <!-- 3列ヘッダー -->
+  <div style="display:flex;gap:3px;margin-bottom:3px;font-size:7pt;font-weight:bold;text-align:center;">
+    <div style="flex:1;background:#2e6da4;color:#fff;padding:3px 4px;border-radius:3px;">令82条各号及び令82条の4の計算</div>
+    <div style="flex:1.1;background:#336600;color:#fff;padding:3px 4px;border-radius:3px;">許容応力度等計算（一次設計＋ルート2）</div>
+    <div style="flex:1;background:#8b3a00;color:#fff;padding:3px 4px;border-radius:3px;">保有水平耐力計算（一次設計＋ルート3）</div>
+  </div>
+
+  <!-- メインフロー SVG -->
+  <svg viewBox="0 0 760 268" width="100%" style="display:block;margin-bottom:5px;">
+    <defs>
+      <marker id="fc_d" markerWidth="4" markerHeight="5" refX="2" refY="4" orient="auto"><path d="M0,0 L4,0 L2,5 Z" fill="#555"/></marker>
+      <marker id="fc_r" markerWidth="5" markerHeight="4" refX="4" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#c00"/></marker>
+      <marker id="fc_b" markerWidth="4" markerHeight="5" refX="2" refY="4" orient="auto"><path d="M0,0 L4,0 L2,5 Z" fill="#2e6da4"/></marker>
+      <marker id="fc_g" markerWidth="4" markerHeight="5" refX="2" refY="4" orient="auto"><path d="M0,0 L4,0 L2,5 Z" fill="#336600"/></marker>
+      <marker id="fc_br" markerWidth="4" markerHeight="5" refX="2" refY="4" orient="auto"><path d="M0,0 L4,0 L2,5 Z" fill="#8b3a00"/></marker>
+    </defs>
+
+    <!-- 一次設計 BOX (全幅) -->
+    <rect x="1" y="1" width="758" height="50" rx="3" fill="#fffde7" stroke="#e6c100" stroke-width="2"/>
+    <text x="380" y="15" font-size="9" fill="#7a4000" text-anchor="middle" font-weight="bold">一次設計</text>
+    <text x="380" y="27" font-size="7" fill="#555" text-anchor="middle">許容応力度≧生じる応力度　　C₀≧0.2 の地震力による短期許容応力度計算</text>
+    <text x="380" y="39" font-size="7" fill="#555" text-anchor="middle">使用上の支障防止の確認　　屋根ふき材等の構造計算</text>
+    <text x="380" y="48" font-size="6.5" fill="#888" text-anchor="middle">※ 層間変形角 δ/h ≦ 1/200（1/120）の確認はルート2・3では必須、ルート1では基本的に仕様で担保</text>
+
+    <!-- ルート選択 Diamond -->
+    <line x1="380" y1="51" x2="380" y2="62" stroke="#555" stroke-width="1.5" marker-end="url(#fc_d)"/>
+    <polygon points="380,62 432,74 380,86 328,74" fill="#f5f5e5" stroke="#666" stroke-width="1.2"/>
+    <text x="380" y="71" font-size="6.5" fill="#333" text-anchor="middle" font-weight="bold">規模等による</text>
+    <text x="380" y="81" font-size="6.5" fill="#333" text-anchor="middle" font-weight="bold">耐震計算ルートの選択</text>
+
+    <!-- 3方向への分岐矢印 -->
+    <line x1="328" y1="74" x2="120" y2="74" stroke="#555" stroke-width="1.2"/>
+    <line x1="120" y1="74" x2="120" y2="94" stroke="#555" stroke-width="1.2" marker-end="url(#fc_d)"/>
+    <line x1="380" y1="86" x2="380" y2="94" stroke="#555" stroke-width="1.2" marker-end="url(#fc_d)"/>
+    <line x1="432" y1="74" x2="640" y2="74" stroke="#555" stroke-width="1.2"/>
+    <line x1="640" y1="74" x2="640" y2="94" stroke="#555" stroke-width="1.2" marker-end="url(#fc_d)"/>
+
+    <!-- ═══ ルート1 列 ═══ -->
+    <rect x="1" y="94" width="237" height="16" rx="2" fill="#2e6da4"/>
+    <text x="120" y="106" font-size="8" fill="#fff" text-anchor="middle" font-weight="bold">ルート 1</text>
+    <rect x="1" y="113" width="237" height="42" rx="2" fill="#eef4fb" stroke="#aac4de" stroke-width="1"/>
+    <text x="120" y="126" font-size="7" fill="#1a3a5c" text-anchor="middle" font-weight="bold">構造種別に応じた確認</text>
+    <text x="120" y="137" font-size="6.5" fill="#555" text-anchor="middle">仕様規定・規模制限を満たすこと</text>
+    <text x="120" y="148" font-size="6.5" fill="#555" text-anchor="middle">剛性率・偏心率の計算は不要</text>
+    <line x1="120" y1="155" x2="120" y2="164" stroke="#2e6da4" stroke-width="1.2" marker-end="url(#fc_b)"/>
+    <rect x="66" y="164" width="108" height="15" rx="7" fill="#2e6da4"/>
+    <text x="120" y="175" font-size="8" fill="#fff" text-anchor="middle" font-weight="bold">END</text>
+
+    <!-- ═══ ルート2 列 ═══ -->
+    <rect x="248" y="94" width="264" height="16" rx="2" fill="#336600"/>
+    <text x="380" y="106" font-size="8" fill="#fff" text-anchor="middle" font-weight="bold">ルート 2</text>
+    <!-- 層間変形角 -->
+    <rect x="248" y="113" width="264" height="17" rx="2" fill="#f0fff0" stroke="#a5d6a7" stroke-width="1"/>
+    <text x="380" y="125" font-size="7" fill="#1a4a1a" text-anchor="middle">層間変形角の確認　δ/h ≦ 1/200（1/120）</text>
+    <line x1="380" y1="130" x2="380" y2="137" stroke="#555" stroke-width="1.2" marker-end="url(#fc_d)"/>
+    <!-- H≦31m diamond -->
+    <polygon points="380,137 418,148 380,159 342,148" fill="#fafff8" stroke="#666" stroke-width="1"/>
+    <text x="380" y="145" font-size="6" fill="#333" text-anchor="middle">高さ</text>
+    <text x="380" y="154" font-size="6" fill="#333" text-anchor="middle">≦31m?</text>
+    <!-- NO → ルート3 -->
+    <line x1="418" y1="148" x2="470" y2="148" stroke="#c00" stroke-width="1.2" marker-end="url(#fc_r)"/>
+    <text x="421" y="144" font-size="5.5" fill="#c00" font-weight="bold">NO</text>
+    <text x="474" y="152" font-size="5.5" fill="#c00">ルート3へ→</text>
+    <!-- YES down -->
+    <text x="349" y="174" font-size="6" fill="#336600">YES</text>
+    <line x1="380" y1="159" x2="380" y2="167" stroke="#555" stroke-width="1.2" marker-end="url(#fc_d)"/>
+    <!-- Rs/Re box -->
+    <rect x="248" y="167" width="264" height="28" rx="2" fill="#f0fff0" stroke="#a5d6a7" stroke-width="1"/>
+    <text x="380" y="179" font-size="7" fill="#1a4a1a" text-anchor="middle" font-weight="bold">剛性率 Rs ≧ 0.6　　偏心率 Re ≦ 0.15</text>
+    <text x="380" y="190" font-size="7" fill="#1a4a1a" text-anchor="middle">建物の塔状比 ≦ 4</text>
+    <!-- NG → ルート3 -->
+    <line x1="512" y1="181" x2="535" y2="181" stroke="#c00" stroke-width="1.2" marker-end="url(#fc_r)"/>
+    <text x="514" y="177" font-size="5.5" fill="#c00" font-weight="bold">NG</text>
+    <text x="538" y="185" font-size="5.5" fill="#c00">ルート3へ→</text>
+    <!-- OK down -->
+    <text x="349" y="209" font-size="6" fill="#336600">OK</text>
+    <line x1="380" y1="195" x2="380" y2="203" stroke="#555" stroke-width="1.2" marker-end="url(#fc_d)"/>
+    <rect x="248" y="203" width="264" height="16" rx="2" fill="#f0fff0" stroke="#a5d6a7" stroke-width="1"/>
+    <text x="380" y="215" font-size="7" fill="#1a4a1a" text-anchor="middle">構造種別に応じた確認</text>
+    <line x1="380" y1="219" x2="380" y2="228" stroke="#336600" stroke-width="1.2" marker-end="url(#fc_g)"/>
+    <rect x="326" y="228" width="108" height="15" rx="7" fill="#336600"/>
+    <text x="380" y="239" font-size="8" fill="#fff" text-anchor="middle" font-weight="bold">END</text>
+
+    <!-- ═══ ルート3 列 ═══ -->
+    <rect x="521" y="94" width="238" height="16" rx="2" fill="#8b3a00"/>
+    <text x="640" y="106" font-size="8" fill="#fff" text-anchor="middle" font-weight="bold">ルート 3　（ルート2のNG・NOも含む）</text>
+    <!-- 層間変形角 -->
+    <rect x="521" y="113" width="238" height="17" rx="2" fill="#fff5ee" stroke="#f5c0a0" stroke-width="1"/>
+    <text x="640" y="125" font-size="7" fill="#8b3a00" text-anchor="middle">層間変形角の確認　δ/h ≦ 1/200（1/120）</text>
+    <line x1="640" y1="130" x2="640" y2="137" stroke="#555" stroke-width="1.2" marker-end="url(#fc_d)"/>
+    <!-- 保有水平耐力 box -->
+    <rect x="521" y="137" width="238" height="42" rx="2" fill="#fff5ee" stroke="#f5c0a0" stroke-width="1"/>
+    <text x="640" y="150" font-size="7.5" fill="#8b3a00" text-anchor="middle" font-weight="bold">保有水平耐力の確認</text>
+    <text x="640" y="162" font-size="7.5" fill="#8b3a00" text-anchor="middle">Qu ≧ Qun</text>
+    <text x="640" y="173" font-size="7" fill="#8b3a00" text-anchor="middle">Qun ＝ Ds × Fes × Qud</text>
+    <line x1="640" y1="179" x2="640" y2="187" stroke="#555" stroke-width="1.2" marker-end="url(#fc_d)"/>
+    <!-- 転倒の検討 -->
+    <rect x="521" y="187" width="238" height="16" rx="2" fill="#fff5ee" stroke="#f5c0a0" stroke-width="1"/>
+    <text x="640" y="199" font-size="7" fill="#8b3a00" text-anchor="middle">転倒の検討（塔状比 ＞ 4 の場合）</text>
+    <line x1="640" y1="203" x2="640" y2="211" stroke="#555" stroke-width="1.2" marker-end="url(#fc_d)"/>
+    <!-- 構造種別確認 -->
+    <rect x="521" y="211" width="238" height="16" rx="2" fill="#fff5ee" stroke="#f5c0a0" stroke-width="1"/>
+    <text x="640" y="223" font-size="7" fill="#8b3a00" text-anchor="middle">構造種別に応じた確認</text>
+    <line x1="640" y1="227" x2="640" y2="235" stroke="#8b3a00" stroke-width="1.2" marker-end="url(#fc_br)"/>
+    <rect x="586" y="235" width="108" height="15" rx="7" fill="#8b3a00"/>
+    <text x="640" y="246" font-size="8" fill="#fff" text-anchor="middle" font-weight="bold">END</text>
+
+    <!-- 右側ラベル: 耐震二次設計の範囲 -->
+    <rect x="752" y="51" width="7" height="197" rx="3" fill="#c00" opacity="0.35"/>
+    <text x="756" y="175" font-size="6.5" fill="#c00" font-weight="bold" text-anchor="middle" transform="rotate(90,756,175)">耐震二次設計の範囲</text>
+  </svg>
+
+  <!-- ルート別確認事項のまとめ表 -->
+  <table style="font-size:7.5pt;width:100%;">
+    <colgroup><col style="width:12%"><col style="width:29%"><col style="width:29%"><col style="width:30%"></colgroup>
+    <thead>
+      <tr>
+        <th style="background:#555;color:#fff;padding:3px 5px;">確認項目</th>
+        <th style="background:#2e6da4;color:#fff;padding:3px 5px;text-align:center;">ルート1（仕様規定）</th>
+        <th style="background:#336600;color:#fff;padding:3px 5px;text-align:center;">ルート2（許容応力度等計算）</th>
+        <th style="background:#8b3a00;color:#fff;padding:3px 5px;text-align:center;">ルート3（保有水平耐力計算）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold" style="padding:2px 5px;border:1px solid #ddd;">適用規模</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;">S造: H≦16m, 階数≦3<br>RC・SRC: H≦20m<br>木造: H≦13m, 軒高≦9m</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;">H ≦ 31m</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;">H ≦ 60m（制限なし）</td>
+      </tr>
+      <tr style="background:#f9f9f9;">
+        <td class="bold" style="padding:2px 5px;border:1px solid #ddd;">層間変形角</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;">仕様規定で担保<br><span style="font-size:6.5pt;color:#555;">（個別計算は基本不要）</span></td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">δ/h ≦ 1/200<br>（1/120 緩和可）</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">δ/h ≦ 1/200<br>（1/120 緩和可）</td>
+      </tr>
+      <tr>
+        <td class="bold" style="padding:2px 5px;border:1px solid #ddd;">剛性率・偏心率</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;color:#888;">計算不要</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">Rs ≧ 0.6<br>Re ≦ 0.15<br>塔状比 ≦ 4</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;">Fes として形状係数に反映<br><span style="font-size:6.5pt;color:#555;">（NGでも計算で対応可）</span></td>
+      </tr>
+      <tr style="background:#f9f9f9;">
+        <td class="bold" style="padding:2px 5px;border:1px solid #ddd;">保有水平耐力</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;color:#888;">計算不要</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;color:#888;">計算不要<br><span style="font-size:6.5pt;color:#555;">（NG時はルート3へ）</span></td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">Qu ≧ Qun<br>Qun = Ds × Fes × Qud<br>（C₀ = 1.0 で算定）</td>
+      </tr>
+      <tr>
+        <td class="bold" style="padding:2px 5px;border:1px solid #ddd;">C₀ 地震力</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">C₀ ≧ 0.2<br>（壁なし等→0.3）</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;color:#c00;font-weight:bold;">C₀ ≧ 0.2</td>
+        <td style="padding:2px 5px;border:1px solid #ddd;text-align:center;">一次設計: C₀≧0.2<br><span class="red bold">二次設計: C₀≧1.0</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box" style="margin-top:5px;">
+    <span class="label">※ 判断</span>
+    設計者の設計方針に基づく判断のこと。例えばルート2適用可能な規模31m以下でも、あえてルート3を選択する場合がある。
+  </div>
+
+
+</div>
+<div class="page-break"></div>
+
+<!-- ========================= PAGE 0d: S造詳細 ========================= -->
+<div class="page">
+  <div class="page-title">構造まとめ資料①d　鉄骨造（S造）の耐震計算ルート</div>
+
+  <!-- 高さ帯スケール -->
+  <div style="background:#f0f4ff;border:2px solid #336;border-radius:5px;padding:5px 10px;margin-bottom:6px;">
+    <div style="font-size:7.5pt;font-weight:bold;color:#1a3a5c;text-align:center;margin-bottom:4px;">規模・高さによるルート選択の目安（鉄骨造）</div>
+    <svg viewBox="0 0 740 32" width="100%" style="display:block;">
+      <defs>
+        <marker id="p0d_r" markerWidth="5" markerHeight="4" refX="4" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#555"/></marker>
+      </defs>
+      <line x1="10" y1="22" x2="728" y2="22" stroke="#555" stroke-width="1.2" marker-end="url(#p0d_r)"/>
+      <text x="730" y="26" font-size="6.5" fill="#555">H(m)</text>
+      <line x1="10" y1="20" x2="10" y2="24" stroke="#555" stroke-width="1"/><text x="10" y="30" font-size="6" fill="#555" text-anchor="middle">0</text>
+      <line x1="172" y1="20" x2="172" y2="24" stroke="#555" stroke-width="1"/><text x="172" y="30" font-size="6" fill="#555" text-anchor="middle">13m</text>
+      <line x1="222" y1="20" x2="222" y2="24" stroke="#555" stroke-width="1"/><text x="222" y="30" font-size="6" fill="#555" text-anchor="middle">16m</text>
+      <line x1="415" y1="20" x2="415" y2="24" stroke="#555" stroke-width="1"/><text x="415" y="30" font-size="6" fill="#555" text-anchor="middle">31m</text>
+      <line x1="720" y1="20" x2="720" y2="24" stroke="#555" stroke-width="1"/><text x="720" y="30" font-size="6" fill="#555" text-anchor="middle">60m</text>
+      <rect x="10" y="6" width="162" height="13" rx="2" fill="#2e6da4" opacity="0.85"/>
+      <text x="91" y="16" font-size="6.5" fill="#fff" text-anchor="middle" font-weight="bold">ルート1-1 / 1-2</text>
+      <rect x="172" y="6" width="50" height="13" rx="2" fill="#1a5fa8" opacity="0.85"/>
+      <text x="197" y="16" font-size="6" fill="#fff" text-anchor="middle" font-weight="bold">1-3</text>
+      <rect x="222" y="6" width="193" height="13" rx="2" fill="#336600" opacity="0.85"/>
+      <text x="319" y="16" font-size="6.5" fill="#fff" text-anchor="middle" font-weight="bold">ルート2（H≦31m）</text>
+      <rect x="415" y="6" width="305" height="13" rx="2" fill="#8b3a00" opacity="0.85"/>
+      <text x="567" y="16" font-size="6.5" fill="#fff" text-anchor="middle" font-weight="bold">ルート3（31m＜H≦60m）</text>
+    </svg>
+  </div>
+
+  <!-- 5ルート詳細 -->
+  <div style="display:flex;gap:5px;margin-bottom:6px;align-items:stretch;">
+
+    <div style="flex:1;border:2px solid #2e6da4;border-radius:5px;overflow:hidden;">
+      <div style="background:#2e6da4;color:#fff;font-size:7.5pt;font-weight:bold;padding:3px 6px;text-align:center;">ルート1-1<br><span style="font-weight:normal;font-size:6.5pt;">筋かい架構</span></div>
+      <div style="padding:4px 6px;background:#eef4fb;font-size:7pt;">
+        <div style="border:1px solid #aac4de;border-radius:3px;padding:3px 5px;margin-bottom:3px;background:#fff;">
+          <div style="font-weight:bold;color:#c00;font-size:6.5pt;margin-bottom:2px;">▶ 規模条件</div>
+          ・H ≦ <span class="red bold">13m</span>、軒高 ≦ 9m<br>
+          ・階数 ≦ <span class="red bold">3</span><br>
+          ・スパン ≦ <span class="red bold">6m</span><br>
+          ・延べ面積 ≦ <span class="red bold">500m²</span>
+        </div>
+        <div style="border:1px solid #aac4de;border-radius:3px;padding:3px 5px;background:#fff;">
+          <div style="font-weight:bold;color:#2e6da4;font-size:6.5pt;margin-bottom:2px;">▶ 確認事項</div>
+          ①筋かいの<span class="bold">幅厚比</span>制限<br>
+          ②端部接合部の<span class="red bold">破断防止</span>設計<br>
+          ③筋かい負担率 ≧ 5/7<br>
+          　→ <span class="red bold">C₀ ≧ 0.3</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;border:2px solid #2e6da4;border-radius:5px;overflow:hidden;">
+      <div style="background:#2e6da4;color:#fff;font-size:7.5pt;font-weight:bold;padding:3px 6px;text-align:center;">ルート1-2<br><span style="font-weight:normal;font-size:6.5pt;">ラーメン架構</span></div>
+      <div style="padding:4px 6px;background:#eef4fb;font-size:7pt;">
+        <div style="border:1px solid #aac4de;border-radius:3px;padding:3px 5px;margin-bottom:3px;background:#fff;">
+          <div style="font-weight:bold;color:#c00;font-size:6.5pt;margin-bottom:2px;">▶ 規模条件</div>
+          ・H ≦ <span class="red bold">13m</span>、軒高 ≦ 9m<br>
+          ・階数 ≦ <span class="red bold">2</span>（平屋除く）<br>
+          ・スパン ≦ <span class="red bold">12m</span><br>
+          ・延べ ≦ <span class="red bold">500m²</span><br>
+          　（平屋のみ 3,000m² 以下）
+        </div>
+        <div style="border:1px solid #aac4de;border-radius:3px;padding:3px 5px;background:#fff;">
+          <div style="font-weight:bold;color:#2e6da4;font-size:6.5pt;margin-bottom:2px;">▶ 確認事項</div>
+          ①柱・梁の<span class="bold">幅厚比</span>制限<br>
+          ②柱の細長比 λ ≦ 200<br>
+          ③標準接合部の仕様遵守
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;border:2px solid #1a5fa8;border-radius:5px;overflow:hidden;">
+      <div style="background:#1a5fa8;color:#fff;font-size:7.5pt;font-weight:bold;padding:3px 6px;text-align:center;">ルート1-3<br><span style="font-weight:normal;font-size:6.5pt;">変形・偏心確認型</span></div>
+      <div style="padding:4px 6px;background:#e8f0fb;font-size:7pt;">
+        <div style="border:1px solid #8aacce;border-radius:3px;padding:3px 5px;margin-bottom:3px;background:#fff;">
+          <div style="font-weight:bold;color:#c00;font-size:6.5pt;margin-bottom:2px;">▶ 規模条件</div>
+          ・H ≦ <span class="red bold">16m</span><br>
+          ・階数 ≦ <span class="red bold">3</span><br>
+          ・スパン ≦ <span class="red bold">6m</span><br>
+          ・延べ面積 ≦ <span class="red bold">500m²</span>
+        </div>
+        <div style="border:1px solid #8aacce;border-radius:3px;padding:3px 5px;background:#fff;">
+          <div style="font-weight:bold;color:#1a5fa8;font-size:6.5pt;margin-bottom:2px;">▶ 確認事項（必須）</div>
+          ①層間変形角 δ/h ≦ <span class="red bold">1/200</span><br>
+          　（緩和規定なし）<br>
+          ②偏心率 Re ≦ <span class="red bold">0.15</span><br>
+          ③幅厚比制限（柱・梁）
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;border:2px solid #336600;border-radius:5px;overflow:hidden;">
+      <div style="background:#336600;color:#fff;font-size:7.5pt;font-weight:bold;padding:3px 6px;text-align:center;">ルート2<br><span style="font-weight:normal;font-size:6.5pt;">許容応力度等計算</span></div>
+      <div style="padding:4px 6px;background:#f0fff0;font-size:7pt;">
+        <div style="border:1px solid #a5d6a7;border-radius:3px;padding:3px 5px;margin-bottom:3px;background:#fff;">
+          <div style="font-weight:bold;color:#c00;font-size:6.5pt;margin-bottom:2px;">▶ 規模条件</div>
+          ・H ≦ <span class="red bold">31m</span>
+        </div>
+        <div style="border:1px solid #a5d6a7;border-radius:3px;padding:3px 5px;background:#fff;">
+          <div style="font-weight:bold;color:#336600;font-size:6.5pt;margin-bottom:2px;">▶ 確認事項</div>
+          ①層間変形角 δ/h ≦ <span class="red bold">1/200</span><br>
+          ②剛性率 Rs ≧ <span class="red bold">0.6</span><br>
+          ③偏心率 Re ≦ <span class="red bold">0.15</span><br>
+          ④塔状比 ≦ <span class="red bold">4</span><br>
+          ⑤幅厚比制限（FBランク）<br>
+          ⑥横座屈補剛の確認
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;border:2px solid #8b3a00;border-radius:5px;overflow:hidden;">
+      <div style="background:#8b3a00;color:#fff;font-size:7.5pt;font-weight:bold;padding:3px 6px;text-align:center;">ルート3<br><span style="font-weight:normal;font-size:6.5pt;">保有水平耐力計算</span></div>
+      <div style="padding:4px 6px;background:#fff5ee;font-size:7pt;">
+        <div style="border:1px solid #f5c0a0;border-radius:3px;padding:3px 5px;margin-bottom:3px;background:#fff;">
+          <div style="font-weight:bold;color:#c00;font-size:6.5pt;margin-bottom:2px;">▶ 規模条件</div>
+          ・31m ＜ H ≦ <span class="red bold">60m</span><br>
+          ・ルート2からNG/NOも
+        </div>
+        <div style="border:1px solid #f5c0a0;border-radius:3px;padding:3px 5px;background:#fff;">
+          <div style="font-weight:bold;color:#8b3a00;font-size:6.5pt;margin-bottom:2px;">▶ 確認事項</div>
+          ①層間変形角 δ/h ≦ <span class="red bold">1/200</span><br>
+          ②保有水平耐力<br>
+          　Qu ≧ Qun<br>
+          　Qun = Ds × Fes × Qud<br>
+          ③<span class="red bold">保有耐力接合</span>（必須）<br>
+          ④転倒の検討（塔状比＞4）
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Ds の整理 -->
+  <div style="border:2px solid #5a3e8b;border-radius:6px;overflow:hidden;margin-bottom:6px;">
+    <div style="background:#5a3e8b;color:#fff;font-size:7.5pt;font-weight:bold;padding:3px 8px;">S造の構造特性係数 Ds（ルート3での保有耐力算定に使用）</div>
+    <div style="padding:5px 8px;background:#f5f0ff;">
+      <table style="font-size:7pt;width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#d8ccf0;">
+            <th style="padding:2px 5px;border:1px solid #c0b0e0;">部材の種別</th>
+            <th style="padding:2px 5px;border:1px solid #c0b0e0;">筋かいなし（ラーメン）</th>
+            <th style="padding:2px 5px;border:1px solid #c0b0e0;">筋かいあり</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;font-weight:bold;">FA級（最も粘る）</td>
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;text-align:center;color:#336600;font-weight:bold;">0.25</td>
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;text-align:center;">0.25〜0.35</td>
+          </tr>
+          <tr style="background:#fafafa;">
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;font-weight:bold;">FB級</td>
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;text-align:center;">0.30</td>
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;text-align:center;">0.30〜0.40</td>
+          </tr>
+          <tr>
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;font-weight:bold;">FC級</td>
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;text-align:center;">0.35</td>
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;text-align:center;">0.35〜0.45</td>
+          </tr>
+          <tr style="background:#fafafa;">
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;font-weight:bold;">FD級（最も脆い）</td>
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;text-align:center;color:#c00;font-weight:bold;">0.40</td>
+            <td style="padding:2px 5px;border:1px solid #d8ccf0;text-align:center;color:#c00;font-weight:bold;">0.40〜0.50</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:6.5pt;color:#555;margin-top:3px;">
+        ※ FA が最も靭性大（幅厚比が小さく局部座屈しにくい）。筋かいがある場合は Ds が大きくなる（ねばり性低下）。
+      </div>
+    </div>
+  </div>
+
+  <div class="point-box">
+    <span class="label">★ 試験ポイント</span>
+    S造ルート1は<span class="red bold">3種類</span>（1-1・1-2・1-3）ある。1-1と1-2の違いは<span class="bold">スパン長と架構種別</span>（6mと12m）。1-3は高さが<span class="red bold">16m</span>まで（1-1/1-2より大きい）だが層間変形角確認と偏心率確認が必須。ルート3では<span class="red bold">保有耐力接合</span>の確認が必須。
+  </div>
+
+</div>
+<div class="page-break"></div>
+
+<!-- ========================= PAGE 0e: RC/SRC造詳細 ========================= -->
+<div class="page">
+  <div class="page-title">構造まとめ資料①e　RC造・SRC造の耐震計算ルート</div>
+
+  <!-- RC造 -->
+  <div style="border:2px solid #8b1a1a;border-radius:6px;overflow:hidden;margin-bottom:8px;">
+    <div style="background:#8b1a1a;color:#fff;font-size:8.5pt;font-weight:bold;padding:4px 10px;">RC造（鉄筋コンクリート造）</div>
+    <div style="padding:6px 10px;background:#fff5f5;">
+      <svg viewBox="0 0 740 142" width="100%" style="display:block;">
+        <defs>
+          <marker id="p0e_d" markerWidth="4" markerHeight="5" refX="2" refY="4" orient="auto"><path d="M0,0 L4,0 L2,5 Z" fill="#555"/></marker>
+          <marker id="p0e_r" markerWidth="5" markerHeight="4" refX="4" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#8b1a1a"/></marker>
+        </defs>
+        <line x1="10" y1="18" x2="728" y2="18" stroke="#555" stroke-width="1.2" marker-end="url(#p0e_r)"/>
+        <text x="730" y="22" font-size="6" fill="#555">H(m)</text>
+        <line x1="10" y1="16" x2="10" y2="20" stroke="#555" stroke-width="1"/><text x="10" y="27" font-size="6" fill="#555" text-anchor="middle">0</text>
+        <line x1="247" y1="16" x2="247" y2="20" stroke="#8b1a1a" stroke-width="1.5"/><text x="247" y="27" font-size="6.5" fill="#8b1a1a" text-anchor="middle" font-weight="bold">20m</text>
+        <line x1="415" y1="16" x2="415" y2="20" stroke="#8b1a1a" stroke-width="1.5"/><text x="415" y="27" font-size="6.5" fill="#8b1a1a" text-anchor="middle" font-weight="bold">31m</text>
+        <line x1="720" y1="16" x2="720" y2="20" stroke="#555" stroke-width="1"/><text x="720" y="27" font-size="6" fill="#555" text-anchor="middle">60m</text>
+        <rect x="10" y="4" width="237" height="12" rx="2" fill="#2e6da4"/>
+        <text x="128" y="13.5" font-size="7" fill="#fff" text-anchor="middle" font-weight="bold">ルート1　H ≦ 20m</text>
+        <rect x="247" y="4" width="168" height="12" rx="2" fill="#336600"/>
+        <text x="331" y="13.5" font-size="7" fill="#fff" text-anchor="middle" font-weight="bold">ルート2　20m ＜ H ≦ 31m</text>
+        <rect x="415" y="4" width="305" height="12" rx="2" fill="#8b3a00"/>
+        <text x="567" y="13.5" font-size="7" fill="#fff" text-anchor="middle" font-weight="bold">ルート3　31m ＜ H ≦ 60m</text>
+        <!-- ルート1 内容 -->
+        <rect x="10" y="32" width="237" height="100" rx="3" fill="#eef4fb" stroke="#2e6da4" stroke-width="1.2"/>
+        <text x="128" y="47" font-size="8" fill="#2e6da4" text-anchor="middle" font-weight="bold">ルート 1</text>
+        <text x="128" y="60" font-size="7" fill="#333" text-anchor="middle">① 耐震壁の壁量確保</text>
+        <text x="128" y="73" font-size="7.5" fill="#8b1a1a" text-anchor="middle" font-weight="bold">Σ2.5αAw + Σ0.7αAc ≧ ZWAi</text>
+        <text x="128" y="85" font-size="6.5" fill="#555" text-anchor="middle">（耐震壁なし柱のみ→ C₀ ≧ 0.3）</text>
+        <text x="128" y="97" font-size="7" fill="#333" text-anchor="middle">② 壁式RC造：地上 5階以下</text>
+        <text x="128" y="109" font-size="7" fill="#333" text-anchor="middle">　 各階高 ≦ 3.5m、壁率確保</text>
+        <text x="128" y="122" font-size="6.5" fill="#888" text-anchor="middle">③ 一次設計のみで完結</text>
+        <!-- ルート2 内容 -->
+        <rect x="247" y="32" width="168" height="100" rx="3" fill="#f0fff0" stroke="#336600" stroke-width="1.2"/>
+        <text x="331" y="47" font-size="8" fill="#336600" text-anchor="middle" font-weight="bold">ルート 2</text>
+        <text x="331" y="60" font-size="7" fill="#333" text-anchor="middle">① 層間変形角 δ/h ≦ 1/200</text>
+        <text x="331" y="73" font-size="7" fill="#333" text-anchor="middle">② 剛性率 Rs ≧ 0.6</text>
+        <text x="331" y="85" font-size="7" fill="#333" text-anchor="middle">③ 偏心率 Re ≦ 0.15</text>
+        <text x="331" y="97" font-size="7" fill="#333" text-anchor="middle">④ 柱のせん断破壊先行防止</text>
+        <text x="331" y="109" font-size="6.5" fill="#888" text-anchor="middle">　 柱せん断耐力 ＞ 曲げ時せん断力</text>
+        <text x="331" y="122" font-size="6.5" fill="#888" text-anchor="middle">⑤ 柱梁耐力比の確認</text>
+        <!-- ルート3 内容 -->
+        <rect x="415" y="32" width="305" height="100" rx="3" fill="#fff5ee" stroke="#8b3a00" stroke-width="1.2"/>
+        <text x="567" y="47" font-size="8" fill="#8b3a00" text-anchor="middle" font-weight="bold">ルート 3</text>
+        <text x="567" y="60" font-size="7" fill="#333" text-anchor="middle">① 層間変形角 δ/h ≦ 1/200</text>
+        <text x="567" y="73" font-size="7" fill="#333" text-anchor="middle">② 保有水平耐力　Qu ≧ Qun</text>
+        <text x="567" y="85" font-size="7" fill="#333" text-anchor="middle">　 Qun = Ds × Fes × Qud</text>
+        <text x="567" y="97" font-size="6.5" fill="#555" text-anchor="middle">　 Ds = 0.30〜0.55（RC造）</text>
+        <text x="567" y="109" font-size="7" fill="#333" text-anchor="middle">③ 転倒の検討</text>
+        <text x="567" y="122" font-size="7" fill="#333" text-anchor="middle">④ 構造種別に応じた確認</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SRC造 -->
+  <div style="border:2px solid #5a3e8b;border-radius:6px;overflow:hidden;margin-bottom:6px;">
+    <div style="background:#5a3e8b;color:#fff;font-size:8.5pt;font-weight:bold;padding:4px 10px;">SRC造（鉄骨鉄筋コンクリート造）</div>
+    <div style="padding:6px 10px;background:#f5f0ff;">
+      <svg viewBox="0 0 740 152" width="100%" style="display:block;">
+        <defs>
+          <marker id="p0e_sd" markerWidth="4" markerHeight="5" refX="2" refY="4" orient="auto"><path d="M0,0 L4,0 L2,5 Z" fill="#555"/></marker>
+          <marker id="p0e_sr" markerWidth="5" markerHeight="4" refX="4" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#5a3e8b"/></marker>
+        </defs>
+        <line x1="10" y1="18" x2="728" y2="18" stroke="#555" stroke-width="1.2" marker-end="url(#p0e_sr)"/>
+        <text x="730" y="22" font-size="6" fill="#555">H(m)</text>
+        <line x1="10" y1="16" x2="10" y2="20" stroke="#555" stroke-width="1"/><text x="10" y="27" font-size="6" fill="#555" text-anchor="middle">0</text>
+        <line x1="247" y1="16" x2="247" y2="20" stroke="#5a3e8b" stroke-width="1.5"/><text x="247" y="27" font-size="6.5" fill="#5a3e8b" text-anchor="middle" font-weight="bold">20m</text>
+        <line x1="415" y1="16" x2="415" y2="20" stroke="#5a3e8b" stroke-width="1.5"/><text x="415" y="27" font-size="6.5" fill="#5a3e8b" text-anchor="middle" font-weight="bold">31m</text>
+        <line x1="720" y1="16" x2="720" y2="20" stroke="#555" stroke-width="1"/><text x="720" y="27" font-size="6" fill="#555" text-anchor="middle">60m</text>
+        <rect x="10" y="4" width="237" height="12" rx="2" fill="#2e6da4"/>
+        <text x="128" y="13.5" font-size="7" fill="#fff" text-anchor="middle" font-weight="bold">ルート1　H ≦ 20m</text>
+        <rect x="247" y="4" width="168" height="12" rx="2" fill="#336600"/>
+        <text x="331" y="13.5" font-size="6.5" fill="#fff" text-anchor="middle" font-weight="bold">ルート2-1 / 2-2　20m＜H≦31m</text>
+        <rect x="415" y="4" width="305" height="12" rx="2" fill="#8b3a00"/>
+        <text x="567" y="13.5" font-size="7" fill="#fff" text-anchor="middle" font-weight="bold">ルート3　31m ＜ H ≦ 60m</text>
+        <!-- ルート1 SRC -->
+        <rect x="10" y="32" width="237" height="110" rx="3" fill="#eef4fb" stroke="#2e6da4" stroke-width="1.2"/>
+        <text x="128" y="47" font-size="8" fill="#2e6da4" text-anchor="middle" font-weight="bold">ルート 1</text>
+        <text x="128" y="60" font-size="7" fill="#333" text-anchor="middle">壁量確認（令第79条の3）</text>
+        <text x="128" y="75" font-size="8" fill="#8b1a1a" text-anchor="middle" font-weight="bold">Σ2.5αAw + Σ1.0αAc</text>
+        <text x="128" y="88" font-size="8" fill="#8b1a1a" text-anchor="middle" font-weight="bold">≧ ZWAi</text>
+        <text x="128" y="101" font-size="6.5" fill="#555" text-anchor="middle">Aw：耐震壁の断面積</text>
+        <text x="128" y="113" font-size="6.5" fill="#555" text-anchor="middle">Ac：柱の断面積（鉄骨合成）</text>
+        <text x="128" y="125" font-size="6" fill="#888" text-anchor="middle">※ RC造の0.7αAcより係数大</text>
+        <text x="128" y="136" font-size="6" fill="#888" text-anchor="middle">（鉄骨の合成効果を反映）</text>
+        <!-- ルート2-1/2-2 SRC -->
+        <rect x="247" y="32" width="168" height="110" rx="3" fill="#f0fff0" stroke="#336600" stroke-width="1.2"/>
+        <text x="331" y="47" font-size="7.5" fill="#336600" text-anchor="middle" font-weight="bold">ルート 2-1 / 2-2</text>
+        <text x="331" y="58" font-size="6.5" fill="#333" text-anchor="middle">（強度型の耐震設計）</text>
+        <rect x="252" y="63" width="158" height="35" rx="2" fill="#e8f8e8" stroke="#a5d6a7" stroke-width="1"/>
+        <text x="331" y="75" font-size="6.5" fill="#1a4a1a" text-anchor="middle" font-weight="bold">2-1（強度型①）</text>
+        <text x="331" y="86" font-size="6.5" fill="#333" text-anchor="middle">Σ2.5αAw 壁量の確保</text>
+        <text x="331" y="95" font-size="6" fill="#888" text-anchor="middle">層間変形角・Rs・Re 確認</text>
+        <rect x="252" y="101" width="158" height="35" rx="2" fill="#e8f8e8" stroke="#a5d6a7" stroke-width="1"/>
+        <text x="331" y="113" font-size="6.5" fill="#1a4a1a" text-anchor="middle" font-weight="bold">2-2（強度型②）</text>
+        <text x="331" y="124" font-size="6.5" fill="#333" text-anchor="middle">さらに大きい壁量係数での確保</text>
+        <text x="331" y="133" font-size="6" fill="#888" text-anchor="middle">（α係数が2-1より大きい）</text>
+        <!-- ルート3 SRC -->
+        <rect x="415" y="32" width="305" height="110" rx="3" fill="#fff5ee" stroke="#8b3a00" stroke-width="1.2"/>
+        <text x="567" y="47" font-size="8" fill="#8b3a00" text-anchor="middle" font-weight="bold">ルート 3</text>
+        <text x="567" y="60" font-size="7" fill="#333" text-anchor="middle">① 層間変形角 δ/h ≦ 1/200</text>
+        <text x="567" y="73" font-size="7" fill="#333" text-anchor="middle">② 保有水平耐力　Qu ≧ Qun</text>
+        <text x="567" y="85" font-size="7" fill="#333" text-anchor="middle">　 Qun = Ds × Fes × Qud</text>
+        <text x="567" y="97" font-size="6.5" fill="#555" text-anchor="middle">　 Ds = 0.25〜0.50（SRC造）</text>
+        <text x="567" y="109" font-size="6.5" fill="#555" text-anchor="middle">　 （RC造より低め：鉄骨の靭性寄与）</text>
+        <text x="567" y="121" font-size="7" fill="#333" text-anchor="middle">③ 保有耐力接合の確認</text>
+        <text x="567" y="133" font-size="7" fill="#333" text-anchor="middle">④ 転倒の検討</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- RC vs SRC 比較表 -->
+  <div style="background:#f9f9f9;border:1.5px solid #aaa;border-radius:5px;padding:5px 10px;margin-bottom:6px;">
+    <div style="font-size:8pt;font-weight:bold;color:#333;margin-bottom:4px;text-align:center;">RC造とSRC造の主な違い</div>
+    <table style="font-size:7.5pt;width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="background:#555;color:#fff;">
+          <th style="padding:2px 6px;">比較項目</th>
+          <th style="padding:2px 6px;background:#8b1a1a;">RC造</th>
+          <th style="padding:2px 6px;background:#5a3e8b;">SRC造</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:2px 6px;border:1px solid #ddd;font-weight:bold;">ルート1 壁量式</td>
+          <td style="padding:2px 6px;border:1px solid #ddd;">Σ2.5αAw + Σ<span class="red bold">0.7</span>αAc ≧ ZWAi</td>
+          <td style="padding:2px 6px;border:1px solid #ddd;">Σ2.5αAw + Σ<span class="red bold">1.0</span>αAc ≧ ZWAi</td>
+        </tr>
+        <tr style="background:#f5f5f5;">
+          <td style="padding:2px 6px;border:1px solid #ddd;font-weight:bold;">ルート2の分類</td>
+          <td style="padding:2px 6px;border:1px solid #ddd;">ルート2（1種類）</td>
+          <td style="padding:2px 6px;border:1px solid #ddd;"><span class="red bold">ルート2-1 / 2-2</span>（2種類・強度型）</td>
+        </tr>
+        <tr>
+          <td style="padding:2px 6px;border:1px solid #ddd;font-weight:bold;">Ds の範囲</td>
+          <td style="padding:2px 6px;border:1px solid #ddd;">0.30〜0.55</td>
+          <td style="padding:2px 6px;border:1px solid #ddd;">0.25〜0.50（鉄骨の靭性で低め）</td>
+        </tr>
+        <tr style="background:#f5f5f5;">
+          <td style="padding:2px 6px;border:1px solid #ddd;font-weight:bold;">特徴</td>
+          <td style="padding:2px 6px;border:1px solid #ddd;">コンクリート＋鉄筋<br>靭性はやや低め</td>
+          <td style="padding:2px 6px;border:1px solid #ddd;">コンクリート＋鉄筋＋鉄骨<br>靭性・強度ともに高い</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="point-box">
+    <span class="label">★ 試験ポイント</span>
+    ルート1の壁量式でRC造とSRC造の<span class="red bold">柱面積の係数が異なる</span>（RC造: 0.7α、SRC造: 1.0α）。SRC造はルート2が<span class="red bold">2-1と2-2に分かれる</span>（強度型）。Ds はSRC造の方がRC造より<span class="red bold">小さい</span>（鉄骨の靭性寄与による）。
+  </div>
+
+</div>
+<div class="page-break"></div>
+
+<!-- ============================= PAGE 1 ============================= -->
+<div class="page">
+  <div class="page-title">構造まとめ資料②　RC造 ― 各力の負担要素</div>
+
+  <h2>1. 鉄筋コンクリート造（RC造）― 各応力に対する負担要素</h2>
+
+  <table>
+    <colgroup>
+      <col style="width:14%">
+      <col style="width:20%">
+      <col style="width:20%">
+      <col style="width:22%">
+      <col style="width:24%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>応力の種類</th>
+        <th>主筋<br><span class="small">（縦方向鉄筋）</span></th>
+        <th>帯筋・あばら筋<br><span class="small">（せん断補強筋）</span></th>
+        <th>コンクリート</th>
+        <th>備考・ポイント</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center bold">曲げモーメント<br>M</td>
+        <td class="center"><span class="red">◎ 主に負担</span><br><span class="small">（引張側主筋）</span></td>
+        <td class="center">△ ほぼ無関係</td>
+        <td class="center"><span class="blue">○ 圧縮側負担</span><br><span class="small">（圧縮域コンクリート）</span></td>
+        <td><span class="small">引張応力 → 主筋<br>圧縮応力 → コンクリート（±複筋では圧縮鉄筋も）</span></td>
+      </tr>
+      <tr>
+        <td class="center bold">せん断力<br>Q</td>
+        <td class="center">△ 一部負担<br><span class="small">（縦筋の曲げ剛性）</span></td>
+        <td class="center"><span class="red">◎ 主に負担</span><br><span class="small">帯筋・スターラップ</span></td>
+        <td class="center"><span class="blue">○ 斜め引張前</span><br><span class="small">コンクリートのせん断耐力</span></td>
+        <td><span class="small">Q = Qc（コンクリート分）+ Qs（帯筋分）<br>→ 帯筋比 pw ≥ 0.2%</span></td>
+      </tr>
+      <tr>
+        <td class="center bold">軸方向力<br>N（圧縮）</td>
+        <td class="center"><span class="blue">○ 負担</span><br><span class="small">（圧縮主筋）</span></td>
+        <td class="center">△ 座屈拘束</td>
+        <td class="center"><span class="red">◎ 主に負担</span></td>
+        <td><span class="small">柱では帯筋が主筋の座屈を防止する役割</span></td>
+      </tr>
+      <tr>
+        <td class="center bold">軸方向力<br>N（引張）</td>
+        <td class="center"><span class="red">◎ 主に負担</span></td>
+        <td class="center">△ ほぼ無関係</td>
+        <td class="center"><span style="color:#999;">× 負担不可</span><br><span class="small">（引張強度極めて小）</span></td>
+        <td><span class="small">コンクリートの引張強度は圧縮の1/10程度</span></td>
+      </tr>
+      <tr>
+        <td class="center bold">ねじりモーメント<br>T</td>
+        <td class="center"><span class="blue">○ 負担</span><br><span class="small">（縦筋）</span></td>
+        <td class="center"><span class="red">◎ 主に負担</span><br><span class="small">（閉鎖型帯筋必要）</span></td>
+        <td class="center">△ 一部</td>
+        <td><span class="small">ねじり補強には<span class="red">閉鎖型</span>帯筋が必須</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 試験頻出</span>
+    帯筋（スターラップ）の役割：①せん断補強　②主筋の座屈防止　③コア部のコンファインメント（靭性向上）
+  </div>
+
+  <h2>2. RC造 ― 柱・梁の配筋規定まとめ</h2>
+
+  <div class="two-col">
+    <div class="col-card">
+      <div class="card-title">柱の規定</div>
+      <table>
+        <tr><th>項目</th><th>規定値</th></tr>
+        <tr><td>主筋本数</td><td class="red">4本以上</td></tr>
+        <tr><td>主筋比（pg）</td><td><span class="red">0.8%以上</span>（上限 規定なし）</td></tr>
+        <tr><td>帯筋比（pw）</td><td><span class="red">0.2%以上</span></td></tr>
+        <tr><td>帯筋間隔</td><td>最小径の15倍以下<br>かつ <span class="red">150mm以下</span></td></tr>
+        <tr><td>帯筋径</td><td>D6以上</td></tr>
+        <tr><td>小径（最小断面）</td><td>（構造計算による）</td></tr>
+      </table>
+    </div>
+    <div class="col-card">
+      <div class="card-title">梁の規定</div>
+      <table>
+        <tr><th>項目</th><th>規定値</th></tr>
+        <tr><td>引張鉄筋比（pt）</td><td><span class="red">0.2%以上</td></tr>
+        <tr><td>あばら筋比（pw）</td><td><span class="red">0.2%以上</span></td></tr>
+        <tr><td>あばら筋間隔</td><td>梁せいの3/4以下<br>かつ <span class="red">450mm以下</span></td></tr>
+        <tr><td>あばら筋径</td><td>D6以上</td></tr>
+        <tr><td>最小幅</td><td>（構造計算による）</td></tr>
+        <tr><td>複筋梁圧縮筋</td><td>引張鉄筋の1/2以上推奨</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2>3. RC造の許容応力度・終局耐力の考え方</h2>
+
+  <table>
+    <colgroup>
+      <col style="width:9%">
+      <col style="width:10%">
+      <col style="width:27%">
+      <col style="width:27%">
+      <col style="width:27%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>応力</th>
+        <th>部材</th>
+        <th style="background:#dbe8f5;color:#1a3a5c;">長期</th>
+        <th style="background:#f5e8d0;color:#7a4000;">短期</th>
+        <th style="background:#8b1a1a;color:#fff;">終局</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- N軸力 -->
+      <tr>
+        <td class="bold center" style="font-size:8.5pt;">N<br>軸力</td>
+        <td class="center small">柱</td>
+        <td class="small" style="background:#eef4fb;">
+          <span class="blue">コンクリート</span>＋<span class="red">主筋（圧縮）</span><br>
+          <span style="color:#888;">（全断面有効・弾性）</span>
+        </td>
+        <td class="small" style="background:#fdf5e8;">
+          長期の <span class="bold">1.5倍</span>
+        </td>
+        <td class="small" style="background:#fff0f0;">
+          <span class="red bold">Nu = Fc·Ac + σy·As</span><br>
+          <span style="color:#888;">（強度基準値で算定）</span>
+        </td>
+      </tr>
+      <!-- M曲げ -->
+      <tr>
+        <td class="bold center" style="font-size:8.5pt;">M<br>曲げ</td>
+        <td class="center small">柱・梁<br>共通</td>
+        <td class="small" style="background:#eef4fb;">
+          <span style="color:#2a6a2a;font-weight:bold;">ひび割れ不許容</span><br>
+          引張コンクリート有効<br>全断面で抵抗（弾性）<br>
+          <span class="red">主筋</span>＋<span class="blue">Conc（圧縮側）</span>
+        </td>
+        <td class="small" style="background:#fdf5e8;">
+          長期の <span class="bold">1.5倍</span><br>
+          <span style="color:#888;">（同じくひび割れ不許容）</span>
+        </td>
+        <td class="small" style="background:#fff0f0;">
+          <span style="color:#cc0000;font-weight:bold;">ひび割れ許容</span><br>
+          引張コンクリート無視<br>
+          <span class="red bold">Mu = at·σy·j</span><br>
+          <span style="color:#888;">（鉄筋降伏強度基準）</span>
+        </td>
+      </tr>
+      <!-- Q せん断：接合部 -->
+      <tr>
+        <td rowspan="3" class="bold center" style="font-size:8.5pt;">Q<br>せん<br>断</td>
+        <td class="center small">接合部<br>（パネル）</td>
+        <td class="small" style="background:#eef4fb;">
+          <span style="color:#2a6a2a;font-weight:bold;">ひび割れ不許容</span><br>
+          <span class="blue">Conc</span>＋<span class="red">帯筋（和）</span>
+        </td>
+        <td class="small" style="background:#fdf5e8;">
+          長期の <span class="bold">1.5倍</span><br>
+          <span style="color:#888;">（ひび割れ不許容）</span>
+        </td>
+        <td class="small" style="background:#fff0f0;">
+          <span class="blue">Qcu</span>＋<span class="red">Qsu</span>（和）<br>
+          <span style="color:#888;">帯筋比・間隔を規定</span>
+        </td>
+      </tr>
+      <!-- Q せん断：柱 -->
+      <tr>
+        <td class="center small">柱</td>
+        <td class="small" style="background:#eef4fb;">
+          <span class="blue">Qc（コンクリート）</span><br>＋<span class="red">Qs（帯筋）</span>の和
+        </td>
+        <td class="small" style="background:#fdf5e8;">
+          長期の <span class="bold">1.5倍</span>
+        </td>
+        <td class="small" style="background:#fff0f0;">
+          <span class="red bold">Qu = Qcu + Qsu</span><br>
+          <span style="color:#cc0000;">Qu ＞ Qmu を確認</span><br>
+          <span style="color:#888;">（曲げ降伏を先行させる）</span>
+        </td>
+      </tr>
+      <!-- Q せん断：梁 -->
+      <tr>
+        <td class="center small">梁</td>
+        <td class="small" style="background:#eef4fb;">
+          <span class="blue">Qc（コンクリート）</span><br>＋<span class="red">Qs（あばら筋）</span>の和
+        </td>
+        <td class="small" style="background:#fdf5e8;">
+          長期の <span class="bold">1.5倍</span>
+        </td>
+        <td class="small" style="background:#fff0f0;">
+          <span class="red bold">Qu = Qcu + Qsu</span><br>
+          <span style="color:#cc0000;">Qu ＞ Qmu を確認</span><br>
+          <span style="color:#888;">（あばら筋比 pw≥0.2%）</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 重要</span>
+    長期・短期（許容）：<span class="red">ひび割れ不許容</span>→ 引張コンクリートも有効・全断面で抵抗　／
+    終局：<span class="red">ひび割れ許容</span>→ 引張コンクリート無視・鉄筋降伏強度で算定<br>
+    せん断は長期〜終局すべて <span class="red">コンクリート分＋帯筋分の「和」</span>（SRCとは異なり部材によらず重ね合わせ）
+  </div>
+</div>
+
+<!-- ============================= PAGE 2 ============================= -->
+<div class="page">
+  <div class="page-title">構造まとめ資料②　コンクリートの養生期間</div>
+
+  <h2>4. コンクリートの養生期間（湿潤養生の最短期間）</h2>
+
+  <div class="note-box">
+    根拠：建築基準法施行令 第75条・JASS5。セメントの種類と平均気温によって決まる。<br>
+    <span class="red">養生期間を短くしすぎると強度・耐久性・ひび割れ抵抗が低下する。</span>
+  </div>
+
+  <h3>① 普通ポルトランドセメント使用時</h3>
+  <table>
+    <colgroup>
+      <col style="width:35%">
+      <col style="width:20%">
+      <col style="width:25%">
+      <col style="width:20%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>養生期間中の平均気温</th>
+        <th>湿潤養生<br>最短日数</th>
+        <th>強度発現への影響</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="red-row">
+        <td><span class="red">15℃以上</span></td>
+        <td class="center bold"><span class="red">5日以上</span></td>
+        <td>標準的な強度発現</td>
+        <td>最も基本となる条件</td>
+      </tr>
+      <tr>
+        <td>10℃以上 15℃未満</td>
+        <td class="center bold">7日以上</td>
+        <td>強度発現やや遅い</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>5℃以上 10℃未満</td>
+        <td class="center bold">9日以上</td>
+        <td>寒冷期に注意</td>
+        <td>寒中コンクリートの範囲に近い</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>② 早強ポルトランドセメント使用時</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>平均気温</th>
+        <th>最短日数</th>
+        <th>特徴</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="red-row">
+        <td><span class="red">15℃以上</span></td>
+        <td class="center bold"><span class="red">3日以上</span></td>
+        <td rowspan="3">初期強度が高い<br>→ 養生期間短縮可</td>
+        <td>普通の約3/5</td>
+      </tr>
+      <tr>
+        <td>10℃以上 15℃未満</td>
+        <td class="center bold">5日以上</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>5℃以上 10℃未満</td>
+        <td class="center bold">7日以上</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>③ 混合セメントB種（高炉・フライアッシュ）使用時</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>平均気温</th>
+        <th>最短日数</th>
+        <th>特徴</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="red-row">
+        <td><span class="red">15℃以上</span></td>
+        <td class="center bold"><span class="red">7日以上</span></td>
+        <td rowspan="3">潜在水硬性・<br>ポゾラン反応のため<br>初期強度が低い</td>
+        <td>普通より長い</td>
+      </tr>
+      <tr>
+        <td>10℃以上 15℃未満</td>
+        <td class="center bold">9日以上</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>5℃以上 10℃未満</td>
+        <td class="center bold">12日以上</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>④ 養生期間まとめ比較表（15℃以上の場合）</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>セメントの種類</th>
+        <th>最短養生日数<br>（15℃以上）</th>
+        <th>強度発現速度</th>
+        <th>主な用途</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>早強ポルトランドセメント</td>
+        <td class="center"><span class="red bold">3日</span></td>
+        <td>速い ↑↑</td>
+        <td>型枠早期解体・冬期施工</td>
+      </tr>
+      <tr class="highlight-row">
+        <td><span class="bold">普通ポルトランドセメント</span></td>
+        <td class="center"><span class="blue bold">5日</span>（基準！）</td>
+        <td>標準</td>
+        <td>一般建築物</td>
+      </tr>
+      <tr>
+        <td>混合セメントB種<br>（高炉・フライアッシュ）</td>
+        <td class="center"><span class="red bold">7日</span></td>
+        <td>遅い ↓↓</td>
+        <td>マスコンクリート・耐久性重視</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 暗記の鍵</span>
+    早強 → <span class="red">3日</span>、普通 → <span class="blue">5日</span>、混合B種 → <span class="red">7日</span>（15℃以上の場合）<br>
+    気温が下がるごとに <span class="red">＋2日ずつ</span>延びる（普通の場合：15℃以上5日 → 10℃以上7日 → 5℃以上9日）
+  </div>
+
+  <h2>5. 特殊なコンクリートの養生</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>種別</th>
+        <th>養生の注意点</th>
+        <th>期間・温度管理</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold">寒中コンクリート<br><span class="small">（打設期間中の気温 4℃以下）</span></td>
+        <td>初期凍害防止のため<br>保温・加熱養生が必要</td>
+        <td><span class="red">打込み後5日以上</span>は<br>0℃以上を保持</td>
+      </tr>
+      <tr>
+        <td class="bold">暑中コンクリート<br><span class="small">（日平均気温 25℃超）</span></td>
+        <td>急激な乾燥・温度上昇防止<br>散水・日よけが必要</td>
+        <td>打込み後すぐ湿潤養生開始<br>（乾燥ひび割れ防止）</td>
+      </tr>
+      <tr>
+        <td class="bold">マスコンクリート<br><span class="small">（部材厚≥80cm目安）</span></td>
+        <td>水和熱による温度ひび割れ防止<br>低発熱セメント使用</td>
+        <td>打込み後の温度差管理<br>内外温度差<span class="red">25℃以内</span>目安</td>
+      </tr>
+      <tr>
+        <td class="bold">高強度コンクリート<br><span class="small">（Fc &gt; 36N/mm²）</span></td>
+        <td>自己収縮に注意<br>W/C比が低いため給水養生重要</td>
+        <td>散水・膜養生の組合せ</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note-box">
+    <span class="bold">型枠の存置期間（参考）：</span>基礎・梁側・柱・壁の型枠はコンクリート強度が<span class="red">5N/mm²</span>以上になるまで存置。スラブ下・梁下は圧縮強度が設計基準強度×2/3以上（または85%以上）まで。
+  </div>
+
+  <h2>6. コンクリートの打ち継ぎ</h2>
+
+  <div class="note-box">
+    根拠：JASS5。打ち継ぎには①打ち重ね（フレッシュ同士の接合）と②硬化後の打継ぎ目の2種がある。<br>
+    <span class="red">コールドジョイントを生じさせないことが最重要。</span>打ち重ね時間間隔を超えると一体化しない。
+  </div>
+
+  <h3>① 時間制限の種類と上限一覧（JASS5）</h3>
+
+  <table>
+    <colgroup>
+      <col style="width:36%"><col style="width:18%"><col style="width:18%"><col style="width:28%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>時間制限の種類</th>
+        <th class="center">外気温<br><span style="font-weight:normal;">25℃以下</span></th>
+        <th class="center">外気温<br><span style="font-weight:normal;">25℃超（暑中）</span></th>
+        <th>ポイント</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight-row">
+        <td>
+          <span class="bold">練混ぜから打込み終了まで</span><br>
+          <span class="small">（練混ぜ開始 → 現場で打込み完了）</span>
+        </td>
+        <td class="center"><span class="blue bold">120分以内</span></td>
+        <td class="center"><span class="red bold">90分以内</span></td>
+        <td class="small">生コン車での運搬時間を含む。超えると強度・ワーカビリティ低下</td>
+      </tr>
+      <tr class="red-row">
+        <td>
+          <span class="bold red">打ち重ね時間間隔</span><br>
+          <span class="small">（先打ちコンクリートへの次層打込みまで）</span>
+        </td>
+        <td class="center"><span class="blue bold">150分以内</span></td>
+        <td class="center"><span class="red bold">120分以内</span></td>
+        <td class="small">超えると先打ち層が硬化 → <span class="red">コールドジョイント</span>発生。一体化しない</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 暗記の鍵</span>
+    <table style="margin:2px 0;border:none;background:transparent;">
+      <tr>
+        <td style="border:none;padding:1px 8px 1px 0;background:transparent;font-size:8pt;width:50%;">
+          【練混ぜ→打込み終了】<br>
+          25℃以下 → <span class="blue">120分</span>　25℃超 → <span class="red">90分</span>
+        </td>
+        <td style="border:none;padding:1px 0;background:transparent;font-size:8pt;">
+          【打ち重ね間隔】<br>
+          25℃以下 → <span class="blue">150分</span>　25℃超 → <span class="red">120分</span>
+        </td>
+      </tr>
+    </table>
+    どちらも<span class="red">25℃超で30分短縮</span>。打ち重ね間隔は練混ぜ時間より<span class="red">30分長い</span>。
+  </div>
+
+  <h3>② 打継ぎ目の位置（JASS5・施令）</h3>
+
+  <table>
+    <colgroup>
+      <col style="width:18%"><col style="width:35%"><col style="width:47%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>部材</th>
+        <th>打継ぎ位置の原則</th>
+        <th>ポイント</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold center">柱</td>
+        <td><span class="red">梁・スラブの上端</span><br>（梁下端はNG）</td>
+        <td class="small">せん断力の少ない位置に設ける<br>梁下端はせん断大 → 避ける</td>
+      </tr>
+      <tr>
+        <td class="bold center">壁</td>
+        <td><span class="red">梁・スラブの上端</span><br>または開口下端</td>
+        <td class="small">柱と同様。開口部の角部は避ける<br>（応力集中するため）</td>
+      </tr>
+      <tr>
+        <td class="bold center">梁・スラブ</td>
+        <td><span class="red">スパン中央付近</span><br>（端部は避ける）</td>
+        <td class="small">せん断力の小さいスパン中央1/3区間が原則<br>→ 曲げモーメント最大・せん断力最小</td>
+      </tr>
+      <tr>
+        <td class="bold center">基礎</td>
+        <td>地盤面付近</td>
+        <td class="small">フーチングと基礎柱の境界付近</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>③ 打継ぎ目の処理（硬化後コンクリートとの接合）</h3>
+
+  <table>
+    <colgroup>
+      <col style="width:28%"><col style="width:72%">
+    </colgroup>
+    <thead>
+      <tr><th>処理項目</th><th>内容・ポイント</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold">レイタンス除去</td>
+        <td class="small">硬化前後に水が浮き上がってできる脆弱層。<span class="red">ワイヤブラシ・チッピングなどで除去必須。</span>除去しないと付着不良→一体化しない</td>
+      </tr>
+      <tr>
+        <td class="bold">散水・吸水調整</td>
+        <td class="small">既設面が乾燥していると新コンクリートの水分を吸収して付着不良。<span class="red">打込み直前に散水し表面を湿潤にする</span>（水たまりはNG）</td>
+      </tr>
+      <tr>
+        <td class="bold">型枠の締め付け<br>確認</td>
+        <td class="small">打継ぎ目付近の型枠からのノロ漏れ防止。打継ぎ面の型枠は特に隙間に注意</td>
+      </tr>
+      <tr class="highlight-row">
+        <td class="bold">鉛直打継ぎ目</td>
+        <td class="small">水平打継ぎより難しい。<span class="red">せん断力の小さい位置</span>に設け、止水板や膨張目地材を使用する場合も</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 試験頻出</span>
+    打ち重ね時間 → <span class="blue">25℃以下150分</span>・<span class="red">25℃超120分</span>（これを超えるとコールドジョイント）<br>
+    打継ぎ位置 → <span class="red">せん断力の小さい位置</span>（梁・スラブ中央、柱・壁は梁上端）<br>
+    前処理 → <span class="red">レイタンス除去 ＋ 散水湿潤</span>（水たまりは不可）
+  </div>
+</div>
+
+<!-- ============================= PAGE 3 ============================= -->
+<div class="page">
+  <div class="page-title">構造まとめ資料③　SRC造の耐力・鉄骨SN材</div>
+
+  <h2>6. 鉄骨鉄筋コンクリート造（SRC造）― 各耐力の算定〔重ね合わせ法〕</h2>
+
+  <!-- 凡例 -->
+  <div style="display:flex;gap:8px;margin-bottom:5px;font-size:7.5pt;flex-wrap:wrap;">
+    <span style="background:#fff3b0;border:1px solid #c8a800;padding:1px 6px;border-radius:3px;font-weight:bold;">黄：鉄骨＋RCの和（重ね合わせ）</span>
+    <span style="background:#dce8fb;border:1px solid #2e6da4;padding:1px 6px;border-radius:3px;font-weight:bold;">青：SかRCの大きい方</span>
+    <span style="background:#f0faf0;border:1px solid #006600;padding:1px 6px;border-radius:3px;font-weight:bold;">緑：ひび割れ不許容（全断面弾性）</span>
+    <span style="background:#fde8e8;border:1px solid #cc0000;padding:1px 6px;border-radius:3px;font-weight:bold;">赤：ひび割れ・降伏許容</span>
+  </div>
+
+  <!-- ===== メイン耐力マトリクス表（縦：応力種別・部材、横：設計区分） ===== -->
+  <table style="margin-bottom:4px;">
+    <colgroup>
+      <col style="width:9%">
+      <col style="width:9%">
+      <col style="width:27%">
+      <col style="width:27%">
+      <col style="width:28%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th style="background:#1a3a5c;color:#fff;">応力</th>
+        <th style="background:#1a3a5c;color:#fff;">部材</th>
+        <th style="background:#2e6da4;color:#fff;">長期</th>
+        <th style="background:#2e6da4;color:#fff;">短期</th>
+        <th style="background:#8b1a1a;color:#fff;">終局</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 軸力 -->
+      <tr>
+        <td rowspan="1" class="bold center" style="background:#e8eef6;">N<br><span class="small">軸力</span></td>
+        <td class="center small">柱</td>
+        <td style="background:#f7fbff;">
+          <span class="red">鉄骨</span> ＋ <span class="blue">RC</span><br>
+          <span class="small">（Conc ＋ 主筋）</span>
+        </td>
+        <td style="background:#f7fbff;">
+          <span class="red">鉄骨</span> ＋ <span class="blue">RC</span>
+        </td>
+        <td style="background:#fdf0f0;">
+          <span class="red">鉄骨終局</span> ＋ <span class="blue">RC終局</span>
+        </td>
+      </tr>
+      <!-- 曲げ -->
+      <tr>
+        <td class="bold center" style="background:#e8eef6;">M<br><span class="small">曲げ</span></td>
+        <td class="center small">柱・梁<br>共通</td>
+        <td style="background:#f0faf0;">
+          <span class="red">鉄骨</span> ＋ <span class="blue">RC</span><br>
+          <span class="small" style="color:#006600;font-weight:bold;">ひび割れ不許容</span><br>
+          <span class="small">（引張Conc有効）</span>
+        </td>
+        <td style="background:#fff8f8;">
+          <span class="red">鉄骨</span> ＋ <span class="blue">RC</span><br>
+          <span class="small red font-weight:bold">ひび割れ許容</span><br>
+          <span class="small">（引張Conc無視）</span>
+        </td>
+        <td style="background:#fde8e8;">
+          <span class="red bold">鉄骨：全塑性M（Mpu）</span><br>
+          ＋ <span class="blue bold">RC終局曲げ（Mu）</span>
+        </td>
+      </tr>
+      <!-- せん断：接合部 -->
+      <tr>
+        <td rowspan="3" class="bold center" style="background:#e8eef6;border-bottom:2px solid #2e6da4;">Q<br><span class="small">せん断</span></td>
+        <td class="center bold small" style="background:#eef4fb;">接合部<br><span style="font-weight:normal;">（パネル<br>ゾーン）</span></td>
+        <td style="background:#f0faf0;">
+          <span class="small" style="color:#006600;font-weight:bold;">ひび割れ不許容</span><br>
+          <span class="red">鉄骨ウェブ</span> ＋ <span class="blue">Conc</span><br>
+          <span class="small">（全断面弾性・換算断面）</span>
+        </td>
+        <td style="background:#fff3b0;border:1px solid #c8a800;">
+          <span style="color:#7a5800;font-weight:bold;">鉄骨ウェブ ＋ RC</span><br>
+          <span class="small" style="color:#7a5800;font-weight:bold;">重ね合わせ（S＋RC の和）</span><br>
+          <span class="small">※柱・梁と異なる点に注意</span>
+        </td>
+        <td style="background:#fde8e8;">
+          <span class="red">鉄骨（Qsu）</span> ＋ <span class="blue">RC終局</span><br>
+          <span class="small">（重ね合わせ）</span>
+        </td>
+      </tr>
+      <!-- せん断：柱 -->
+      <tr>
+        <td class="center bold small" style="background:#eef4fb;">柱</td>
+        <td style="background:#f0faf0;">
+          <span class="small" style="color:#006600;font-weight:bold;">ひび割れ不許容</span><br>
+          <span class="red">鉄骨</span> ＋ <span class="blue">RC</span><br>
+          <span class="small">（換算断面・全断面弾性）</span>
+        </td>
+        <td style="background:#dce8fb;">
+          <span class="blue bold">S か RC の大きい方</span><br>
+          <span class="small">max（Q<sub>as</sub>, Q<sub>arc</sub>）</span><br>
+          <span class="small">※重ね合わせしない</span>
+        </td>
+        <td style="background:#fde8e8;">
+          <span class="red">鉄骨（Qsu）</span> ＋ <span class="blue">RC終局（Quu）</span><br>
+          <span class="small">（重ね合わせ）</span>
+        </td>
+      </tr>
+      <!-- せん断：梁 -->
+      <tr>
+        <td class="center bold small" style="background:#eef4fb;">梁</td>
+        <td style="background:#dce8fb;">
+          <span class="blue bold">S か RC の大きい方</span><br>
+          <span class="small">max（Q<sub>as</sub>, Q<sub>arc</sub>）</span><br>
+          <span class="small red">（長期・短期とも同じ扱い）</span>
+        </td>
+        <td style="background:#dce8fb;">
+          <span class="blue bold">S か RC の大きい方</span><br>
+          <span class="small">max（Q<sub>as</sub>, Q<sub>arc</sub>）</span><br>
+          <span class="small red">（長期と同じ）</span>
+        </td>
+        <td style="background:#fde8e8;">
+          <span class="red">鉄骨（Qsu）</span> ＋ <span class="blue">RC終局（Quu）</span><br>
+          <span class="small">（重ね合わせ）</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 欄外メモ -->
+  <div style="border:1px solid #aac4de;border-radius:3px;padding:3px 8px;font-size:7.5pt;background:#f8fbff;margin-bottom:5px;">
+    <span class="bold" style="color:#1a3a5c;">【欄外・算定式】</span>
+    Mpu = Zp・σy　／　RC終局曲げ Mu = at・σy・j'　／　RC終局せん断 Quu = Qcu＋Qwu（Conc分＋帯筋分）
+  </div>
+
+  <div class="point-box">
+    <span class="label">★ 最重要</span>
+    せん断力の扱いは<span class="red">部材によって異なる</span>！<br>
+    ・<span class="bold">柱</span>：長期＝S＋RC（弾性重ね合わせ）／ 短期＝<span class="blue">SかRCの大きい方</span><br>
+    ・<span class="bold">梁</span>：長期・短期ともに<span class="blue">SかRCの大きい方</span>（常に重ね合わせしない）<br>
+    ・<span class="bold">接合部</span>：長期＝ひび割れ不許容 ／ 短期＝<span style="color:#7a5800;font-weight:bold;">S＋RCの和（重ね合わせ）</span>←梁・柱と異なる<br>
+    ・終局は<span class="red">全部材</span>で S＋RC の重ね合わせ
+  </div>
+
+  <h2>7. 鉄骨SN材（建築構造用圧延鋼材）の規定</h2>
+
+  <div class="note-box">
+    SN材（Steel New Structure）：1994年制定。建築構造専用の鋼材。溶接・靭性・降伏比などが厳しく規定されている。
+  </div>
+
+  <table>
+    <colgroup>
+      <col style="width:10%">
+      <col style="width:15%">
+      <col style="width:17%">
+      <col style="width:17%">
+      <col style="width:18%">
+      <col style="width:23%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>種別</th>
+        <th>降伏点<br>下限値</th>
+        <th>引張強さ</th>
+        <th><span class="red">降伏比<br>上限値</span></th>
+        <th>シャルピー<br>吸収エネルギー</th>
+        <th>主な用途・特徴</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center bold">SN400A</td>
+        <td class="center">235 N/mm²以上</td>
+        <td class="center">400〜510 N/mm²</td>
+        <td class="center"><span style="color:#999;">規定なし</span></td>
+        <td class="center">規定なし</td>
+        <td class="small">二次部材・非耐震部材向け<br>溶接性・靭性規定なし</td>
+      </tr>
+      <tr class="highlight-row">
+        <td class="center bold">SN400B</td>
+        <td class="center">235 N/mm²以上</td>
+        <td class="center">400〜510 N/mm²</td>
+        <td class="center"><span class="red bold">80%以下</span></td>
+        <td class="center">27J以上<br>（0℃）</td>
+        <td class="small">主要構造部材に使用<br>降伏比・靭性・溶接規定あり</td>
+      </tr>
+      <tr class="highlight-row">
+        <td class="center bold">SN400C</td>
+        <td class="center">235 N/mm²以上</td>
+        <td class="center">400〜510 N/mm²</td>
+        <td class="center"><span class="red bold">80%以下</span></td>
+        <td class="center">27J以上<br>（0℃）</td>
+        <td class="small">板厚方向の絞り値≥25%<br>ダイアフラム等Z方向規定</td>
+      </tr>
+      <tr>
+        <td class="center bold">SN490B</td>
+        <td class="center">325 N/mm²以上</td>
+        <td class="center">490〜610 N/mm²</td>
+        <td class="center"><span class="red bold">80%以下</span></td>
+        <td class="center">27J以上<br>（0℃）</td>
+        <td class="small">高強度版B種。大スパン・高層に使用</td>
+      </tr>
+      <tr>
+        <td class="center bold">SN490C</td>
+        <td class="center">325 N/mm²以上</td>
+        <td class="center">490〜610 N/mm²</td>
+        <td class="center"><span class="red bold">80%以下</span></td>
+        <td class="center">27J以上<br>（0℃）</td>
+        <td class="small">高強度版C種。板厚方向絞り規定あり</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 降伏比の意味</span>
+    降伏比 ＝ 降伏点 ÷ 引張強さ。<br>
+    <span class="red">降伏比に上限（80%以下）</span>を設けることで、降伏後の<span class="red">塑性変形能力（延性）を確保</span>する。<br>
+    SN400Aは降伏比の規定がない → <span class="red">耐震設計の主要部材には使用しない</span>
+  </div>
+
+  <h3>SN材 vs SS材・SM材 対比</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>規格</th>
+        <th>降伏比上限</th>
+        <th>衝撃値（靭性）</th>
+        <th>建築構造耐震部材への適用</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold">SS400（一般構造用）</td>
+        <td class="center"><span style="color:#999;">規定なし</span></td>
+        <td class="center">規定なし</td>
+        <td class="center"><span class="red">非推奨</span>（耐震部材不可）</td>
+      </tr>
+      <tr>
+        <td class="bold">SM材（溶接構造用）</td>
+        <td class="center">規定なし</td>
+        <td class="center">あり（溶接性重視）</td>
+        <td class="center">溶接OK・靭性あるが降伏比制限なし</td>
+      </tr>
+      <tr class="highlight-row">
+        <td class="bold">SN400B/C・SN490B/C</td>
+        <td class="center"><span class="red bold">80%以下</span></td>
+        <td class="center"><span class="red">27J以上（0℃）</span></td>
+        <td class="center"><span class="blue bold">推奨（耐震部材に使用）</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note-box">
+    <span class="bold">SN400Cのポイント：</span>通しダイアフラムなど<span class="red">板厚方向に力が作用する</span>部材に使用。板厚方向の<span class="red">絞り値（断面収縮率）≥ 25%</span>が規定され、ラメラテア（層状引裂き）を防止する。
+  </div>
+</div>
+
+
+<!-- ============================= PAGE 4 ============================= -->
+<div class="page">
+  <div class="page-title">構造まとめ資料④　鉄骨柱脚の種類と力の負担</div>
+
+  <h2>8. 柱脚の3種類 ― 概要図と比較</h2>
+
+  <div class="note-box">
+    柱脚は基礎と鉄骨柱をつなぐ重要部位。種類によって<span class="red">固定度・力の伝達方法・累加の可否</span>が大きく異なる。
+  </div>
+
+  <!-- ===== 3種の断面図 ===== -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:6px;">
+
+    <!-- ① 露出柱脚 -->
+    <div style="border:1.5px solid #2e6da4;border-radius:3px;padding:5px;background:#fafdff;">
+      <div style="font-weight:bold;font-size:9pt;color:#1a3a5c;text-align:center;border-bottom:1px solid #aac4de;margin-bottom:4px;padding-bottom:2px;">① 露出柱脚</div>
+      <svg viewBox="0 0 120 160" width="100%" style="display:block;margin:0 auto;">
+        <!-- 基礎コンクリート -->
+        <rect x="10" y="105" width="100" height="45" fill="#d8d6ce" stroke="#999" stroke-width="1"/>
+        <!-- ハッチング（基礎） -->
+        <clipPath id="clip1"><rect x="10" y="105" width="100" height="45"/></clipPath>
+        <g clip-path="url(#clip1)">
+          <line x1="0"  y1="110" x2="30"  y2="155" stroke="#bbb" stroke-width="0.7"/>
+          <line x1="20" y1="105" x2="55"  y2="155" stroke="#bbb" stroke-width="0.7"/>
+          <line x1="50" y1="105" x2="85"  y2="155" stroke="#bbb" stroke-width="0.7"/>
+          <line x1="80" y1="105" x2="115" y2="155" stroke="#bbb" stroke-width="0.7"/>
+        </g>
+        <text x="60" y="138" font-size="7.5" fill="#555" text-anchor="middle">基礎コンクリート</text>
+        <!-- モルタル -->
+        <rect x="26" y="96" width="68" height="9" fill="#ede6cc" stroke="#ccc" stroke-width="0.8"/>
+        <text x="60" y="103" font-size="6" fill="#999" text-anchor="middle">モルタル</text>
+        <!-- ベースプレート -->
+        <rect x="18" y="88" width="84" height="8" fill="#999" stroke="#555" stroke-width="1.2"/>
+        <!-- アンカーボルト -->
+        <line x1="32" y1="96" x2="32" y2="150" stroke="#cc0000" stroke-width="2.5"/>
+        <line x1="88" y1="96" x2="88" y2="150" stroke="#cc0000" stroke-width="2.5"/>
+        <!-- ABナット（ベースプレート上） -->
+        <rect x="27" y="84" width="10" height="4" fill="#cc0000" rx="1"/>
+        <rect x="83" y="84" width="10" height="4" fill="#cc0000" rx="1"/>
+        <!-- H形鋼柱（ウェブ） -->
+        <rect x="53" y="10" width="14" height="78" fill="#bbb" stroke="#555" stroke-width="1"/>
+        <!-- フランジ（上） -->
+        <rect x="38" y="10" width="44" height="6" fill="#999" stroke="#555" stroke-width="1"/>
+        <!-- フランジ（中間・下） -->
+        <rect x="38" y="56" width="44" height="6" fill="#999" stroke="#555" stroke-width="1"/>
+        <!-- ラベル（右側） -->
+        <text x="106" y="92" font-size="6.5" fill="#555" text-anchor="start">BP</text>
+        <text x="93"  y="78" font-size="6.5" fill="#cc0000" text-anchor="start">AB</text>
+        <text x="85"  y="34" font-size="6.5" fill="#555" text-anchor="start">H柱</text>
+      </svg>
+      <div style="font-size:7pt;text-align:center;color:#cc0000;font-weight:bold;">固定度：低〜中（ピン〜半剛接）</div>
+    </div>
+
+    <!-- ② 根巻き柱脚 -->
+    <div style="border:1.5px solid #c8a800;border-radius:3px;padding:5px;background:#fffdf0;">
+      <div style="font-weight:bold;font-size:9pt;color:#7a5800;text-align:center;border-bottom:1px solid #e8d870;margin-bottom:4px;padding-bottom:2px;">② 根巻き柱脚</div>
+      <svg viewBox="0 0 120 160" width="100%" style="display:block;margin:0 auto;">
+        <!-- 基礎コンクリート -->
+        <rect x="10" y="112" width="100" height="40" fill="#d8d6ce" stroke="#999" stroke-width="1"/>
+        <clipPath id="clip2"><rect x="10" y="112" width="100" height="40"/></clipPath>
+        <g clip-path="url(#clip2)">
+          <line x1="0"  y1="117" x2="25"  y2="155" stroke="#bbb" stroke-width="0.7"/>
+          <line x1="22" y1="112" x2="57"  y2="155" stroke="#bbb" stroke-width="0.7"/>
+          <line x1="52" y1="112" x2="87"  y2="155" stroke="#bbb" stroke-width="0.7"/>
+          <line x1="82" y1="112" x2="115" y2="152" stroke="#bbb" stroke-width="0.7"/>
+        </g>
+        <text x="60" y="142" font-size="7.5" fill="#555" text-anchor="middle">基礎コンクリート</text>
+        <!-- ベースプレート（基礎内） -->
+        <rect x="38" y="105" width="44" height="7" fill="#999" stroke="#555" stroke-width="1"/>
+        <!-- アンカーボルト（基礎内・点線） -->
+        <line x1="46" y1="105" x2="46" y2="150" stroke="#cc0000" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <line x1="74" y1="105" x2="74" y2="150" stroke="#cc0000" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <!-- 根巻きコンクリート -->
+        <rect x="20" y="42" width="80" height="63" fill="#c4d8ec" stroke="#2e6da4" stroke-width="1.5"/>
+        <!-- 主筋（縦） -->
+        <line x1="26" y1="42" x2="26" y2="105" stroke="#cc0000" stroke-width="2"/>
+        <line x1="94" y1="42" x2="94" y2="105" stroke="#cc0000" stroke-width="2"/>
+        <!-- 帯筋（横） -->
+        <rect x="23" y="48"  width="74" height="4" fill="none" stroke="#cc0000" stroke-width="1.2"/>
+        <rect x="23" y="64"  width="74" height="4" fill="none" stroke="#cc0000" stroke-width="1.2"/>
+        <rect x="23" y="80"  width="74" height="4" fill="none" stroke="#cc0000" stroke-width="1.2"/>
+        <rect x="23" y="96"  width="74" height="4" fill="none" stroke="#cc0000" stroke-width="1.2"/>
+        <!-- 「根巻きConc」ラベル（根巻き上部・帯筋より上） -->
+        <text x="60" y="46" font-size="6.5" fill="#1a3a5c" text-anchor="middle" font-weight="bold">根巻きコンクリート</text>
+        <!-- H形鋼柱（ウェブ） -->
+        <rect x="53" y="6" width="14" height="99" fill="#bbb" stroke="#555" stroke-width="1"/>
+        <!-- フランジ（上） -->
+        <rect x="40" y="6" width="40" height="5" fill="#999" stroke="#555" stroke-width="1"/>
+        <!-- フランジ（中） -->
+        <rect x="40" y="52" width="40" height="5" fill="#999" stroke="#555" stroke-width="1"/>
+        <!-- 寸法線 h≥2.5D（左外側） -->
+        <line x1="13" y1="42"  x2="13" y2="105" stroke="#c8a800" stroke-width="1.2"/>
+        <line x1="10" y1="42"  x2="16" y2="42"  stroke="#c8a800" stroke-width="1.2"/>
+        <line x1="10" y1="105" x2="16" y2="105" stroke="#c8a800" stroke-width="1.2"/>
+        <text x="8" y="75" font-size="6.5" fill="#7a5800" text-anchor="middle" transform="rotate(-90,8,75)">h ≥ 2.5D</text>
+      </svg>
+      <div style="font-size:7pt;text-align:center;color:#7a5800;font-weight:bold;">固定度：中〜高（半剛〜剛接）</div>
+    </div>
+
+    <!-- ③ 埋め込み柱脚 -->
+    <div style="border:1.5px solid #006600;border-radius:3px;padding:5px;background:#f0faf0;">
+      <div style="font-weight:bold;font-size:9pt;color:#006600;text-align:center;border-bottom:1px solid #88cc88;margin-bottom:4px;padding-bottom:2px;">③ 埋め込み柱脚</div>
+      <svg viewBox="0 0 120 160" width="100%" style="display:block;margin:0 auto;">
+        <!-- 基礎コンクリート（大） -->
+        <rect x="10" y="30" width="100" height="122" fill="#d0d0c8" stroke="#999" stroke-width="1"/>
+        <clipPath id="clip3"><rect x="10" y="30" width="100" height="122"/></clipPath>
+        <g clip-path="url(#clip3)">
+          <line x1="10" y1="55"  x2="55"  y2="155" stroke="#bbb" stroke-width="0.7"/>
+          <line x1="10" y1="90"  x2="55"  y2="155" stroke="#bbb" stroke-width="0.7"/><!-- skip柱部 -->
+          <line x1="10" y1="125" x2="55"  y2="155" stroke="#bbb" stroke-width="0.7"/>
+          <line x1="65" y1="30"  x2="110" y2="75"  stroke="#bbb" stroke-width="0.7"/>
+          <line x1="65" y1="65"  x2="110" y2="110" stroke="#bbb" stroke-width="0.7"/>
+          <line x1="65" y1="100" x2="110" y2="145" stroke="#bbb" stroke-width="0.7"/>
+        </g>
+        <text x="60" y="150" font-size="7.5" fill="#555" text-anchor="middle">基礎コンクリート</text>
+        <!-- H形鋼柱（ウェブ） -->
+        <rect x="53" y="4" width="14" height="118" fill="#bbb" stroke="#555" stroke-width="1"/>
+        <!-- フランジ（上・地上部） -->
+        <rect x="40" y="4" width="40" height="5" fill="#999" stroke="#555" stroke-width="1"/>
+        <!-- フランジ（中） -->
+        <rect x="40" y="48" width="40" height="5" fill="#999" stroke="#555" stroke-width="1"/>
+        <!-- フランジ（下端・埋め込み底） -->
+        <rect x="40" y="116" width="40" height="5" fill="#999" stroke="#555" stroke-width="1"/>
+        <!-- 支圧力（上側：左→右方向） -->
+        <polygon points="26,50 36,44 36,56" fill="#2e6da4"/>
+        <line x1="36" y1="50" x2="52" y2="50" stroke="#2e6da4" stroke-width="1.5"/>
+        <polygon points="26,68 36,62 36,74" fill="#2e6da4"/>
+        <line x1="36" y1="68" x2="52" y2="68" stroke="#2e6da4" stroke-width="1.5"/>
+        <!-- 支圧力（下側：右→左方向） -->
+        <polygon points="94,90 84,84 84,96" fill="#cc0000"/>
+        <line x1="68" y1="90" x2="84" y2="90" stroke="#cc0000" stroke-width="1.5"/>
+        <polygon points="94,108 84,102 84,114" fill="#cc0000"/>
+        <line x1="68" y1="108" x2="84" y2="108" stroke="#cc0000" stroke-width="1.5"/>
+        <!-- 支圧ラベル -->
+        <text x="19" y="62" font-size="6" fill="#2e6da4" text-anchor="middle">支圧</text>
+        <text x="101" y="103" font-size="6" fill="#cc0000" text-anchor="middle">支圧</text>
+        <!-- 地表面ライン -->
+        <line x1="10" y1="30" x2="110" y2="30" stroke="#666" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="112" y="33" font-size="6" fill="#666">GL</text>
+        <!-- 寸法線 d≥2D -->
+        <line x1="13" y1="30"  x2="13" y2="121" stroke="#006600" stroke-width="1.2"/>
+        <line x1="10" y1="30"  x2="16" y2="30"  stroke="#006600" stroke-width="1.2"/>
+        <line x1="10" y1="121" x2="16" y2="121" stroke="#006600" stroke-width="1.2"/>
+        <text x="8" y="78" font-size="6.5" fill="#006600" text-anchor="middle" transform="rotate(-90,8,78)">d ≥ 2D</text>
+      </svg>
+      <div style="font-size:7pt;text-align:center;color:#006600;font-weight:bold;">固定度：高（剛接に近い）</div>
+    </div>
+  </div>
+
+  <!-- ===== 力の負担まとめ表 ===== -->
+  <h2>9. 柱脚の種類別 ― 力の負担と設計のポイント</h2>
+
+  <table>
+    <colgroup>
+      <col style="width:12%"><col style="width:10%"><col style="width:22%"><col style="width:22%"><col style="width:17%"><col style="width:17%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>種類</th>
+        <th>固定度</th>
+        <th>曲げモーメント M</th>
+        <th>せん断力 Q</th>
+        <th>軸力 N（圧縮）</th>
+        <th>累加の可否</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 露出柱脚 -->
+      <tr>
+        <td class="bold center">①露出<br>柱脚</td>
+        <td class="center small"><span class="red">低〜中</span><br>ピン〜半剛</td>
+        <td>
+          <span class="red">アンカーボルト（引張）</span><br>
+          ＋ ベースプレート（圧縮伝達）<br>
+          <span class="small">ABの引張力×アーム長</span>
+        </td>
+        <td>
+          <span class="red">アンカーボルト</span><br>
+          または摩擦力（μN）<br>
+          <span class="small red">→ 大きい方を採用</span><br>
+          <span class="small">（累加は行わない）</span>
+        </td>
+        <td>
+          <span class="blue">ベースプレート</span><br>
+          → 基礎コンクリートへの支圧
+        </td>
+        <td class="center">
+          <span style="color:#999;">累加しない</span><br>
+          <span class="small">（AB or 摩擦の<br>大きい方）</span>
+        </td>
+      </tr>
+      <!-- 根巻き柱脚 -->
+      <tr class="highlight-row">
+        <td class="bold center">②根巻き<br>柱脚</td>
+        <td class="center small"><span style="color:#7a5800;">中〜高</span><br>半剛〜剛接</td>
+        <td>
+          <span style="color:#7a5800;font-weight:bold;">根巻きRC部が主体</span><br>
+          ＋ アンカーボルト（補助）<br>
+          <span class="small">→ RC部＋ABで<span class="red bold">累加OK</span></span>
+        </td>
+        <td>
+          <span style="color:#7a5800;font-weight:bold;">根巻きコンクリート</span>が主体<br>
+          <span class="small">（鉄骨コンクリート間の支圧）</span>
+        </td>
+        <td>
+          <span class="blue">ベースプレート</span><br>
+          → コンクリートへの支圧
+        </td>
+        <td class="center">
+          <span class="red bold">累加する</span><br>
+          <span class="small">（根巻きRC部<br>＋AB耐力の和）</span>
+        </td>
+      </tr>
+      <!-- 埋め込み柱脚 -->
+      <tr class="green-row">
+        <td class="bold center">③埋め込み<br>柱脚</td>
+        <td class="center small"><span class="green">高</span><br>剛接に近い</td>
+        <td>
+          <span class="green">コンクリートの支圧力</span><br>
+          （柱側面の支圧応力度）<br>
+          <span class="small">上下の支圧力のカップル</span>
+        </td>
+        <td>
+          <span class="green">コンクリートの支圧力</span><br>
+          <span class="small">（曲げとせん断を一体で支圧伝達）</span>
+        </td>
+        <td>
+          <span class="green">基礎コンクリート</span><br>
+          （端板またはスタッドで確実に伝達）
+        </td>
+        <td class="center">
+          <span style="color:#999;">累加の概念なし</span><br>
+          <span class="small">（支圧応力度の<br>みで算定）</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>10. 各柱脚の規定・設計上の注意点</h2>
+
+  <table>
+    <colgroup>
+      <col style="width:13%"><col style="width:29%"><col style="width:29%"><col style="width:29%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>項目</th>
+        <th>① 露出柱脚</th>
+        <th>② 根巻き柱脚</th>
+        <th>③ 埋め込み柱脚</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold center">寸法規定</td>
+        <td class="small">
+          アンカーボルト：<span class="red">4本以上</span><br>
+          ベースプレート厚：十分な剛性確保<br>
+          AB埋め込み長さ：AB径×20以上
+        </td>
+        <td class="small">
+          根巻き高さ h：<span class="red">柱せい D の 2.5倍以上</span><br>
+          （h ≧ 2.5D）<br>
+          主筋：4本以上、帯筋：RC規定準拠
+        </td>
+        <td class="small">
+          埋め込み深さ d：<span class="red">柱せい D の 2倍以上</span><br>
+          （d ≧ 2D）<br>
+          端板（ベースプレート）で軸力伝達確保
+        </td>
+      </tr>
+      <tr>
+        <td class="bold center">固定度の<br>扱い</td>
+        <td class="small">
+          構造解析上<span class="red">ピン or 半剛接</span>で扱うことが多い。<br>
+          完全固定として解析するには特別な配慮が必要
+        </td>
+        <td class="small">
+          根巻き部が変形を拘束し、<span class="red">固定に近い</span>挙動。<br>
+          根巻き高さが不足すると固定度が低下
+        </td>
+        <td class="small">
+          最も<span class="green">固定度が高い</span>。<br>剛接として構造解析できる。<br>施工精度の管理が重要
+        </td>
+      </tr>
+      <tr class="highlight-row">
+        <td class="bold center">耐震上の<br>特徴</td>
+        <td class="small">
+          ABが降伏してエネルギー吸収<br>
+          → <span class="red">ABの靭性（変形能力）が重要</span><br>
+          転倒モーメントに対し引抜き力に注意
+        </td>
+        <td class="small">
+          根巻きRCが塑性ヒンジを形成<br>
+          エネルギー吸収能力が高い<br>
+          → <span class="red">RC部の靭性設計</span>が重要
+        </td>
+        <td class="small">
+          剛性が高く変形が小さい<br>
+          → <span class="green">層間変形角が小さくなる</span><br>
+          コンクリートのせん断破壊に注意
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 最重要ポイント</span>
+    ・<span class="red">根巻き柱脚のみ累加OK</span>（根巻きRC部 ＋ アンカーボルトの耐力の和）<br>
+    ・露出柱脚のせん断：ABと摩擦力は<span class="red">累加しない</span>（大きい方を採用）<br>
+    ・根巻き高さ：<span class="red">h ≧ 2.5D</span>　／　埋め込み深さ：<span class="red">d ≧ 2D</span>（Dは柱せい）<br>
+    ・固定度：露出（低）＜ 根巻き（中〜高）＜ 埋め込み（高）
+  </div>
+
+</div>
+
+</body>
+</html>

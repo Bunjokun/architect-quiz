@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>施工まとめ資料① 材料の保管・保存方法</title>
+<style>
+  @page { size: A4 portrait; margin: 15mm 12mm 15mm 12mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
+    font-size: 9.5pt;
+    color: #111;
+    background: #fff;
+    width: 210mm;
+    margin: 0 auto;
+    padding: 10mm 12mm;
+    overflow-x: hidden;
+  }
+  .page { width: 186mm; page-break-after: always; padding-bottom: 6mm; }
+  .page:last-child { page-break-after: auto; }
+
+  .page-title {
+    font-size: 13pt; font-weight: bold;
+    background: #1a3a5c; color: #fff;
+    padding: 4px 10px; margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 10.5pt; font-weight: bold; color: #fff;
+    background: #2e6da4; padding: 3px 8px; margin: 10px 0 5px 0;
+  }
+  h3 {
+    font-size: 9.5pt; font-weight: bold; color: #1a3a5c;
+    border-left: 4px solid #2e6da4; padding-left: 6px;
+    margin: 8px 0 4px 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 6px; }
+  th {
+    background: #dbe8f5; font-weight: bold;
+    border: 1px solid #7aaacf; padding: 4px 5px;
+    text-align: center; vertical-align: middle;
+  }
+  td { border: 1px solid #aac4de; padding: 3px 5px; vertical-align: middle; }
+  tr:nth-child(even) td { background: #f4f9ff; }
+
+  .red    { color: #cc0000; font-weight: bold; }
+  .blue   { color: #0055aa; font-weight: bold; }
+  .green  { color: #006600; font-weight: bold; }
+  .bold   { font-weight: bold; }
+  .center { text-align: center; }
+  .small  { font-size: 7.5pt; }
+
+  .point-box {
+    border: 1.5px solid #cc0000; background: #fff8f8;
+    border-radius: 3px; padding: 4px 8px; margin: 5px 0; font-size: 8.5pt;
+  }
+  .point-box .label { font-weight: bold; color: #cc0000; margin-right: 4px; }
+  .note-box {
+    border: 1px solid #2e6da4; background: #f0f6ff;
+    border-radius: 3px; padding: 4px 8px; margin: 4px 0; font-size: 8pt;
+  }
+  .highlight-row td { background: #fff3cd !important; }
+  .red-row td { background: #fde8e8 !important; }
+  .green-row td { background: #e8f5e8 !important; }
+
+  /* ===== 図エリア ===== */
+  .fig-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin: 6px 0;
+  }
+  .fig-card {
+    border: 1px solid #aac4de;
+    border-radius: 3px;
+    padding: 4px;
+    background: #fafdff;
+    text-align: center;
+  }
+  .fig-card .fig-label {
+    font-size: 7.5pt;
+    font-weight: bold;
+    margin-bottom: 2px;
+    color: #1a3a5c;
+  }
+  .fig-card .fig-method {
+    font-size: 8pt;
+    font-weight: bold;
+    margin-top: 2px;
+  }
+  .tate { color: #cc0000; }
+  .hira { color: #0055aa; }
+
+  .fig-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin: 6px 0;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-title">施工まとめ資料①　材料の保管・保存方法（縦置き vs 平積み）</div>
+
+  <h2>1. 縦置き vs 平積み 一覧まとめ</h2>
+
+  <div class="note-box">
+    保管方法を誤ると変形・割れ・品質低下の原因になる。<span class="red">試験では「なぜその向きか」の理由とセットで覚える。</span>
+  </div>
+
+  <!-- ===== 図 ===== -->
+  <div class="fig-grid">
+
+    <!-- ガラス：縦置き -->
+    <div class="fig-card">
+      <div class="fig-label">ガラス板</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <!-- 地面 -->
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- パッド -->
+        <rect x="12" y="56" width="8" height="4" fill="#c8a87a" rx="1"/>
+        <rect x="42" y="56" width="8" height="4" fill="#c8a87a" rx="1"/>
+        <!-- ガラス板3枚 縦置き -->
+        <rect x="8"  y="12" width="6" height="44" fill="#aed6f1" stroke="#2980b9" stroke-width="1" opacity="0.85"/>
+        <rect x="18" y="12" width="6" height="44" fill="#aed6f1" stroke="#2980b9" stroke-width="1" opacity="0.85"/>
+        <rect x="28" y="12" width="6" height="44" fill="#aed6f1" stroke="#2980b9" stroke-width="1" opacity="0.85"/>
+        <!-- 養生材 -->
+        <rect x="37" y="18" width="5" height="32" fill="#f9e79f" stroke="#d4ac0d" stroke-width="0.8" opacity="0.9"/>
+        <rect x="46" y="18" width="5" height="32" fill="#f9e79f" stroke="#d4ac0d" stroke-width="0.8" opacity="0.9"/>
+        <!-- 矢印 縦方向 -->
+        <text x="60" y="34" font-size="14" fill="#cc0000" font-weight="bold">↕</text>
+        <text x="57" y="46" font-size="6" fill="#cc0000">縦方向</text>
+      </svg>
+      <div class="fig-method tate">縦置き（立て置き）</div>
+      <div class="small">割れ防止・面均等加重</div>
+    </div>
+
+    <!-- ALCパネル：縦置き -->
+    <div class="fig-card">
+      <div class="fig-label">ALCパネル</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- 台木 -->
+        <rect x="10" y="55" width="60" height="5" fill="#c8a87a" rx="1"/>
+        <!-- ALCパネル 縦置き -->
+        <rect x="12" y="10" width="10" height="45" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+        <rect x="26" y="10" width="10" height="45" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+        <rect x="40" y="10" width="10" height="45" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+        <rect x="54" y="10" width="10" height="45" fill="#e8e8e8" stroke="#999" stroke-width="1"/>
+        <!-- テクスチャ -->
+        <line x1="12" y1="20" x2="22" y2="20" stroke="#bbb" stroke-width="0.5"/>
+        <line x1="12" y1="30" x2="22" y2="30" stroke="#bbb" stroke-width="0.5"/>
+        <line x1="26" y1="20" x2="36" y2="20" stroke="#bbb" stroke-width="0.5"/>
+        <line x1="26" y1="30" x2="36" y2="30" stroke="#bbb" stroke-width="0.5"/>
+        <text x="57" y="34" font-size="14" fill="#cc0000" font-weight="bold">↕</text>
+        <text x="57" y="46" font-size="5.5" fill="#cc0000">縦方向</text>
+      </svg>
+      <div class="fig-method tate">縦置き（立て置き）</div>
+      <div class="small">たわみ・ひび割れ防止</div>
+    </div>
+
+    <!-- セメント：平積み -->
+    <div class="fig-card">
+      <div class="fig-label">セメント（袋）</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- パレット -->
+        <rect x="8" y="54" width="64" height="6" fill="#c8a87a" rx="1"/>
+        <line x1="20" y1="54" x2="20" y2="60" stroke="#a07850" stroke-width="1"/>
+        <line x1="40" y1="54" x2="40" y2="60" stroke="#a07850" stroke-width="1"/>
+        <line x1="60" y1="54" x2="60" y2="60" stroke="#a07850" stroke-width="1"/>
+        <!-- セメント袋 平積み 10袋-->
+        <rect x="10" y="48" width="60" height="6" fill="#d5d5c0" stroke="#888" stroke-width="0.8" rx="1"/>
+        <rect x="10" y="42" width="60" height="6" fill="#c8c8b0" stroke="#888" stroke-width="0.8" rx="1"/>
+        <rect x="10" y="36" width="60" height="6" fill="#d5d5c0" stroke="#888" stroke-width="0.8" rx="1"/>
+        <rect x="10" y="30" width="60" height="6" fill="#c8c8b0" stroke="#888" stroke-width="0.8" rx="1"/>
+        <rect x="10" y="24" width="60" height="6" fill="#d5d5c0" stroke="#888" stroke-width="0.8" rx="1"/>
+        <!-- ×マーク（11袋目NG） -->
+        <rect x="10" y="14" width="60" height="6" fill="#fcc" stroke="#cc0000" stroke-width="1" rx="1" stroke-dasharray="2,2"/>
+        <text x="35" y="20" font-size="7" fill="#cc0000" font-weight="bold">× 11袋目NG</text>
+        <!-- 矢印 -->
+        <text x="3" y="38" font-size="7" fill="#0055aa" transform="rotate(-90,3,38)">積上げ</text>
+      </svg>
+      <div class="fig-method hira">平積み（10袋以下）</div>
+      <div class="small">パレット上・床から離す</div>
+    </div>
+
+    <!-- 木材：平積み -->
+    <div class="fig-card">
+      <div class="fig-label">木材・合板</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- 台木（まくら木）-->
+        <rect x="8"  y="54" width="10" height="6" fill="#8b6914" rx="1"/>
+        <rect x="35" y="54" width="10" height="6" fill="#8b6914" rx="1"/>
+        <rect x="62" y="54" width="10" height="6" fill="#8b6914" rx="1"/>
+        <!-- 木材 平積み -->
+        <rect x="8" y="47" width="64" height="7" fill="#deb887" stroke="#a0522d" stroke-width="0.8" rx="1"/>
+        <rect x="8" y="40" width="64" height="7" fill="#d2a679" stroke="#a0522d" stroke-width="0.8" rx="1"/>
+        <rect x="8" y="33" width="64" height="7" fill="#deb887" stroke="#a0522d" stroke-width="0.8" rx="1"/>
+        <rect x="8" y="26" width="64" height="7" fill="#d2a679" stroke="#a0522d" stroke-width="0.8" rx="1"/>
+        <rect x="8" y="19" width="64" height="7" fill="#deb887" stroke="#a0522d" stroke-width="0.8" rx="1"/>
+        <!-- 木目 -->
+        <line x1="20" y1="19" x2="20" y2="54" stroke="#c8956a" stroke-width="0.5" stroke-dasharray="3,4"/>
+        <line x1="40" y1="19" x2="40" y2="54" stroke="#c8956a" stroke-width="0.5" stroke-dasharray="3,4"/>
+        <line x1="60" y1="19" x2="60" y2="54" stroke="#c8956a" stroke-width="0.5" stroke-dasharray="3,4"/>
+        <!-- まくら木ラベル -->
+        <text x="9" y="59" font-size="5" fill="#fff">まくら</text>
+      </svg>
+      <div class="fig-method hira">平積み（まくら木の上）</div>
+      <div class="small">反り防止・通気確保</div>
+    </div>
+  </div>
+
+  <!-- ===== 2段目図 ===== -->
+  <div class="fig-grid">
+
+    <!-- 鉄筋：平置き -->
+    <div class="fig-card">
+      <div class="fig-label">鉄筋</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- 台木 -->
+        <rect x="8" y="53" width="10" height="7" fill="#c8a87a" rx="1"/>
+        <rect x="62" y="53" width="10" height="7" fill="#c8a87a" rx="1"/>
+        <!-- 鉄筋 束 平置き-->
+        <circle cx="18" cy="46" r="4" fill="#888" stroke="#555" stroke-width="0.8"/>
+        <circle cx="27" cy="46" r="4" fill="#777" stroke="#555" stroke-width="0.8"/>
+        <circle cx="36" cy="46" r="4" fill="#888" stroke="#555" stroke-width="0.8"/>
+        <circle cx="45" cy="46" r="4" fill="#777" stroke="#555" stroke-width="0.8"/>
+        <circle cx="54" cy="46" r="4" fill="#888" stroke="#555" stroke-width="0.8"/>
+        <circle cx="63" cy="46" r="4" fill="#777" stroke="#555" stroke-width="0.8"/>
+        <circle cx="22" cy="39" r="4" fill="#888" stroke="#555" stroke-width="0.8"/>
+        <circle cx="31" cy="39" r="4" fill="#777" stroke="#555" stroke-width="0.8"/>
+        <circle cx="40" cy="39" r="4" fill="#888" stroke="#555" stroke-width="0.8"/>
+        <circle cx="49" cy="39" r="4" fill="#777" stroke="#555" stroke-width="0.8"/>
+        <circle cx="58" cy="39" r="4" fill="#888" stroke="#555" stroke-width="0.8"/>
+        <!-- 側面から見た断面表現 -->
+        <text x="6" y="25" font-size="6" fill="#555">←断面→</text>
+        <!-- 横方向の鉄筋（束） -->
+        <line x1="8" y1="30" x2="72" y2="30" stroke="#666" stroke-width="2.5"/>
+        <line x1="8" y1="34" x2="72" y2="34" stroke="#555" stroke-width="2.5"/>
+        <!-- 雨よけ表示 -->
+        <text x="20" y="14" font-size="6" fill="#cc0000">シート養生</text>
+        <path d="M15,16 L65,16 L65,18 L15,18 Z" fill="#88bbee" opacity="0.5"/>
+      </svg>
+      <div class="fig-method hira">平置き（台木の上）</div>
+      <div class="small">直置きNG・シート養生</div>
+    </div>
+
+    <!-- 石膏ボード：縦置き -->
+    <div class="fig-card">
+      <div class="fig-label">石膏ボード</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- 台木 -->
+        <rect x="10" y="55" width="60" height="5" fill="#c8a87a" rx="1"/>
+        <!-- 石膏ボード 縦置き -->
+        <rect x="10" y="10" width="9" height="45" fill="#f5f5f0" stroke="#bbb" stroke-width="1"/>
+        <rect x="22" y="10" width="9" height="45" fill="#eeeee8" stroke="#bbb" stroke-width="1"/>
+        <rect x="34" y="10" width="9" height="45" fill="#f5f5f0" stroke="#bbb" stroke-width="1"/>
+        <rect x="46" y="10" width="9" height="45" fill="#eeeee8" stroke="#bbb" stroke-width="1"/>
+        <rect x="58" y="10" width="9" height="45" fill="#f5f5f0" stroke="#bbb" stroke-width="1"/>
+        <text x="57" y="34" font-size="14" fill="#cc0000" font-weight="bold">↕</text>
+      </svg>
+      <div class="fig-method tate">縦置き（立て置き）</div>
+      <div class="small">水濡れ・破損防止</div>
+    </div>
+
+    <!-- 構造用合板：平積み -->
+    <div class="fig-card">
+      <div class="fig-label">構造用合板</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- 台木 -->
+        <rect x="8"  y="54" width="10" height="6" fill="#8b6914" rx="1"/>
+        <rect x="35" y="54" width="10" height="6" fill="#8b6914" rx="1"/>
+        <rect x="62" y="54" width="10" height="6" fill="#8b6914" rx="1"/>
+        <!-- 合板 平積み -->
+        <rect x="8" y="49" width="64" height="5" fill="#deb887" stroke="#a0522d" stroke-width="0.8"/>
+        <rect x="8" y="44" width="64" height="5" fill="#c8a064" stroke="#a0522d" stroke-width="0.8"/>
+        <rect x="8" y="39" width="64" height="5" fill="#deb887" stroke="#a0522d" stroke-width="0.8"/>
+        <rect x="8" y="34" width="64" height="5" fill="#c8a064" stroke="#a0522d" stroke-width="0.8"/>
+        <rect x="8" y="29" width="64" height="5" fill="#deb887" stroke="#a0522d" stroke-width="0.8"/>
+        <rect x="8" y="24" width="64" height="5" fill="#c8a064" stroke="#a0522d" stroke-width="0.8"/>
+        <rect x="8" y="19" width="64" height="5" fill="#deb887" stroke="#a0522d" stroke-width="0.8"/>
+        <!-- シート -->
+        <rect x="6" y="16" width="68" height="3" fill="#88bbee" opacity="0.6" rx="1"/>
+        <text x="22" y="14" font-size="6" fill="#0055aa">シート養生</text>
+      </svg>
+      <div class="fig-method hira">平積み（まくら木の上）</div>
+      <div class="small">シート養生・通気確保</div>
+    </div>
+
+    <!-- 鋼材・H形鋼：平置き -->
+    <div class="fig-card">
+      <div class="fig-label">形鋼（H形鋼等）</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- 枕木 -->
+        <rect x="8" y="53" width="12" height="7" fill="#c8a87a" rx="1"/>
+        <rect x="60" y="53" width="12" height="7" fill="#c8a87a" rx="1"/>
+        <!-- H形鋼 断面（横から見た複数本） -->
+        <!-- 本1 -->
+        <rect x="10" y="36" width="60" height="4" fill="#aaa" stroke="#666" stroke-width="0.8"/>
+        <rect x="10" y="40" width="60" height="13" fill="none" stroke="#666" stroke-width="0.8"/>
+        <rect x="10" y="40" width="60" height="2" fill="#aaa"/>
+        <rect x="10" y="51" width="60" height="2" fill="#aaa"/>
+        <rect x="37" y="42" width="6" height="9" fill="#aaa"/>
+        <!-- 本2 上に積む -->
+        <rect x="10" y="22" width="60" height="4" fill="#bbb" stroke="#666" stroke-width="0.8"/>
+        <rect x="37" y="26" width="6" height="10" fill="#bbb" stroke="#666" stroke-width="0.5"/>
+        <rect x="10" y="32" width="60" height="4" fill="#bbb" stroke="#666" stroke-width="0.8"/>
+      </svg>
+      <div class="fig-method hira">平置き（枕木の上）</div>
+      <div class="small">変形防止・錆対策</div>
+    </div>
+  </div>
+
+  <!-- ===== 3段目図 ===== -->
+  <div class="fig-grid">
+
+    <!-- ロールカーペット：縦置き -->
+    <div class="fig-card">
+      <div class="fig-label">ロールカーペット</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- 台木 -->
+        <rect x="10" y="55" width="60" height="5" fill="#c8a87a" rx="1"/>
+        <!-- ロール 縦置き（筒の断面を正面から） -->
+        <!-- ロール1 -->
+        <ellipse cx="22" cy="30" rx="9" ry="24" fill="#d4b483" stroke="#a07040" stroke-width="1"/>
+        <ellipse cx="22" cy="30" rx="5" ry="14" fill="#c8a060" stroke="#a07040" stroke-width="0.8"/>
+        <ellipse cx="22" cy="30" rx="2" ry="5" fill="#b89050"/>
+        <!-- ロール2 -->
+        <ellipse cx="42" cy="30" rx="9" ry="24" fill="#c4a073" stroke="#a07040" stroke-width="1"/>
+        <ellipse cx="42" cy="30" rx="5" ry="14" fill="#b89060" stroke="#a07040" stroke-width="0.8"/>
+        <ellipse cx="42" cy="30" rx="2" ry="5" fill="#a88040"/>
+        <!-- ロール3 -->
+        <ellipse cx="62" cy="30" rx="9" ry="24" fill="#d4b483" stroke="#a07040" stroke-width="1"/>
+        <ellipse cx="62" cy="30" rx="5" ry="14" fill="#c8a060" stroke="#a07040" stroke-width="0.8"/>
+        <ellipse cx="62" cy="30" rx="2" ry="5" fill="#b89050"/>
+        <!-- 矢印 -->
+        <text x="2" y="35" font-size="12" fill="#cc0000">↕</text>
+      </svg>
+      <div class="fig-method tate">縦置き（芯を立てる）</div>
+      <div class="small">横置きでロール変形</div>
+    </div>
+
+    <!-- タイルカーペット：平積み -->
+    <div class="fig-card">
+      <div class="fig-label">タイルカーペット</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- パレット -->
+        <rect x="8" y="53" width="64" height="7" fill="#c8a87a" rx="1"/>
+        <line x1="22" y1="53" x2="22" y2="60" stroke="#a07850" stroke-width="1"/>
+        <line x1="44" y1="53" x2="44" y2="60" stroke="#a07850" stroke-width="1"/>
+        <line x1="63" y1="53" x2="63" y2="60" stroke="#a07850" stroke-width="1"/>
+        <!-- タイルカーペット箱 平積み -->
+        <rect x="10" y="45" width="60" height="8" fill="#e8d8c0" stroke="#a07040" stroke-width="0.8" rx="1"/>
+        <rect x="10" y="37" width="60" height="8" fill="#d8c8b0" stroke="#a07040" stroke-width="0.8" rx="1"/>
+        <rect x="10" y="29" width="60" height="8" fill="#e8d8c0" stroke="#a07040" stroke-width="0.8" rx="1"/>
+        <rect x="10" y="21" width="60" height="8" fill="#d8c8b0" stroke="#a07040" stroke-width="0.8" rx="1"/>
+        <!-- タイル模様（箱の側面） -->
+        <line x1="30" y1="21" x2="30" y2="53" stroke="#bba070" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <line x1="50" y1="21" x2="50" y2="53" stroke="#bba070" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <!-- ラベル -->
+        <text x="28" y="17" font-size="6" fill="#a07040">箱（ケース）単位</text>
+      </svg>
+      <div class="fig-method hira">平積み（ケース単位）</div>
+      <div class="small">屋内乾燥場所・温度管理</div>
+    </div>
+
+    <!-- アスファルトルーフィング：縦置き -->
+    <div class="fig-card">
+      <div class="fig-label">アスファルト<br>ルーフィング</div>
+      <svg viewBox="0 0 80 70" width="100%" style="max-height:68px;">
+        <rect x="5" y="60" width="70" height="4" fill="#8b7355"/>
+        <!-- 台木 -->
+        <rect x="10" y="55" width="60" height="5" fill="#c8a87a" rx="1"/>
+        <!-- ルーフィングロール 縦置き（黒） -->
+        <ellipse cx="20" cy="30" rx="8" ry="22" fill="#333" stroke="#111" stroke-width="1"/>
+        <ellipse cx="20" cy="30" rx="4" ry="12" fill="#555" stroke="#333" stroke-width="0.8"/>
+        <ellipse cx="20" cy="30" rx="1.5" ry="4" fill="#222"/>
+        <!-- ロール2 -->
+        <ellipse cx="40" cy="30" rx="8" ry="22" fill="#2a2a2a" stroke="#111" stroke-width="1"/>
+        <ellipse cx="40" cy="30" rx="4" ry="12" fill="#444" stroke="#333" stroke-width="0.8"/>
+        <ellipse cx="40" cy="30" rx="1.5" ry="4" fill="#111"/>
+        <!-- ロール3 -->
+        <ellipse cx="60" cy="30" rx="8" ry="22" fill="#333" stroke="#111" stroke-width="1"/>
+        <ellipse cx="60" cy="30" rx="4" ry="12" fill="#555" stroke="#333" stroke-width="0.8"/>
+        <ellipse cx="60" cy="30" rx="1.5" ry="4" fill="#222"/>
+        <!-- 日光NG -->
+        <text x="1" y="10" font-size="5.5" fill="#cc0000">直射日光・高温NG</text>
+        <text x="2" y="35" font-size="12" fill="#cc0000">↕</text>
+      </svg>
+      <div class="fig-method tate">縦置き（芯を立てる）</div>
+      <div class="small">横置きでたわみ・溶着</div>
+    </div>
+
+    <!-- 空白（レイアウト調整） -->
+    <div class="fig-card" style="background:transparent;border:1px dashed #ccc;">
+      <div style="height:100%;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:7.5pt;padding:10px 0;">
+        （続く）
+      </div>
+    </div>
+
+  </div>
+
+  <h2>2. 材料別 保管方法 まとめ表</h2>
+
+  <table>
+    <colgroup>
+      <col style="width:15%"><col style="width:11%"><col style="width:13%"><col style="width:61%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>材料</th>
+        <th>保管方向</th>
+        <th>積み重ね上限</th>
+        <th>注意事項・理由</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="red-row">
+        <td class="bold">ガラス板</td>
+        <td class="center"><span class="red">縦置き</span></td>
+        <td class="center">—</td>
+        <td class="small">
+          ・面が均等に接地する縦置きが基本。<span class="red">平置きは自重でたわみ割れる</span><br>
+          ・合紙（養生材）を挟み、直接接触させない<br>
+          ・転倒防止の当て木・固定必須。壁に立てかける場合は<span class="red">6°〜8°程度</span>の傾斜で
+        </td>
+      </tr>
+      <tr class="red-row">
+        <td class="bold">ALCパネル</td>
+        <td class="center"><span class="red">縦置き</span></td>
+        <td class="center">—</td>
+        <td class="small">
+          ・<span class="red">平積みにするとたわみ・ひび割れが発生</span>する<br>
+          ・台木（まくら）の上に縦置きにし、転倒防止の措置を取る<br>
+          ・直射日光・雨濡れを避けシート養生
+        </td>
+      </tr>
+      <tr class="red-row">
+        <td class="bold">石膏ボード</td>
+        <td class="center"><span class="red">縦置き</span></td>
+        <td class="center">—</td>
+        <td class="small">
+          ・<span class="red">水濡れ厳禁</span>（強度が著しく低下）。縦置きで雨水が溜まりにくくする<br>
+          ・屋内で乾燥した場所に保管。平積みは端部破損しやすい
+        </td>
+      </tr>
+      <tr class="green-row">
+        <td class="bold">セメント（袋）</td>
+        <td class="center"><span class="blue">平積み</span></td>
+        <td class="center"><span class="red bold">10袋以下</span></td>
+        <td class="small">
+          ・<span class="red">地面・床面から離す</span>（湿気による風化防止）。パレット・スノコの上<br>
+          ・<span class="red">10袋を超えて積まない</span>（下層の固結・品質劣化防止）<br>
+          ・先入れ先出し（FIFO）を徹底。長期保管は品質確認が必要
+        </td>
+      </tr>
+      <tr class="green-row">
+        <td class="bold">木材・角材</td>
+        <td class="center"><span class="blue">平積み</span></td>
+        <td class="center">—</td>
+        <td class="small">
+          ・<span class="red">まくら木（桁材）の上に平積み</span>。直置きNG（腐食・変形防止）<br>
+          ・まくら木間隔：スパンの1/5〜1/4程度。たわみ防止<br>
+          ・通気を確保し、シート養生で雨露を防ぐ
+        </td>
+      </tr>
+      <tr class="green-row">
+        <td class="bold">構造用合板</td>
+        <td class="center"><span class="blue">平積み</span></td>
+        <td class="center">—</td>
+        <td class="small">
+          ・まくら木の上に平積み。<span class="red">水濡れに弱いため</span>シート養生必須<br>
+          ・直射日光による乾燥・反り防止のため日陰保管
+        </td>
+      </tr>
+      <tr class="green-row">
+        <td class="bold">鉄筋</td>
+        <td class="center"><span class="blue">平置き</span></td>
+        <td class="center">—</td>
+        <td class="small">
+          ・<span class="red">直置きNG</span>（泥付着・錆促進）。台木の上に径・種別ごとに整理<br>
+          ・シート養生で雨露を防ぐ。ただし<span class="red">表面錆（赤錆）は付着力増加で許容</span><br>
+          ・油・泥・塗料の付着は禁止（付着力低下）
+        </td>
+      </tr>
+      <tr class="green-row">
+        <td class="bold">形鋼・鋼材</td>
+        <td class="center"><span class="blue">平置き</span></td>
+        <td class="center">—</td>
+        <td class="small">
+          ・枕木の上に平置き。種別・サイズごとに整理<br>
+          ・直置きNG（変形・錆促進）。防錆処理・シート養生
+        </td>
+      </tr>
+      <tr class="red-row">
+        <td class="bold">ロールカーペット</td>
+        <td class="center"><span class="red">縦置き</span></td>
+        <td class="center">—</td>
+        <td class="small">
+          ・<span class="red">芯を立てて縦置き保管</span>。横置き（平置き）にするとロールが自重でつぶれ・変形する<br>
+          ・直射日光・湿気を避け屋内保管。温度変化が大きい場所はNG<br>
+          ・転倒防止の措置を取る（当て木・固定）
+        </td>
+      </tr>
+      <tr class="green-row">
+        <td class="bold">タイルカーペット</td>
+        <td class="center"><span class="blue">平積み</span></td>
+        <td class="center">—</td>
+        <td class="small">
+          ・ケース（箱）単位で平積み保管<br>
+          ・<span class="red">屋内の乾燥した場所</span>に保管。湿気・水濡れで変形・接着層劣化<br>
+          ・温度管理が重要（高温でバッキングが軟化・変形）。直射日光を避ける
+        </td>
+      </tr>
+      <tr class="red-row">
+        <td class="bold">アスファルト<br>ルーフィング</td>
+        <td class="center"><span class="red">縦置き</span></td>
+        <td class="center">—</td>
+        <td class="small">
+          ・<span class="red">芯を立てて縦置き保管</span>（JIS A 6005準拠）。横置きにすると自重でたわみ、アスファルト層が溶着・変形する<br>
+          ・<span class="red">直射日光・高温厳禁</span>（アスファルトが軟化・ブリード）。屋内または日陰で保管<br>
+          ・重ね積みNG。転倒防止の当て木・固定必須
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 縦置きの材料</span>
+    <span class="red">ガラス・ALCパネル・石膏ボード・ロールカーペット・アスファルトルーフィング</span><br>
+    → 平置き・横置きにすると「割れる・たわむ・ロールが変形・溶着」する<br>
+    <span class="label">★ 平積みの注意点</span>
+    セメントは<span class="red">10袋以下</span>。木材・鉄筋・鋼材は<span class="red">台木（まくら木）必須</span>・直置きNG<br>
+    タイルカーペットは<span class="red">高温・湿気厳禁</span>（バッキング軟化・接着劣化）
+  </div>
+
+  <h2>3. 保管場所・共通事項</h2>
+  <table>
+    <thead>
+      <tr><th>事項</th><th>内容</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold">直射日光・雨露</td>
+        <td class="small">原則シート養生。特にセメント・石膏ボード・木材は水濡れで品質が大幅低下</td>
+      </tr>
+      <tr>
+        <td class="bold">地面からの離隔</td>
+        <td class="small">台木・パレット・スノコで<span class="red">地面から離す</span>。湿気・汚れ防止</td>
+      </tr>
+      <tr>
+        <td class="bold">先入れ先出し</td>
+        <td class="small">セメント・接着剤など期限のある材料は<span class="red">FIFO（先入れ先出し）</span>を厳守</td>
+      </tr>
+      <tr>
+        <td class="bold">転倒防止</td>
+        <td class="small">縦置き材（ガラス・ALC・石膏ボード）は必ず<span class="red">当て木・固定具で転倒防止</span></td>
+      </tr>
+      <tr class="highlight-row">
+        <td class="bold">火気・薬品</td>
+        <td class="small">塗料・溶剤・接着剤類は<span class="red">火気厳禁場所に別保管</span>。消火器を近くに配置</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
+</html>
