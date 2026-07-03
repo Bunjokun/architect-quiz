@@ -292,6 +292,7 @@ input.id-input{width:100%;padding:10px 12px;border:1.5px solid #d0d5e0;border-ra
 </div>
 
 <!-- Firebase SDK -->
+<script src="questions_data_2025.js"></script>
 <script src="questions_data_2024.js"></script>
 <script src="questions_data_2023.js"></script>
 <script src="questions_data_2022.js"></script>
@@ -784,7 +785,7 @@ function renderHome() {
       const d = best[y+'_'+s];
       if (!d) { html += `<td><span class="cell-none">−</span></td>`; allDone = false; return; }
       const cls = d.score >= yTarget[s] ? 'cell-pass' : d.score >= SUB_PASS[s] ? 'cell-mid' : 'cell-fail';
-      html += `<td><span class="${cls}" title="目標${yTarget[s]}点">${d.score}/${d.total}</span></td>`;
+      html += `<td><span class="${cls}" title="目標${yTarget[s]}点" style="font-size:16px;padding:3px 8px">${d.score}<span style="font-size:11px;font-weight:400">/${d.total}</span></span><br><span style="font-size:10px;color:#999;display:inline-block;margin-top:2px">基準${yTarget[s]}</span></td>`;
       totalScore += d.score;
       totalMax += d.total;
     });
