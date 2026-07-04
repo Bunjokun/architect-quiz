@@ -571,12 +571,14 @@ function grade() {
   document.getElementById('res-score').textContent = `${score} / ${n}`;
   document.getElementById('res-label').textContent =
     `正答率 ${Math.round(score/n*100)}%　（回答済み ${answered}問 / 未回答 ${n-answered}問）`;
-  const pass = SUB_PASS[sub];
-  const ok = score >= pass;
+  const cutoff = SUB_PASS[sub];
+  const border = (YEAR_SUB_TARGET[year] || SUB_TARGET)[sub];
+  const ok = score >= border;
+  const aboveCutoff = score >= cutoff;
   document.getElementById('res-pass').innerHTML =
-    `合格基準点: <strong>${pass}点</strong><br>` +
-    `<span style="color:${ok?'#2ecc71':'#e74c3c'};font-size:16px;font-weight:700">` +
-    (ok ? '✓ 合格ライン超え' : '✗ 合格ライン未達') + '</span>';
+    `ボーダー基準点: <strong>${border}点</strong>　<span style="font-size:11px;color:#aaa">（足切: ${cutoff}点）</span><br>` +
+    `<span style="color:${ok?'#2ecc71':aboveCutoff?'#f39c12':'#e74c3c'};font-size:16px;font-weight:700">` +
+    (ok ? '✓ ボーダー超え' : aboveCutoff ? '△ 足切クリア・ボーダー未達' : '✗ 足切未達') + '</span>';
 
   const qGrid = document.getElementById('q-grid');
   qGrid.innerHTML = '';
