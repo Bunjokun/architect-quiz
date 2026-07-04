@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="794" height="1123" viewBox="0 0 794 1123">
+<defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 z" fill="#000"/></marker></defs>
+<rect width="794" height="1123" fill="#fff"/>
+<text x="34" y="34" font-family="Noto Sans CJK JP, sans-serif" font-size="15" text-anchor="start" font-weight="bold" fill="#000">第7章  一次設計</text>
+<text x="34" y="60" font-family="Noto Sans CJK JP, sans-serif" font-size="14" text-anchor="start" font-weight="bold" fill="#000">耐震計算のフロー(超高層建築物等の構造計算, 限界耐力計算を除く)</text>
+<line x1="760" y1="110" x2="760" y2="300" stroke="#000" stroke-width="1.3"/>
+<line x1="760" y1="217" x2="470" y2="217" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="690" y="150" width="78" height="26" fill="#f7dede" stroke="#000" stroke-width="1.3"/>
+<text x="729" y="167" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">一次設計</text>
+<rect x="342" y="78" width="116" height="26" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="400" y="95" font-family="Noto Sans CJK JP, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#000">スタート</text>
+<line x1="400" y1="104" x2="400" y2="116" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="342" y="116" width="116" height="26" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="400" y="133" font-family="Noto Sans CJK JP, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#000">応力計算</text>
+<rect x="120" y="116" width="110" height="26" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="175" y="133" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">荷重・外力</text>
+<line x1="230" y1="129" x2="342" y2="129" stroke="#000" stroke-width="1.3"/>
+<line x1="400" y1="142" x2="400" y2="152" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="292" y="152" width="216" height="42" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="400" y="168.5" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">荷重・外力の組合せに</text>
+<text x="400" y="185.5" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">よる長期と短期の応力</text>
+<line x1="400" y1="194" x2="400" y2="204" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="330" y="204" width="140" height="26" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="400" y="221" font-family="Noto Sans CJK JP, sans-serif" font-size="13" text-anchor="middle" font-weight="normal" fill="#000">応力度計算</text>
+<rect x="88" y="204" width="180" height="26" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="178" y="221" font-family="Noto Sans CJK JP, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#000">許容応力度≧生じる応力度</text>
+<line x1="268" y1="217" x2="330" y2="217" stroke="#000" stroke-width="1.3"/>
+<line x1="400" y1="230" x2="400" y2="244" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="272" y="244" width="256" height="50" fill="#ffffff" stroke="#000" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="284" y="264.0" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#000">・使用上の支障防止の確認</text>
+<text x="284" y="282.0" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="start" font-weight="normal" fill="#000">・屋根ふき材等の構造計算</text>
+<line x1="400" y1="294" x2="400" y2="316" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<polygon points="400,320 496,372 400,424 304,372" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="400" y="359.0" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">規模等による</text>
+<text x="400" y="376.0" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">耐震計算ルートの</text>
+<text x="400" y="393.0" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">選択</text>
+<rect x="678" y="452" width="104" height="26" fill="#e8534e" stroke="#000" stroke-width="1.3"/>
+<text x="730" y="469" font-family="Noto Sans CJK JP, sans-serif" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#fff">耐震二次設計</text>
+<text x="300" y="362" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">不要</text>
+<line x1="304" y1="372" x2="236" y2="372" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<polygon points="180,338 238,372 180,406 122,372" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="180" y="376" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">判断※</text>
+<text x="180" y="424" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="middle" font-weight="normal" fill="#000">(より詳細な検討)</text>
+<line x1="180" y1="406" x2="180" y2="726" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<text x="416" y="440" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">必要</text>
+<line x1="400" y1="424" x2="400" y2="452" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="270" y="452" width="260" height="46" fill="#f7dede" stroke="#000" stroke-width="1.3"/>
+<text x="400" y="469.6666666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#000">層間変形角の確認</text>
+<text x="400" y="488.6666666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="12.5" text-anchor="middle" font-weight="normal" fill="#000">層間変形角≦1/200(1/120)</text>
+<line x1="400" y1="498" x2="400" y2="534" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<polygon points="400,534 474,574 400,614 326,574" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="400" y="578" font-family="Noto Sans CJK JP, sans-serif" font-size="12.5" text-anchor="middle" font-weight="normal" fill="#000">高さ≦31m</text>
+<text x="540" y="560" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">No</text>
+<line x1="474" y1="574" x2="600" y2="574" stroke="#000" stroke-width="1.3"/>
+<text x="416" y="618" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">Yes</text>
+<line x1="400" y1="614" x2="400" y2="640" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<polygon points="400,640 462,676 400,712 338,676" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="400" y="680" font-family="Noto Sans CJK JP, sans-serif" font-size="12" text-anchor="middle" font-weight="normal" fill="#000">判断※</text>
+<text x="610" y="680" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">(より詳細な検討)</text>
+<line x1="462" y1="676" x2="600" y2="676" stroke="#000" stroke-width="1.3"/>
+<line x1="600" y1="574" x2="600" y2="786" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<line x1="400" y1="712" x2="400" y2="740" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="66" y="726" width="228" height="214" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="76" y="740.6166666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">○木造</text>
+<text x="76" y="754.3166666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   階数≦3</text>
+<text x="76" y="768.0166666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   高さ≦16m</text>
+<text x="76" y="781.7166666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">○鉄骨造</text>
+<text x="76" y="795.4166666666666" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   階数≦3</text>
+<text x="76" y="809.1166666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   高さ≦16m</text>
+<text x="76" y="822.8166666666666" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   地震力の割増し(C₀≧0.3)</text>
+<text x="76" y="836.5166666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   及び筋かい端部・接合部の破</text>
+<text x="76" y="850.2166666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   断防止等</text>
+<text x="76" y="863.9166666666666" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">○鉄筋コンクリート造及び鉄骨鉄</text>
+<text x="76" y="877.6166666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   筋コンクリート造</text>
+<text x="76" y="891.3166666666666" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   高さ≦20m</text>
+<text x="76" y="905.0166666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   壁量・柱量の確保</text>
+<text x="76" y="918.7166666666667" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="start" font-weight="normal" fill="#000">   部材のせん断破壊防止  等</text>
+<rect x="300" y="706" width="244" height="254" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="422" y="716.8333333333334" font-family="Noto Sans CJK JP, sans-serif" font-size="11.5" text-anchor="middle" font-weight="bold" fill="#000">剛性率・偏心率等の確認</text>
+<text x="422" y="733.8333333333334" font-family="Noto Sans CJK JP, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#000">剛性率≧0.6(6/10)</text>
+<text x="422" y="750.8333333333334" font-family="Noto Sans CJK JP, sans-serif" font-size="11.5" text-anchor="middle" font-weight="normal" fill="#000">偏心率≦0.15(15/100)</text>
+<text x="308" y="768.9" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">○木造</text>
+<text x="308" y="782.1" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">  筋かいを含む階の応力の割増し。</text>
+<text x="308" y="795.3" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">  筋かいの破断の防止。柱,梁,接</text>
+<text x="308" y="808.5" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">  合部の急激な耐力低下の防止</text>
+<text x="308" y="821.6999999999999" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">○鉄骨造</text>
+<text x="308" y="834.9" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">  筋かい架構の応力の割増し,筋かい</text>
+<text x="308" y="848.0999999999999" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">  端部・接合部の破断防止,局部座屈</text>
+<text x="308" y="861.3" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">  等の防止及び柱脚部の破壊防止等</text>
+<text x="308" y="874.5" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">○鉄筋コンクリート造及び鉄骨鉄筋</text>
+<text x="308" y="887.6999999999999" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">  コンクリート造</text>
+<text x="308" y="900.9" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">  壁量・柱量の確保</text>
+<text x="308" y="914.0999999999999" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">  部材のせん断破壊防止   等</text>
+<text x="422" y="953" font-family="Noto Sans CJK JP, sans-serif" font-size="11.5" text-anchor="middle" font-weight="bold" fill="#000">建築物の塔状比≦4</text>
+<rect x="566" y="786" width="202" height="40" fill="#f7dede" stroke="#000" stroke-width="1.3"/>
+<text x="667" y="802.0" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#000">材料強度</text>
+<text x="667" y="817.0" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="middle" font-weight="normal" fill="#000">構造特性係数 Ds  形状係数 Fes</text>
+<line x1="566" y1="806" x2="768" y2="806" stroke="#000" stroke-width="1.3" stroke-dasharray="3 3"/>
+<line x1="667" y1="826" x2="667" y2="840" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="566" y="840" width="202" height="96" fill="#f7dede" stroke="#000" stroke-width="1.3"/>
+<text x="667" y="857.6666666666666" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="middle" font-weight="bold" fill="#000">保有水平耐力の確認</text>
+<text x="667" y="874.6666666666666" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="middle" font-weight="normal" fill="#000">Qu≧Qun</text>
+<text x="667" y="891.6666666666666" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="middle" font-weight="normal" fill="#000">Qun = Ds Fes Qud</text>
+<text x="667" y="908.6666666666666" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="middle" font-weight="normal" fill="#000">転倒の検討</text>
+<text x="667" y="925.6666666666666" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="middle" font-weight="normal" fill="#000">(塔状比&gt;4の場合)</text>
+<text x="556" y="878" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="middle" font-weight="normal" fill="#000">NG</text>
+<line x1="544" y1="888" x2="566" y2="888" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<line x1="180" y1="940" x2="180" y2="978" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="134.0" y="981.0" width="92" height="26" rx="13.0" fill="#f7dede" stroke="#000" stroke-width="1.3"/>
+<text x="180" y="999" font-family="Noto Sans CJK JP, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#000">ルート 1</text>
+<line x1="422" y1="960" x2="422" y2="978" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<text x="410" y="973" font-family="Noto Sans CJK JP, sans-serif" font-size="11" text-anchor="middle" font-weight="normal" fill="#000">OK</text>
+<rect x="376.0" y="981.0" width="92" height="26" rx="13.0" fill="#f7dede" stroke="#000" stroke-width="1.3"/>
+<text x="422" y="999" font-family="Noto Sans CJK JP, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#000">ルート 2</text>
+<line x1="667" y1="936" x2="667" y2="978" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="621.0" y="981.0" width="92" height="26" rx="13.0" fill="#f7dede" stroke="#000" stroke-width="1.3"/>
+<text x="667" y="999" font-family="Noto Sans CJK JP, sans-serif" font-size="13" text-anchor="middle" font-weight="bold" fill="#000">ルート 3</text>
+<line x1="180" y1="1007" x2="180" y2="1024" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<line x1="422" y1="1007" x2="422" y2="1024" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<line x1="667" y1="1007" x2="667" y2="1024" stroke="#000" stroke-width="1.3" marker-end="url(#ar)"/>
+<rect x="66" y="1024" width="702" height="26" fill="#ffffff" stroke="#000" stroke-width="1.3"/>
+<text x="400" y="1041" font-family="Noto Sans CJK JP, sans-serif" font-size="14" text-anchor="middle" font-weight="normal" fill="#000" letter-spacing="2">エ  ン  ド</text>
+<text x="34" y="1078.0" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">※判断とは設計者の設計方針に基づく判断のことである。例えば, 規模としては, ルート2を適用可能な高さ31m以</text>
+<text x="34" y="1093.0" font-family="Noto Sans CJK JP, sans-serif" font-size="10.5" text-anchor="start" font-weight="normal" fill="#000">  下の建築物であっても, より詳細な検討を行う設計法であるルート3を適用する判断等のことを示している。</text>
+</svg>
