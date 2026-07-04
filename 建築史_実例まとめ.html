@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>建築史・建築実例まとめ</title>
+<style>
+  @page { size: A4 portrait; margin: 15mm 12mm 15mm 12mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
+    font-size: 9.5pt;
+    color: #111;
+    background: #fff;
+    width: 210mm;
+    margin: 0 auto;
+    padding: 10mm 12mm;
+    overflow-x: hidden;
+  }
+  .page { width: 186mm; page-break-after: always; padding-bottom: 6mm; }
+  .page:last-child { page-break-after: auto; }
+  .page-header {
+    display: flex; align-items: center;
+    background: #1a3a5c; color: #fff;
+    padding: 4px 10px; margin-bottom: 8px;
+  }
+  .page-num {
+    font-size: 14pt; font-weight: bold;
+    margin-right: 10px; min-width: 24px; text-align: center;
+  }
+  .page-title { font-size: 12pt; font-weight: bold; }
+  h2 {
+    font-size: 10.5pt; font-weight: bold; color: #fff;
+    background: #2e6da4; padding: 3px 8px; margin: 10px 0 5px 0;
+  }
+  h3 {
+    font-size: 9.5pt; font-weight: bold; color: #1a3a5c;
+    border-left: 4px solid #2e6da4; padding-left: 6px;
+    margin: 8px 0 4px 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 6px; }
+  th {
+    background: #dbe8f5; font-weight: bold;
+    border: 1px solid #7aaacf; padding: 4px 5px;
+    text-align: center; vertical-align: middle;
+  }
+  td { border: 1px solid #aac4de; padding: 3px 6px; vertical-align: middle; }
+  tr:nth-child(even) td { background: #f4f9ff; }
+  .red   { color: #cc0000; font-weight: bold; }
+  .blue  { color: #0055aa; font-weight: bold; }
+  .green { color: #006600; font-weight: bold; }
+  .bold  { font-weight: bold; }
+  .center { text-align: center; }
+  .small { font-size: 7.5pt; }
+  .point-box {
+    border: 1.5px solid #cc0000; background: #fff8f8;
+    border-radius: 3px; padding: 4px 8px; margin: 5px 0; font-size: 8.5pt;
+  }
+  .point-box .label { font-weight: bold; color: #cc0000; margin-right: 4px; }
+  .note-box {
+    border: 1px solid #2e6da4; background: #f0f6ff;
+    border-radius: 3px; padding: 4px 8px; margin: 4px 0; font-size: 8pt;
+  }
+  .two-col { display: flex; gap: 8px; margin-bottom: 6px; }
+  .two-col > div { flex: 1; }
+  .section-card {
+    border: 1.5px solid #aac4de; border-radius: 4px;
+    overflow: hidden; margin-bottom: 6px;
+  }
+  .section-card-head {
+    font-size: 9pt; font-weight: bold; color: #fff;
+    padding: 3px 8px;
+  }
+  .section-card-body { padding: 5px 8px; font-size: 8.5pt; }
+  .tag {
+    display: inline-block; font-size: 7.5pt; font-weight: bold;
+    border-radius: 3px; padding: 1px 6px; margin-bottom: 3px;
+  }
+  ul { padding-left: 16px; margin: 3px 0 5px 0; }
+  li { margin-bottom: 2px; font-size: 8.5pt; line-height: 1.5; }
+  .star { color: #cc6600; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<!-- ======================== PAGE 1: 日本建築史（古代〜江戸） ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">①</span>
+    <span class="page-title">日本建築史（古代〜江戸）― 神社・仏教建築・城郭・住宅</span>
+  </div>
+
+  <h2>1. 神社建築の様式</h2>
+  <table>
+    <colgroup><col style="width:14%"><col style="width:40%"><col style="width:46%"></colgroup>
+    <thead>
+      <tr><th>様式</th><th>特徴</th><th>代表例</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="red">神明造</span></td>
+        <td>切妻・<span class="red">平入</span>・棟持柱・高床</td>
+        <td>伊勢神宮内宮（三重）</td>
+      </tr>
+      <tr>
+        <td><span class="red">大社造</span></td>
+        <td>切妻・<span class="red">妻入</span>・棟持柱・高床</td>
+        <td>出雲大社（島根）</td>
+      </tr>
+      <tr>
+        <td><span class="red">住吉造</span></td>
+        <td>切妻・妻入・<span class="red">内部2分割</span></td>
+        <td>住吉大社（大阪）</td>
+      </tr>
+      <tr>
+        <td><span class="red">春日造</span></td>
+        <td>切妻・妻入・<span class="red">向拝付</span></td>
+        <td>春日大社（奈良）</td>
+      </tr>
+      <tr>
+        <td><span class="red">流造</span></td>
+        <td>切妻・<span class="red">平入</span>・向拝付・<span class="red">前面庇延長</span></td>
+        <td>宇治上神社（京都）、上賀茂神社（京都）</td>
+      </tr>
+      <tr>
+        <td><span class="red">八幡造</span></td>
+        <td>切妻<span class="red">2棟連結</span></td>
+        <td>宇佐神宮（大分）、石清水八幡宮（京都）</td>
+      </tr>
+      <tr>
+        <td><span class="red">権現造</span></td>
+        <td>本殿＋拝殿を<span class="red">石の間</span>で連結</td>
+        <td>日光東照宮（栃木）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 混同注意</span>
+    <span class="red">神明造は平入</span>、<span class="red">大社造・住吉造・春日造は妻入</span>。
+    流造は平入だが前面庇が延長。八幡造は唯一2棟連結。
+  </div>
+
+  <h2>2. 仏教建築の様式</h2>
+  <table>
+    <colgroup><col style="width:18%"><col style="width:42%"><col style="width:40%"></colgroup>
+    <thead>
+      <tr><th>様式</th><th>特徴</th><th>代表例</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="red">和様（大和様）</span></td>
+        <td>木鼻なし・<span class="red">扇垂木</span>・引き戸・柔らかい曲線</td>
+        <td>法隆寺（奈良・飛鳥）、唐招提寺金堂（奈良・奈良時代）</td>
+      </tr>
+      <tr>
+        <td><span class="red">大仏様（天竺様）</span></td>
+        <td><span class="red">挿し肘木</span>・<span class="red">貫多用</span>・桟唐戸・豪快な構造</td>
+        <td>東大寺南大門（奈良・<span class="blue">鎌倉再建</span>）</td>
+      </tr>
+      <tr>
+        <td><span class="red">禅宗様（唐様）</span></td>
+        <td><span class="red">詰組</span>・<span class="red">海老虹梁</span>・<span class="red">花頭窓</span>・桟唐戸・扇垂木</td>
+        <td>円覚寺舎利殿（神奈川）、永保寺開山堂（岐阜）</td>
+      </tr>
+      <tr>
+        <td><span class="red">折衷様</span></td>
+        <td>和様＋禅宗様・大仏様を<span class="red">混在</span></td>
+        <td>観心寺金堂（大阪）、石山寺多宝塔（滋賀）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 混同注意</span>
+    <span class="red">東大寺南大門＝大仏様（天竺様）</span>。和様ではない。挿し肘木・貫多用が大仏様の最大特徴。
+    禅宗様は詰組（肘木が密に組まれる）と花頭窓がセット。
+  </div>
+
+  <h2>3. 城郭・住宅・茶室</h2>
+  <div class="two-col">
+    <div>
+      <h3>書院造・数寄屋造</h3>
+      <ul>
+        <li><span class="red">書院造</span>：二条城二の丸御殿（京都）、慈照寺東求堂（京都・室町時代）</li>
+        <li><span class="red">数寄屋造</span>：桂離宮（京都・江戸初期）、修学院離宮（京都）</li>
+      </ul>
+      <h3>茶室</h3>
+      <ul>
+        <li><span class="red">待庵</span>（山崎・千利休）― 現存最古の茶室 <span class="star">★</span></li>
+        <li><span class="red">如庵</span>（愛知・織田有楽斎）</li>
+        <li>曼殊院書院（京都）</li>
+      </ul>
+    </div>
+    <div>
+      <h3>天守・城郭</h3>
+      <ul>
+        <li><span class="red">姫路城</span>（兵庫）― 現存12天守の中で最大・世界遺産 <span class="star">★</span></li>
+        <li><span class="red">犬山城</span>（愛知）― 現存最古の木造天守（説あり）<span class="star">★</span></li>
+        <li>松本城（長野）・彦根城（滋賀）・高知城・松山城なども現存天守</li>
+      </ul>
+      <div class="note-box">
+        <span class="bold">現存12天守</span>：弘前・松本・丸岡・犬山・彦根・姫路・備中松山・松江・丸亀・伊予松山・宇和島・高知
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PAGE 2: 西洋建築史（古代〜近世） ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">②</span>
+    <span class="page-title">西洋建築史（古代〜近世）― 様式・時代・特徴・代表建築</span>
+  </div>
+
+  <h2>1. 西洋建築の様式と時代</h2>
+  <table>
+    <colgroup><col style="width:16%"><col style="width:10%"><col style="width:34%"><col style="width:40%"></colgroup>
+    <thead>
+      <tr><th>様式</th><th>時代</th><th>構造的特徴</th><th>代表建築</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="red">古代ギリシャ</span></td>
+        <td class="center">〜前3c</td>
+        <td><span class="red">柱梁構造</span>・ドリス式／イオニア式／コリント式</td>
+        <td>パルテノン神殿（アテネ・<span class="blue">ドリス式</span>）・エレクテイオン（<span class="blue">イオニア式</span>）</td>
+      </tr>
+      <tr>
+        <td><span class="red">古代ローマ</span></td>
+        <td class="center">前3c〜5c</td>
+        <td><span class="red">アーチ・ドーム</span>・コンクリート・ヴォールト</td>
+        <td>パンテオン（ローマ）・コロッセウム（ローマ）・カラカラ浴場</td>
+      </tr>
+      <tr>
+        <td><span class="red">ビザンチン</span></td>
+        <td class="center">4c〜15c</td>
+        <td><span class="red">ペンデンティブドーム</span>・モザイク装飾・集中式</td>
+        <td>ハギア・ソフィア（イスタンブール・6c）</td>
+      </tr>
+      <tr>
+        <td><span class="red">ロマネスク</span></td>
+        <td class="center">11c〜12c</td>
+        <td><span class="red">半円アーチ・厚壁・小窓</span>・バシリカ式</td>
+        <td>ピサ大聖堂（イタリア）・クリュニー修道院</td>
+      </tr>
+      <tr>
+        <td><span class="red">ゴシック</span></td>
+        <td class="center">12c〜15c</td>
+        <td><span class="red">尖頭アーチ・フライングバットレス</span>・ステンドグラス・垂直性</td>
+        <td>ノートルダム大聖堂（パリ・13c）・ケルン大聖堂（独）・シャルトル大聖堂</td>
+      </tr>
+      <tr>
+        <td><span class="red">ルネサンス</span></td>
+        <td class="center">15c〜16c</td>
+        <td><span class="red">古典復興・ドーム・左右対称</span>・比例重視</td>
+        <td>サン・ピエトロ大聖堂（ローマ・ブラマンテ→ミケランジェロ）・フィレンツェ大聖堂（ブルネレスキ）</td>
+      </tr>
+      <tr>
+        <td><span class="red">バロック</span></td>
+        <td class="center">17c〜18c</td>
+        <td><span class="red">曲線・動感・光と影</span>の劇的演出</td>
+        <td>ヴェルサイユ宮殿（フランス）・サン・カルロ教会（ボッロミーニ）</td>
+      </tr>
+      <tr>
+        <td><span class="red">新古典主義</span></td>
+        <td class="center">18c〜19c</td>
+        <td>古典復興・理性強調・装飾排除</td>
+        <td>パンテオン（パリ）・大英博物館（ロンドン）・ベルリン旧美術館（シンケル）</td>
+      </tr>
+      <tr>
+        <td><span class="red">ゴシック・リバイバル</span></td>
+        <td class="center">19c</td>
+        <td>ゴシック様式の<span class="red">復興・折衷主義</span></td>
+        <td>ウェストミンスター宮殿（ロンドン・バリー＋ピュージン）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2. 柱頭の種類（ギリシャの三様式）</h2>
+  <div class="two-col">
+    <div class="section-card">
+      <div class="section-card-head" style="background:#8b4513;">ドリス式</div>
+      <div class="section-card-body">
+        <span class="bold">最も簡素</span>・柱頭に装飾なし・エキヌスとアバクス<br>
+        代表：パルテノン神殿
+      </div>
+    </div>
+    <div class="section-card">
+      <div class="section-card-head" style="background:#2e6da4;">イオニア式</div>
+      <div class="section-card-body">
+        <span class="bold">渦巻状（ヴォリュート）</span>の柱頭<br>
+        代表：エレクテイオン
+      </div>
+    </div>
+    <div class="section-card">
+      <div class="section-card-head" style="background:#27ae60;">コリント式</div>
+      <div class="section-card-body">
+        <span class="bold">最も豪華</span>・アカンサスの葉の柱頭<br>
+        代表：パンテオン内部
+      </div>
+    </div>
+  </div>
+
+  <h2>3. 重要建築の詳細メモ</h2>
+  <div class="two-col">
+    <div>
+      <div class="note-box">
+        <span class="bold red">パンテオン（ローマ）</span>：紀元後125年頃・ハドリアヌス帝。<br>
+        直径43.3mのドーム・オキュラス（天窓）。<br>
+        <span class="star">★</span> 「パンテオン（パリ）」とは別物。
+      </div>
+      <div class="note-box">
+        <span class="bold red">ハギア・ソフィア</span>：537年・ユスティニアヌス帝。<br>
+        ペンデンティブドームにより正方形平面にドームを架ける。<br>
+        <span class="star">★</span> ビザンチン建築の最高傑作。
+      </div>
+    </div>
+    <div>
+      <div class="note-box">
+        <span class="bold red">フィレンツェ大聖堂ドーム</span>：<span class="blue">ブルネレスキ</span>（15c）。<br>
+        型枠なしで施工・二重殻ドーム。ルネサンス建築の幕開け。
+      </div>
+      <div class="note-box">
+        <span class="bold red">ウェストミンスター宮殿</span>：<span class="blue">バリー＋ピュージン</span>（1840年代）。<br>
+        ゴシック・リバイバルの代表。<span class="star">★</span> バリーが設計、ピュージンが内装担当。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PAGE 3: 近代建築史（19c末〜20c中） ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">③</span>
+    <span class="page-title">近代建築史（19c末〜20c中）― 五巨匠・バウハウス・アール・デコ</span>
+  </div>
+
+  <h2>1. アーツ＆クラフツ〜アール・ヌーヴォー</h2>
+  <table>
+    <colgroup><col style="width:22%"><col style="width:28%"><col style="width:50%"></colgroup>
+    <thead>
+      <tr><th>建築家・運動</th><th>年代</th><th>代表作・特徴</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="red">ウィリアム・モリス</span></td>
+        <td class="center">英・19c後半</td>
+        <td>アーツ＆クラフツ運動・工芸美術の復興。<span class="blue">レッド・ハウス</span>（1859・ウェッブ設計）</td>
+      </tr>
+      <tr>
+        <td><span class="red">アントニ・ガウディ</span></td>
+        <td class="center">西・1852〜1926</td>
+        <td><span class="blue">サグラダ・ファミリア</span>（バルセロナ・1882〜）、カサ・ミラ、グエル公園。曲線・自然形態</td>
+      </tr>
+      <tr>
+        <td><span class="red">ヴィクトール・オルタ</span></td>
+        <td class="center">白・19c末</td>
+        <td><span class="blue">タッセル邸</span>（ブリュッセル・1893）。植物的曲線・鉄骨露出。アール・ヌーヴォーの先駆</td>
+      </tr>
+      <tr>
+        <td><span class="red">オットー・ワーグナー</span></td>
+        <td class="center">墺・1841〜1918</td>
+        <td>ウィーン郵便貯金局（1906）。分離派（ゼツェッション）への橋渡し</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2. 近代建築の五巨匠</h2>
+  <table>
+    <colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
+    <thead>
+      <tr><th>建築家</th><th>代表作</th><th>キーワード・特徴</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="red">フランク・ロイド・ライト</span><br><span class="small">米・1867〜1959</span></td>
+        <td>落水荘（PA・1936）、グッゲンハイム美術館（NY・1959）、<span class="blue">旧帝国ホテル（東京・1923）</span></td>
+        <td><span class="red">有機的建築</span>・プレーリースタイル（水平線強調）・浮き基礎（耐震）</td>
+      </tr>
+      <tr>
+        <td><span class="red">ル・コルビュジエ</span><br><span class="small">仏・1887〜1965</span></td>
+        <td>サヴォア邸（ポワシー・1931）、ユニテ・ダビタシオン（マルセイユ・1952）、チャンディガール都市計画、<span class="blue">国立西洋美術館（東京）</span></td>
+        <td><span class="red">近代建築の5原則</span>（ピロティ／屋上庭園／自由な平面／水平連続窓／自由な立面）</td>
+      </tr>
+      <tr>
+        <td><span class="red">ミース・ファン・デル・ローエ</span><br><span class="small">独→米・1886〜1969</span></td>
+        <td>バルセロナ・パビリオン（1929）、ファンズワース邸（IL・1951）、<span class="blue">シーグラムビル（NY・1958）</span></td>
+        <td><span class="red">Less is more</span>・ユニバーサルスペース・鉄骨＋ガラスの均質空間</td>
+      </tr>
+      <tr>
+        <td><span class="red">ヴァルター・グロピウス</span><br><span class="small">独・1883〜1969</span></td>
+        <td><span class="blue">バウハウス校舎（デッサウ・1926）</span>、ファグス靴型工場（1911）</td>
+        <td>バウハウス創設（1919）・工業化・教育改革・カーテンウォール先駆</td>
+      </tr>
+      <tr>
+        <td><span class="red">アルヴァ・アアルト</span><br><span class="small">芬・1898〜1976</span></td>
+        <td><span class="blue">パイミオのサナトリウム（1933）</span>、フィンランディアホール（ヘルシンキ）、ヴュオクセンニスカ教会</td>
+        <td>人間中心主義・有機的曲線・北欧モダニズム・木と自然素材</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ ル・コルビュジエの近代建築5原則</span>
+    ①ピロティ ②屋上庭園 ③自由な平面 ④水平連続窓（横長窓） ⑤自由な立面。
+    サヴォア邸（1931）がその体現。<span class="red">「屋上テラス」ではなく「屋上庭園」</span>と記述。
+  </div>
+
+  <h2>3. バウハウスとアール・デコ</h2>
+  <div class="two-col">
+    <div>
+      <h3>バウハウス</h3>
+      <ul>
+        <li><span class="red">1919年</span>：<span class="blue">ワイマール</span>にてグロピウスが創立</li>
+        <li><span class="red">1925年</span>：<span class="blue">デッサウ</span>に移転（校舎グロピウス設計）</li>
+        <li><span class="red">1932年</span>：<span class="blue">ベルリン</span>に移転</li>
+        <li><span class="red">1933年</span>：ナチスにより<span class="red">閉校</span> <span class="star">★</span></li>
+        <li>教師：クレー、カンディンスキー、モホイ＝ナジ、ブロイヤーなど</li>
+      </ul>
+    </div>
+    <div>
+      <h3>アール・デコ（1920〜30年代）</h3>
+      <ul>
+        <li>幾何学的・直線的・装飾性・機械美学</li>
+        <li><span class="red">クライスラービル</span>（NY・1930・ヴァン＝アレン）<span class="star">★</span></li>
+        <li><span class="red">エンパイア・ステート・ビル</span>（NY・1931）</li>
+        <li>ロックフェラーセンター（NY・1939）</li>
+      </ul>
+      <div class="note-box">
+        <span class="bold">アール・ヌーヴォー vs アール・デコ：</span>
+        ヌーヴォー＝曲線・植物的（19c末〜20c初）、デコ＝直線・幾何学（1920〜30年代）
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PAGE 4: 現代建築・日本の近代建築 ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">④</span>
+    <span class="page-title">現代建築・日本の近代建築 ― 建築家と代表作</span>
+  </div>
+
+  <h2>1. 現代建築の潮流と建築家</h2>
+  <table>
+    <colgroup><col style="width:20%"><col style="width:38%"><col style="width:42%"></colgroup>
+    <thead>
+      <tr><th>建築家</th><th>代表作</th><th>キーワード</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="red">ルイス・カーン</span><br><span class="small">米・1901〜1974</span></td>
+        <td><span class="blue">キンベル美術館</span>（フォートワース・1972）、サルク研究所（カリフォルニア）</td>
+        <td><span class="red">サーブド／サーバント空間</span>・自然光・重量感ある構造</td>
+      </tr>
+      <tr>
+        <td><span class="red">ロバート・ヴェンチューリ</span><br><span class="small">米・1925〜2018</span></td>
+        <td>母の家（チェストナット・ヒル・1964）</td>
+        <td><span class="red">ポストモダン</span>・「<span class="red">Less is a bore</span>」（ミースへの反論）<span class="star">★</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">レンゾ・ピアノ</span><br><span class="small">伊・1937〜</span></td>
+        <td><span class="blue">ポンピドゥー・センター</span>（パリ・1977・ロジャーズと共同）、関西国際空港旅客ターミナル（1994）</td>
+        <td><span class="red">ハイテク建築</span>・設備露出・インサイドアウト</td>
+      </tr>
+      <tr>
+        <td><span class="red">ノーマン・フォスター</span><br><span class="small">英・1935〜</span></td>
+        <td>香港上海銀行（1985）、ザ・ガーキン（ロンドン・2003）、大英博物館グレートコート（2000）</td>
+        <td><span class="red">ハイテク建築</span>・エコロジー・ガラスドーム</td>
+      </tr>
+      <tr>
+        <td><span class="red">フランク・O・ゲーリー</span><br><span class="small">加→米・1929〜</span></td>
+        <td><span class="blue">グッゲンハイム美術館ビルバオ</span>（スペイン・1997）</td>
+        <td><span class="red">解体主義（デコンストラクティビズム）</span>・チタン外装・曲面形態</td>
+      </tr>
+      <tr>
+        <td><span class="red">安藤忠雄</span><br><span class="small">日・1941〜</span></td>
+        <td>住吉の長屋（大阪・1976）、<span class="blue">光の教会</span>（茨木・1989）、地中美術館（直島・2004）</td>
+        <td><span class="red">コンクリート打放し・幾何学・自然光・場所性</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">丹下健三</span><br><span class="small">日・1913〜2005</span></td>
+        <td><span class="blue">国立代々木競技場</span>（東京五輪・1964）、広島平和記念資料館（1955）、東京都庁（1991）</td>
+        <td>日本の伝統＋近代建築の融合・都市計画・構造美</td>
+      </tr>
+      <tr>
+        <td><span class="red">黒川紀章</span><br><span class="small">日・1934〜2007</span></td>
+        <td><span class="blue">中銀カプセルタワービル</span>（東京・1972）、国立新美術館（東京・2007）</td>
+        <td><span class="red">メタボリズム</span>・着脱式カプセル・共生思想</td>
+      </tr>
+      <tr>
+        <td><span class="red">磯崎新</span><br><span class="small">日・1931〜2022</span></td>
+        <td>大分県立図書館（1966）、つくばセンタービル（1983）、木村産業研究所</td>
+        <td><span class="red">ポストモダン</span>・引用と折衷・プリツカー賞（2019）</td>
+      </tr>
+      <tr>
+        <td><span class="red">槇文彦</span><br><span class="small">日・1928〜2024</span></td>
+        <td>幕張メッセ（千葉・1989）、スパイラル（東京・1985）、代官山ヒルサイドテラス</td>
+        <td><span class="red">コンテクスチュアリズム</span>・グループフォーム・都市との関係</td>
+      </tr>
+      <tr>
+        <td><span class="red">妹島和世＋西沢立衛</span><br><span class="small">SANAA・日</span></td>
+        <td><span class="blue">金沢21世紀美術館</span>（2004）、ルーブル・ランス（フランス・2012）、豊島美術館</td>
+        <td><span class="red">透明性・軽さ・無方向性</span>・ガラス・薄い屋根</td>
+      </tr>
+      <tr>
+        <td><span class="red">隈研吾</span><br><span class="small">日・1954〜</span></td>
+        <td><span class="blue">国立競技場</span>（東京・2019）、根津美術館（東京・2009）、KITTE（東京）</td>
+        <td><span class="red">木・自然素材</span>・消えゆく建築・テクスチャー重視</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2. 日本の近代建築史（明治〜昭和）</h2>
+  <div class="two-col">
+    <div>
+      <h3>明治期：お雇い外国人</h3>
+      <ul>
+        <li><span class="red">ジョサイア・コンドル</span>（英）：鹿鳴館（1883）、ニコライ堂（東京・1891）、旧岩崎邸（東京） <span class="star">★</span></li>
+        <li><span class="red">辰野金吾</span>（コンドルの弟子）：<span class="blue">東京駅丸の内駅舎</span>（1914）、日本銀行本店（東京） <span class="star">★</span></li>
+      </ul>
+      <h3>大正〜昭和初期</h3>
+      <ul>
+        <li><span class="red">前川國男</span>（ル・コルビュジエに師事）：東京都美術館（1975）、熊本県立美術館（1976）、国立国会図書館（1968）</li>
+        <li><span class="red">村野藤吾</span>：宝塚カトリック教会、メルパルク（旧郵便貯金会館）</li>
+        <li><span class="red">坂倉準三</span>（ル・コルビュジエ門下）：神奈川県立近代美術館（1951）</li>
+      </ul>
+    </div>
+    <div>
+      <div class="note-box" style="margin-bottom:5px;">
+        <span class="bold">重要文化財指定の近代建築（例）</span><br>
+        旧岩崎邸（東京・コンドル設計）<br>
+        赤坂離宮（東京・片山東熊設計・1909）<br>
+        日本銀行本店（東京・辰野金吾）<br>
+        旧第一銀行京都支店（京都・辰野）
+      </div>
+      <div class="point-box">
+        <span class="label">★ 師弟関係（試験頻出）</span>
+        コンドル → 辰野金吾<br>
+        ル・コルビュジエ → 前川國男 → 丹下健三<br>
+        ル・コルビュジエ → 坂倉準三
+      </div>
+      <div class="note-box">
+        <span class="bold">メタボリズム（1960年代・日本）</span>：
+        黒川紀章・菊竹清訓・大髙正人ら。建築を細胞のように新陳代謝させる思想。
+        中銀カプセルタワービルが代表例。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PAGE 5: 試験頻出の建築実例（計画） ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">⑤</span>
+    <span class="page-title">試験頻出の建築実例（計画）― 住宅・美術館・公共施設</span>
+  </div>
+
+  <h2>1. 住宅建築</h2>
+  <table>
+    <colgroup><col style="width:24%"><col style="width:18%"><col style="width:8%"><col style="width:50%"></colgroup>
+    <thead>
+      <tr><th>建物名</th><th>建築家</th><th>竣工</th><th>試験ポイント</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="red">落水荘（カウフマン邸）</span></td>
+        <td>F.L.ライト</td>
+        <td class="center">1936</td>
+        <td>ペンシルベニア州・滝の上に<span class="red">キャンチレバー</span>スラブを張り出した有機的建築の傑作</td>
+      </tr>
+      <tr>
+        <td><span class="red">サヴォア邸</span></td>
+        <td>ル・コルビュジエ</td>
+        <td class="center">1931</td>
+        <td>ポワシー（フランス）・近代建築<span class="red">5原則の体現</span>。ピロティで地面から浮く <span class="star">★</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">ファンズワース邸</span></td>
+        <td>ミース</td>
+        <td class="center">1951</td>
+        <td>イリノイ州・<span class="red">鉄骨＋ガラス</span>の均質空間・H形鋼8本で床と屋根を支持</td>
+      </tr>
+      <tr>
+        <td><span class="red">住吉の長屋</span></td>
+        <td>安藤忠雄</td>
+        <td class="center">1976</td>
+        <td>大阪・<span class="red">コンクリート打放し・中庭</span>・都市の極小敷地。中庭を通らないと各室移動不可 <span class="star">★</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">塔の家</span></td>
+        <td>東孝光</td>
+        <td class="center">1966</td>
+        <td>東京・20㎡の狭小地・<span class="red">垂直動線</span>に各機能を積み重ねた都市型住宅</td>
+      </tr>
+      <tr>
+        <td><span class="red">白の家</span></td>
+        <td>篠原一男</td>
+        <td class="center">1966</td>
+        <td>東京・<span class="red">傘型の大屋根・中心柱</span>。住宅を芸術作品として捉えた作品</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2. 美術館・文化施設</h2>
+  <table>
+    <colgroup><col style="width:24%"><col style="width:18%"><col style="width:14%"><col style="width:44%"></colgroup>
+    <thead>
+      <tr><th>建物名</th><th>建築家</th><th>所在地</th><th>試験ポイント</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="red">キンベル美術館</span></td>
+        <td>ルイス・カーン</td>
+        <td>フォートワース（米）</td>
+        <td><span class="red">サイクロイド曲線ヴォールト</span>・頂部のスリットから<span class="red">自然光</span>を拡散 <span class="star">★</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">ポンピドゥー・センター</span></td>
+        <td>ピアノ＋ロジャーズ</td>
+        <td>パリ（仏）</td>
+        <td><span class="red">設備・構造を外部に露出（インサイドアウト）</span>・1977年開館・ハイテク建築の代表 <span class="star">★</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">グッゲンハイム美術館</span></td>
+        <td>F.L.ライト</td>
+        <td>ニューヨーク（米）</td>
+        <td><span class="red">螺旋スロープ</span>に沿って展示。中央にアトリウム・1959年竣工</td>
+      </tr>
+      <tr>
+        <td><span class="red">金沢21世紀美術館</span></td>
+        <td>SANAA（妹島＋西沢）</td>
+        <td>金沢（石川）</td>
+        <td><span class="red">円形平面・透明ガラス・無方向性</span>。まちに開かれた美術館 <span class="star">★</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">地中美術館</span></td>
+        <td>安藤忠雄</td>
+        <td>直島（香川）</td>
+        <td><span class="red">地下埋設・自然光</span>のみ。モネの睡蓮作品のための展示室・2004年</td>
+      </tr>
+      <tr>
+        <td><span class="red">国立西洋美術館</span></td>
+        <td>ル・コルビュジエ</td>
+        <td>東京・上野</td>
+        <td><span class="red">無限成長美術館</span>の概念。<span class="red">世界遺産</span>（2016年・ル・コルビュジエの建築作品群）<span class="star">★</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">豊田市美術館</span></td>
+        <td>谷口吉生</td>
+        <td>愛知</td>
+        <td>水・ガラス・精緻な納まり。<span class="red">谷口吉郎（父）</span>との混同に注意 <span class="star">★</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. 公共・都市施設</h2>
+  <table>
+    <colgroup><col style="width:26%"><col style="width:20%"><col style="width:54%"></colgroup>
+    <thead>
+      <tr><th>建物名</th><th>建築家（竣工）</th><th>試験ポイント</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="red">国立代々木競技場</span></td>
+        <td>丹下健三（1964）</td>
+        <td><span class="red">吊り屋根構造（懸垂屋根）</span>・東京五輪施設・第一体育館は2本の主柱で支持 <span class="star">★</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">広島平和記念資料館</span></td>
+        <td>丹下健三（1955）</td>
+        <td><span class="red">ピロティ</span>・軸線上に原爆ドーム・慰霊碑を配置。ル・コルビュジエの影響 <span class="star">★</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">東京都庁</span></td>
+        <td>丹下健三（1991）</td>
+        <td><span class="red">双塔・ゴシック大聖堂</span>的シルエット・新宿副都心のランドマーク</td>
+      </tr>
+      <tr>
+        <td><span class="red">国立国会図書館</span></td>
+        <td>前川國男（1968）</td>
+        <td><span class="red">無窓・書庫集中型</span>。増築を繰り返した大型図書館</td>
+      </tr>
+      <tr>
+        <td><span class="red">倉敷アイビースクエア</span></td>
+        <td>浦辺鎮太郎（1974）</td>
+        <td>倉敷紡績工場を<span class="red">保存・転用（コンバージョン）</span>したホテル・文化施設 <span class="star">★</span></td>
+      </tr>
+      <tr>
+        <td><span class="red">中銀カプセルタワービル</span></td>
+        <td>黒川紀章（1972）</td>
+        <td><span class="red">メタボリズム・着脱式カプセル</span>140個。中央コア2本に片持ちで接続 <span class="star">★</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 頻出の混同ポイント まとめ</span>
+    <ul style="margin-top:3px;">
+      <li>落水荘（ライト）≠ グッゲンハイム美術館（ライト・ニューヨーク）・ビルバオ（ゲーリー）</li>
+      <li>国立西洋美術館（ル・コルビュジエ・東京）≠ キンベル美術館（カーン・米）</li>
+      <li>谷口吉生（豊田市美術館）≠ 谷口吉郎（父・東京国立博物館東洋館など）</li>
+      <li>ポンピドゥー・センター：設計は<span class="red">ピアノ＋ロジャーズ</span>（両者共同）</li>
+      <li>代々木競技場の構造：<span class="red">吊り屋根（懸垂構造）</span>、折板屋根ではない</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
