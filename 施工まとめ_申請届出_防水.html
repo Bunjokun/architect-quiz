@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>施工まとめ資料② 申請・届出／防水工事／頻出数値</title>
+<style>
+  @page { size: A4 portrait; margin: 15mm 12mm 15mm 12mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
+    font-size: 9.5pt;
+    color: #111;
+    background: #fff;
+    width: 210mm;
+    margin: 0 auto;
+    padding: 10mm 12mm;
+    overflow-x: hidden;
+  }
+  .page { width: 186mm; page-break-after: always; padding-bottom: 6mm; }
+  .page:last-child { page-break-after: auto; }
+  .page-title {
+    font-size: 13pt; font-weight: bold;
+    background: #1a3a5c; color: #fff;
+    padding: 4px 10px; margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 10.5pt; font-weight: bold; color: #fff;
+    background: #2e6da4; padding: 3px 8px; margin: 10px 0 5px 0;
+  }
+  h3 {
+    font-size: 9.5pt; font-weight: bold; color: #1a3a5c;
+    border-left: 4px solid #2e6da4; padding-left: 6px;
+    margin: 8px 0 4px 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 6px; }
+  th {
+    background: #dbe8f5; font-weight: bold;
+    border: 1px solid #7aaacf; padding: 4px 5px;
+    text-align: center; vertical-align: middle;
+  }
+  td { border: 1px solid #aac4de; padding: 3px 6px; vertical-align: middle; }
+  tr:nth-child(even) td { background: #f4f9ff; }
+  .red   { color: #cc0000; font-weight: bold; }
+  .blue  { color: #0055aa; font-weight: bold; }
+  .green { color: #006600; font-weight: bold; }
+  .bold  { font-weight: bold; }
+  .center { text-align: center; }
+  .small { font-size: 7.5pt; }
+  .point-box {
+    border: 1.5px solid #cc0000; background: #fff8f8;
+    border-radius: 3px; padding: 4px 8px; margin: 5px 0; font-size: 8.5pt;
+  }
+  .point-box .label { font-weight: bold; color: #cc0000; margin-right: 4px; }
+  .note-box {
+    border: 1px solid #2e6da4; background: #f0f6ff;
+    border-radius: 3px; padding: 4px 8px; margin: 4px 0; font-size: 8pt;
+  }
+  .two-col { display: flex; gap: 8px; margin-bottom: 6px; }
+  .two-col > div { flex: 1; }
+  .section-card {
+    border: 1.5px solid #aac4de; border-radius: 4px;
+    overflow: hidden; margin-bottom: 6px;
+  }
+  .section-card-head {
+    font-size: 9pt; font-weight: bold; color: #fff;
+    padding: 3px 8px;
+  }
+  .section-card-body { padding: 5px 8px; font-size: 8.5pt; }
+  .diff-box {
+    display: flex; gap: 6px; margin-bottom: 6px;
+  }
+  .diff-box > div {
+    flex: 1; border-radius: 4px; padding: 5px 8px; font-size: 8.5pt;
+  }
+  .tag {
+    display: inline-block; font-size: 7.5pt; font-weight: bold;
+    border-radius: 3px; padding: 1px 6px; margin-bottom: 3px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================== PAGE 1: 申請・届出 ======================== -->
+<div class="page">
+  <div class="page-title">施工まとめ資料②a　申請・届出 ― 提出先・期限・対象</div>
+
+  <h2>1. 提出先別 早見表</h2>
+
+  <!-- 提出先ごとに色分けカード -->
+  <div class="diff-box">
+    <div style="background:#fff3e0;border:1.5px solid #e67e22;">
+      <div class="tag" style="background:#e67e22;color:#fff;">警察署長</div>
+      <div class="bold" style="margin-bottom:3px;">道路使用許可</div>
+      <div class="small" style="color:#555;">道路上での作業・資材置き場・工事車両の通行など、交通に影響を与える行為</div>
+      <div style="margin-top:4px;font-size:7.5pt;color:#888;">期限：工事前（定めなし）</div>
+    </div>
+    <div style="background:#e8f5e9;border:1.5px solid #27ae60;">
+      <div class="tag" style="background:#27ae60;color:#fff;">道路管理者</div>
+      <div class="bold" style="margin-bottom:3px;">道路占用許可</div>
+      <div class="small" style="color:#555;">道路に工作物を設置する行為（足場・仮囲い・クレーン・電線引込等）</div>
+      <div style="margin-top:4px;font-size:7.5pt;color:#888;">期限：工事前（定めなし）</div>
+    </div>
+  </div>
+
+  <div class="note-box" style="margin-bottom:6px;">
+    <span class="bold">道路使用 vs 道路占用の違い：</span>
+    道路<span class="red">使用</span>（警察署長）＝人や車が使う行為　／　道路<span class="red">占用</span>（道路管理者）＝物を置く・設置する行為。
+    工事現場では<span class="bold">両方</span>必要になることが多い。
+  </div>
+
+  <table>
+    <colgroup><col style="width:28%"><col style="width:28%"><col style="width:22%"><col style="width:22%"></colgroup>
+    <thead>
+      <tr>
+        <th>届出内容</th>
+        <th>提出先</th>
+        <th style="background:#fde8d8;color:#8b3a00;">期限</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold">建設リサイクル法<br>特定建設資材の分別解体等の届出</td>
+        <td class="center bold" style="color:#8b1a1a;">都道府県知事</td>
+        <td class="center red">着手 <span style="font-size:11pt;">7日前</span>まで</td>
+        <td class="small">解体80m²以上・新築500m²以上・修繕1億円以上が対象</td>
+      </tr>
+      <tr>
+        <td class="bold">騒音規制法<br>特定建設作業の実施届出</td>
+        <td class="center bold" style="color:#1a5fa8;">市区町村長</td>
+        <td class="center red">作業開始 <span style="font-size:11pt;">7日前</span>まで</td>
+        <td class="small">くい打機・さく岩機・コンプレッサー等</td>
+      </tr>
+      <tr>
+        <td class="bold">振動規制法<br>特定建設作業の実施届出</td>
+        <td class="center bold" style="color:#1a5fa8;">市区町村長</td>
+        <td class="center red">作業開始 <span style="font-size:11pt;">7日前</span>まで</td>
+        <td class="small">くい打機・鋼球を使用する破壊作業等</td>
+      </tr>
+      <tr>
+        <td class="bold">クレーン設置届<br>（つり上げ荷重 <span class="red">3t以上</span>）</td>
+        <td class="center bold" style="color:#5a3e8b;">労働基準監督署長</td>
+        <td class="center red">設置 <span style="font-size:11pt;">30日前</span>まで</td>
+        <td class="small">移動式クレーン・デリックも同様</td>
+      </tr>
+      <tr>
+        <td class="bold">型枠支保工設置届<br>（高さ <span class="red">3.5m以上</span>）</td>
+        <td class="center bold" style="color:#5a3e8b;">労働基準監督署長</td>
+        <td class="center red">設置 <span style="font-size:11pt;">30日前</span>まで</td>
+        <td class="small">コンクリート打設荷重4.5kN/m²以上も対象</td>
+      </tr>
+      <tr>
+        <td class="bold">足場設置届<br>（高さ<span class="red">10m以上</span>・60日以上使用）</td>
+        <td class="center bold" style="color:#5a3e8b;">労働基準監督署長</td>
+        <td class="center red">設置 <span style="font-size:11pt;">30日前</span>まで</td>
+        <td class="small">つり足場・張出し足場は規模に関係なく届出</td>
+      </tr>
+      <tr>
+        <td class="bold">ボイラー・第一種圧力容器設置届</td>
+        <td class="center bold" style="color:#5a3e8b;">労働基準監督署長</td>
+        <td class="center red">設置 <span style="font-size:11pt;">30日前</span>まで</td>
+        <td class="small">使用前検査も必要</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 覚え方</span>
+    <span class="bold">7日前</span> → 騒音・振動・建設リサイクル（3つとも地域の自治体系）
+    <span class="bold">30日前</span> → 労働基準監督署長（クレーン・足場・型枠支保工）
+  </div>
+
+  <h2>2. 特定建設作業の規制内容（騒音・振動規制法 共通）</h2>
+
+  <div class="two-col">
+    <div>
+      <table>
+        <thead><tr><th>規制項目</th><th>制限内容</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">作業時間帯</td><td class="center red">7時〜19時</td></tr>
+          <tr><td class="bold">1日の最大作業時間</td><td class="center red">10時間以内</td></tr>
+          <tr><td class="bold">連続作業日数</td><td class="center red">6日以内</td></tr>
+          <tr><td class="bold">日曜・休日</td><td class="center red">作業禁止（原則）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>建設リサイクル法の対象規模</h3>
+      <table>
+        <thead><tr><th>工事種別</th><th>届出が必要な規模</th></tr></thead>
+        <tbody>
+          <tr><td>建築物の<span class="bold">解体</span></td><td class="center red">床面積 80m²以上</td></tr>
+          <tr><td>建築物の<span class="bold">新築・増築</span></td><td class="center red">床面積 500m²以上</td></tr>
+          <tr><td>建築物の<span class="bold">修繕・模様替</span></td><td class="center red">請負代金 1億円以上</td></tr>
+          <tr><td>建築物以外の<span class="bold">解体・新築</span></td><td class="center red">請負代金 500万円以上</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box small">特定建設資材：コンクリート・コンクリート＋鉄・木材・アスファルトコンクリートの4種</div>
+    </div>
+  </div>
+
+  <h2>3. 作業主任者の選任が必要な作業（労働安全衛生法）</h2>
+
+  <table>
+    <colgroup><col style="width:40%"><col style="width:30%"><col style="width:30%"></colgroup>
+    <thead><tr><th>作業</th><th>選任が必要な規模</th><th>作業主任者の資格</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="bold">地山の掘削</td>
+        <td class="center red">掘削深さ 2m以上</td>
+        <td>地山の掘削作業主任者技能講習</td>
+      </tr>
+      <tr>
+        <td class="bold">土止め支保工の切りばり・腹起し</td>
+        <td class="center red">掘削深さ 2m以上</td>
+        <td>土止め支保工作業主任者技能講習</td>
+      </tr>
+      <tr>
+        <td class="bold">型枠支保工の組立・解体</td>
+        <td class="center">高さに関係なく</td>
+        <td>型枠支保工の組立等作業主任者技能講習</td>
+      </tr>
+      <tr>
+        <td class="bold">足場の組立・解体</td>
+        <td class="center red">高さ 5m以上</td>
+        <td>足場の組立等作業主任者技能講習</td>
+      </tr>
+      <tr>
+        <td class="bold">コンクリート造工作物の解体</td>
+        <td class="center red">高さ 5m以上</td>
+        <td>コンクリート造工作物の解体等作業主任者技能講習</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 注意</span>
+    型枠支保工は高さに関係なく作業主任者が必要（足場は5m以上）。混同に注意。
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ======================== PAGE 2: 防水工事 ======================== -->
+<div class="page">
+  <div class="page-title">施工まとめ資料②b　防水工事 ― 工法別 重ね幅・立上り・膜厚</div>
+
+  <h2>1. アスファルト防水</h2>
+
+  <div class="two-col">
+    <div>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td>平場のルーフィング<span class="bold">重ね幅</span></td><td class="center red">100mm以上</td></tr>
+          <tr><td>立上りのルーフィング<span class="bold">重ね幅</span></td><td class="center red">150mm以上</td></tr>
+          <tr><td>立上り<span class="bold">高さ</span></td><td class="center red">250mm以上</td></tr>
+          <tr><td>出隅・入隅の<span class="bold">増張り</span></td><td class="center red">各300mm以上</td></tr>
+          <tr><td>ドレン回りの増張り</td><td class="center">300mm以上（2重）</td></tr>
+          <tr><td>アスファルトの溶融温度</td><td class="center">160〜230℃</td></tr>
+          <tr><td>張付け方向</td><td class="center bold">水上→水下<br><span class="small" style="color:#555;">（重ねが上になる方向）</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>施工上のポイント</h3>
+      <div class="section-card">
+        <div class="section-card-head" style="background:#c00;">絶縁工法（脱気工法）</div>
+        <div class="section-card-body">
+          下地との間に穴あきシート（絶縁シート）を敷いて水蒸気を逃がす工法。<br>
+          既存防水層の上に重ね施工する場合や、コンクリートが十分乾燥していない場合に採用。<br>
+          <span class="red">脱気筒を設置</span>して内部の水蒸気を外部へ排出。
+        </div>
+      </div>
+      <div class="section-card" style="margin-top:5px;">
+        <div class="section-card-head" style="background:#555;">密着工法</div>
+        <div class="section-card-body">
+          下地にアスファルトを全面溶融接着。防水性が高いが下地の水分・動きに影響を受けやすい。新築の乾燥した下地に適する。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>2. 改質アスファルトシート防水（トーチ工法・常温工法）</h2>
+
+  <table>
+    <colgroup><col style="width:40%"><col style="width:30%"><col style="width:30%"></colgroup>
+    <thead><tr><th>項目</th><th>数値</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>幅方向の<span class="bold">重ね幅</span></td><td class="center red">100mm以上</td><td></td></tr>
+      <tr><td>長手方向の<span class="bold">重ね幅</span></td><td class="center red">150mm以上</td><td>（端部のずらし）</td></tr>
+      <tr><td>立上りの<span class="bold">高さ</span></td><td class="center red">250mm以上</td><td></td></tr>
+      <tr><td>トーチ工法の加熱温度</td><td class="center">シート裏面が均一に溶けるまで</td><td>過加熱に注意</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. 合成高分子系シート防水</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>塩化ビニル樹脂系（塩ビシート）</h3>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td>接着工法 <span class="bold">重ね幅</span></td><td class="center red">40mm以上</td></tr>
+          <tr><td>機械的固定工法 <span class="bold">重ね幅</span></td><td class="center red">40mm以上</td></tr>
+          <tr><td>立上り高さ</td><td class="center red">150mm以上</td></tr>
+          <tr><td>端部処理</td><td class="center">テープ・シーリング処理</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>合成ゴム系（加硫ゴムシート）</h3>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td><span class="bold">重ね幅</span></td><td class="center red">100mm以上</td></tr>
+          <tr><td>立上り高さ</td><td class="center red">150mm以上</td></tr>
+          <tr><td>接合部処理</td><td class="center">テープ状シーリング材で被覆</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="point-box">
+    <span class="label">★ 重ね幅の比較</span>
+    塩ビ・加硫ゴム = <span class="red">40mm（塩ビ）/ 100mm（ゴム）</span>　vs　アスファルト系 = <span class="red">100mm以上（平場）</span>。塩ビが最小40mmと例外的に小さい。
+  </div>
+
+  <h2>4. 塗膜防水（ウレタン系）</h2>
+
+  <table>
+    <colgroup><col style="width:40%"><col style="width:30%"><col style="width:30%"></colgroup>
+    <thead><tr><th>項目</th><th>数値</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>防水層の<span class="bold">最小膜厚</span>（屋根・床）</td><td class="center red">2mm以上</td><td class="small">3層塗り（プライマー・中塗り・上塗り）</td></tr>
+      <tr><td>防水層の<span class="bold">最小膜厚</span>（水槽・浴室等）</td><td class="center red">3mm以上</td><td class="small">使用環境が厳しい場合</td></tr>
+      <tr><td>立上り高さ</td><td class="center red">250mm以上</td><td></td></tr>
+      <tr><td>プライマー乾燥時間</td><td class="center">指触乾燥後（通常2〜4時間）</td><td class="small">乾燥前に塗ると密着不良</td></tr>
+      <tr><td>補強布（クロス）の張付け</td><td class="center">出隅・入隅・ドレン回り</td><td class="small">ひび割れ追従のため</td></tr>
+      <tr><td>トップコートの塗替え目安</td><td class="center">5〜10年毎</td><td class="small">防水層自体は別途確認</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. FRP防水</h2>
+
+  <table>
+    <thead><tr><th>項目</th><th>数値・内容</th></tr></thead>
+    <tbody>
+      <tr><td>ガラスマットの<span class="bold">重ね幅</span></td><td class="center red">50mm以上</td></tr>
+      <tr><td>標準積層数</td><td class="center">ガラスマット 2プライ以上</td></tr>
+      <tr><td>トップコート（仕上げ塗り）の塗替え</td><td class="center">約5年毎</td></tr>
+    </tbody>
+  </table>
+
+  <h2>6. シーリング工事</h2>
+
+  <div class="two-col">
+    <div>
+      <table>
+        <thead><tr><th>項目</th><th>内容・数値</th></tr></thead>
+        <tbody>
+          <tr><td><span class="bold">ワーキングジョイント</span><br><span class="small">（外壁目地など動く目地）</span></td><td><span class="red bold">2面接着</span><br>バックアップ材で深さ調整し<br>3面接着を避ける</td></tr>
+          <tr><td><span class="bold">ノンワーキングジョイント</span><br><span class="small">（構造体内部など動かない目地）</span></td><td>3面接着も可</td></tr>
+          <tr><td>目地幅に対する深さ比</td><td class="center red">幅の 1/2以上<br>（最小 5mm）</td></tr>
+          <tr><td>バックアップ材の目的</td><td>①深さ調整　②3面接着防止</td></tr>
+          <tr><td>プライマー塗布後の放置時間</td><td class="center">乾燥確認後に施工<br><span class="small">（過乾燥も不可）</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>シーリング材の種類と適用</h3>
+      <table>
+        <thead><tr><th>種類</th><th>主な用途</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">シリコーン系</td><td>ガラス・サッシ回り<br><span class="small red">塗装不可（塗料弾く）</span></td></tr>
+          <tr><td class="bold">変成シリコーン系</td><td>外壁目地（塗装可）</td></tr>
+          <tr><td class="bold">ポリサルファイド系</td><td>外壁・窓枠（耐候性高）</td></tr>
+          <tr><td class="bold">ポリウレタン系</td><td>コンクリート目地<br><span class="small red">紫外線に弱い（塗装推奨）</span></td></tr>
+          <tr><td class="bold">アクリル系</td><td>内装・乾式工法<br><span class="small">耐候性は低め</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="point-box">
+    <span class="label">★ 試験頻出</span>
+    ワーキングジョイントは必ず<span class="red">2面接着</span>。3面接着だと目地の動きでシーリング材が破断する。シリコーン系は<span class="red">塗装不可</span>（後から塗装する外壁には使えない）。
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ======================== PAGE 3: 頻出数値 ======================== -->
+<div class="page">
+  <div class="page-title">施工まとめ資料②c　頻出数値まとめ ― コンクリート・鉄筋・鉄骨・仕上げ</div>
+
+  <h2>1. コンクリート工事</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>配合・材料</h3>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td>単位水量の上限</td><td class="center red">185 kg/m³以下</td></tr>
+          <tr><td>水セメント比（一般）</td><td class="center red">65%以下</td></tr>
+          <tr><td>水セメント比（水密構造）</td><td class="center red">50%以下</td></tr>
+          <tr><td>空気量（普通コン）</td><td class="center red">4.5%（±1.5%）</td></tr>
+          <tr><td>スランプ（一般）</td><td class="center red">18cm</td></tr>
+          <tr><td>スランプ許容差</td><td class="center">±2.5cm（18cm時）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>打込み・締固め</h3>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td>1層の打込み高さ</td><td class="center red">40〜50cm以下</td></tr>
+          <tr><td>バイブレーター挿入間隔</td><td class="center red">60cm以下</td></tr>
+          <tr><td>バイブレーター挿入時間</td><td class="center red">5〜15秒</td></tr>
+          <tr><td>打重ね時間（25℃以下）</td><td class="center red">2.5時間以内</td></tr>
+          <tr><td>打重ね時間（25℃超）</td><td class="center red">2時間以内</td></tr>
+          <tr><td>運搬時間（荷卸しまで）</td><td class="center red">1.5時間以内</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>養生・型枠存置</h3>
+      <table>
+        <thead><tr><th>部位・条件</th><th>存置基準</th></tr></thead>
+        <tbody>
+          <tr><td>柱・壁・梁の側面</td><td class="center red">圧縮強度 5N/mm²以上</td></tr>
+          <tr><td>スラブ底・梁底（支保工）</td><td class="center red">設計基準強度の2/3以上<br>かつ 12N/mm²以上</td></tr>
+          <tr><td>養生期間（普通ポルトランド）</td><td class="center red">5日以上（湿潤養生）</td></tr>
+          <tr><td>養生期間（早強ポルトランド）</td><td class="center red">3日以上</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>かぶり厚さ</h3>
+      <table>
+        <thead><tr><th>部位</th><th>最小かぶり</th></tr></thead>
+        <tbody>
+          <tr><td>基礎（捨てコン除く）</td><td class="center red">60mm</td></tr>
+          <tr><td>土に接する柱・梁・壁・スラブ</td><td class="center red">40mm</td></tr>
+          <tr><td>屋外の柱・梁・壁・スラブ</td><td class="center red">30mm</td></tr>
+          <tr><td>屋内の柱・梁・壁</td><td class="center red">30mm</td></tr>
+          <tr><td>屋内のスラブ</td><td class="center red">20mm</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>2. 鉄筋工事</h2>
+
+  <div class="two-col">
+    <div>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td>SD345の<span class="bold">降伏点</span></td><td class="center red">345N/mm²以上</td></tr>
+          <tr><td>SD345の<span class="bold">引張強さ</span></td><td class="center red">490N/mm²以上</td></tr>
+          <tr><td>帯筋の<span class="bold">最小比率</span>（pw）</td><td class="center red">0.2%以上</td></tr>
+          <tr><td>柱主筋の最小本数</td><td class="center red">4本以上</td></tr>
+          <tr><td>柱主筋比（pg）</td><td class="center red">0.8%以上</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>ガス圧接</h3>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td>圧接部の<span class="bold">ふくらみ径</span></td><td class="center red">鉄筋径の 1.4倍以上</td></tr>
+          <tr><td>圧接部の<span class="bold">長さ</span></td><td class="center red">鉄筋径の 1.1倍以上</td></tr>
+          <tr><td>圧接部の<span class="bold">ずれ</span></td><td class="center red">鉄筋径の 1/4以下</td></tr>
+          <tr><td>抜取り検査（引張試験）</td><td class="center">1検査ロット 30箇所→3本</td></tr>
+          <tr><td>超音波探傷試験（UT）</td><td class="center">全数または抜取り</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>3. 鉄骨工事</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>高力ボルト</h3>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td>ナット回転量（本締め）</td><td class="center red">120°（±30°）</td></tr>
+          <tr><td>共回り・軸回りの確認</td><td class="center">ナット・ボルト頭にマーキング</td></tr>
+          <tr><td>摩擦面の処理</td><td class="center">赤錆面（すべり係数0.45以上）</td></tr>
+          <tr><td>一次締め後の本締め</td><td class="center">当日中に完了</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>建方精度・溶接</h3>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td>柱のたて直し精度</td><td class="center red">H/1000 かつ 10mm以下</td></tr>
+          <tr><td>溶接の予熱（低合金鋼）</td><td class="center red">36℃以下で予熱必要</td></tr>
+          <tr><td>アンダーカット深さ</td><td class="center red">0.5mm以下</td></tr>
+          <tr><td>オーバーラップ</td><td class="center red">不可（補修必要）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>4. タイル・仕上げ工事</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>タイル工事</h3>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td><span class="bold">引張接着強度</span>（外壁）</td><td class="center red">0.4N/mm²以上</td></tr>
+          <tr><td>試験実施時期</td><td class="center">施工後 2週間以上経過後</td></tr>
+          <tr><td>打診検査（全面）</td><td class="center">施工後・竣工前</td></tr>
+          <tr><td>有機系接着剤の目地幅</td><td class="center red">3mm以上</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>塗装・左官工事</h3>
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td>素地調整（鉄鋼面・一般）</td><td class="center red">3種以上（ディスクサンダー等）</td></tr>
+          <tr><td>素地調整（1種）</td><td class="center">ブラスト処理（最高規格）</td></tr>
+          <tr><td>モルタル塗り 1層の厚さ</td><td class="center red">7mm以下</td></tr>
+          <tr><td>セメントモルタル張りの下地乾燥</td><td class="center">4週間以上養生後</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>5. 杭工事・基礎</h2>
+
+  <table>
+    <colgroup><col style="width:40%"><col style="width:30%"><col style="width:30%"></colgroup>
+    <thead><tr><th>項目</th><th>数値</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>既製杭の<span class="bold">偏心許容量</span></td><td class="center red">杭径の 1/4以下<br>かつ 100mm以下</td><td class="small">小さい方が適用</td></tr>
+      <tr><td>アースドリル工法のスライム処理</td><td class="center">一次（掘削直後）・二次（コンクリート打設直前）</td><td class="small">計2回</td></tr>
+      <tr><td>場所打ち杭のコンクリート余盛り</td><td class="center red">800mm以上</td><td class="small">スライム混入部を除去するため</td></tr>
+      <tr><td>砂利地業の突固め厚さ</td><td class="center red">60mm程度（1層）</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="point-box">
+    <span class="label">★ 試験頻出セット</span>
+    かぶり厚さ「基礎60・土接触40・屋外30・屋内スラブ20」/ 打重ね時間「25℃以下で2.5h・超で2h」/ タイル引張「0.4N/mm²」/ 圧接ふくらみ「1.4倍」/ ナット回転「120°」
+  </div>
+</div>
+
+</body>
+</html>
