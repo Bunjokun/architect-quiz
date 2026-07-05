@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>計画まとめ　建築マネジメント・サステナブル・環境評価</title>
+<style>
+  @page { size: A4 portrait; margin: 15mm 12mm 15mm 12mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
+    font-size: 9.5pt;
+    color: #111;
+    background: #fff;
+    width: 210mm;
+    margin: 0 auto;
+    padding: 10mm 12mm;
+    overflow-x: hidden;
+  }
+  .page { width: 186mm; page-break-after: always; padding-bottom: 6mm; }
+  .page:last-child { page-break-after: auto; }
+  .page-header {
+    display: flex; align-items: center; gap: 8px;
+    background: #1a3a5c; color: #fff;
+    padding: 4px 10px; margin-bottom: 8px;
+  }
+  .page-num {
+    font-size: 14pt; font-weight: bold;
+    background: #fff; color: #1a3a5c;
+    border-radius: 50%; width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .page-title-text { font-size: 11pt; font-weight: bold; }
+  h2 {
+    font-size: 10.5pt; font-weight: bold; color: #fff;
+    background: #2e6da4; padding: 3px 8px; margin: 10px 0 5px 0;
+  }
+  h3 {
+    font-size: 9.5pt; font-weight: bold; color: #1a3a5c;
+    border-left: 4px solid #2e6da4; padding-left: 6px;
+    margin: 8px 0 4px 0;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 8pt; margin-bottom: 6px; }
+  th {
+    background: #dbe8f5; font-weight: bold;
+    border: 1px solid #7aaacf; padding: 4px 5px;
+    text-align: center; vertical-align: middle;
+  }
+  td { border: 1px solid #aac4de; padding: 3px 6px; vertical-align: middle; }
+  tr:nth-child(even) td { background: #f4f9ff; }
+  .red   { color: #cc0000; font-weight: bold; }
+  .blue  { color: #0055aa; font-weight: bold; }
+  .green { color: #006600; font-weight: bold; }
+  .bold  { font-weight: bold; }
+  .center { text-align: center; }
+  .small { font-size: 7.5pt; }
+  .point-box {
+    border: 1.5px solid #cc0000; background: #fff8f8;
+    border-radius: 3px; padding: 4px 8px; margin: 5px 0; font-size: 8.5pt;
+  }
+  .point-box .label { font-weight: bold; color: #cc0000; margin-right: 4px; }
+  .note-box {
+    border: 1px solid #2e6da4; background: #f0f6ff;
+    border-radius: 3px; padding: 4px 8px; margin: 4px 0; font-size: 8pt;
+  }
+  .two-col { display: flex; gap: 8px; margin-bottom: 6px; }
+  .two-col > div { flex: 1; }
+  .section-card {
+    border: 1.5px solid #aac4de; border-radius: 4px;
+    overflow: hidden; margin-bottom: 6px;
+  }
+  .section-card-head {
+    font-size: 9pt; font-weight: bold; color: #fff;
+    padding: 3px 8px;
+  }
+  .section-card-body { padding: 5px 8px; font-size: 8.5pt; }
+  .diff-box { display: flex; gap: 6px; margin-bottom: 6px; }
+  .diff-box > div {
+    flex: 1; border-radius: 4px; padding: 5px 8px; font-size: 8.5pt;
+  }
+  .tag {
+    display: inline-block; font-size: 7.5pt; font-weight: bold;
+    border-radius: 3px; padding: 1px 6px; margin-bottom: 3px;
+  }
+  ul { padding-left: 14px; margin: 2px 0 4px 0; }
+  li { margin-bottom: 2px; font-size: 8.5pt; }
+  p { margin: 3px 0; font-size: 8.5pt; }
+</style>
+</head>
+<body>
+
+<!-- ======================== PAGE 1: 環境評価・認証制度 ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">①</span>
+    <span class="page-title-text">環境評価・認証制度　CASBEE / BELS / ZEB / LEED / 長期優良住宅</span>
+  </div>
+
+  <h2>1. CASBEE（建築物総合環境性能評価システム）</h2>
+  <div class="note-box">
+    <span class="bold">定義：</span>建築物の<span class="blue">環境品質（Q）</span>と<span class="red">環境負荷（L）</span>を評価し、その比（BEE）で総合性能を示す日本発の評価システム。国土交通省・建築系学会が連携して開発。
+  </div>
+
+  <table>
+    <tr>
+      <th style="width:28%">指標</th>
+      <th>内容</th>
+    </tr>
+    <tr>
+      <td class="bold center">BEE（建築物環境効率）</td>
+      <td><span class="blue">Q（建築物の環境品質・性能）</span> ÷ <span class="red">L（建築物の環境負荷）</span><br>
+      Qは室内環境・サービス・室外環境の3分野　Lはエネルギー・資源・敷地外環境の3分野</td>
+    </tr>
+    <tr>
+      <td class="bold center">ランク</td>
+      <td><span class="green">S（最高）</span> &gt; <span class="green">A</span> &gt; B+ &gt; B- &gt; <span class="red">C（最低）</span></td>
+    </tr>
+    <tr>
+      <td class="bold center">対象</td>
+      <td>新築・既存・改修・一時使用・街区・まちづくり　など用途ごとにツールが存在</td>
+    </tr>
+  </table>
+
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2019出題】</span>「BEEの値が<span class="red">小さい</span>ほど建築物の環境性能が高い」→ <span class="red">誤り</span>。BEEは大きいほど高性能（Q÷L が大きい＝負荷が少なく品質が高い）。
+  </div>
+
+  <h2>2. BELS（建築物省エネルギー性能表示制度）</h2>
+  <div class="note-box">
+    <span class="bold">BEI（エネルギー消費性能指標）＝ 設計一次エネルギー消費量 ÷ 基準一次エネルギー消費量</span><br>
+    BEI ≦ 1.0 で省エネ基準適合。値が小さいほど省エネ性能が高く、星の数が増える（5段階）。<br>
+    対象：<span class="bold">新築・既存建築物</span>を対象として第三者評価機関が評価・認証（2024出題）。
+  </div>
+
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2021出題】</span>「BELSの5段階のマークは、BEIの値が<span class="red">大きい</span>ほど星の数が増える」→ <span class="red">誤り</span>。BEIは<span class="blue">小さい</span>ほど省エネ性能が高く星が増える。
+  </div>
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2023出題】</span>BEIの定義：「評価建築物の<span class="red">省エネルギー量の合計</span>を基準一次エネルギー消費量で除した値」→ <span class="red">誤り</span>。正しくは「<span class="blue">設計一次エネルギー消費量</span>を基準値で除した値」。省エネ量（削減量）ではなく消費量で除す。
+  </div>
+
+  <h2>3. ZEB（ネット・ゼロ・エネルギービル）</h2>
+  <table>
+    <tr><th style="width:25%">区分</th><th>再エネ込み削減率</th><th>再エネ除き削減率</th></tr>
+    <tr><td class="bold center">ZEB</td><td class="center green">100%以上</td><td class="center">50%以上</td></tr>
+    <tr><td class="bold center">Nearly ZEB</td><td class="center">75%以上</td><td class="center">50%以上</td></tr>
+    <tr><td class="bold center">ZEB Ready</td><td class="center">―</td><td class="center green">50%以上</td></tr>
+    <tr><td class="bold center">ZEB Oriented</td><td class="center">―</td><td class="center">延床面積に応じ30〜40%以上</td></tr>
+  </table>
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2022出題】</span>「インバータ制御やLED照明はパッシブ技術」→ <span class="red">誤り</span>。これらは<span class="blue">アクティブ技術</span>。パッシブは断熱・日射遮蔽・自然換気など。<br>
+    また「ZEBは既存建築物には適用不可」→ 誤り。改修時にも<span class="blue">実現可能</span>（2022出題）。
+  </div>
+
+  <h2>4. LEED（Leadership in Energy and Environmental Design）</h2>
+  <div class="note-box">
+    米国グリーンビルディング協会（USGBC）が運営する国際的な環境性能評価システム。取得ポイントの合計で4段階認証。<br>
+    <span class="bold">Platinum（プラチナ）＞ Gold（ゴールド）＞ Silver（シルバー）＞ Certified（認定）</span><br>
+    建築物・敷地・街区等に関する環境性能を総合評価（2020出題）。
+  </div>
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2024出題】</span>「LEEDは<span class="red">人の健康やウェルネスに着目した</span>評価システム」→ 誤り。健康・ウェルネスに特化するのは<span class="blue">WELL認証</span>。LEEDは環境性能全般の評価。
+  </div>
+
+  <h2>5. 長期優良住宅・住宅性能表示制度</h2>
+  <div class="two-col">
+    <div class="section-card">
+      <div class="section-card-head" style="background:#2e6da4;">長期優良住宅の認定基準（主要項目）</div>
+      <div class="section-card-body">
+        <ul>
+          <li>耐久性・可変性（居住者のライフスタイル変化に対応できる間取り変更措置）</li>
+          <li>省エネルギー性</li>
+          <li>耐震性（等級2以上）</li>
+          <li>維持管理・更新の容易性</li>
+          <li><span class="bold">維持保全計画の策定</span>（構造・雨水浸入防止部分・設備の定期点検・補修計画）【2025出題】</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section-card">
+      <div class="section-card-head" style="background:#27ae60;">住宅性能表示制度（品確法）</div>
+      <div class="section-card-body">
+        <ul>
+          <li>構造耐力・省エネルギー・バリアフリー等 <span class="bold">10分野</span></li>
+          <li>高齢者等配慮対策等級：等級5〜1で評価【2022出題】</li>
+          <li>「特定寝室」＝高齢者の利用を想定する主たる寝室【2022出題】</li>
+          <li>一次エネルギー消費量等級4＝省エネ基準相当【2025出題】</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PAGE 2: LCA・環境マネジメント ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">②</span>
+    <span class="page-title-text">LCA・環境マネジメント　LCA / 環境効率 / ISO14001 / サステナブル建築</span>
+  </div>
+
+  <h2>1. LCA（ライフサイクルアセスメント）</h2>
+  <div class="note-box">
+    <span class="bold">定義：</span>製品・建築物のライフサイクル全体（資源採取→製造・建設→使用・維持→廃棄・解体）を通じた環境負荷を定量的に評価する手法（ISO14040シリーズで規格化）。
+  </div>
+
+  <h3>LCAの4段階プロセス（混同注意）</h3>
+  <table>
+    <tr><th style="width:30%">段階</th><th>内容</th></tr>
+    <tr>
+      <td class="bold center">① 目的・調査範囲の設定</td>
+      <td>評価の目的、機能単位（FU）、システム境界を定める</td>
+    </tr>
+    <tr>
+      <td class="bold center">② インベントリ分析</td>
+      <td>ライフサイクル全体のINPUT（資源・エネルギー）とOUTPUT（排出物・廃棄物）を<span class="bold">リストアップし定量化</span>する段階。<br><span class="small">→ 環境負荷物質の<span class="blue">重量等の物理量</span>を求める段階</span></td>
+    </tr>
+    <tr>
+      <td class="bold center">③ 影響評価</td>
+      <td>インベントリ分析で求めた物理量を、地球温暖化・酸性化・オゾン層破壊等の<span class="bold">環境影響カテゴリに変換・評価</span>する段階</td>
+    </tr>
+    <tr>
+      <td class="bold center">④ 解釈</td>
+      <td>結果を評価の目的に照らして解釈し、改善策を提案する</td>
+    </tr>
+  </table>
+
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ（混同注意）</span>「インベントリ分析＝環境負荷物質ごとに重量等の物理量で求めた結果を<span class="red">環境影響に変換</span>する段階」→ <span class="red">誤り</span>。<br>
+    環境影響への変換は<span class="blue">③影響評価</span>の段階。インベントリ分析は<span class="blue">物理量（INPUT/OUTPUT）をリストアップ・定量化</span>する段階。
+  </div>
+
+  <div class="note-box">
+    <span class="bold">ライフサイクルCO2：</span>一般的な事務所ビルでは、「<span class="blue">運用段階のCO2排出量</span>」が全体の大半（約80〜90%）を占め、「設計・建設段階及び廃棄段階」よりはるかに大きい。【2020出題・誤り選択肢として出題】
+  </div>
+
+  <h2>2. 環境効率</h2>
+  <div class="note-box">
+    <span class="bold">定義：</span>環境負荷を低減しつつ生活の質（価値）を向上させる考え方を数値化した指標。<br>
+    <span class="bold">環境効率 ＝ 生活の質（価値・サービスの量） ÷ 環境負荷</span><br>
+    → 環境負荷が増えると環境効率は<span class="red">下がる</span>。環境負荷を減らしながら価値を高めることが目標。
+  </div>
+
+  <h2>3. ISO 14001 / EMS（環境マネジメントシステム）</h2>
+  <div class="note-box">
+    <span class="bold">目的：</span>組織が環境方針を定め、環境目標・実施計画を策定し、PDCAサイクルで<span class="blue">継続的改善</span>を行う仕組みを構築・維持するための国際規格。<br>
+    <span class="bold">主な構成要素：</span>組織構造・責任分担・実施手順・資源・記録管理等を明確化。
+  </div>
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ</span>「ISO14001は環境負荷を<span class="red">ゼロにする</span>ことを保証するシステム」→ <span class="red">誤り</span>。ISO14001は<span class="blue">継続的改善の仕組み</span>であり、環境負荷ゼロを保証するものではない。
+  </div>
+
+  <h2>4. サステナブル建築</h2>
+  <div class="note-box">
+    <span class="bold">定義：</span>「将来にわたり人間の生活の質を維持・向上」させることを目標とし、以下を総合的に実現する建築。
+  </div>
+  <table>
+    <tr><th>要素</th><th>内容</th></tr>
+    <tr><td>省エネルギー・省資源</td><td>エネルギー・資源消費の最小化</td></tr>
+    <tr><td>リサイクル・廃棄物削減</td><td>材料の再利用・廃棄物の発生抑制</td></tr>
+    <tr><td>有害物質排出抑制</td><td>シックハウス対策・大気汚染物質排出削減</td></tr>
+    <tr><td>地域・環境との調和</td><td>地域の気候・伝統・文化・周辺環境に配慮した設計</td></tr>
+    <tr><td>長寿命・可変性</td><td>長期使用・用途変更・改修に対応できる設計</td></tr>
+  </table>
+
+  <h2>5. カーボンニュートラル・脱炭素</h2>
+  <div class="note-box">
+    2050年カーボンニュートラル宣言（日本・2020年）：温室効果ガスの排出量と吸収量を差し引きゼロにする目標。<br>
+    建築物では<span class="bold">省エネ性能の確保・向上、再生可能エネルギーの導入拡大</span>が必要【2022出題・正解肢】。
+  </div>
+  <table>
+    <tr><th style="width:20%">区分</th><th>内容</th><th>例</th></tr>
+    <tr><td class="bold center">Scope 1</td><td>自社の直接排出</td><td>燃料燃焼、工場排出</td></tr>
+    <tr><td class="bold center">Scope 2</td><td>他社から供給されるエネルギー由来の排出</td><td>購入電力・熱の使用</td></tr>
+    <tr><td class="bold center">Scope 3</td><td>サプライチェーン全体の排出</td><td>資材製造・輸送・廃棄</td></tr>
+  </table>
+</div>
+
+<!-- ======================== PAGE 3: 建築マネジメント手法 ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">③</span>
+    <span class="page-title-text">建築マネジメント手法　FM / CRE / PM / AM / PFI / PPP / コンセッション / ECI</span>
+  </div>
+
+  <h2>1. マネジメント手法 比較一覧表</h2>
+  <table>
+    <tr>
+      <th style="width:18%">手法</th>
+      <th style="width:40%">定義・内容</th>
+      <th style="width:22%">視点</th>
+      <th style="width:20%">混同注意</th>
+    </tr>
+    <tr>
+      <td class="bold center">FM<br><span class="small">ファシリティ<br>マネジメント</span></td>
+      <td>企業・団体等が保有または使用する施設（ファシリティ）とその環境を<span class="blue">経営的視点</span>から総合的・戦略的に企画・管理・活用する経営活動【2023出題・正解肢】</td>
+      <td>自社施設の最適化・経営効率向上</td>
+      <td>CRE戦略とは主体が異なる</td>
+    </tr>
+    <tr>
+      <td class="bold center">CRE<br><span class="small">企業不動産戦略</span></td>
+      <td>企業が保有する不動産を<span class="blue">企業価値向上</span>の観点から、経営戦略的視点で見直し・活用し、<span class="blue">不動産投資の効率を最大化</span>するための考え方【2021出題・正解肢】</td>
+      <td>不動産投資効率の最大化</td>
+      <td>PFIと混同注意（PFIは公共施設整備手法）</td>
+    </tr>
+    <tr>
+      <td class="bold center">PM<br><span class="small">プロパティ<br>マネジメント</span></td>
+      <td>不動産オーナーから委託を受け、賃貸管理・テナント管理・収支管理等で収益性を最大化する業務。ビル運営管理・リーシング・コンストラクションマネジメント等も含む【2024出題】</td>
+      <td>収益不動産の日常管理・運営</td>
+      <td>FMは自社施設、PMは受託管理</td>
+    </tr>
+    <tr>
+      <td class="bold center">AM<br><span class="small">アセット<br>マネジメント</span></td>
+      <td>不動産の所有者・投資家を代行して、テナント対応・建築物の維持管理・運営までを含めた一連の不動産業務を行う。PMより上位の<span class="blue">資産運用戦略レベル</span>の業務。</td>
+      <td>投資資産全体の価値最大化</td>
+      <td>「適正な投資価値算出のための多角的調査」→【2022出題・誤り肢】　それはデューデリジェンス</td>
+    </tr>
+  </table>
+
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2019出題】</span>「CRE戦略とは、国や地方公共団体が民間の資金・経営能力・技術的能力を活用して公共施設等の設計・建設・維持管理・運営を行う手法」→ <span class="red">誤り</span>。それは<span class="blue">PFI</span>の定義。CRE戦略は<span class="blue">企業</span>の不動産戦略。
+  </div>
+
+  <h2>2. 公民連携手法 比較一覧表</h2>
+  <table>
+    <tr>
+      <th style="width:18%">手法</th>
+      <th style="width:42%">定義・内容</th>
+      <th style="width:22%">所有権</th>
+      <th style="width:18%">運営主体</th>
+    </tr>
+    <tr>
+      <td class="bold center">PPP<br><span class="small">Public Private<br>Partnership</span></td>
+      <td>公共サービスの提供に民間が参画する手法を幅広くとらえた概念。民間資本・創意工夫等を活用し公共サービスの効率化・質の向上を目指す総称【2025出題】</td>
+      <td>公共</td>
+      <td>官民連携（PFIも包含）</td>
+    </tr>
+    <tr>
+      <td class="bold center">PFI<br><span class="small">Private Finance<br>Initiative</span></td>
+      <td>公共施設の設計・建設・維持管理・運営を民間に委ねる手法。VFM（Value for Money＝支払いに対し最も価値の高いサービスを供給する考え方）が重要概念【2020出題】。PPPの一手法。</td>
+      <td>公共<br>または民間</td>
+      <td>民間（SPCを設立）</td>
+    </tr>
+    <tr>
+      <td class="bold center">コンセッション</td>
+      <td>料金徴収を行う公共施設において、<span class="blue">施設の所有権は公共が保持したまま</span>、施設の<span class="blue">運営権のみを民間業者に設定</span>する方式。空港・上下水道・道路等で活用。PFIの一類型。</td>
+      <td class="bold center blue">公共のまま</td>
+      <td>民間（運営権）</td>
+    </tr>
+    <tr>
+      <td class="bold center">BOT<br><span class="small">Build-Operate-<br>Transfer</span></td>
+      <td>民間が資金調達・建設し、一定期間運営した後、期間満了後に所有権を行政に<span class="bold">移管</span>する方式</td>
+      <td>民間→<br>満了後公共</td>
+      <td>民間</td>
+    </tr>
+    <tr>
+      <td class="bold center">BTO<br><span class="small">Build-Transfer-<br>Operate</span></td>
+      <td>民間が資金調達・建設し、<span class="bold">完成直後</span>に所有権を公共に移転し、その後当該民間事業者が一定期間維持管理・運営する方式【2020・2024出題】</td>
+      <td>完成直後に<br>公共へ移転</td>
+      <td>民間</td>
+    </tr>
+    <tr>
+      <td class="bold center">BOO<br><span class="small">Build-Own-<br>Operate</span></td>
+      <td>民間が建設・所有・運営し、移管なし（民間が保有し続ける）</td>
+      <td class="bold center red">民間（移管なし）</td>
+      <td>民間</td>
+    </tr>
+    <tr>
+      <td class="bold center">SPC<br><span class="small">特別目的会社</span></td>
+      <td>PFI事業を実施するために設立される会社。PFI以外の投資は行わず、契約期間終了後に解散【2022出題・正解肢】</td>
+      <td>―</td>
+      <td>PFIの実施主体</td>
+    </tr>
+  </table>
+
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2021出題】</span>「コンセッション方式とは、施設の<span class="red">所有権と運営権を民間業者へ移行</span>する方式」→ <span class="red">誤り</span>。<span class="blue">所有権は公共が保持したまま</span>、運営権のみを設定する方式。
+  </div>
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2024出題】</span>「BOT方式は、完成直後に所有権を移転する方式」→ <span class="red">誤り</span>。完成直後に所有権移転するのは<span class="blue">BTO方式</span>。BOTは<span class="blue">期間満了後</span>に移管。
+  </div>
+
+  <h2>3. 性能発注・ECI方式</h2>
+  <div class="two-col">
+    <div class="section-card">
+      <div class="section-card-head" style="background:#2e6da4;">性能発注方式</div>
+      <div class="section-card-body">
+        設計者が施工候補者に<span class="bold">一定の性能基準を提示</span>した上で技術提案を求めて施工者を選定する発注方式。施工者のノウハウ・技術提案を活かせる。仕様発注（材料・工法指定）との対比で覚える。
+      </div>
+    </div>
+    <div class="section-card">
+      <div class="section-card-head" style="background:#27ae60;">ECI方式（Early Contractor Involvement）</div>
+      <div class="section-card-body">
+        公共工事において、<span class="bold">設計段階</span>から施工者が技術協力を行い、施工の数量・仕様を確定した上で工事契約をする方式。施工段階における設計変更の発生リスクの減少等が期待できる。【2019出題・正解肢】
+        <div class="point-box" style="margin-top:4px;">
+          <span class="label">⚠</span>「ECI方式は<span class="red">施工段階から</span>施工者が参加」→ 誤り。<span class="blue">設計段階から</span>関与するのが特徴。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PAGE 4: コミッショニング・BCP・ストック活用 ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">④</span>
+    <span class="page-title-text">コミッショニング・BCP・スケルトンインフィル・コンバージョン・ストック活用</span>
+  </div>
+
+  <h2>1. コミッショニング</h2>
+  <div class="note-box">
+    <span class="bold">定義：</span>建築物のオーナー・ユーザーが求める<span class="blue">要求性能を把握</span>し、<span class="blue">設計・施工・運用の各段階</span>においてその要求性能の実現を<span class="blue">検証・確認</span>するプロセス。環境・エネルギー性能の観点から行われることが多い。【2019出題・正解肢】
+  </div>
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ</span>「コミッショニングは<span class="red">施工段階のみ</span>行う検証プロセス」→ <span class="red">誤り</span>。<span class="blue">設計→施工→運用</span>の全段階にわたって実施する。
+  </div>
+
+  <h2>2. BCP（Business Continuity Plan：事業継続計画）</h2>
+  <div class="note-box">
+    <span class="bold">定義：</span>企業が災害・事故で被害を受けても重要な業務が<span class="blue">中断しない</span>こと、中断しても可能な限り<span class="blue">短期間で再開</span>できるよう事業の継続を追求するための計画。【2019出題・正解肢】
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3>BCP対策の具体例（試験頻出）</h3>
+      <ul>
+        <li>サテライトオフィスを設置して事業拠点を分散【2024出題】</li>
+        <li>病院・ホテル等：電気・ガス・水道のライフライン広域停止に備えた設備計画【2021出題】</li>
+        <li>受水槽を1日予想給水量の2倍に設定し塩素滅菌装置を設置【2023出題】</li>
+      </ul>
+    </div>
+    <div>
+      <h3>BCM（Business Continuity Management）</h3>
+      <div class="note-box">
+        BCPを継続的に維持・改善する<span class="bold">経営管理活動</span>全般。BCPの策定・訓練・見直し・教育を含む。<br>BCP（計画）の上位概念としてBCM（マネジメント）がある。
+      </div>
+    </div>
+  </div>
+
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ</span>「BCPは<span class="red">防災計画と同じ</span>もの」→ 誤り。防災計画は被害軽減が主目的。BCPは<span class="blue">業務継続・早期復旧</span>に特化した計画。視点が異なる。
+  </div>
+
+  <h2>3. スケルトン・インフィル（SI住宅）</h2>
+  <table>
+    <tr>
+      <th style="width:22%">要素</th>
+      <th style="width:38%">内容</th>
+      <th style="width:18%">耐用年数</th>
+      <th style="width:22%">区分</th>
+    </tr>
+    <tr>
+      <td class="bold center blue">スケルトン（S）</td>
+      <td>構造躯体・共用設備（柱・梁・スラブ・共用廊下等）</td>
+      <td class="center">長寿命（100年超）</td>
+      <td class="center">共用部</td>
+    </tr>
+    <tr>
+      <td class="bold center green">インフィル（I）</td>
+      <td>内装・専有設備（間仕切り壁・床仕上げ・設備配管等）</td>
+      <td class="center">短寿命（15〜30年）</td>
+      <td class="center">専有部（可変・更新可）</td>
+    </tr>
+  </table>
+  <div class="note-box">
+    スケルトンとインフィルを分離することで、居住者のライフスタイル変化に対応した<span class="bold">間取り変更・設備更新</span>が容易になる。長期優良住宅の「可変性」基準にも関連。
+  </div>
+
+  <h2>4. コンバージョン（用途転換）</h2>
+  <div class="note-box">
+    <span class="bold">定義：</span>既存建築物の用途を変更して再活用する手法。ストック活用・環境負荷低減に有効。<br>
+    代表例：オフィス→住宅、工場→文化施設・商業施設（倉敷アイビースクエア：紡績工場→ホテル・文化施設）
+  </div>
+  <div class="point-box">
+    <span class="label">⚠ 試験ポイント</span>建築基準法上の「用途変更」：床面積200㎡超（特殊建築物への変更）は<span class="blue">確認申請が必要</span>。200㎡以下は申請不要（工事届のみ）。
+  </div>
+
+  <h2>5. ストックマネジメント・ライフサイクルマネジメント</h2>
+  <div class="two-col">
+    <div class="section-card">
+      <div class="section-card-head" style="background:#2e6da4;">ストックマネジメント</div>
+      <div class="section-card-body">
+        既存建築物・インフラを長期的に維持・活用するための計画的管理。公共施設等総合管理計画の策定（PPP/PFI活用と連動）。公共施設の老朽化対応・統廃合の観点から出題。
+      </div>
+    </div>
+    <div class="section-card">
+      <div class="section-card-head" style="background:#8e44ad;">ライフサイクルマネジメント（LCM）</div>
+      <div class="section-card-body">
+        建築物の機能や効用の維持あるいは向上を適切なコストのもとで、<span class="bold">企画から解体・廃棄処分まで</span>管理実行すること【2024出題・正解肢】。
+      </div>
+    </div>
+  </div>
+
+  <h2>6. アダプタビリティ・フレキシビリティ（可変性）</h2>
+  <table>
+    <tr><th style="width:30%">概念</th><th>内容</th><th style="width:22%">時間スケール</th></tr>
+    <tr>
+      <td class="bold center">アダプタビリティ</td>
+      <td>建築物が用途変更・大規模改修に対応できる<span class="bold">長期的な可変性</span>（SI住宅・コンバージョン対応）</td>
+      <td class="center">長期（数十年）</td>
+    </tr>
+    <tr>
+      <td class="bold center">フレキシビリティ</td>
+      <td>間取りの変更・家具の移動等、<span class="bold">短期的な空間の可変性</span>（可動間仕切り・オープンプラン等）</td>
+      <td class="center">短期〜中期</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ======================== PAGE 5: 省エネ・エネルギー制度まとめ ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">⑤</span>
+    <span class="page-title-text">省エネ・エネルギー制度まとめ　BEI / ZEB / 再エネ / 省エネ法 / 頻出数値</span>
+  </div>
+
+  <h2>1. 建築物省エネ法と一次エネルギー消費量基準</h2>
+  <div class="note-box">
+    <span class="bold">設計一次エネルギー消費量 ÷ 基準一次エネルギー消費量 ＝ BEI</span><br>
+    BEI ≦ 1.0 で<span class="blue">省エネ基準適合</span>。2017年に非住宅300㎡以上が省エネ適合義務化の流れ。2025年以降は新築住宅・非住宅すべて省エネ基準適合が義務化方向。
+  </div>
+
+  <table>
+    <tr><th style="width:18%">BEI値</th><th>評価</th><th style="width:20%">BELS星数</th></tr>
+    <tr><td class="center">BEI ≦ 0.8</td><td>省エネ基準より20%以上向上</td><td class="center">★★★★★（5星）相当以上</td></tr>
+    <tr><td class="center">BEI ≦ 0.85</td><td>省エネ基準より15%以上向上</td><td class="center">★★★★</td></tr>
+    <tr><td class="center">BEI ≦ 0.9</td><td>省エネ基準より10%以上向上</td><td class="center">★★★</td></tr>
+    <tr><td class="center">BEI ≦ 1.0</td><td>省エネ基準適合</td><td class="center">★★</td></tr>
+    <tr><td class="center">BEI &gt; 1.0</td><td>省エネ基準不適合</td><td class="center">★（基準不適合表示）</td></tr>
+  </table>
+
+  <h2>2. ZEB区分と省エネ削減率 詳細</h2>
+  <table>
+    <tr>
+      <th style="width:22%">区分</th>
+      <th style="width:30%">再エネ込み削減率</th>
+      <th style="width:30%">再エネ除き削減率</th>
+      <th style="width:18%">主な対象</th>
+    </tr>
+    <tr>
+      <td class="bold center">ZEB</td>
+      <td class="center green bold">100%以上</td>
+      <td class="center">50%以上</td>
+      <td class="center">全用途</td>
+    </tr>
+    <tr>
+      <td class="bold center">Nearly ZEB</td>
+      <td class="center">75%以上〜100%未満</td>
+      <td class="center">50%以上</td>
+      <td class="center">全用途</td>
+    </tr>
+    <tr>
+      <td class="bold center">ZEB Ready</td>
+      <td class="center">―</td>
+      <td class="center green bold">50%以上</td>
+      <td class="center">全用途</td>
+    </tr>
+    <tr>
+      <td class="bold center">ZEB Oriented</td>
+      <td class="center">―</td>
+      <td class="center">30〜40%以上<br><span class="small">（延床面積・用途による）</span></td>
+      <td class="center">大規模建築物</td>
+    </tr>
+    <tr>
+      <td class="bold center">ZEH（住宅）</td>
+      <td class="center green bold">100%以上（正味ゼロ以下）</td>
+      <td class="center">20%以上（外皮強化）</td>
+      <td class="center">住宅</td>
+    </tr>
+  </table>
+  <div class="note-box" style="margin-top:4px;">
+    <span class="bold">ZEH（ネット・ゼロ・エネルギー・ハウス）：</span>高い断熱性能を有する外皮と高効率省エネ設備を備え、再生可能エネルギー等により年間一次エネルギー消費量が<span class="bold">正味ゼロ又はマイナス</span>となる住宅【2025出題・正解肢】。
+  </div>
+
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2021出題】</span>「ZEBは建設リサイクル法の分別解体・再資源化の実施義務対象建築物のことである」→ <span class="red">誤り</span>。ZEBはエネルギー性能の概念であり、建設リサイクル法の適用対象建築物の定義ではない。
+  </div>
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2022出題】</span>「ZEBを実現するためには、<span class="red">再生可能エネルギーの導入のみ</span>では不十分」→ <span class="blue">正しい</span>。ZEBはエネルギー消費量の削減（省エネ）と再エネの両方が必要。省エネ努力なしに再エネのみで達成はできない。
+  </div>
+
+  <h2>3. 再生可能エネルギー種別</h2>
+  <table>
+    <tr><th>種別</th><th>概要</th><th>ZEBへの活用</th></tr>
+    <tr><td class="bold center">太陽光発電（PV）</td><td>太陽光を直接電力に変換。建築物屋根・外壁等に設置</td><td class="center">◎ 最も一般的</td></tr>
+    <tr><td class="bold center">太陽熱利用</td><td>太陽熱を給湯・暖房等に利用</td><td class="center">○</td></tr>
+    <tr><td class="bold center">地中熱利用</td><td>地中の安定した温度を利用したヒートポンプ</td><td class="center">○</td></tr>
+    <tr><td class="bold center">バイオマス</td><td>生物由来の有機物を燃料として利用</td><td class="center">△</td></tr>
+    <tr><td class="bold center">風力</td><td>風のエネルギーを電力に変換</td><td class="center">△（建築物単体では限定的）</td></tr>
+  </table>
+
+  <h2>4. 省エネ基準・eマーク・認定制度 整理</h2>
+  <table>
+    <tr><th style="width:30%">制度・マーク</th><th>内容</th></tr>
+    <tr>
+      <td class="bold center">eマーク<br>（省エネ基準適合認定マーク）</td>
+      <td>建築物が省エネルギー基準に適合していることについて<span class="bold">所管行政庁から認定</span>を受けたことを示すマーク【2020出題・正解肢】</td>
+    </tr>
+    <tr>
+      <td class="bold center">BELS</td>
+      <td>第三者評価機関が評価・認証する制度（新築・既存対象）。eマークより客観性・中立性が高い</td>
+    </tr>
+    <tr>
+      <td class="bold center">省エネ適合性判定</td>
+      <td>延床面積300㎡以上の非住宅新築は建築確認と別途に省エネ適合性判定が必要</td>
+    </tr>
+  </table>
+
+  <h2>5. 頻出数値・キーワード まとめ</h2>
+  <div class="two-col">
+    <div class="note-box">
+      <span class="bold">CASBEE：</span>BEE = Q ÷ L　大きいほど高性能<br>
+      ランク：S &gt; A &gt; B+ &gt; B- &gt; C
+    </div>
+    <div class="note-box">
+      <span class="bold">BELS：</span>BEI = 設計一次E ÷ 基準一次E<br>
+      小さいほど省エネ・星が多い　BEI≦1.0で適合
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="note-box">
+      <span class="bold">ZEB Ready：</span>再エネ除き50%以上削減<br>
+      <span class="bold">ZEB：</span>再エネ込み100%以上削減
+    </div>
+    <div class="note-box">
+      <span class="bold">LEED：</span>USGBC運営・4段階<br>
+      Platinum &gt; Gold &gt; Silver &gt; Certified
+    </div>
+  </div>
+  <div class="point-box">
+    <span class="label">最終確認</span>BEEは<span class="blue">大きい</span>ほど高性能（CASBEE）　／　BEIは<span class="blue">小さい</span>ほど省エネ（BELS）。この対比を必ず押さえる。
+  </div>
+</div>
+
+
+<!-- ======================== PAGE 6: 都市計画・まちづくり用語 ======================== -->
+<div class="page">
+  <div class="page-header">
+    <span class="page-num">⑥</span>
+    <span class="page-title-text">都市計画・まちづくり用語　インナーシティ / スプロール / レジリエンス / TOD / BID / GIS / CEMS</span>
+  </div>
+
+  <h2>1. 都市問題・まちづくり概念</h2>
+
+  <div class="two-col">
+    <div class="section-card">
+      <div class="section-card-head" style="background:#cc0000;">インナーシティ問題</div>
+      <div class="section-card-body">
+        <div class="note-box" style="margin-bottom:4px;">
+          <span class="bold">定義：</span>都市の<span class="blue">中心部とその周辺の市街地</span>における人口の減少と産業の衰退、地域の荒廃等の問題。郊外化（スプロール）の裏返し現象として発生。
+        </div>
+        <div class="point-box">
+          <span class="label">⚠</span>「インナーシティ問題＝<span class="red">郊外部</span>の問題」→ 誤り。<span class="blue">都市中心部・内側</span>の問題。
+        </div>
+      </div>
+    </div>
+    <div class="section-card">
+      <div class="section-card-head" style="background:#e67e22;">スプロール現象</div>
+      <div class="section-card-body">
+        <div class="note-box" style="margin-bottom:4px;">
+          <span class="bold">定義：</span>都市が<span class="blue">無秩序・無計画に郊外へ拡大</span>していく現象。虫食い状の市街地拡大。インフラ整備コストの増大・農地の無秩序な転用等が問題となる。
+        </div>
+        <div class="point-box">
+          <span class="label">⚠</span>「スプロール＝自然災害から社会基盤が復活すること」→ 誤り。それは<span class="blue">レジリエンス</span>の概念。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card" style="margin-bottom:6px;">
+    <div class="section-card-head" style="background:#27ae60;">レジリエンス（都市のレジリエンス）</div>
+    <div class="section-card-body">
+      <div class="note-box">
+        <span class="bold">定義：</span>自然災害等により社会基盤やそれが支える社会・経済が一時的に大きなダメージを受けても、<span class="blue">速やかに復活・回復</span>できる都市・地域の能力・性質。BCPと近い概念だが、<span class="bold">都市・地域スケール</span>で使われる。
+      </div>
+      <p style="margin-top:3px;font-size:8pt;color:#555;">BCPは個別企業の事業継続計画 ／ レジリエンスは都市・地域全体の回復力</p>
+    </div>
+  </div>
+
+  <h2>2. 都市計画関連の略語・制度</h2>
+
+  <table>
+    <tr>
+      <th style="width:14%">略語</th>
+      <th style="width:22%">正式名称</th>
+      <th style="width:14%">単位</th>
+      <th>定義・内容・試験ポイント</th>
+    </tr>
+    <tr>
+      <td class="bold center">TMO</td>
+      <td class="center small">Town Management Organization</td>
+      <td class="center">中心市街地</td>
+      <td>商業・業務機能が集積した地区において「中心市街地活性化基本計画」等をもとに活性化事業を推進する<span class="bold blue">民間主体の組織</span>。<br><span class="small red">⚠「行政主体の組織」→誤り</span></td>
+    </tr>
+    <tr>
+      <td class="bold center">DID</td>
+      <td class="center small">Densely Inhabited District<br>人口集中地区</td>
+      <td class="center">統計地区</td>
+      <td>人口密度が<span class="bold">4,000人/km²以上</span>の基本単位区等が互いに隣接し、それらの人口が<span class="bold">5,000人以上</span>となる地域。国勢調査で5年ごとに設定。<br><span class="small red">⚠「3,000人以上」「密度の数値違い」で引っかけ出題</span></td>
+    </tr>
+    <tr>
+      <td class="bold center">TOD</td>
+      <td class="center small">Transit Oriented Development</td>
+      <td class="center">開発手法</td>
+      <td>鉄道・バス等の公共交通機関の駅・停留所を中心に、<span class="bold">徒歩圏内</span>に住宅・商業・業務等を集積させるコンパクトな都市開発手法。<br><span class="small red">⚠「自動車交通の効率化を最大限活かす計画」→誤り。公共交通・歩行者中心が正しい</span></td>
+    </tr>
+    <tr>
+      <td class="bold center">BID</td>
+      <td class="center small">Business Improvement District</td>
+      <td class="center">地区</td>
+      <td>地区内の不動産所有者や事業者等から<span class="bold">負担金を徴収</span>し、その地区のオープンスペース維持管理・治安改善・マーケティング等を行う制度。米国・英国で発展。日本では「エリアマネジメント」として普及。</td>
+    </tr>
+    <tr>
+      <td class="bold center">GIS</td>
+      <td class="center small">Geographic Information System<br>地理情報システム</td>
+      <td class="center">情報技術</td>
+      <td>位置に関する情報をもつデータ（空間データ）を総合的に管理・加工し、<span class="bold">視覚的に表示・分析・判断</span>を可能にする技術。都市計画・防災・インフラ管理等に活用。</td>
+    </tr>
+  </table>
+
+  <h2>3. エネルギー管理システム 規模別比較（混同注意）</h2>
+
+  <table>
+    <tr>
+      <th style="width:14%">略語</th>
+      <th style="width:22%">正式名称</th>
+      <th style="width:12%">対象規模</th>
+      <th>定義・内容</th>
+    </tr>
+    <tr>
+      <td class="bold center">HEMS</td>
+      <td class="center small">Home Energy Management System</td>
+      <td class="center bold blue">住宅</td>
+      <td>住宅内のエネルギー設備（太陽光・蓄電池・家電等）を一元管理・制御するシステム</td>
+    </tr>
+    <tr>
+      <td class="bold center">BEMS</td>
+      <td class="center small">Building and Energy Management System</td>
+      <td class="center bold green">建物</td>
+      <td>建築物のエネルギー設備（空調・照明・熱源等）を一元管理・制御するシステム。省エネの自動制御・見える化に活用。【2022出題注意：BEMSをペリメーターゾーン用の空調システムとする誤り選択肢あり】</td>
+    </tr>
+    <tr>
+      <td class="bold center">CEMS</td>
+      <td class="center small">Community Energy Management System</td>
+      <td class="center bold red">地区</td>
+      <td>インターネット等の通信回線を活用し、<span class="bold">複数の建築物のエネルギー設備を一元的に管理・制御</span>することによって<span class="bold blue">地区（コミュニティ）単位</span>で行われるエネルギーの集中管理システム</td>
+    </tr>
+  </table>
+
+  <div class="point-box">
+    <span class="label">⚠ 引っかけ【2022出題】</span>「BEMS（Building and Energy Management System）＝二重のガラス間にブラインド等の遮光装置を設置し、空調空気を通すことで、ペリメーターゾーンの熱負荷を軽減するシステム」→ <span class="red">誤り</span>。その説明は<span class="blue">エアフローウィンドウ</span>（またはダブルスキン）の説明。BEMSは建物エネルギーの管理・制御システム。
+  </div>
+
+  <h2>4. エリアマネジメント</h2>
+  <div class="note-box">
+    地域の不動産所有者・事業者・住民等が<span class="bold">主体</span>となり、地域の価値・魅力を維持・向上させるための<span class="bold">自発的・継続的な取り組み</span>。BIDの日本版的な概念。公民連携（PPP）の手法の一つでもある。
+  </div>
+
+  <h2>5. 都市計画・まちづくり用語 クイック一覧</h2>
+  <table>
+    <tr>
+      <th style="width:18%">用語</th>
+      <th style="width:16%">単位・主体</th>
+      <th>キーワード</th>
+    </tr>
+    <tr>
+      <td class="bold center">インナーシティ問題</td>
+      <td class="center">都市中心部</td>
+      <td>人口減少・産業衰退・荒廃　←→　スプロール（郊外拡大）の裏返し</td>
+    </tr>
+    <tr>
+      <td class="bold center">スプロール</td>
+      <td class="center">郊外</td>
+      <td>無秩序・無計画な郊外拡大　虫食い市街地</td>
+    </tr>
+    <tr>
+      <td class="bold center">レジリエンス</td>
+      <td class="center">都市・地域</td>
+      <td>被害後の<span class="blue">速やかな回復力</span>　都市スケールのBCP概念</td>
+    </tr>
+    <tr>
+      <td class="bold center">TMO</td>
+      <td class="center">民間主体組織</td>
+      <td>中心市街地活性化　<span class="red">民間</span>主体（行政ではない）</td>
+    </tr>
+    <tr>
+      <td class="bold center">DID</td>
+      <td class="center">統計地区</td>
+      <td>密度<span class="bold">4,000人/km²以上</span>かつ<span class="bold">5,000人以上</span>　国勢調査で5年毎</td>
+    </tr>
+    <tr>
+      <td class="bold center">TOD</td>
+      <td class="center">開発手法</td>
+      <td><span class="blue">公共交通</span>指向型開発　駅周辺の徒歩圏に機能集積</td>
+    </tr>
+    <tr>
+      <td class="bold center">BID</td>
+      <td class="center">地区</td>
+      <td>負担金で運営するビジネス改善地区　日本のエリアマネジメントに相当</td>
+    </tr>
+    <tr>
+      <td class="bold center">GIS</td>
+      <td class="center">情報技術</td>
+      <td>空間データの管理・可視化・分析　都市計画・防災に活用</td>
+    </tr>
+    <tr>
+      <td class="bold center">HEMS / BEMS / CEMS</td>
+      <td class="center">住宅・建物・地区</td>
+      <td>規模順：住宅→建物→地区（コミュニティ）　規模が大きくなるほどCに近づく</td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>
