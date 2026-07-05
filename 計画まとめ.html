@@ -3,2468 +3,579 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>計画まとめ　建築史・マネジメント・環境・都市計画</title>
+<title>計画まとめ　建築史・計画・環境・マネジメント・都市計画</title>
 <style>
-  @page { size: A4 portrait; margin: 15mm 12mm 15mm 12mm; }
+  @page { size: A4 portrait; margin: 14mm 11mm 14mm 11mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
-    font-size: 9.5pt;
+    font-size: 9pt;
     color: #111;
     background: #fff;
     width: 210mm;
     margin: 0 auto;
-    padding: 10mm 12mm;
-    overflow-x: hidden;
+    padding: 8mm 11mm;
   }
-  .page { width: 186mm; page-break-after: always; padding-bottom: 6mm; }
+  .page { width: 188mm; page-break-after: always; padding-bottom: 4mm; }
   .page:last-child { page-break-after: auto; }
   .page-header {
-    display: flex; align-items: center;
+    display: flex; align-items: center; gap: 7px;
     background: #1a3a5c; color: #fff;
-    padding: 4px 10px; margin-bottom: 8px;
+    padding: 3px 9px; margin-bottom: 7px;
   }
   .page-num {
-    font-size: 14pt; font-weight: bold;
+    font-size: 10pt; font-weight: bold;
     background: #fff; color: #1a3a5c;
-    border-radius: 50%; width: 22px; height: 22px;
+    border-radius: 50%; width: 20px; height: 20px;
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin-right: 10px;
+    flex-shrink: 0;
   }
-  .page-title, .page-title-text { font-size: 11pt; font-weight: bold; }
+  .page-title { font-size: 10.5pt; font-weight: bold; }
   h2 {
-    font-size: 10.5pt; font-weight: bold; color: #fff;
-    background: #2e6da4; padding: 3px 8px; margin: 10px 0 5px 0;
+    font-size: 9.5pt; font-weight: bold; color: #fff;
+    background: #2e6da4; padding: 2px 7px; margin: 8px 0 4px 0;
   }
   h3 {
-    font-size: 9.5pt; font-weight: bold; color: #1a3a5c;
-    border-left: 4px solid #2e6da4; padding-left: 6px;
-    margin: 8px 0 4px 0;
+    font-size: 8.5pt; font-weight: bold; color: #1a3a5c;
+    border-left: 3px solid #2e6da4; padding-left: 5px;
+    margin: 6px 0 3px 0;
   }
-  table { width: 100%; border-collapse: collapse; font-size: 8pt; margin-bottom: 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 7.8pt; margin-bottom: 5px; }
   th {
     background: #dbe8f5; font-weight: bold;
-    border: 1px solid #7aaacf; padding: 4px 5px;
+    border: 1px solid #7aaacf; padding: 3px 4px;
     text-align: center; vertical-align: middle;
   }
-  td { border: 1px solid #aac4de; padding: 3px 6px; vertical-align: middle; }
+  td { border: 1px solid #aac4de; padding: 2px 5px; vertical-align: middle; }
   tr:nth-child(even) td { background: #f4f9ff; }
-  .red   { color: #cc0000; font-weight: bold; }
-  .blue  { color: #0055aa; font-weight: bold; }
-  .green { color: #006600; font-weight: bold; }
-  .bold  { font-weight: bold; }
-  .center { text-align: center; }
-  .small { font-size: 7.5pt; }
-  .important { color: #cc0000; font-weight: bold; }
-  .point-box {
-    border: 1.5px solid #cc0000; background: #fff8f8;
-    border-radius: 3px; padding: 4px 8px; margin: 5px 0; font-size: 8.5pt;
+  .r { color: #cc0000; font-weight: bold; }
+  .b { color: #0055aa; font-weight: bold; }
+  .g { color: #006600; font-weight: bold; }
+  .bold { font-weight: bold; }
+  .c { text-align: center; }
+  .s { font-size: 7pt; }
+  .pt {
+    border: 1px solid #cc0000; background: #fff8f8;
+    border-radius: 3px; padding: 3px 7px; margin: 4px 0; font-size: 7.8pt;
   }
-  .point-box .label { font-weight: bold; color: #cc0000; margin-right: 4px; }
-  .note-box {
+  .nt {
     border: 1px solid #2e6da4; background: #f0f6ff;
-    border-radius: 3px; padding: 4px 8px; margin: 4px 0; font-size: 8pt;
+    border-radius: 3px; padding: 3px 7px; margin: 3px 0; font-size: 7.8pt;
   }
-  .trap-box {
-    border: 1.5px solid #cc6600; background: #fff8ee;
-    border-radius: 3px; padding: 6px 10px; margin: 6px 0; font-size: 8.5pt;
+  .trap {
+    border: 1px solid #cc6600; background: #fff8ee;
+    border-radius: 3px; padding: 3px 7px; margin: 4px 0; font-size: 7.8pt;
   }
-  .trap-title { font-weight: bold; color: #cc6600; margin-bottom: 4px; }
-  .section-title {
-    font-size: 10pt; font-weight: bold; color: #fff;
-    background: #2e6da4; padding: 3px 8px; margin: 8px 0 5px 0;
-  }
-  .two-col { display: flex; gap: 8px; margin-bottom: 6px; }
-  .two-col > div { flex: 1; }
-  .diff-box { display: flex; gap: 6px; margin-bottom: 6px; }
-  .diff-box > div {
-    flex: 1; border-radius: 4px; padding: 5px 8px; font-size: 8.5pt;
-  }
-  .section-card {
-    border: 1.5px solid #aac4de; border-radius: 4px;
-    overflow: hidden; margin-bottom: 6px;
-  }
-  .section-card-head {
-    font-size: 9pt; font-weight: bold; color: #fff;
-    padding: 3px 8px;
-  }
-  .section-card-body { padding: 5px 8px; font-size: 8.5pt; }
-  .tag {
-    display: inline-block; font-size: 7.5pt; font-weight: bold;
-    border-radius: 3px; padding: 1px 6px; margin-bottom: 3px;
-  }
-  .star { color: #cc6600; font-weight: bold; }
-  ul { padding-left: 16px; margin: 3px 0 5px 0; }
-  li { margin-bottom: 2px; font-size: 8.5pt; line-height: 1.5; }
-  p { margin: 3px 0; font-size: 8.5pt; }
-
-  /* 章区切り */
-  .chapter-divider {
-    page-break-before: always;
-    background: #1a3a5c; color: #fff;
-    font-size: 16pt; font-weight: bold;
-    text-align: center; padding: 30mm 0;
-    width: 186mm; margin-bottom: 0;
-  }
+  .two { display: flex; gap: 6px; margin-bottom: 5px; }
+  .two > div { flex: 1; }
+  .card { border: 1px solid #aac4de; border-radius: 3px; overflow: hidden; margin-bottom: 4px; }
+  .card-h { font-size: 8pt; font-weight: bold; color: #fff; padding: 2px 7px; }
+  .card-b { padding: 4px 7px; font-size: 7.8pt; }
+  ul { padding-left: 14px; margin: 2px 0 4px 0; }
+  li { margin-bottom: 1px; font-size: 7.8pt; line-height: 1.45; }
+  p { margin: 2px 0; font-size: 7.8pt; }
 </style>
 </head>
 <body>
 
-<!-- ============================================================ -->
-<!--  第1部：建築史・建築実例                                       -->
-<!-- ============================================================ -->
-<div class="chapter-divider">
-  第1部<br><span style="font-size:12pt;margin-top:8px;display:block">建築史・建築実例まとめ</span>
-</div>
-
-<!-- ======================== PAGE 1: 日本建築史（古代〜江戸） ======================== -->
+<!-- ① 建築史（日本） -->
 <div class="page">
   <div class="page-header">
-    <span class="page-num">①</span>
-    <span class="page-title">日本建築史（古代〜江戸）― 神社・仏教建築・城郭・住宅</span>
+    <div class="page-num">①</div>
+    <div class="page-title">建築史（日本）― 神社・仏教建築・城郭・住宅・茶室</div>
   </div>
 
-  <h2>1. 神社建築の様式</h2>
+  <h2>神社建築の様式</h2>
   <table>
-    <colgroup><col style="width:14%"><col style="width:40%"><col style="width:46%"></colgroup>
-    <thead>
-      <tr><th>様式</th><th>特徴</th><th>代表例</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="red">神明造</span></td>
-        <td>切妻・<span class="red">平入</span>・棟持柱・高床</td>
-        <td>伊勢神宮内宮（三重）</td>
-      </tr>
-      <tr>
-        <td><span class="red">大社造</span></td>
-        <td>切妻・<span class="red">妻入</span>・棟持柱・高床</td>
-        <td>出雲大社（島根）</td>
-      </tr>
-      <tr>
-        <td><span class="red">住吉造</span></td>
-        <td>切妻・妻入・<span class="red">内部2分割</span></td>
-        <td>住吉大社（大阪）</td>
-      </tr>
-      <tr>
-        <td><span class="red">春日造</span></td>
-        <td>切妻・妻入・<span class="red">向拝付</span></td>
-        <td>春日大社（奈良）</td>
-      </tr>
-      <tr>
-        <td><span class="red">流造</span></td>
-        <td>切妻・<span class="red">平入</span>・向拝付・<span class="red">前面庇延長</span></td>
-        <td>宇治上神社（京都）、上賀茂神社（京都）</td>
-      </tr>
-      <tr>
-        <td><span class="red">八幡造</span></td>
-        <td>切妻<span class="red">2棟連結</span>（相の間でつなぐ）</td>
-        <td>宇佐神宮（大分）、石清水八幡宮（京都）</td>
-      </tr>
-      <tr>
-        <td><span class="red">権現造</span></td>
-        <td>本殿＋拝殿を<span class="red">石の間</span>で連結</td>
-        <td>日光東照宮（栃木）</td>
-      </tr>
-    </tbody>
+    <tr><th style="width:16%">様式</th><th style="width:32%">特徴</th><th>代表例</th></tr>
+    <tr><td class="c"><span class="r">神明造</span></td><td>切妻・<span class="r">平入</span>・棟持柱・高床</td><td>伊勢神宮内宮（三重）</td></tr>
+    <tr><td class="c"><span class="r">大社造</span></td><td>切妻・<span class="r">妻入</span>・棟持柱・高床・内部に心御柱</td><td>出雲大社（島根）</td></tr>
+    <tr><td class="c"><span class="r">住吉造</span></td><td>切妻・妻入・<span class="r">内部2分割</span>・直線的</td><td>住吉大社（大阪）</td></tr>
+    <tr><td class="c"><span class="r">春日造</span></td><td>切妻・妻入・<span class="r">向拝付き</span>・檜皮葺</td><td>春日大社（奈良）</td></tr>
+    <tr><td class="c"><span class="r">流造</span></td><td>切妻・<span class="r">平入</span>・向拝付き・<span class="r">前面庇延長</span></td><td>宇治上神社・上賀茂神社（京都）</td></tr>
+    <tr><td class="c"><span class="r">八幡造</span></td><td>切妻<span class="r">2棟連結</span>（相の間でつなぐ）</td><td>宇佐神宮（大分）・石清水八幡宮</td></tr>
+    <tr><td class="c"><span class="r">権現造</span></td><td>本殿＋拝殿を<span class="r">石の間</span>で連結</td><td>日光東照宮（栃木）</td></tr>
   </table>
+  <div class="pt">神明造・流造＝<span class="r">平入</span>　大社造・住吉造・春日造＝<span class="r">妻入</span>　八幡造のみ2棟連結</div>
 
-  <div class="point-box">
-    <span class="label">★ 混同注意</span>
-    <span class="red">神明造は平入</span>、<span class="red">大社造・住吉造・春日造は妻入</span>。
-    流造は平入だが前面庇が延長。八幡造は唯一2棟連結。
-  </div>
-
-  <h2>2. 仏教建築の様式</h2>
+  <h2>仏教建築の様式</h2>
   <table>
-    <colgroup><col style="width:18%"><col style="width:42%"><col style="width:40%"></colgroup>
-    <thead>
-      <tr><th>様式</th><th>特徴</th><th>代表例</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="red">和様（大和様）</span></td>
-        <td>木鼻なし・<span class="red">扇垂木</span>・引き戸・柔らかい曲線</td>
-        <td>法隆寺（奈良・飛鳥）、唐招提寺金堂（奈良・奈良時代）</td>
-      </tr>
-      <tr>
-        <td><span class="red">大仏様（天竺様）</span></td>
-        <td><span class="red">挿し肘木</span>・<span class="red">貫多用</span>・桟唐戸・豪快な構造</td>
-        <td>東大寺南大門（奈良・<span class="blue">鎌倉再建</span>）</td>
-      </tr>
-      <tr>
-        <td><span class="red">禅宗様（唐様）</span></td>
-        <td><span class="red">詰組</span>・<span class="red">海老虹梁</span>・<span class="red">花頭窓</span>・桟唐戸・扇垂木</td>
-        <td>円覚寺舎利殿（神奈川）、永保寺開山堂（岐阜）</td>
-      </tr>
-      <tr>
-        <td><span class="red">折衷様</span></td>
-        <td>和様＋禅宗様・大仏様を<span class="red">混在</span></td>
-        <td>観心寺金堂（大阪）、石山寺多宝塔（滋賀）</td>
-      </tr>
-    </tbody>
+    <tr><th style="width:18%">様式</th><th style="width:38%">構造的特徴</th><th>代表例</th></tr>
+    <tr><td class="c"><span class="r">和様</span></td><td>扇垂木・小さな組物・柔らかい曲線・引き戸</td><td>法隆寺・唐招提寺金堂（奈良）</td></tr>
+    <tr><td class="c"><span class="r">大仏様（天竺様）</span></td><td><span class="r">挿し肘木・貫多用</span>・桟唐戸・豪快</td><td>東大寺南大門（奈良・<span class="b">鎌倉再建</span>）</td></tr>
+    <tr><td class="c"><span class="r">禅宗様（唐様）</span></td><td><span class="r">詰組・海老虹梁・花頭窓</span>・桟唐戸</td><td>円覚寺舎利殿（神奈川）</td></tr>
+    <tr><td class="c"><span class="r">折衷様</span></td><td>和様＋禅宗様・大仏様を混在</td><td>観心寺金堂（大阪）・石山寺多宝塔</td></tr>
   </table>
+  <div class="pt">東大寺南大門＝<span class="r">大仏様（天竺様）</span>　「和様では？」の引っかけ注意　挿し肘木・貫多用がポイント</div>
 
-  <div class="point-box">
-    <span class="label">★ 混同注意</span>
-    <span class="red">東大寺南大門＝大仏様（天竺様）</span>。和様ではない。挿し肘木・貫多用が大仏様の最大特徴。
-    禅宗様は詰組（肘木が密に組まれる）と花頭窓がセット。
-  </div>
-
-  <h2>3. 城郭・住宅・茶室</h2>
-  <div class="two-col">
+  <h2>城郭・住宅・茶室</h2>
+  <div class="two">
     <div>
-      <h3>書院造・数寄屋造</h3>
-      <ul>
-        <li><span class="red">書院造</span>：二条城二の丸御殿（京都）、慈照寺東求堂（京都・室町時代）</li>
-        <li><span class="red">数寄屋造</span>：桂離宮（京都・江戸初期）、修学院離宮（京都）</li>
-      </ul>
-      <h3>茶室</h3>
-      <ul>
-        <li><span class="red">待庵</span>（山崎・千利休）― 現存最古の茶室 <span class="star">★</span></li>
-        <li><span class="red">如庵</span>（愛知・織田有楽斎）</li>
-        <li>曼殊院書院（京都）</li>
-      </ul>
-    </div>
-    <div>
-      <h3>天守・城郭</h3>
-      <ul>
-        <li><span class="red">姫路城</span>（兵庫）― 現存12天守の中で最大・世界遺産 <span class="star">★</span></li>
-        <li><span class="red">犬山城</span>（愛知）― 現存最古の木造天守（説あり）<span class="star">★</span></li>
-        <li>松本城（長野）・彦根城（滋賀）・高知城・松山城なども現存天守</li>
-      </ul>
-      <div class="note-box">
-        <span class="bold">現存12天守</span>：弘前・松本・丸岡・犬山・彦根・姫路・備中松山・松江・丸亀・伊予松山・宇和島・高知
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== PAGE 2: 西洋建築史（古代〜近世） ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">②</span>
-    <span class="page-title">西洋建築史（古代〜近世）― 様式・時代・特徴・代表建築</span>
-  </div>
-
-  <h2>1. 西洋建築の様式と時代</h2>
-  <table>
-    <colgroup><col style="width:16%"><col style="width:10%"><col style="width:34%"><col style="width:40%"></colgroup>
-    <thead>
-      <tr><th>様式</th><th>時代</th><th>構造的特徴</th><th>代表建築</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="red">古代ギリシャ</span></td>
-        <td class="center">〜前3c</td>
-        <td><span class="red">柱梁構造</span>・ドリス式／イオニア式／コリント式</td>
-        <td>パルテノン神殿（アテネ・<span class="blue">ドリス式</span>）・エレクテイオン（<span class="blue">イオニア式</span>）</td>
-      </tr>
-      <tr>
-        <td><span class="red">古代ローマ</span></td>
-        <td class="center">前3c〜5c</td>
-        <td><span class="red">アーチ・ドーム</span>・コンクリート・ヴォールト</td>
-        <td>パンテオン（ローマ）・コロッセウム（ローマ）・カラカラ浴場</td>
-      </tr>
-      <tr>
-        <td><span class="red">ビザンチン</span></td>
-        <td class="center">4c〜15c</td>
-        <td><span class="red">ペンデンティブドーム</span>・モザイク装飾・集中式</td>
-        <td>ハギア・ソフィア（イスタンブール・6c）</td>
-      </tr>
-      <tr>
-        <td><span class="red">ロマネスク</span></td>
-        <td class="center">11c〜12c</td>
-        <td><span class="red">半円アーチ・厚壁・小窓</span>・バシリカ式</td>
-        <td>ピサ大聖堂（イタリア）・クリュニー修道院</td>
-      </tr>
-      <tr>
-        <td><span class="red">ゴシック</span></td>
-        <td class="center">12c〜15c</td>
-        <td><span class="red">尖頭アーチ・フライングバットレス</span>・ステンドグラス・垂直性</td>
-        <td>ノートルダム大聖堂（パリ・13c）・ケルン大聖堂（独）・シャルトル大聖堂</td>
-      </tr>
-      <tr>
-        <td><span class="red">ルネサンス</span></td>
-        <td class="center">15c〜16c</td>
-        <td><span class="red">古典復興・ドーム・左右対称</span>・比例重視</td>
-        <td>サン・ピエトロ大聖堂（ローマ・ブラマンテ→ミケランジェロ）・フィレンツェ大聖堂（ブルネレスキ）</td>
-      </tr>
-      <tr>
-        <td><span class="red">バロック</span></td>
-        <td class="center">17c〜18c</td>
-        <td><span class="red">曲線・動感・光と影</span>の劇的演出</td>
-        <td>ヴェルサイユ宮殿（フランス）・サン・カルロ教会（ボッロミーニ）</td>
-      </tr>
-      <tr>
-        <td><span class="red">新古典主義</span></td>
-        <td class="center">18c〜19c</td>
-        <td>古典復興・理性強調・装飾排除</td>
-        <td>パンテオン（パリ）・大英博物館（ロンドン）・ベルリン旧美術館（シンケル）</td>
-      </tr>
-      <tr>
-        <td><span class="red">ゴシック・リバイバル</span></td>
-        <td class="center">19c</td>
-        <td>ゴシック様式の<span class="red">復興・折衷主義</span></td>
-        <td>ウェストミンスター宮殿（ロンドン・バリー＋ピュージン）</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>2. 柱頭の種類（ギリシャの三様式）</h2>
-  <div class="two-col">
-    <div class="section-card">
-      <div class="section-card-head" style="background:#8b4513;">ドリス式</div>
-      <div class="section-card-body">
-        <span class="bold">最も簡素</span>・柱頭に装飾なし・エキヌスとアバクス<br>
-        代表：パルテノン神殿
-      </div>
-    </div>
-    <div class="section-card">
-      <div class="section-card-head" style="background:#2e6da4;">イオニア式</div>
-      <div class="section-card-body">
-        <span class="bold">渦巻状（ヴォリュート）</span>の柱頭<br>
-        代表：エレクテイオン
-      </div>
-    </div>
-    <div class="section-card">
-      <div class="section-card-head" style="background:#27ae60;">コリント式</div>
-      <div class="section-card-body">
-        <span class="bold">最も豪華</span>・アカンサスの葉の柱頭<br>
-        代表：パンテオン内部
-      </div>
-    </div>
-  </div>
-
-  <h2>3. 重要建築の詳細メモ</h2>
-  <div class="two-col">
-    <div>
-      <div class="note-box">
-        <span class="bold red">パンテオン（ローマ）</span>：紀元後125年頃・ハドリアヌス帝。<br>
-        直径43.3mのドーム・オキュラス（天窓）。<br>
-        <span class="star">★</span> 「パンテオン（パリ）」とは別物。
-      </div>
-      <div class="note-box">
-        <span class="bold red">ハギア・ソフィア</span>：537年・ユスティニアヌス帝。<br>
-        ペンデンティブドームにより正方形平面にドームを架ける。<br>
-        <span class="star">★</span> ビザンチン建築の最高傑作。
-      </div>
-    </div>
-    <div>
-      <div class="note-box">
-        <span class="bold red">フィレンツェ大聖堂ドーム</span>：<span class="blue">ブルネレスキ</span>（15c）。<br>
-        型枠なしで施工・二重殻ドーム。ルネサンス建築の幕開け。
-      </div>
-      <div class="note-box">
-        <span class="bold red">ウェストミンスター宮殿</span>：<span class="blue">バリー＋ピュージン</span>（1840年代）。<br>
-        ゴシック・リバイバルの代表。<span class="star">★</span> バリーが設計、ピュージンが内装担当。
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== PAGE 3: 近代建築史（19c末〜20c中） ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">③</span>
-    <span class="page-title">近代建築史（19c末〜20c中）― 五巨匠・バウハウス・アール・デコ</span>
-  </div>
-
-  <h2>1. アーツ＆クラフツ〜アール・ヌーヴォー</h2>
-  <table>
-    <colgroup><col style="width:22%"><col style="width:28%"><col style="width:50%"></colgroup>
-    <thead>
-      <tr><th>建築家・運動</th><th>年代</th><th>代表作・特徴</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="red">ウィリアム・モリス</span></td>
-        <td class="center">英・19c後半</td>
-        <td>アーツ＆クラフツ運動・工芸美術の復興。<span class="blue">レッド・ハウス</span>（1859・ウェッブ設計）</td>
-      </tr>
-      <tr>
-        <td><span class="red">アントニ・ガウディ</span></td>
-        <td class="center">西・1852〜1926</td>
-        <td><span class="blue">サグラダ・ファミリア</span>（バルセロナ・1882〜）、カサ・ミラ、グエル公園。曲線・自然形態</td>
-      </tr>
-      <tr>
-        <td><span class="red">ヴィクトール・オルタ</span></td>
-        <td class="center">白・19c末</td>
-        <td><span class="blue">タッセル邸</span>（ブリュッセル・1893）。植物的曲線・鉄骨露出。アール・ヌーヴォーの先駆</td>
-      </tr>
-      <tr>
-        <td><span class="red">オットー・ワーグナー</span></td>
-        <td class="center">墺・1841〜1918</td>
-        <td>ウィーン郵便貯金局（1906）。分離派（ゼツェッション）への橋渡し</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>2. 近代建築の五巨匠</h2>
-  <table>
-    <colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
-    <thead>
-      <tr><th>建築家</th><th>代表作</th><th>キーワード・特徴</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="red">フランク・ロイド・ライト</span><br><span class="small">米・1867〜1959</span></td>
-        <td>落水荘（PA・1936）、グッゲンハイム美術館（NY・1959）、<span class="blue">旧帝国ホテル（東京・1923）</span></td>
-        <td><span class="red">有機的建築</span>・プレーリースタイル（水平線強調）・浮き基礎（耐震）</td>
-      </tr>
-      <tr>
-        <td><span class="red">ル・コルビュジエ</span><br><span class="small">仏・1887〜1965</span></td>
-        <td>サヴォア邸（ポワシー・1931）、ユニテ・ダビタシオン（マルセイユ・1952）、チャンディガール都市計画、<span class="blue">国立西洋美術館（東京）</span></td>
-        <td><span class="red">近代建築の5原則</span>（ピロティ／屋上庭園／自由な平面／水平連続窓／自由な立面）</td>
-      </tr>
-      <tr>
-        <td><span class="red">ミース・ファン・デル・ローエ</span><br><span class="small">独→米・1886〜1969</span></td>
-        <td>バルセロナ・パビリオン（1929）、ファンズワース邸（IL・1951）、<span class="blue">シーグラムビル（NY・1958）</span></td>
-        <td><span class="red">Less is more</span>・ユニバーサルスペース・鉄骨＋ガラスの均質空間</td>
-      </tr>
-      <tr>
-        <td><span class="red">ヴァルター・グロピウス</span><br><span class="small">独・1883〜1969</span></td>
-        <td><span class="blue">バウハウス校舎（デッサウ・1926）</span>、ファグス靴型工場（1911）</td>
-        <td>バウハウス創設（1919）・工業化・教育改革・カーテンウォール先駆</td>
-      </tr>
-      <tr>
-        <td><span class="red">アルヴァ・アアルト</span><br><span class="small">芬・1898〜1976</span></td>
-        <td><span class="blue">パイミオのサナトリウム（1933）</span>、フィンランディアホール（ヘルシンキ）、ヴュオクセンニスカ教会</td>
-        <td>人間中心主義・有機的曲線・北欧モダニズム・木と自然素材</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="point-box">
-    <span class="label">★ ル・コルビュジエの近代建築5原則</span>
-    ①ピロティ ②屋上庭園 ③自由な平面 ④水平連続窓（横長窓） ⑤自由な立面。
-    サヴォア邸（1931）がその体現。<span class="red">「屋上テラス」ではなく「屋上庭園」</span>と記述。
-  </div>
-
-  <h2>3. バウハウスとアール・デコ</h2>
-  <div class="two-col">
-    <div>
-      <h3>バウハウス</h3>
-      <ul>
-        <li><span class="red">1919年</span>：<span class="blue">ワイマール</span>にてグロピウスが創立</li>
-        <li><span class="red">1925年</span>：<span class="blue">デッサウ</span>に移転（校舎グロピウス設計）</li>
-        <li><span class="red">1932年</span>：<span class="blue">ベルリン</span>に移転</li>
-        <li><span class="red">1933年</span>：ナチスにより<span class="red">閉校</span> <span class="star">★</span></li>
-        <li>教師：クレー、カンディンスキー、モホイ＝ナジ、ブロイヤーなど</li>
-      </ul>
-    </div>
-    <div>
-      <h3>アール・デコ（1920〜30年代）</h3>
-      <ul>
-        <li>幾何学的・直線的・装飾性・機械美学</li>
-        <li><span class="red">クライスラービル</span>（NY・1930・ヴァン＝アレン）<span class="star">★</span></li>
-        <li><span class="red">エンパイア・ステート・ビル</span>（NY・1931）</li>
-        <li>ロックフェラーセンター（NY・1939）</li>
-      </ul>
-      <div class="note-box">
-        <span class="bold">アール・ヌーヴォー vs アール・デコ：</span>
-        ヌーヴォー＝曲線・植物的（19c末〜20c初）、デコ＝直線・幾何学（1920〜30年代）
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== PAGE 4: 現代建築・日本の近代建築（難易度高め） ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">④</span>
-    <span class="page-title">現代建築・日本の近代建築（やや難しめ）― 問われやすいが迷う建築家</span>
-  </div>
-
-  <h2>1. 海外の現代建築家（難易度高め）</h2>
-  <table>
-    <colgroup><col style="width:22%"><col style="width:34%"><col style="width:44%"></colgroup>
-    <thead><tr><th>建築家</th><th>代表作</th><th>キーワード・迷いやすい点</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">エーロ・サーリネン</span><br><span class="small">芬→米・1910〜1961</span></td>
-        <td>TWAターミナル（NY・1962）、ゲートウェイ・アーチ（セントルイス）、<span class="blue">ノール社チューリップチェア</span></td>
-        <td>父<span class="red">エリエル・サーリネン</span>（ヘルシンキ駅）と混同注意 <span class="star">★</span>。コンクリートシェル・有機的形態</td>
-      </tr>
-      <tr>
-        <td><span class="red">カルロ・スカルパ</span><br><span class="small">伊・1906〜1978</span></td>
-        <td><span class="blue">カステルヴェッキオ美術館</span>改修（ヴェローナ）、ブリオン・ヴェガ墓地（1978）</td>
-        <td><span class="red">細部へのこだわり・マテリアル</span>。既存建物の改修で評価。イタリア地方主義</td>
-      </tr>
-      <tr>
-        <td><span class="red">ルイス・バラガン</span><br><span class="small">墨・1902〜1988</span></td>
-        <td><span class="blue">バラガン邸</span>（メキシコシティ・世界遺産）、ロス・クルベス（1958）</td>
-        <td><span class="red">鮮やかな色彩の壁・水・光・静寂</span>。プリツカー賞1980年。メキシコ地域主義</td>
-      </tr>
-      <tr>
-        <td><span class="red">アドルフ・ロース</span><br><span class="small">墺・1870〜1933</span></td>
-        <td>シュタイナー邸（ウィーン・1910）、<span class="blue">ロース・ハウス</span>（ウィーン・1911）</td>
-        <td>「<span class="red">装飾は犯罪である</span>」・近代合理主義の先駆。ウィーン分離派への反発 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">アルネ・ヤコブセン</span><br><span class="small">丁・1902〜1971</span></td>
-        <td><span class="blue">SASロイヤルホテル</span>（コペンハーゲン・1960）、蟻の椅子・スワンチェア</td>
-        <td>北欧モダニズム・デザインと建築の統合。<span class="red">建築から食器・家具まで一体</span>でデザイン</td>
-      </tr>
-      <tr>
-        <td><span class="red">ヨゼフ・ホフマン</span><br><span class="small">墺・1870〜1956</span></td>
-        <td><span class="blue">ストックレー邸</span>（ブリュッセル・1911）、ウィーン工房設立</td>
-        <td><span class="red">ウィーン分離派（ゼツェッション）</span>・クリムトと協働。総合芸術としての建築</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>2. 日本の近代建築家（難易度高め）</h2>
-  <table>
-    <colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
-    <thead><tr><th>建築家</th><th>代表作</th><th>キーワード</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">アントニン・レーモンド</span><br><span class="small">チェコ→日・1888〜1976</span></td>
-        <td>旧草津聖パウロ教会、東京女子大学礼拝堂、<span class="blue">自邸兼事務所</span>（東京）</td>
-        <td>ライトの旧帝国ホテル建設に参加→日本に定住。<span class="red">日本の伝統と近代の融合</span>。吉村順三を育てた <span class="star">★</span>（前川國男はコルビュジエに師事）</td>
-      </tr>
-      <tr>
-        <td><span class="red">吉田鉄郎</span><br><span class="small">1894〜1956</span></td>
-        <td><span class="blue">旧東京中央郵便局</span>（1931）、大阪中央郵便局（1939）</td>
-        <td>逓信省の建築家。<span class="red">モダニズムの合理的外観</span>を官庁建築に導入。保存問題で話題 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">白井晟一</span><br><span class="small">1905〜1983</span></td>
-        <td><span class="blue">松濤美術館</span>（東京・1981）、親和銀行本店（長崎）、NOAビル（東京）</td>
-        <td><span class="red">孤高の建築家</span>。石・煉瓦・重厚感。モダニズムと相容れない独自の精神性</td>
-      </tr>
-      <tr>
-        <td><span class="red">吉村順三</span><br><span class="small">1908〜1997</span></td>
-        <td><span class="blue">軽井沢の山荘</span>（1962）、奈良国立博物館新館（1972）、四季の住宅</td>
-        <td>レーモンドに師事。<span class="red">木造・自然との調和・繊細な納まり</span>。「美しい建築は美しく老いる」</td>
-      </tr>
-      <tr>
-        <td><span class="red">菊竹清訓</span><br><span class="small">1928〜2011</span></td>
-        <td><span class="blue">スカイハウス</span>（1958）、島根県立美術館、都城市民会館</td>
-        <td><span class="red">メタボリズム</span>の中心人物。スカイハウスは4枚の壁で空中に浮かせた住宅</td>
-      </tr>
-      <tr>
-        <td><span class="red">渡辺仁</span><br><span class="small">1887〜1973</span></td>
-        <td><span class="blue">旧服部時計店（和光）</span>（東京・1932）、東京国立博物館本館（1938）、旧第一生命館</td>
-        <td>様式建築の名手。<span class="red">和光のネオ・ルネサンス様式の時計塔</span>は銀座の象徴 <span class="star">★</span></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="two-col" style="margin-top:6px;">
-    <div>
-      <div class="point-box">
-        <span class="label">★ レーモンドの師弟系譜</span>
-        ライト → <span class="red">レーモンド</span>（日本定住）→ <span class="red">吉村順三</span><br>
-        レーモンドは「日本近代建築の父」的存在<br>
-        <span class="small">※前川國男はレーモンドではなくコルビュジエに直接師事（1928〜1930年パリ）</span>
-      </div>
-    </div>
-    <div>
-      <div class="note-box">
-        <span class="bold red">渡辺仁と東京国立博物館本館</span><br>
-        帝冠様式（和風屋根＋洋風躯体）の代表作。<br>
-        同博物館内の<span class="red">東洋館＝谷口吉郎</span>（1968）、<span class="red">法隆寺宝物館＝谷口吉生</span>（1999）と混同しない <span class="star">★</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== PAGE 5: やや難易度高めの建築実例 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">⑤</span>
-    <span class="page-title">やや難しい建築実例（計画）― 問われやすいが迷いやすい作品</span>
-  </div>
-
-  <h2>1. 住宅・集合住宅</h2>
-  <table>
-    <colgroup><col style="width:26%"><col style="width:18%"><col style="width:56%"></colgroup>
-    <thead><tr><th>建物名</th><th>建築家（年）</th><th>試験ポイント・迷いやすい点</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">シュレーダー邸</span></td>
-        <td>リートフェルト（1924）</td>
-        <td>オランダ・<span class="red">デ・ステイル運動</span>の代表作。水平・垂直の面と線のみで構成。世界遺産</td>
-      </tr>
-      <tr>
-        <td><span class="red">シュタイナー邸</span></td>
-        <td>アドルフ・ロース（1910）</td>
-        <td>ウィーン・<span class="red">装飾＝犯罪</span>を唱えたロースの代表作。白い外壁・装飾なし</td>
-      </tr>
-      <tr>
-        <td><span class="red">ユニテ・ダビタシオン</span></td>
-        <td>ル・コルビュジエ（1952）</td>
-        <td>マルセイユ・<span class="red">337戸・ピロティ・内部に商店街・屋上に保育所</span>。集合住宅の原型 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">ハビタ'67</span></td>
-        <td>モシェ・サフディ（1967）</td>
-        <td>モントリオール万博・<span class="red">プレキャストコンクリートの箱を積み重ねた</span>集合住宅。各戸に庭</td>
-      </tr>
-      <tr>
-        <td><span class="red">から傘の家</span></td>
-        <td>篠原一男（1961）</td>
-        <td>東京・<span class="red">傘状の屋根（方形屋根）</span>を1本の柱と壁で支持。白の家より10年早い</td>
-      </tr>
-      <tr>
-        <td><span class="red">スカイハウス</span></td>
-        <td>菊竹清訓（1958）</td>
-        <td>東京・<span class="red">4枚の壁（コア）で空中に浮かせた</span>正方形の住宅。メタボリズムの先駆</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>2. 美術館・文化施設（難易度高め）</h2>
-  <table>
-    <colgroup><col style="width:26%"><col style="width:18%"><col style="width:56%"></colgroup>
-    <thead><tr><th>建物名</th><th>建築家（年）</th><th>試験ポイント</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">サルク研究所</span></td>
-        <td>ルイス・カーン（1963）</td>
-        <td>カリフォルニア・2棟の研究棟が<span class="red">中庭（水路）</span>を挟み対称配置。設備層を構造体に組込み</td>
-      </tr>
-      <tr>
-        <td><span class="red">バルセロナ・パビリオン</span></td>
-        <td>ミース（1929）</td>
-        <td>万博のドイツ館。<span class="red">十字形の鉄柱・大理石の壁・ガラス</span>。「流れる空間」。翌年解体・後に復元 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">パイミオのサナトリウム</span></td>
-        <td>アアルト（1933）</td>
-        <td>フィンランド・<span class="red">結核療養所</span>。患者の動線・採光・換気を徹底的に配慮した人間工学的設計</td>
-      </tr>
-      <tr>
-        <td><span class="red">ヴィトラ消防署</span></td>
-        <td>ザハ・ハディド（1993）</td>
-        <td>ドイツ・<span class="red">解体主義（デコンストラクティビズム）</span>。斜めの壁・鋭角の平面。ザハ初の実作</td>
-      </tr>
-      <tr>
-        <td><span class="red">神奈川県立近代美術館</span></td>
-        <td>坂倉準三（1951）</td>
-        <td>鎌倉・<span class="red">ル・コルビュジエの影響</span>（師事）。日本初の近代美術館。ピロティ・水盤</td>
-      </tr>
-      <tr>
-        <td><span class="red">東京国立博物館法隆寺宝物館</span></td>
-        <td>谷口吉生（1999）</td>
-        <td>上野・<span class="red">ガラスのファサード・水盤・石造りのルーバー</span>。静謐な空間。父・吉郎と混同注意 <span class="star">★</span></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>3. 公共・都市・宗教建築</h2>
-  <table>
-    <colgroup><col style="width:26%"><col style="width:18%"><col style="width:56%"></colgroup>
-    <thead><tr><th>建物名</th><th>建築家（年）</th><th>試験ポイント</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">ロンシャンの礼拝堂</span></td>
-        <td>ル・コルビュジエ（1955）</td>
-        <td>フランス・<span class="red">白い湾曲した壁・ランダムな小窓・厚い屋根</span>。5原則とは対極の彫刻的作品 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">TWAターミナル（JFKエアポート）</span></td>
-        <td>エーロ・サーリネン（1962）</td>
-        <td>ニューヨーク・<span class="red">鳥の翼のような曲面シェル屋根</span>。コンクリートシェル構造の代表</td>
-      </tr>
-      <tr>
-        <td><span class="red">シドニー・オペラハウス</span></td>
-        <td>ヨーン・ウッツォン（1973）</td>
-        <td>オーストラリア・<span class="red">貝殻形のシェル屋根</span>・プレキャスト・世界遺産。設計変更で建築家降板 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">豊平館</span></td>
-        <td>安達喜幸（1880）</td>
-        <td>北海道・<span class="red">明治期の洋風木造建築</span>。国の重要文化財。コンドルとは無関係 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">旧前川國男邸</span></td>
-        <td>前川國男（1942）</td>
-        <td>東京・江戸東京たてもの園に移築。戦時下の<span class="red">資材制限の中で伝統的和風外観</span>に近代を融合</td>
-      </tr>
-      <tr>
-        <td><span class="red">国際会議場（京都）</span></td>
-        <td>大谷幸夫（1966）</td>
-        <td>京都・<span class="red">逆梁構造・逆V形の外観</span>。RC造・打放しコンクリートで日本的を表現</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="point-box">
-    <span class="label">★ 混同しやすい「ル・コルビュジエ作品」の落とし穴</span>
-    サヴォア邸（1931・5原則の体現）と<span class="red">ロンシャンの礼拝堂（1955・彫刻的・5原則とは別）</span>は同じ建築家でも性格が全く異なる。<br>
-    「ロンシャンはコルビュジエ晩年の転換点」と押さえる。
-  </div>
-</div>
-
-
-<!-- ======================== PAGE 6: 覚え方・語呂合わせ集 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">⑥</span>
-    <span class="page-title">建築史 覚え方・語呂合わせ集</span>
-  </div>
-
-  <h2>1. 神社様式：平入・妻入の語呂合わせ</h2>
-  <div class="point-box">
-    <span class="label">語呂</span>
-    <span class="red">「神と流れは平らに（平入）、大住春八は妻に聞け（妻入）」</span><br>
-    　平入：<span class="blue">神</span>明造・<span class="blue">流</span>造<br>
-    　妻入：<span class="blue">大</span>社造・<span class="blue">住</span>吉造・<span class="blue">春</span>日造・<span class="blue">八</span>幡造
-  </div>
-  <table>
-    <colgroup><col style="width:18%"><col style="width:22%"><col style="width:60%"></colgroup>
-    <thead><tr><th>様式</th><th>入り</th><th>追加の連想</th></tr></thead>
-    <tbody>
-      <tr><td><span class="red">神明造</span></td><td class="center">平入</td><td>伊勢神宮＝「神様が<span class="red">平ら</span>に出迎える」</td></tr>
-      <tr><td><span class="red">流造</span></td><td class="center">平入</td><td>「<span class="red">流れは平らに</span>流れる」。前の庇が長く流れ落ちる形状が名前の由来</td></tr>
-      <tr><td><span class="red">大社造</span></td><td class="center">妻入</td><td>出雲大社＝「大きい社は<span class="red">妻（端）</span>から入る」。日本最古の神社建築様式</td></tr>
-      <tr><td><span class="red">春日造</span></td><td class="center">妻入</td><td>「<span class="red">春日（カスガ）</span>→向拝（カワラバイ）付き」。向拝があるから庇を追加したと覚える</td></tr>
-      <tr><td><span class="red">八幡造</span></td><td class="center">妻入</td><td>「<span class="red">八幡＝2つ並ぶ</span>」。2棟が<span class="red">相の間</span>でつながる＝八幡（ハチ）の字の二本線（※石の間は権現造）</td></tr>
-      <tr><td><span class="red">権現造</span></td><td class="center">—</td><td>「<span class="red">権現＝つなぐ</span>」。本殿＋石の間（つなぎ）＋拝殿の3部構成。日光東照宮</td></tr>
-    </tbody>
-  </table>
-
-  <h2>2. 仏教建築の様式：キーワード連想</h2>
-  <div class="two-col">
-    <div>
-      <div class="note-box" style="margin-bottom:5px;">
-        <span class="bold red">大仏様（天竺様）</span>の覚え方<br>
-        「<span class="red">大仏は貫（つらぬ）く</span>」→ <span class="red">貫多用・挿し肘木</span><br>
-        東大寺南大門は鎌倉時代に<span class="red">重源（ちょうげん）</span>が再建。<br>
-        「大仏様を作った大仏の門」と覚える。
-      </div>
-      <div class="note-box">
-        <span class="bold red">禅宗様（唐様）</span>の覚え方<br>
-        「<span class="red">禅の花は詰まって咲く</span>」→ <span class="red">花頭窓・詰組</span><br>
-        円覚寺舎利殿（鎌倉）＝禅宗のお寺→禅宗様と紐付ける。
-      </div>
-    </div>
-    <div>
-      <div class="note-box" style="margin-bottom:5px;">
-        <span class="bold red">和様</span>の覚え方<br>
-        「<span class="red">和やか・扇型・優しい</span>」→ <span class="red">扇垂木・木鼻なし</span><br>
-        法隆寺（飛鳥）＝日本最古の木造建築。飛鳥時代から続く<span class="red">「古くて和やか」</span>が和様。
-      </div>
-      <div class="point-box">
-        <span class="label">試験の罠</span>
-        東大寺南大門を「和様」と言わせる問題が頻出！<br>
-        → <span class="red">大仏様（天竺様）</span>が正解。
-      </div>
-    </div>
-  </div>
-
-  <h2>3. 西洋建築様式：時代順の覚え方</h2>
-  <div class="point-box">
-    <span class="label">語呂</span>
-    <span class="red">「古（ギ）古（ロ）ビ（ザ）ロ（マネ）ゴ（シック）ル（ネサ）バ（ロック）新（古典）ゴ（シック復興）」</span><br>
-    ギリシャ→ローマ→ビザンチン→ロマネスク→ゴシック→ルネサンス→バロック→新古典→ゴシック・リバイバル
-  </div>
-  <table>
-    <colgroup><col style="width:20%"><col style="width:40%"><col style="width:40%"></colgroup>
-    <thead><tr><th>様式</th><th>一番の特徴（試験頻出）</th><th>連想キーワード</th></tr></thead>
-    <tbody>
-      <tr><td><span class="red">ゴシック</span></td><td><span class="red">尖頭アーチ＋フライングバットレス</span>で窓を大きく</td><td>「尖ってバット（バットレス）で飛ぶ」</td></tr>
-      <tr><td><span class="red">ロマネスク</span></td><td><span class="red">半円アーチ＋厚壁＋小窓</span>で重厚</td><td>「ロマン（ロマネスク）は重い厚壁・丸窓」</td></tr>
-      <tr><td><span class="red">ビザンチン</span></td><td><span class="red">ペンデンティブドーム</span>（四角にドームを乗せる）</td><td>「ペンデンティブ＝ペンダントを四角に吊るす」</td></tr>
-      <tr><td><span class="red">バロック</span></td><td>曲線・劇的な光と影</td><td>「バロック＝歪んだ真珠」（語源）。ベルサイユが典型</td></tr>
-      <tr><td><span class="red">ルネサンス</span></td><td>古典復興・ドーム・左右対称</td><td>「<span class="red">再（ルネサンス）生</span>」＝ギリシャ・ローマの復活</td></tr>
-    </tbody>
-  </table>
-
-  <h2>4. 五巨匠と代表作：連想で覚える</h2>
-  <table>
-    <colgroup><col style="width:22%"><col style="width:28%"><col style="width:50%"></colgroup>
-    <thead><tr><th>建築家</th><th>代表作</th><th>連想・覚え方</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">ライト</span></td>
-        <td>落水荘・旧帝国ホテル</td>
-        <td>「<span class="red">ライト（水）の上</span>に落水荘」。水平線強調＝プレーリー（大草原）</td>
-      </tr>
-      <tr>
-        <td><span class="red">ル・コルビュジエ</span></td>
-        <td>サヴォア邸・国立西洋美術館</td>
-        <td>「<span class="red">5原則をコル（コルビュジエ）に暗記</span>」：ピ・屋・平・横・立（ピクヨコタテ）<br>ピロティ・屋上庭園・自由な平面・横長窓・自由な立面</td>
-      </tr>
-      <tr>
-        <td><span class="red">ミース</span></td>
-        <td>バルセロナP・ファンズワース邸</td>
-        <td>「<span class="red">ミース＝シンプルLess</span>」。ガラスと鉄だけの箱。「Less is more」</td>
-      </tr>
-      <tr>
-        <td><span class="red">グロピウス</span></td>
-        <td>バウハウス校舎</td>
-        <td>「<span class="red">グロピウスが1919年にバウハウスを作った</span>」。デッサウ→ベルリン→閉校1933</td>
-      </tr>
-      <tr>
-        <td><span class="red">アアルト</span></td>
-        <td>パイミオのサナトリウム</td>
-        <td>「<span class="red">アアルト＝あたたかい北欧</span>」。フィンランド・木・人間中心。パイミオ＝結核療養所</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>5. 日本建築家と師弟関係・代表作の連想</h2>
-  <div class="point-box">
-    <span class="label">師弟の流れ</span>
-    <span class="red">コンドル</span>（英・お雇い外国人）→ <span class="red">辰野金吾</span>（東京駅・日本銀行）<br>
-    <span class="red">ル・コルビュジエ</span> → <span class="red">前川國男</span>（東京文化会館・京都会館）→ <span class="red">丹下健三</span>（代々木競技場・広島）<br>
-    <span class="red">ル・コルビュジエ</span> → <span class="red">坂倉準三</span>（神奈川県立近代美術館）
-  </div>
-  <div class="two-col">
-    <div>
-      <div class="note-box" style="margin-bottom:5px;">
-        <span class="bold red">丹下健三の3大作品</span>（試験頻出）<br>
-        ①<span class="red">広島平和記念資料館</span>（1955）＝ピロティ＋軸線<br>
-        ②<span class="red">国立代々木競技場</span>（1964）＝吊り屋根・東京五輪<br>
-        ③<span class="red">東京都庁</span>（1991）＝双塔・ゴシック的<br>
-        「<span class="red">広（ヒロ）・代（ヨヨ）・都（ト）</span>」で3作品セット
-      </div>
-    </div>
-    <div>
-      <div class="note-box">
-        <span class="bold red">安藤忠雄の連想</span><br>
-        「<span class="red">コンクリート打放し＋光＋水</span>」がすべての作品に共通<br>
-        住吉の長屋（中庭・都市）、光の教会（十字の光）、<br>
-        地中美術館（地下・自然光・モネ）<br>
-        「<span class="red">安藤は光と水をコンクリートで切り取る</span>」
-      </div>
-    </div>
-  </div>
-
-  <h2>6. 混同しやすい実例の整理</h2>
-  <table>
-    <colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup>
-    <thead><tr><th>紛らわしいペア</th><th>A</th><th>B</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">グッゲンハイム</span><br>（2つある！）</td>
-        <td><span class="blue">NY</span>＝<span class="red">ライト</span>設計・螺旋スロープ</td>
-        <td><span class="blue">ビルバオ</span>＝<span class="red">ゲーリー</span>設計・チタン外装・解体主義</td>
-      </tr>
-      <tr>
-        <td><span class="red">パンテオン</span><br>（2つある！）</td>
-        <td><span class="blue">ローマ</span>＝古代ローマ・ドーム・オキュラス（紀元後125年）</td>
-        <td><span class="blue">パリ</span>＝新古典主義・フランス偉人廟（18c末）</td>
-      </tr>
-      <tr>
-        <td><span class="red">谷口</span>親子</td>
-        <td><span class="blue">谷口吉郎（父）</span>＝東京国立博物館東洋館・迎賓館和風別館</td>
-        <td><span class="blue">谷口吉生（子）</span>＝豊田市美術館・東京国立博物館法隆寺宝物館</td>
-      </tr>
-      <tr>
-        <td><span class="red">倉敷の建物</span></td>
-        <td><span class="blue">倉敷アイビースクエア</span>＝<span class="red">浦辺鎮太郎</span>（工場転用・1974）</td>
-        <td><span class="blue">大原美術館</span>＝薛田清（1930）。倉敷の歴史的建物群</td>
-      </tr>
-      <tr>
-        <td><span class="red">ポストモダン</span><br>建築家</td>
-        <td><span class="blue">磯崎新</span>（日）＝つくばセンタービル。引用と折衷</td>
-        <td><span class="blue">ヴェンチューリ</span>（米）＝母の家。「Less is a bore」</td>
-      </tr>
-      <tr>
-        <td><span class="red">懸垂屋根</span></td>
-        <td><span class="blue">国立代々木競技場</span>（丹下・1964）</td>
-        <td>代々木は<span class="red">「吊り（懸垂）」屋根</span>。折板屋根や膜屋根と混同しない</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-<!-- ======================== PAGE 7: 2026年出題予測 建築実例マトリクス ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">⑦</span>
-    <span class="page-title">2026年度 出題予測 ― 建築実例・建築史 過去7年分析と狙い目</span>
-  </div>
-
-  <h2>1. 過去7年間 出題実例マトリクス（学科Ⅰ 計画 No.1〜No.20）</h2>
-  <p style="font-size:7.5pt;margin-bottom:4px;color:#555;">※<span style="background:#c8e6c9;padding:1px 4px;border-radius:2px;">緑</span>=出題あり　<span style="background:#fff9c4;border:1px solid #f0c000;padding:1px 4px;border-radius:2px;">黄</span>=最近3年未出・2026狙い目</p>
-
-  <!-- 日本建築史 -->
-  <h3>【日本建築史】神社・仏教・近世建築</h3>
-  <table style="font-size:7.5pt;">
-    <colgroup>
-      <col style="width:26%">
-      <col style="width:10%"><col style="width:10%"><col style="width:10%">
-      <col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:10%">
-      <col style="width:4%">
-    </colgroup>
-    <thead>
-      <tr>
-        <th>建物名・建築家</th>
-        <th>2019</th><th>2020</th><th>2021</th>
-        <th>2022</th><th>2023</th><th>2024</th><th>2025</th>
-        <th>狙</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><b>神明造（伊勢神宮内宮正殿）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>大社造（出雲大社本殿）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>流造（賀茂別雷神社本殿）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>権現造（春日大社←誤：日光東照宮が正解）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>八幡造（宇佐神宮本殿）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>大仏様（東大寺南大門）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>禅宗様（円覚寺舎利殿・東福寺三門）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>懸造（三徳山三仏寺投入堂）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>数寄屋造（妙喜庵待庵・桂離宮）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>寝殿造（東三条殿・本願寺飛雲閣）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>書院造（光浄院客殿・臨春閣）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>擬洋風（旧開智学校校舎）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- 西洋建築史 -->
-  <h3>【西洋建築史】古代〜近代</h3>
-  <table style="font-size:7.5pt;">
-    <colgroup>
-      <col style="width:26%">
-      <col style="width:10%"><col style="width:10%"><col style="width:10%">
-      <col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:10%">
-      <col style="width:4%">
-    </colgroup>
-    <thead>
-      <tr>
-        <th>建物名・様式</th>
-        <th>2019</th><th>2020</th><th>2021</th>
-        <th>2022</th><th>2023</th><th>2024</th><th>2025</th>
-        <th>狙</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><b>サン・ピエトロ大聖堂（ルネサンス）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>バロック（サン・カルロ聖堂・ボッロミーニ）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>パンテオン（古代ローマ）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>ハギア・ソフィア（ビザンツ様式）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>ゴシック（ノートルダム大聖堂）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>ロマネスク（シュパイヤー大聖堂）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>新古典主義（大英博物館）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>アール・ヌーヴォー（タッセル邸・オルタ）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>デ・ステイル（シュレーダー邸・リートフェルト）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>フィレンツェ大聖堂（ブルネレスキ）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- 現代建築 -->
-  <h3>【現代建築実例】美術館・図書館・事務所・住宅（No.12〜No.17系）</h3>
-  <table style="font-size:7.5pt;">
-    <colgroup>
-      <col style="width:30%">
-      <col style="width:9%"><col style="width:9%"><col style="width:9%">
-      <col style="width:9%"><col style="width:9%"><col style="width:9%"><col style="width:9%">
-      <col style="width:7%">
-    </colgroup>
-    <thead>
-      <tr>
-        <th>建物名・設計者</th>
-        <th>2019</th><th>2020</th><th>2021</th>
-        <th>2022</th><th>2023</th><th>2024</th><th>2025</th>
-        <th>狙い</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><b>ニューヨーク近代美術館（谷口吉生）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>ロサンゼルス現代美術館（磯崎新）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>フォートワース現代美術館（安藤忠雄）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>アスペン美術館（坂茂）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>ジョンソン・ワックス・ビル（F.L.ライト）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>フォード財団本部ビル（ロッシュ＆ディンカルー）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>ぎふメディアコスモス（伊東豊雄）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>倉敷アイビースクエア（浦辺鎮太郎）工場転用</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>千葉市美術館（鞘堂方式）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>国立子ども図書館（東京都、2002）重要文化財転用</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>フランス国立図書館（ペロー、パリ 1995）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>住吉の長屋（安藤忠雄）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>中野本町の家（伊東豊雄）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>富弘美術館（群馬県）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>豊島美術館（香川県・西沢立衛）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>東京駅丸の内駅舎（免震改修・辰野金吾）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>京都駅ビル（原広司）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p style="font-size:7.5pt;color:#555;margin-top:2px;">★=高確率（5年以上前に出題・基本事項）　△=中確率（2〜4年前に出題・周期的）　※2021年No.3は図版問題（建物特定が必要）</p>
-</div>
-
-<!-- ======================== PAGE 7B: 2026予測詳細 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">⑦</span>
-    <span class="page-title">2026年度 出題予測 ― 確度別リストと今すぐ覚えるべきポイント</span>
-  </div>
-
-  <h2>2. 2026年度 出題予測（確度別）</h2>
-
-  <!-- 高確率 -->
-  <div style="border:2px solid #cc0000;border-radius:4px;margin-bottom:6px;overflow:hidden;">
-    <div style="background:#cc0000;color:#fff;padding:3px 8px;font-weight:bold;font-size:9pt;">
-      【高確率】直近5年以上未出題 または 周期的な出題が確認できる基本事項
-    </div>
-    <div style="padding:5px 8px;font-size:8.5pt;">
-
-      <div style="margin-bottom:6px;border-left:3px solid #cc0000;padding-left:8px;">
-        <b>① 新古典主義 / アール・ヌーヴォー / デ・ステイル（2020年以降未出題）</b><br>
-        <span style="color:#555;">根拠：2020年No.3で3様式セットで出題。5年が経過し再出しやすい周期。近代建築史は毎年度 No.2〜No.3 付近で1問出る。</span><br>
-        <span style="color:#0055aa;">▶ 大英博物館（スマーク、新古典主義）、タッセル邸（オルタ、アール・ヌーヴォー）、シュレーダー邸（リートフェルト、デ・ステイル）をセットで整理。</span><br>
-        <span style="color:#cc0000;">誤肢になりやすい：ウィーン郵便貯金局（ワグナー）→アーツ＆クラフツではなく分離派（ゼツェッシオン）系。2020年No.3の正解はこれ。</span>
-      </div>
-
-      <div style="margin-bottom:6px;border-left:3px solid #cc0000;padding-left:8px;">
-        <b>② 書院造・寝殿造（2024年No.2で出題→2026周期？）＋大仏様・禅宗様</b><br>
-        <span style="color:#555;">根拠：日本建築史（No.2）は毎年出題。2024に寝殿造・書院造が出たが2025は神社建築（権現造・大社造）に移行。2026は仏教建築系（大仏様・禅宗様）に戻る可能性大。</span><br>
-        <span style="color:#0055aa;">▶ 東大寺南大門（大仏様・貫・挿肘木）、円覚寺舎利殿（禅宗様・詰組・海老虹梁）の違いを確認。</span><br>
-        <span style="color:#cc0000;">誤肢：円覚寺舎利殿＝禅宗様（大仏様ではない）。2023年No.2で誤記が問われた。</span>
-      </div>
-
-      <div style="margin-bottom:6px;border-left:3px solid #cc0000;padding-left:8px;">
-        <b>③ 近代美術館・文化施設（2019年No.17以来の美術館問題 → 2024No.17で復活）</b><br>
-        <span style="color:#555;">根拠：美術館問題は2019・2024年に出題。2024年に出たが内容が異なる（富弘・ポーラ・京都市京セラ・豊島）。2019年の谷口吉生・磯崎新・安藤忠雄・坂茂ラインが再出の可能性。</span><br>
-        <span style="color:#0055aa;">▶ フォートワース現代美術館（安藤忠雄・長い庇・水盤）、金沢21世紀美術館（SANAA）、直島地中美術館（安藤忠雄）を整理。</span><br>
-        <span style="color:#cc0000;">誤肢：アスペン美術館（坂茂）→「アトリウム中央＋螺旋スロープ」という構成。坂茂＝紙管建築家と混同しない。</span>
-      </div>
-
-      <div style="border-left:3px solid #cc0000;padding-left:8px;">
-        <b>④ フィレンツェ大聖堂（サンタ・マリア・デル・フィオーレ）/ ルネサンス建築</b><br>
-        <span style="color:#555;">根拠：2022年No.3に出題（選択肢3として登場）。その後未出題。ドームの構造（4本の大バットレスは西洋建築では稀な構造で誤肢にしやすい）。</span><br>
-        <span style="color:#0055aa;">▶ ブルネレスキの八角形ドーム・内外2枚の殻構造・東西の半ドームはバットレスではなく独立構造。</span><br>
-        <span style="color:#cc0000;">2022年No.3の誤答：サンタ・マリア・デル・フィオーレの選択肢2が不適当（バットレスの説明が誤り）。</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 中確率 -->
-  <div style="border:2px solid #e67e00;border-radius:4px;margin-bottom:6px;overflow:hidden;">
-    <div style="background:#e67e00;color:#fff;padding:3px 8px;font-weight:bold;font-size:9pt;">
-      【中確率】過去3〜4年前に出題・間隔が空いてきた作品
-    </div>
-    <div style="padding:5px 8px;font-size:8.5pt;">
-      <table style="font-size:8pt;">
-        <colgroup><col style="width:35%"><col style="width:20%"><col style="width:45%"></colgroup>
-        <thead><tr><th>作品名・設計者</th><th>直近出題年</th><th>試験で問われるポイント</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><b>住吉の長屋</b>（安藤忠雄）</td>
-            <td>2024年 No.12</td>
-            <td>ファサード=玄関以外開口なし。中庭が中央にある。RC造。</td>
-          </tr>
-          <tr>
-            <td><b>豊島美術館</b>（西沢立衛）</td>
-            <td>2024年 No.17</td>
-            <td>シェルRC屋根・大開口から自然光・内藤礼の作品展示</td>
-          </tr>
-          <tr>
-            <td><b>ぎふメディアコスモス</b>（伊東豊雄）</td>
-            <td>2020年 No.15</td>
-            <td>木造格子屋根。市立図書館＋市民交流センター複合。2015年竣工。</td>
-          </tr>
-          <tr>
-            <td><b>倉敷アイビースクエア</b>（浦辺鎮太郎）</td>
-            <td>2021年 No.17</td>
-            <td>明治工場を商業施設転用。「ガラス屋根アトリウム」の説明は誤り（実際は外庭中心）。</td>
-          </tr>
-          <tr>
-            <td><b>千葉市美術館</b>（鞘堂方式）</td>
-            <td>2021年 No.17</td>
-            <td>旧川崎銀行千葉支店を新築建物で丸ごと覆う「鞘堂」。日本古来の保存手法。</td>
-          </tr>
-          <tr>
-            <td><b>ロームシアター京都</b>（旧京都会館）</td>
-            <td>2021年 No.17</td>
-            <td>前川國男設計（昭和35年）→改修で保存＋増築。前川作品であることが重要。</td>
-          </tr>
-        </tbody>
+      <table>
+        <tr><th>種別</th><th>代表</th><th>ポイント</th></tr>
+        <tr><td class="c bold">書院造</td><td>二条城二の丸御殿・慈照寺東求堂（室町）</td><td>床の間・棚・付書院・帳台構</td></tr>
+        <tr><td class="c bold">数寄屋造</td><td>桂離宮・修学院離宮（江戸初期）</td><td>草庵茶室の影響・軽快・侘び</td></tr>
+        <tr><td class="c bold">待庵</td><td>千利休・山崎（安土桃山）</td><td><span class="r">現存最古の茶室</span>・2畳</td></tr>
+        <tr><td class="c bold">如庵</td><td>織田有楽斎・愛知</td><td>国宝茶室・有楽囲み</td></tr>
       </table>
     </div>
-  </div>
-
-  <!-- 参考 -->
-  <div style="border:2px solid #2e6da4;border-radius:4px;margin-bottom:6px;overflow:hidden;">
-    <div style="background:#2e6da4;color:#fff;padding:3px 8px;font-weight:bold;font-size:9pt;">
-      【参考】過去未出題だが試験頻出候補・難易度高め
-    </div>
-    <div style="padding:5px 8px;font-size:8.5pt;">
-      <table style="font-size:8pt;">
-        <colgroup><col style="width:35%"><col style="width:65%"></colgroup>
-        <thead><tr><th>作品名・設計者</th><th>注目ポイント</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><b>金沢21世紀美術館</b><br>（SANAA・妹島和世＋西沢立衛、2004）</td>
-            <td>円形平面・展示室が島状配置・ガラス外壁。「四方向どこからも入れる」が特徴。カーテンウォールと内部展示室の対比。</td>
-          </tr>
-          <tr>
-            <td><b>直島地中美術館</b><br>（安藤忠雄、2004）</td>
-            <td>建物全体が地下埋設。採光はトップライトのみ。クロード・モネの睡蓮を展示。自然光のみで作品鑑賞。</td>
-          </tr>
-          <tr>
-            <td><b>サヴォア邸</b><br>（ル・コルビュジエ、1931）</td>
-            <td>「近代建築の5原則」の実践例。ピロティ・屋上庭園・自由な平面・水平連続窓・自由なファサード。</td>
-          </tr>
-          <tr>
-            <td><b>バルセロナ・パヴィリオン</b><br>（ミース・ファン・デル・ローエ、1929）</td>
-            <td>ユニバーサルスペース・フリープラン。十字形断面の鉄柱。大理石壁が自立する構成。</td>
-          </tr>
-          <tr>
-            <td><b>ポンピドゥー・センター</b><br>（レンゾ・ピアノ＋R.ロジャース、1977）</td>
-            <td>設備・構造を外部に露出するハイテク建築。内部は無柱の大空間。</td>
-          </tr>
-          <tr>
-            <td><b>ハンナー邸（ハニカムハウス）</b><br>（F.L.ライト、1937）</td>
-            <td>ユーソニアン住宅の代表。六角形グリッドに基づく平面。オーガニックアーキテクチャ。</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <h2>3. カテゴリ別 2026年の注目ポイント</h2>
-  <div class="two-col">
     <div>
-      <div class="point-box">
-        <span class="label">【日本建築史 神社・仏教】</span>
-        毎年No.2で確実に出題。2025は神社（権現造・大社造・懸造・数寄屋造）。<b>2026は仏教建築（大仏様・禅宗様・和様の違い）に戻る可能性大。</b>東大寺南大門 vs 円覚寺舎利殿の比較整理が最優先。
+      <div class="nt">
+        <span class="bold">現存天守12城（重要）</span><br>
+        姫路城（最大・世界遺産）・犬山城・彦根城・松本城<br>
+        ほか：弘前・丸岡・松江・丸亀・伊予松山・宇和島・高知・備中松山
       </div>
-      <div class="point-box">
-        <span class="label">【西洋建築史】</span>
-        2024・2025で西洋建築史（No.3）が連続出題。2026も継続か。<b>ビザンツ（ハギア・ソフィア）・ゴシック・ロマネスクは2024〜2025で出た</b>ため、古代ギリシア（パルテノン神殿＝クリアストーリーなし）・ルネサンス（フィレンツェ大聖堂）・バロック以外の様式に注意。
-      </div>
-      <div class="point-box">
-        <span class="label">【近代建築著作・思想】</span>
-        2023年No.3「建築著作物」が新形式。<b>アドルフ・ロース「装飾と犯罪」、ヴェンチューリ「建築の複雑性と対立性」、ジークフリート・ギーディオン「空間・時間・建築」</b>などの著作と内容の対応を確認。
-      </div>
-    </div>
-    <div>
-      <div class="point-box">
-        <span class="label">【現代日本建築・美術館】</span>
-        美術館問題（No.17系）は2019・2024年と5年周期で出題。<b>2026は再出の可能性あり。</b>日本人建築家（谷口吉生・安藤忠雄・坂茂・妹島和世）の代表作と設計コンセプトの確認。特に安藤＝コンクリート・光・水のモチーフを理解。
-      </div>
-      <div class="point-box">
-        <span class="label">【保存・転用・コンバージョン系】</span>
-        2021年No.17（倉敷アイビー・千葉市美術館・ロームシアター）が出題。<b>近年の傾向として歴史建築の保存・再生事例は頻出。</b>「鞘堂（さやどう）」「EV棟増築改修」「増築と保存の一体化」など手法名と事例の対応を整理。
-      </div>
-      <div class="point-box">
-        <span class="label">【駅・交通施設（2025新形式）】</span>
-        2025年No.17は初出の「駅・駅前施設」。<b>岩見沢複合駅舎（古レール再利用）・東京駅（辰野金吾・免震改修）・京都駅ビル（原広司・アトリウム）</b>など。2026は別テーマに戻ると予測されるが、複合施設・建築家名の対応は要確認。
+      <div class="nt" style="margin-top:4px">
+        <span class="bold">明治期の洋風建築（日本）</span><br>
+        鹿鳴館・旧岩崎邸（コンドル）<br>
+        赤坂離宮（片山東熊）<br>
+        日本銀行本店・東京駅（辰野金吾）
       </div>
     </div>
   </div>
-
-  <div class="note-box" style="margin-top:6px;">
-    <b>2026年直前チェック最優先リスト：</b>
-    ①大仏様（東大寺南大門）vs 禅宗様（円覚寺舎利殿）の構造的差異
-    ②タッセル邸（アール・ヌーヴォー）・シュレーダー邸（デ・ステイル）・ウィーン郵便貯金局（分離派）の様式背景
-    ③フィレンツェ大聖堂ドームの構造（内外二重殻・八角形）
-    ④金沢21世紀美術館（SANAA・円形・四方向入口）
-    ⑤サヴォア邸の近代建築5原則の具体的内容
-  </div>
 </div>
 
-<!-- ============================================================ -->
-<!--  第2部：建築マネジメント・環境・都市計画                        -->
-<!-- ============================================================ -->
-<div class="chapter-divider">
-  第2部<br><span style="font-size:12pt;margin-top:8px;display:block">建築マネジメント・サステナブル・環境評価・都市計画</span>
-</div>
-
-<!-- ======================== PAGE 1: 環境評価・認証制度 ======================== -->
+<!-- ② 建築史（西洋・近代・現代） -->
 <div class="page">
   <div class="page-header">
-    <span class="page-num">①</span>
-    <span class="page-title-text">環境評価・認証制度　CASBEE / BELS / ZEB / LEED / 長期優良住宅</span>
+    <div class="page-num">②</div>
+    <div class="page-title">建築史（西洋・近代・現代）― 様式・五巨匠・引っかけ実例</div>
   </div>
 
-  <h2>1. CASBEE（建築物総合環境性能評価システム）</h2>
-  <div class="note-box">
-    <span class="bold">定義：</span>建築物の<span class="blue">環境品質（Q）</span>と<span class="red">環境負荷（L）</span>を評価し、その比（BEE）で総合性能を示す日本発の評価システム。国土交通省・建築系学会が連携して開発。
-  </div>
-
+  <h2>西洋建築の様式</h2>
   <table>
-    <tr>
-      <th style="width:28%">指標</th>
-      <th>内容</th>
-    </tr>
-    <tr>
-      <td class="bold center">BEE（建築物環境効率）</td>
-      <td><span class="blue">Q（建築物の環境品質・性能）</span> ÷ <span class="red">L（建築物の環境負荷）</span><br>
-      Qは室内環境・サービス・室外環境の3分野　Lはエネルギー・資源・敷地外環境の3分野</td>
-    </tr>
-    <tr>
-      <td class="bold center">ランク</td>
-      <td><span class="green">S（最高）</span> &gt; <span class="green">A</span> &gt; B+ &gt; B- &gt; <span class="red">C（最低）</span></td>
-    </tr>
-    <tr>
-      <td class="bold center">対象</td>
-      <td>新築・既存・改修・一時使用・街区・まちづくり　など用途ごとにツールが存在</td>
-    </tr>
+    <tr><th style="width:18%">様式</th><th style="width:10%">時代</th><th style="width:36%">構造・特徴</th><th>代表</th></tr>
+    <tr><td class="c"><span class="r">ギリシャ</span></td><td class="c">〜前3c</td><td>柱梁構造　ドリス式（シンプル）／イオニア式（渦巻）／コリント式（豪華）</td><td>パルテノン神殿（ドリス式）・エレクテイオン（イオニア式）</td></tr>
+    <tr><td class="c"><span class="r">ローマ</span></td><td class="c">前3c〜5c</td><td><span class="r">アーチ・ドーム・コンクリート</span>・ヴォールト</td><td>パンテオン・コロッセウム・カラカラ浴場</td></tr>
+    <tr><td class="c"><span class="r">ビザンチン</span></td><td class="c">4c〜15c</td><td><span class="r">ペンデンティブドーム</span>・モザイク・集中式</td><td>ハギア・ソフィア（537年・コンスタンティノープル）</td></tr>
+    <tr><td class="c"><span class="r">ロマネスク</span></td><td class="c">11c〜12c</td><td><span class="r">半円アーチ・厚壁・小窓</span>・バシリカ式</td><td>ピサ大聖堂・クリュニー修道院</td></tr>
+    <tr><td class="c"><span class="r">ゴシック</span></td><td class="c">12c〜15c</td><td><span class="r">尖頭アーチ・フライングバットレス</span>・ステンドグラス</td><td>ノートルダム大聖堂（パリ）・ケルン大聖堂</td></tr>
+    <tr><td class="c"><span class="r">ルネサンス</span></td><td class="c">15c〜16c</td><td>古典復興・ドーム・左右対称・比例重視</td><td>フィレンツェ大聖堂（ブルネレスキ）・サン・ピエトロ大聖堂</td></tr>
+    <tr><td class="c"><span class="r">バロック</span></td><td class="c">17c〜18c</td><td><span class="r">曲線・動感・光と影</span>の劇的演出</td><td>ヴェルサイユ宮殿・サン・カルロ教会（ボッロミーニ）</td></tr>
+  </table>
+  <div class="pt">パンテオン（ローマ）＝古代ローマ・直径43.3mドーム　パンテオン（パリ）＝新古典主義　同名異建築に注意</div>
+
+  <h2>近代建築の五巨匠</h2>
+  <table>
+    <tr><th style="width:22%">建築家</th><th style="width:42%">代表作</th><th>キーワード</th></tr>
+    <tr><td class="c bold"><span class="r">F.L.ライト</span><br><span class="s">米 1867〜1959</span></td><td>落水荘（PA・1936）・グッゲンハイム美術館（NY）・<span class="b">旧帝国ホテル東京（1923）</span></td><td><span class="r">有機的建築・プレーリースタイル</span>・浮き基礎（耐震）</td></tr>
+    <tr><td class="c bold"><span class="r">ル・コルビュジエ</span><br><span class="s">仏 1887〜1965</span></td><td>サヴォア邸（1931）・ユニテ・ダビタシオン（マルセイユ）・<span class="b">国立西洋美術館（東京）</span></td><td><span class="r">近代建築の5原則</span>：ピロティ／屋上庭園／自由な平面／水平連続窓／自由な立面</td></tr>
+    <tr><td class="c bold"><span class="r">ミース</span><br><span class="s">独→米 1886〜1969</span></td><td>バルセロナ・パビリオン（1929）・ファンズワース邸・<span class="b">シーグラムビル（NY・1958）</span></td><td><span class="r">Less is more</span>・ユニバーサルスペース・鉄骨＋ガラス</td></tr>
+    <tr><td class="c bold"><span class="r">グロピウス</span><br><span class="s">独 1883〜1969</span></td><td><span class="b">バウハウス校舎（デッサウ・1926）</span>・ファグス靴型工場（1911）</td><td>バウハウス：ワイマール創設1919→デッサウ1925→閉校1933</td></tr>
+    <tr><td class="c bold"><span class="r">アルヴァ・アアルト</span><br><span class="s">芬 1898〜1976</span></td><td><span class="b">パイミオのサナトリウム（1933）</span>・フィンランディアホール</td><td><span class="r">人間中心・有機的曲線・北欧モダニズム</span>・木と自然素材</td></tr>
   </table>
 
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2019出題】</span>「BEEの値が<span class="red">小さい</span>ほど建築物の環境性能が高い」→ <span class="red">誤り</span>。BEEは大きいほど高性能（Q÷L が大きい＝負荷が少なく品質が高い）。
-  </div>
-
-  <h2>2. BELS（建築物省エネルギー性能表示制度）</h2>
-  <div class="note-box">
-    <span class="bold">BEI（エネルギー消費性能指標）＝ 設計一次エネルギー消費量 ÷ 基準一次エネルギー消費量</span><br>
-    BEI ≦ 1.0 で省エネ基準適合。値が小さいほど省エネ性能が高く、星の数が増える（5段階）。<br>
-    対象：<span class="bold">新築・既存建築物</span>を対象として第三者評価機関が評価・認証（2024出題）。
-  </div>
-
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2021出題】</span>「BELSの5段階のマークは、BEIの値が<span class="red">大きい</span>ほど星の数が増える」→ <span class="red">誤り</span>。BEIは<span class="blue">小さい</span>ほど省エネ性能が高く星が増える。
-  </div>
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2023出題】</span>BEIの定義：「評価建築物の<span class="red">省エネルギー量の合計</span>を基準一次エネルギー消費量で除した値」→ <span class="red">誤り</span>。正しくは「<span class="blue">設計一次エネルギー消費量</span>を基準値で除した値」。省エネ量（削減量）ではなく消費量で除す。
-  </div>
-
-  <h2>3. ZEB（ネット・ゼロ・エネルギービル）</h2>
+  <h2>引っかけやすい現代建築家・実例</h2>
   <table>
-    <tr><th style="width:25%">区分</th><th>再エネ込み削減率</th><th>再エネ除き削減率</th></tr>
-    <tr><td class="bold center">ZEB</td><td class="center green">100%以上</td><td class="center">50%以上</td></tr>
-    <tr><td class="bold center">Nearly ZEB</td><td class="center">75%以上</td><td class="center">50%以上</td></tr>
-    <tr><td class="bold center">ZEB Ready</td><td class="center">―</td><td class="center green">50%以上</td></tr>
-    <tr><td class="bold center">ZEB Oriented</td><td class="center">―</td><td class="center">延床面積に応じ30〜40%以上</td></tr>
+    <tr><th style="width:24%">建築家</th><th style="width:40%">代表作</th><th>引っかけポイント</th></tr>
+    <tr><td class="c"><span class="r">エーロ・サーリネン</span><br><span class="s">芬→米 1910〜61</span></td><td>TWAターミナル（NY・1962）・ゲートウェイ・アーチ（セントルイス）</td><td>父<span class="r">エリエル・サーリネン</span>（ヘルシンキ駅）と混同注意</td></tr>
+    <tr><td class="c"><span class="r">ルイス・バラガン</span><br><span class="s">墨 1902〜88</span></td><td>バラガン邸（世界遺産・メキシコシティ）・鮮やかな色彩の壁・水・光・静寂</td><td>プリツカー賞1980年。メキシコ地域主義</td></tr>
+    <tr><td class="c"><span class="r">アドルフ・ロース</span><br><span class="s">墺 1870〜1933</span></td><td>ロース・ハウス（ウィーン・1911）「<span class="r">装飾は犯罪である</span>」</td><td>ウィーン分離派への反発。近代合理主義の先駆</td></tr>
+    <tr><td class="c"><span class="r">カルロ・スカルパ</span><br><span class="s">伊 1906〜78</span></td><td>カステルヴェッキオ美術館改修（ヴェローナ）</td><td>新築より<span class="r">既存建物改修</span>で評価。細部へのこだわり</td></tr>
+    <tr><td class="c"><span class="r">ヴィクトール・オルタ</span><br><span class="s">白 1861〜1947</span></td><td>タッセル邸（ブリュッセル・1893）・植物的曲線・鉄骨露出</td><td><span class="r">アール・ヌーヴォー</span>の先駆（曲線・植物）</td></tr>
+    <tr><td class="c"><span class="r">ヨゼフ・ホフマン</span><br><span class="s">墺 1870〜1956</span></td><td>ストックレー邸（ブリュッセル・1911）・ウィーン工房</td><td>ウィーン分離派（ゼツェッション）・クリムトと協働</td></tr>
   </table>
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2022出題】</span>「インバータ制御やLED照明はパッシブ技術」→ <span class="red">誤り</span>。これらは<span class="blue">アクティブ技術</span>。パッシブは断熱・日射遮蔽・自然換気など。<br>
-    また「ZEBは既存建築物には適用不可」→ 誤り。改修時にも<span class="blue">実現可能</span>（2022出題）。
-  </div>
-
-  <h2>4. LEED（Leadership in Energy and Environmental Design）</h2>
-  <div class="note-box">
-    米国グリーンビルディング協会（USGBC）が運営する国際的な環境性能評価システム。取得ポイントの合計で4段階認証。<br>
-    <span class="bold">Platinum（プラチナ）＞ Gold（ゴールド）＞ Silver（シルバー）＞ Certified（認定）</span><br>
-    建築物・敷地・街区等に関する環境性能を総合評価（2020出題）。
-  </div>
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2024出題】</span>「LEEDは<span class="red">人の健康やウェルネスに着目した</span>評価システム」→ 誤り。健康・ウェルネスに特化するのは<span class="blue">WELL認証</span>。LEEDは環境性能全般の評価。
-  </div>
-
-  <h2>5. 長期優良住宅・住宅性能表示制度</h2>
-  <div class="two-col">
-    <div class="section-card">
-      <div class="section-card-head" style="background:#2e6da4;">長期優良住宅の認定基準（主要項目）</div>
-      <div class="section-card-body">
-        <ul>
-          <li>耐久性・可変性（居住者のライフスタイル変化に対応できる間取り変更措置）</li>
-          <li>省エネルギー性</li>
-          <li>耐震性（等級2以上）</li>
-          <li>維持管理・更新の容易性</li>
-          <li><span class="bold">維持保全計画の策定</span>（構造・雨水浸入防止部分・設備の定期点検・補修計画）【2025出題】</li>
-        </ul>
-      </div>
-    </div>
-    <div class="section-card">
-      <div class="section-card-head" style="background:#27ae60;">住宅性能表示制度（品確法）</div>
-      <div class="section-card-body">
-        <ul>
-          <li>構造耐力・省エネルギー・バリアフリー等 <span class="bold">10分野</span></li>
-          <li>高齢者等配慮対策等級：等級5〜1で評価【2022出題】</li>
-          <li>「特定寝室」＝高齢者の利用を想定する主たる寝室【2022出題】</li>
-          <li>一次エネルギー消費量等級4＝省エネ基準相当【2025出題】</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <div class="trap"><span class="bold" style="color:#cc6600">アール・ヌーヴォー</span>（19c末〜20c初）＝曲線・植物的　／　<span class="bold" style="color:#cc6600">アール・デコ</span>（1920〜30s）＝直線・幾何学的　クライスラービル（NY・1930）がデコの代表</div>
 </div>
 
-<!-- ======================== PAGE 2: LCA・環境マネジメント ======================== -->
+<!-- ③ 集合住宅・住宅計画 -->
 <div class="page">
   <div class="page-header">
-    <span class="page-num">②</span>
-    <span class="page-title-text">LCA・環境マネジメント　LCA / 環境効率 / ISO14001 / サステナブル建築</span>
+    <div class="page-num">③</div>
+    <div class="page-title">集合住宅・住宅計画 ― 住棟形式・アクセス形式・寸法・SI住宅</div>
   </div>
 
-  <h2>1. LCA（ライフサイクルアセスメント）</h2>
-  <div class="note-box">
-    <span class="bold">定義：</span>製品・建築物のライフサイクル全体（資源採取→製造・建設→使用・維持→廃棄・解体）を通じた環境負荷を定量的に評価する手法（ISO14040シリーズで規格化）。
-  </div>
-
-  <h3>LCAの4段階プロセス（混同注意）</h3>
+  <h2>住棟形式と特徴</h2>
   <table>
-    <tr><th style="width:30%">段階</th><th>内容</th></tr>
-    <tr>
-      <td class="bold center">① 目的・調査範囲の設定</td>
-      <td>評価の目的、機能単位（FU）、システム境界を定める</td>
-    </tr>
-    <tr>
-      <td class="bold center">② インベントリ分析</td>
-      <td>ライフサイクル全体のINPUT（資源・エネルギー）とOUTPUT（排出物・廃棄物）を<span class="bold">リストアップし定量化</span>する段階。<br><span class="small">→ 環境負荷物質の<span class="blue">重量等の物理量</span>を求める段階</span></td>
-    </tr>
-    <tr>
-      <td class="bold center">③ 影響評価</td>
-      <td>インベントリ分析で求めた物理量を、地球温暖化・酸性化・オゾン層破壊等の<span class="bold">環境影響カテゴリに変換・評価</span>する段階</td>
-    </tr>
-    <tr>
-      <td class="bold center">④ 解釈</td>
-      <td>結果を評価の目的に照らして解釈し、改善策を提案する</td>
-    </tr>
+    <tr><th style="width:20%">形式</th><th>特徴・メリット</th><th style="width:26%">デメリット・注意</th></tr>
+    <tr><td class="c bold">板状（スラブ型）</td><td>南面採光・通風確保しやすい　均質な住戸計画</td><td>単調な外観・ビル風</td></tr>
+    <tr><td class="c bold">点状（タワー型）</td><td>敷地効率が高い・眺望・多様な方位</td><td>通風・採光が住戸により差が出やすい</td></tr>
+    <tr><td class="c bold">テラスハウス</td><td>専用庭付き・低層・<span class="r">各戸が直接地面に接する</span></td><td>低密度　遮音・プライバシー確保要</td></tr>
+    <tr><td class="c bold">メゾネット</td><td>1住戸が<span class="r">2層にわたる</span>　戸建て感覚・採光豊富</td><td>バリアフリー対応しにくい</td></tr>
+    <tr><td class="c bold">スキップフロア</td><td>1層おきに廊下を設け採光・通風を確保</td><td>廊下なし層の住戸はEVから遠くなる場合あり</td></tr>
   </table>
 
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ（混同注意）</span>「インベントリ分析＝環境負荷物質ごとに重量等の物理量で求めた結果を<span class="red">環境影響に変換</span>する段階」→ <span class="red">誤り</span>。<br>
-    環境影響への変換は<span class="blue">③影響評価</span>の段階。インベントリ分析は<span class="blue">物理量（INPUT/OUTPUT）をリストアップ・定量化</span>する段階。
-  </div>
-
-  <div class="note-box">
-    <span class="bold">ライフサイクルCO2：</span>一般的な事務所ビルでは、「<span class="blue">運用段階のCO2排出量</span>」が全体の大半（約80〜90%）を占め、「設計・建設段階及び廃棄段階」よりはるかに大きい。【2020出題・誤り選択肢として出題】
-  </div>
-
-  <h2>2. 環境効率</h2>
-  <div class="note-box">
-    <span class="bold">定義：</span>環境負荷を低減しつつ生活の質（価値）を向上させる考え方を数値化した指標。<br>
-    <span class="bold">環境効率 ＝ 生活の質（価値・サービスの量） ÷ 環境負荷</span><br>
-    → 環境負荷が増えると環境効率は<span class="red">下がる</span>。環境負荷を減らしながら価値を高めることが目標。
-  </div>
-
-  <h2>3. ISO 14001 / EMS（環境マネジメントシステム）</h2>
-  <div class="note-box">
-    <span class="bold">目的：</span>組織が環境方針を定め、環境目標・実施計画を策定し、PDCAサイクルで<span class="blue">継続的改善</span>を行う仕組みを構築・維持するための国際規格。<br>
-    <span class="bold">主な構成要素：</span>組織構造・責任分担・実施手順・資源・記録管理等を明確化。
-  </div>
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ</span>「ISO14001は環境負荷を<span class="red">ゼロにする</span>ことを保証するシステム」→ <span class="red">誤り</span>。ISO14001は<span class="blue">継続的改善の仕組み</span>であり、環境負荷ゼロを保証するものではない。
-  </div>
-
-  <h2>4. サステナブル建築</h2>
-  <div class="note-box">
-    <span class="bold">定義：</span>「将来にわたり人間の生活の質を維持・向上」させることを目標とし、以下を総合的に実現する建築。
-  </div>
+  <h2>アクセス形式の比較</h2>
   <table>
-    <tr><th>要素</th><th>内容</th></tr>
-    <tr><td>省エネルギー・省資源</td><td>エネルギー・資源消費の最小化</td></tr>
-    <tr><td>リサイクル・廃棄物削減</td><td>材料の再利用・廃棄物の発生抑制</td></tr>
-    <tr><td>有害物質排出抑制</td><td>シックハウス対策・大気汚染物質排出削減</td></tr>
-    <tr><td>地域・環境との調和</td><td>地域の気候・伝統・文化・周辺環境に配慮した設計</td></tr>
-    <tr><td>長寿命・可変性</td><td>長期使用・用途変更・改修に対応できる設計</td></tr>
+    <tr><th style="width:20%">形式</th><th style="width:44%">特徴</th><th>プライバシー</th></tr>
+    <tr><td class="c bold">階段室型</td><td>各階段ごとに2〜4戸　<span class="r">プライバシー高</span>　専有面積比高</td><td>◎</td></tr>
+    <tr><td class="c bold">片廊下型</td><td>廊下を片側に配置　南面全戸確保しやすい</td><td>廊下側△</td></tr>
+    <tr><td class="c bold">中廊下型</td><td>廊下両側に住戸　<span class="r">通風・採光不利</span>（北向き住戸が生じる）</td><td>中程度</td></tr>
+    <tr><td class="c bold">ボイド型</td><td>中央に吹抜けで採光・通風確保</td><td>○</td></tr>
+    <tr><td class="c bold">コリドール型</td><td>長い外廊下　<span class="r">単身者向けに多い</span></td><td>△</td></tr>
   </table>
 
-  <h2>5. カーボンニュートラル・脱炭素</h2>
-  <div class="note-box">
-    2050年カーボンニュートラル宣言（日本・2020年）：温室効果ガスの排出量と吸収量を差し引きゼロにする目標。<br>
-    建築物では<span class="bold">省エネ性能の確保・向上、再生可能エネルギーの導入拡大</span>が必要【2022出題・正解肢】。
-  </div>
-  <table>
-    <tr><th style="width:20%">区分</th><th>内容</th><th>例</th></tr>
-    <tr><td class="bold center">Scope 1</td><td>自社の直接排出</td><td>燃料燃焼、工場排出</td></tr>
-    <tr><td class="bold center">Scope 2</td><td>他社から供給されるエネルギー由来の排出</td><td>購入電力・熱の使用</td></tr>
-    <tr><td class="bold center">Scope 3</td><td>サプライチェーン全体の排出</td><td>資材製造・輸送・廃棄</td></tr>
-  </table>
-</div>
-
-<!-- ======================== PAGE 3: 建築マネジメント手法 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">③</span>
-    <span class="page-title-text">建築マネジメント手法　FM / CRE / PM / AM / PFI / PPP / コンセッション / ECI</span>
-  </div>
-
-  <h2>1. マネジメント手法 比較一覧表</h2>
-  <table>
-    <tr>
-      <th style="width:18%">手法</th>
-      <th style="width:40%">定義・内容</th>
-      <th style="width:22%">視点</th>
-      <th style="width:20%">混同注意</th>
-    </tr>
-    <tr>
-      <td class="bold center">FM<br><span class="small">ファシリティ<br>マネジメント</span></td>
-      <td>企業・団体等が保有または使用する施設（ファシリティ）とその環境を<span class="blue">経営的視点</span>から総合的・戦略的に企画・管理・活用する経営活動【2023出題・正解肢】</td>
-      <td>自社施設の最適化・経営効率向上</td>
-      <td>CRE戦略とは主体が異なる</td>
-    </tr>
-    <tr>
-      <td class="bold center">CRE<br><span class="small">企業不動産戦略</span></td>
-      <td>企業が保有する不動産を<span class="blue">企業価値向上</span>の観点から、経営戦略的視点で見直し・活用し、<span class="blue">不動産投資の効率を最大化</span>するための考え方【2021出題・正解肢】</td>
-      <td>不動産投資効率の最大化</td>
-      <td>PFIと混同注意（PFIは公共施設整備手法）</td>
-    </tr>
-    <tr>
-      <td class="bold center">PM<br><span class="small">プロパティ<br>マネジメント</span></td>
-      <td>不動産オーナーから委託を受け、賃貸管理・テナント管理・収支管理等で収益性を最大化する業務。ビル運営管理・リーシング・コンストラクションマネジメント等も含む【2024出題】</td>
-      <td>収益不動産の日常管理・運営</td>
-      <td>FMは自社施設、PMは受託管理</td>
-    </tr>
-    <tr>
-      <td class="bold center">AM<br><span class="small">アセット<br>マネジメント</span></td>
-      <td>不動産の所有者・投資家を代行して、テナント対応・建築物の維持管理・運営までを含めた一連の不動産業務を行う。PMより上位の<span class="blue">資産運用戦略レベル</span>の業務。</td>
-      <td>投資資産全体の価値最大化</td>
-      <td>「適正な投資価値算出のための多角的調査」→【2022出題・誤り肢】　それはデューデリジェンス</td>
-    </tr>
-  </table>
-
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2019出題】</span>「CRE戦略とは、国や地方公共団体が民間の資金・経営能力・技術的能力を活用して公共施設等の設計・建設・維持管理・運営を行う手法」→ <span class="red">誤り</span>。それは<span class="blue">PFI</span>の定義。CRE戦略は<span class="blue">企業</span>の不動産戦略。
-  </div>
-
-  <h2>2. 公民連携手法 比較一覧表</h2>
-  <table>
-    <tr>
-      <th style="width:18%">手法</th>
-      <th style="width:42%">定義・内容</th>
-      <th style="width:22%">所有権</th>
-      <th style="width:18%">運営主体</th>
-    </tr>
-    <tr>
-      <td class="bold center">PPP<br><span class="small">Public Private<br>Partnership</span></td>
-      <td>公共サービスの提供に民間が参画する手法を幅広くとらえた概念。民間資本・創意工夫等を活用し公共サービスの効率化・質の向上を目指す総称【2025出題】</td>
-      <td>公共</td>
-      <td>官民連携（PFIも包含）</td>
-    </tr>
-    <tr>
-      <td class="bold center">PFI<br><span class="small">Private Finance<br>Initiative</span></td>
-      <td>公共施設の設計・建設・維持管理・運営を民間に委ねる手法。VFM（Value for Money＝支払いに対し最も価値の高いサービスを供給する考え方）が重要概念【2020出題】。PPPの一手法。</td>
-      <td>公共<br>または民間</td>
-      <td>民間（SPCを設立）</td>
-    </tr>
-    <tr>
-      <td class="bold center">コンセッション</td>
-      <td>料金徴収を行う公共施設において、<span class="blue">施設の所有権は公共が保持したまま</span>、施設の<span class="blue">運営権のみを民間業者に設定</span>する方式。空港・上下水道・道路等で活用。PFIの一類型。</td>
-      <td class="bold center blue">公共のまま</td>
-      <td>民間（運営権）</td>
-    </tr>
-    <tr>
-      <td class="bold center">BOT<br><span class="small">Build-Operate-<br>Transfer</span></td>
-      <td>民間が資金調達・建設し、一定期間運営した後、期間満了後に所有権を行政に<span class="bold">移管</span>する方式</td>
-      <td>民間→<br>満了後公共</td>
-      <td>民間</td>
-    </tr>
-    <tr>
-      <td class="bold center">BTO<br><span class="small">Build-Transfer-<br>Operate</span></td>
-      <td>民間が資金調達・建設し、<span class="bold">完成直後</span>に所有権を公共に移転し、その後当該民間事業者が一定期間維持管理・運営する方式【2020・2024出題】</td>
-      <td>完成直後に<br>公共へ移転</td>
-      <td>民間</td>
-    </tr>
-    <tr>
-      <td class="bold center">BOO<br><span class="small">Build-Own-<br>Operate</span></td>
-      <td>民間が建設・所有・運営し、移管なし（民間が保有し続ける）</td>
-      <td class="bold center red">民間（移管なし）</td>
-      <td>民間</td>
-    </tr>
-    <tr>
-      <td class="bold center">SPC<br><span class="small">特別目的会社</span></td>
-      <td>PFI事業を実施するために設立される会社。PFI以外の投資は行わず、契約期間終了後に解散【2022出題・正解肢】</td>
-      <td>―</td>
-      <td>PFIの実施主体</td>
-    </tr>
-  </table>
-
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2021出題】</span>「コンセッション方式とは、施設の<span class="red">所有権と運営権を民間業者へ移行</span>する方式」→ <span class="red">誤り</span>。<span class="blue">所有権は公共が保持したまま</span>、運営権のみを設定する方式。
-  </div>
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2024出題】</span>「BOT方式は、完成直後に所有権を移転する方式」→ <span class="red">誤り</span>。完成直後に所有権移転するのは<span class="blue">BTO方式</span>。BOTは<span class="blue">期間満了後</span>に移管。
-  </div>
-
-  <h2>3. 性能発注・ECI方式</h2>
-  <div class="two-col">
-    <div class="section-card">
-      <div class="section-card-head" style="background:#2e6da4;">性能発注方式</div>
-      <div class="section-card-body">
-        設計者が施工候補者に<span class="bold">一定の性能基準を提示</span>した上で技術提案を求めて施工者を選定する発注方式。施工者のノウハウ・技術提案を活かせる。仕様発注（材料・工法指定）との対比で覚える。
-      </div>
-    </div>
-    <div class="section-card">
-      <div class="section-card-head" style="background:#27ae60;">ECI方式（Early Contractor Involvement）</div>
-      <div class="section-card-body">
-        公共工事において、<span class="bold">設計段階</span>から施工者が技術協力を行い、施工の数量・仕様を確定した上で工事契約をする方式。施工段階における設計変更の発生リスクの減少等が期待できる。【2019出題・正解肢】
-        <div class="point-box" style="margin-top:4px;">
-          <span class="label">⚠</span>「ECI方式は<span class="red">施工段階から</span>施工者が参加」→ 誤り。<span class="blue">設計段階から</span>関与するのが特徴。
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== PAGE 4: コミッショニング・BCP・ストック活用 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">④</span>
-    <span class="page-title-text">コミッショニング・BCP・スケルトンインフィル・コンバージョン・ストック活用</span>
-  </div>
-
-  <h2>1. コミッショニング</h2>
-  <div class="note-box">
-    <span class="bold">定義：</span>建築物のオーナー・ユーザーが求める<span class="blue">要求性能を把握</span>し、<span class="blue">設計・施工・運用の各段階</span>においてその要求性能の実現を<span class="blue">検証・確認</span>するプロセス。環境・エネルギー性能の観点から行われることが多い。【2019出題・正解肢】
-  </div>
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ</span>「コミッショニングは<span class="red">施工段階のみ</span>行う検証プロセス」→ <span class="red">誤り</span>。<span class="blue">設計→施工→運用</span>の全段階にわたって実施する。
-  </div>
-
-  <h2>2. BCP（Business Continuity Plan：事業継続計画）</h2>
-  <div class="note-box">
-    <span class="bold">定義：</span>企業が災害・事故で被害を受けても重要な業務が<span class="blue">中断しない</span>こと、中断しても可能な限り<span class="blue">短期間で再開</span>できるよう事業の継続を追求するための計画。【2019出題・正解肢】
-  </div>
-
-  <div class="two-col">
-    <div>
-      <h3>BCP対策の具体例（試験頻出）</h3>
-      <ul>
-        <li>サテライトオフィスを設置して事業拠点を分散【2024出題】</li>
-        <li>病院・ホテル等：電気・ガス・水道のライフライン広域停止に備えた設備計画【2021出題】</li>
-        <li>受水槽を1日予想給水量の2倍に設定し塩素滅菌装置を設置【2023出題】</li>
-      </ul>
-    </div>
-    <div>
-      <h3>BCM（Business Continuity Management）</h3>
-      <div class="note-box">
-        BCPを継続的に維持・改善する<span class="bold">経営管理活動</span>全般。BCPの策定・訓練・見直し・教育を含む。<br>BCP（計画）の上位概念としてBCM（マネジメント）がある。
-      </div>
-    </div>
-  </div>
-
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ</span>「BCPは<span class="red">防災計画と同じ</span>もの」→ 誤り。防災計画は被害軽減が主目的。BCPは<span class="blue">業務継続・早期復旧</span>に特化した計画。視点が異なる。
-  </div>
-
-  <h2>3. スケルトン・インフィル（SI住宅）</h2>
-  <table>
-    <tr>
-      <th style="width:22%">要素</th>
-      <th style="width:38%">内容</th>
-      <th style="width:18%">耐用年数</th>
-      <th style="width:22%">区分</th>
-    </tr>
-    <tr>
-      <td class="bold center blue">スケルトン（S）</td>
-      <td>構造躯体・共用設備（柱・梁・スラブ・共用廊下等）</td>
-      <td class="center">長寿命（100年超）</td>
-      <td class="center">共用部</td>
-    </tr>
-    <tr>
-      <td class="bold center green">インフィル（I）</td>
-      <td>内装・専有設備（間仕切り壁・床仕上げ・設備配管等）</td>
-      <td class="center">短寿命（15〜30年）</td>
-      <td class="center">専有部（可変・更新可）</td>
-    </tr>
-  </table>
-  <div class="note-box">
-    スケルトンとインフィルを分離することで、居住者のライフスタイル変化に対応した<span class="bold">間取り変更・設備更新</span>が容易になる。長期優良住宅の「可変性」基準にも関連。
-  </div>
-
-  <h2>4. コンバージョン（用途転換）</h2>
-  <div class="note-box">
-    <span class="bold">定義：</span>既存建築物の用途を変更して再活用する手法。ストック活用・環境負荷低減に有効。<br>
-    代表例：オフィス→住宅、工場→文化施設・商業施設（倉敷アイビースクエア：紡績工場→ホテル・文化施設）
-  </div>
-  <div class="point-box">
-    <span class="label">⚠ 試験ポイント</span>建築基準法上の「用途変更」：床面積200㎡超（特殊建築物への変更）は<span class="blue">確認申請が必要</span>。200㎡以下は申請不要（工事届のみ）。
-  </div>
-
-  <h2>5. ストックマネジメント・ライフサイクルマネジメント</h2>
-  <div class="two-col">
-    <div class="section-card">
-      <div class="section-card-head" style="background:#2e6da4;">ストックマネジメント</div>
-      <div class="section-card-body">
-        既存建築物・インフラを長期的に維持・活用するための計画的管理。公共施設等総合管理計画の策定（PPP/PFI活用と連動）。公共施設の老朽化対応・統廃合の観点から出題。
-      </div>
-    </div>
-    <div class="section-card">
-      <div class="section-card-head" style="background:#8e44ad;">ライフサイクルマネジメント（LCM）</div>
-      <div class="section-card-body">
-        建築物の機能や効用の維持あるいは向上を適切なコストのもとで、<span class="bold">企画から解体・廃棄処分まで</span>管理実行すること【2024出題・正解肢】。
-      </div>
-    </div>
-  </div>
-
-  <h2>6. アダプタビリティ・フレキシビリティ（可変性）</h2>
-  <table>
-    <tr><th style="width:30%">概念</th><th>内容</th><th style="width:22%">時間スケール</th></tr>
-    <tr>
-      <td class="bold center">アダプタビリティ</td>
-      <td>建築物が用途変更・大規模改修に対応できる<span class="bold">長期的な可変性</span>（SI住宅・コンバージョン対応）</td>
-      <td class="center">長期（数十年）</td>
-    </tr>
-    <tr>
-      <td class="bold center">フレキシビリティ</td>
-      <td>間取りの変更・家具の移動等、<span class="bold">短期的な空間の可変性</span>（可動間仕切り・オープンプラン等）</td>
-      <td class="center">短期〜中期</td>
-    </tr>
-  </table>
-</div>
-
-<!-- ======================== PAGE 5: 省エネ・エネルギー制度まとめ ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">⑤</span>
-    <span class="page-title-text">省エネ・エネルギー制度まとめ　BEI / ZEB / 再エネ / 省エネ法 / 頻出数値</span>
-  </div>
-
-  <h2>1. 建築物省エネ法と一次エネルギー消費量基準</h2>
-  <div class="note-box">
-    <span class="bold">設計一次エネルギー消費量 ÷ 基準一次エネルギー消費量 ＝ BEI</span><br>
-    BEI ≦ 1.0 で<span class="blue">省エネ基準適合</span>。2017年に非住宅300㎡以上が省エネ適合義務化の流れ。2025年以降は新築住宅・非住宅すべて省エネ基準適合が義務化方向。
-  </div>
-
-  <table>
-    <tr><th style="width:18%">BEI値</th><th>評価</th><th style="width:20%">BELS星数</th></tr>
-    <tr><td class="center">BEI ≦ 0.8</td><td>省エネ基準より20%以上向上</td><td class="center">★★★★★（5星）相当以上</td></tr>
-    <tr><td class="center">BEI ≦ 0.85</td><td>省エネ基準より15%以上向上</td><td class="center">★★★★</td></tr>
-    <tr><td class="center">BEI ≦ 0.9</td><td>省エネ基準より10%以上向上</td><td class="center">★★★</td></tr>
-    <tr><td class="center">BEI ≦ 1.0</td><td>省エネ基準適合</td><td class="center">★★</td></tr>
-    <tr><td class="center">BEI &gt; 1.0</td><td>省エネ基準不適合</td><td class="center">★（基準不適合表示）</td></tr>
-  </table>
-
-  <h2>2. ZEB区分と省エネ削減率 詳細</h2>
-  <table>
-    <tr>
-      <th style="width:22%">区分</th>
-      <th style="width:30%">再エネ込み削減率</th>
-      <th style="width:30%">再エネ除き削減率</th>
-      <th style="width:18%">主な対象</th>
-    </tr>
-    <tr>
-      <td class="bold center">ZEB</td>
-      <td class="center green bold">100%以上</td>
-      <td class="center">50%以上</td>
-      <td class="center">全用途</td>
-    </tr>
-    <tr>
-      <td class="bold center">Nearly ZEB</td>
-      <td class="center">75%以上〜100%未満</td>
-      <td class="center">50%以上</td>
-      <td class="center">全用途</td>
-    </tr>
-    <tr>
-      <td class="bold center">ZEB Ready</td>
-      <td class="center">―</td>
-      <td class="center green bold">50%以上</td>
-      <td class="center">全用途</td>
-    </tr>
-    <tr>
-      <td class="bold center">ZEB Oriented</td>
-      <td class="center">―</td>
-      <td class="center">30〜40%以上<br><span class="small">（延床面積・用途による）</span></td>
-      <td class="center">大規模建築物</td>
-    </tr>
-    <tr>
-      <td class="bold center">ZEH（住宅）</td>
-      <td class="center green bold">100%以上（正味ゼロ以下）</td>
-      <td class="center">20%以上（外皮強化）</td>
-      <td class="center">住宅</td>
-    </tr>
-  </table>
-  <div class="note-box" style="margin-top:4px;">
-    <span class="bold">ZEH（ネット・ゼロ・エネルギー・ハウス）：</span>高い断熱性能を有する外皮と高効率省エネ設備を備え、再生可能エネルギー等により年間一次エネルギー消費量が<span class="bold">正味ゼロ又はマイナス</span>となる住宅【2025出題・正解肢】。
-  </div>
-
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2021出題】</span>「ZEBは建設リサイクル法の分別解体・再資源化の実施義務対象建築物のことである」→ <span class="red">誤り</span>。ZEBはエネルギー性能の概念であり、建設リサイクル法の適用対象建築物の定義ではない。
-  </div>
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2022出題】</span>「ZEBを実現するためには、<span class="red">再生可能エネルギーの導入のみ</span>では不十分」→ <span class="blue">正しい</span>。ZEBはエネルギー消費量の削減（省エネ）と再エネの両方が必要。省エネ努力なしに再エネのみで達成はできない。
-  </div>
-
-  <h2>3. 再生可能エネルギー種別</h2>
-  <table>
-    <tr><th>種別</th><th>概要</th><th>ZEBへの活用</th></tr>
-    <tr><td class="bold center">太陽光発電（PV）</td><td>太陽光を直接電力に変換。建築物屋根・外壁等に設置</td><td class="center">◎ 最も一般的</td></tr>
-    <tr><td class="bold center">太陽熱利用</td><td>太陽熱を給湯・暖房等に利用</td><td class="center">○</td></tr>
-    <tr><td class="bold center">地中熱利用</td><td>地中の安定した温度を利用したヒートポンプ</td><td class="center">○</td></tr>
-    <tr><td class="bold center">バイオマス</td><td>生物由来の有機物を燃料として利用</td><td class="center">△</td></tr>
-    <tr><td class="bold center">風力</td><td>風のエネルギーを電力に変換</td><td class="center">△（建築物単体では限定的）</td></tr>
-  </table>
-
-  <h2>4. 省エネ基準・eマーク・認定制度 整理</h2>
-  <table>
-    <tr><th style="width:30%">制度・マーク</th><th>内容</th></tr>
-    <tr>
-      <td class="bold center">eマーク<br>（省エネ基準適合認定マーク）</td>
-      <td>建築物が省エネルギー基準に適合していることについて<span class="bold">所管行政庁から認定</span>を受けたことを示すマーク【2020出題・正解肢】</td>
-    </tr>
-    <tr>
-      <td class="bold center">BELS</td>
-      <td>第三者評価機関が評価・認証する制度（新築・既存対象）。eマークより客観性・中立性が高い</td>
-    </tr>
-    <tr>
-      <td class="bold center">省エネ適合性判定</td>
-      <td>延床面積300㎡以上の非住宅新築は建築確認と別途に省エネ適合性判定が必要</td>
-    </tr>
-  </table>
-
-  <h2>5. 頻出数値・キーワード まとめ</h2>
-  <div class="two-col">
-    <div class="note-box">
-      <span class="bold">CASBEE：</span>BEE = Q ÷ L　大きいほど高性能<br>
-      ランク：S &gt; A &gt; B+ &gt; B- &gt; C
-    </div>
-    <div class="note-box">
-      <span class="bold">BELS：</span>BEI = 設計一次E ÷ 基準一次E<br>
-      小さいほど省エネ・星が多い　BEI≦1.0で適合
-    </div>
-  </div>
-  <div class="two-col">
-    <div class="note-box">
-      <span class="bold">ZEB Ready：</span>再エネ除き50%以上削減<br>
-      <span class="bold">ZEB：</span>再エネ込み100%以上削減
-    </div>
-    <div class="note-box">
-      <span class="bold">LEED：</span>USGBC運営・4段階<br>
-      Platinum &gt; Gold &gt; Silver &gt; Certified
-    </div>
-  </div>
-  <div class="point-box">
-    <span class="label">最終確認</span>BEEは<span class="blue">大きい</span>ほど高性能（CASBEE）　／　BEIは<span class="blue">小さい</span>ほど省エネ（BELS）。この対比を必ず押さえる。
-  </div>
-</div>
-
-
-<!-- ======================== PAGE 6: 都市計画・まちづくり用語 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">⑥</span>
-    <span class="page-title-text">都市計画・まちづくり用語　インナーシティ / スプロール / レジリエンス / TOD / BID / GIS / CEMS</span>
-  </div>
-
-  <h2>1. 都市問題・まちづくり概念</h2>
-
-  <div class="two-col">
-    <div class="section-card">
-      <div class="section-card-head" style="background:#cc0000;">インナーシティ問題</div>
-      <div class="section-card-body">
-        <div class="note-box" style="margin-bottom:4px;">
-          <span class="bold">定義：</span>都市の<span class="blue">中心部とその周辺の市街地</span>における人口の減少と産業の衰退、地域の荒廃等の問題。郊外化（スプロール）の裏返し現象として発生。
-        </div>
-        <div class="point-box">
-          <span class="label">⚠</span>「インナーシティ問題＝<span class="red">郊外部</span>の問題」→ 誤り。<span class="blue">都市中心部・内側</span>の問題。
-        </div>
-      </div>
-    </div>
-    <div class="section-card">
-      <div class="section-card-head" style="background:#e67e22;">スプロール現象</div>
-      <div class="section-card-body">
-        <div class="note-box" style="margin-bottom:4px;">
-          <span class="bold">定義：</span>都市が<span class="blue">無秩序・無計画に郊外へ拡大</span>していく現象。虫食い状の市街地拡大。インフラ整備コストの増大・農地の無秩序な転用等が問題となる。
-        </div>
-        <div class="point-box">
-          <span class="label">⚠</span>「スプロール＝自然災害から社会基盤が復活すること」→ 誤り。それは<span class="blue">レジリエンス</span>の概念。
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-card" style="margin-bottom:6px;">
-    <div class="section-card-head" style="background:#27ae60;">レジリエンス（都市のレジリエンス）</div>
-    <div class="section-card-body">
-      <div class="note-box">
-        <span class="bold">定義：</span>自然災害等により社会基盤やそれが支える社会・経済が一時的に大きなダメージを受けても、<span class="blue">速やかに復活・回復</span>できる都市・地域の能力・性質。BCPと近い概念だが、<span class="bold">都市・地域スケール</span>で使われる。
-      </div>
-      <p style="margin-top:3px;font-size:8pt;color:#555;">BCPは個別企業の事業継続計画 ／ レジリエンスは都市・地域全体の回復力</p>
-    </div>
-  </div>
-
-  <h2>2. 都市計画関連の略語・制度</h2>
-
-  <table>
-    <tr>
-      <th style="width:14%">略語</th>
-      <th style="width:22%">正式名称</th>
-      <th style="width:14%">単位</th>
-      <th>定義・内容・試験ポイント</th>
-    </tr>
-    <tr>
-      <td class="bold center">TMO</td>
-      <td class="center small">Town Management Organization</td>
-      <td class="center">中心市街地</td>
-      <td>商業・業務機能が集積した地区において「中心市街地活性化基本計画」等をもとに活性化事業を推進する<span class="bold blue">民間主体の組織</span>。<br><span class="small red">⚠「行政主体の組織」→誤り</span></td>
-    </tr>
-    <tr>
-      <td class="bold center">DID</td>
-      <td class="center small">Densely Inhabited District<br>人口集中地区</td>
-      <td class="center">統計地区</td>
-      <td>人口密度が<span class="bold">4,000人/km²以上</span>の基本単位区等が互いに隣接し、それらの人口が<span class="bold">5,000人以上</span>となる地域。国勢調査で5年ごとに設定。<br><span class="small red">⚠「3,000人以上」「密度の数値違い」で引っかけ出題</span></td>
-    </tr>
-    <tr>
-      <td class="bold center">TOD</td>
-      <td class="center small">Transit Oriented Development</td>
-      <td class="center">開発手法</td>
-      <td>鉄道・バス等の公共交通機関の駅・停留所を中心に、<span class="bold">徒歩圏内</span>に住宅・商業・業務等を集積させるコンパクトな都市開発手法。<br><span class="small red">⚠「自動車交通の効率化を最大限活かす計画」→誤り。公共交通・歩行者中心が正しい</span></td>
-    </tr>
-    <tr>
-      <td class="bold center">BID</td>
-      <td class="center small">Business Improvement District</td>
-      <td class="center">地区</td>
-      <td>地区内の不動産所有者や事業者等から<span class="bold">負担金を徴収</span>し、その地区のオープンスペース維持管理・治安改善・マーケティング等を行う制度。米国・英国で発展。日本では「エリアマネジメント」として普及。</td>
-    </tr>
-    <tr>
-      <td class="bold center">GIS</td>
-      <td class="center small">Geographic Information System<br>地理情報システム</td>
-      <td class="center">情報技術</td>
-      <td>位置に関する情報をもつデータ（空間データ）を総合的に管理・加工し、<span class="bold">視覚的に表示・分析・判断</span>を可能にする技術。都市計画・防災・インフラ管理等に活用。</td>
-    </tr>
-  </table>
-
-  <h2>3. エネルギー管理システム 規模別比較（混同注意）</h2>
-
-  <table>
-    <tr>
-      <th style="width:14%">略語</th>
-      <th style="width:22%">正式名称</th>
-      <th style="width:12%">対象規模</th>
-      <th>定義・内容</th>
-    </tr>
-    <tr>
-      <td class="bold center">HEMS</td>
-      <td class="center small">Home Energy Management System</td>
-      <td class="center bold blue">住宅</td>
-      <td>住宅内のエネルギー設備（太陽光・蓄電池・家電等）を一元管理・制御するシステム</td>
-    </tr>
-    <tr>
-      <td class="bold center">BEMS</td>
-      <td class="center small">Building and Energy Management System</td>
-      <td class="center bold green">建物</td>
-      <td>建築物のエネルギー設備（空調・照明・熱源等）を一元管理・制御するシステム。省エネの自動制御・見える化に活用。【2022出題注意：BEMSをペリメーターゾーン用の空調システムとする誤り選択肢あり】</td>
-    </tr>
-    <tr>
-      <td class="bold center">CEMS</td>
-      <td class="center small">Community Energy Management System</td>
-      <td class="center bold red">地区</td>
-      <td>インターネット等の通信回線を活用し、<span class="bold">複数の建築物のエネルギー設備を一元的に管理・制御</span>することによって<span class="bold blue">地区（コミュニティ）単位</span>で行われるエネルギーの集中管理システム</td>
-    </tr>
-  </table>
-
-  <div class="point-box">
-    <span class="label">⚠ 引っかけ【2022出題】</span>「BEMS（Building and Energy Management System）＝二重のガラス間にブラインド等の遮光装置を設置し、空調空気を通すことで、ペリメーターゾーンの熱負荷を軽減するシステム」→ <span class="red">誤り</span>。その説明は<span class="blue">エアフローウィンドウ</span>（またはダブルスキン）の説明。BEMSは建物エネルギーの管理・制御システム。
-  </div>
-
-  <h2>4. エリアマネジメント</h2>
-  <div class="note-box">
-    地域の不動産所有者・事業者・住民等が<span class="bold">主体</span>となり、地域の価値・魅力を維持・向上させるための<span class="bold">自発的・継続的な取り組み</span>。BIDの日本版的な概念。公民連携（PPP）の手法の一つでもある。
-  </div>
-
-  <h2>5. 都市計画・まちづくり用語 クイック一覧</h2>
-  <table>
-    <tr>
-      <th style="width:18%">用語</th>
-      <th style="width:16%">単位・主体</th>
-      <th>キーワード</th>
-    </tr>
-    <tr>
-      <td class="bold center">インナーシティ問題</td>
-      <td class="center">都市中心部</td>
-      <td>人口減少・産業衰退・荒廃　←→　スプロール（郊外拡大）の裏返し</td>
-    </tr>
-    <tr>
-      <td class="bold center">スプロール</td>
-      <td class="center">郊外</td>
-      <td>無秩序・無計画な郊外拡大　虫食い市街地</td>
-    </tr>
-    <tr>
-      <td class="bold center">レジリエンス</td>
-      <td class="center">都市・地域</td>
-      <td>被害後の<span class="blue">速やかな回復力</span>　都市スケールのBCP概念</td>
-    </tr>
-    <tr>
-      <td class="bold center">TMO</td>
-      <td class="center">民間主体組織</td>
-      <td>中心市街地活性化　<span class="red">民間</span>主体（行政ではない）</td>
-    </tr>
-    <tr>
-      <td class="bold center">DID</td>
-      <td class="center">統計地区</td>
-      <td>密度<span class="bold">4,000人/km²以上</span>かつ<span class="bold">5,000人以上</span>　国勢調査で5年毎</td>
-    </tr>
-    <tr>
-      <td class="bold center">TOD</td>
-      <td class="center">開発手法</td>
-      <td><span class="blue">公共交通</span>指向型開発　駅周辺の徒歩圏に機能集積</td>
-    </tr>
-    <tr>
-      <td class="bold center">BID</td>
-      <td class="center">地区</td>
-      <td>負担金で運営するビジネス改善地区　日本のエリアマネジメントに相当</td>
-    </tr>
-    <tr>
-      <td class="bold center">GIS</td>
-      <td class="center">情報技術</td>
-      <td>空間データの管理・可視化・分析　都市計画・防災に活用</td>
-    </tr>
-    <tr>
-      <td class="bold center">HEMS / BEMS / CEMS</td>
-      <td class="center">住宅・建物・地区</td>
-      <td>規模順：住宅→建物→地区（コミュニティ）　規模が大きくなるほどCに近づく</td>
-    </tr>
-  </table>
-</div>
-
-<!-- ⑦ ニュータウン事例・近隣住区・交通計画用語 -->
-<div class="page">
-  <div class="page-header">⑦ ニュータウン事例・近隣住区論</div>
-
-  <div class="section-title">ニュータウン事例比較（頻出）</div>
-  <table>
-    <tr>
-      <th style="width:22%">事例</th>
-      <th style="width:12%">国・地域</th>
-      <th>特徴・ポイント</th>
-    </tr>
-    <tr>
-      <td class="bold center">レッチワース</td>
-      <td class="center">イギリス</td>
-      <td>世界初の田園都市（1903年）　E.ハワード構想をアンウィン・パーカーが設計</td>
-    </tr>
-    <tr>
-      <td class="bold center">ウェリン</td>
-      <td class="center">イギリス</td>
-      <td>第2の田園都市（1920年）　レッチワースより職住近接が強化</td>
-    </tr>
-    <tr>
-      <td class="bold center">ミルトン・ケインズ</td>
-      <td class="center">イギリス</td>
-      <td>ロンドン北西約80km（バッキンガムシャー）　<span class="important">近隣住区論による空間構成を目指したものではない</span>　格子状グリッド道路・ラウンドアバウト・自動車優先設計が特徴</td>
-    </tr>
-    <tr>
-      <td class="bold center">タピオラ</td>
-      <td class="center">フィンランド</td>
-      <td>ヘルシンキ郊外　<span class="important">森と湖に囲まれた低密度住宅地（「高密度」は誤り）</span>　中央に商業施設・アイスリンクを配置　自然との共生が特徴</td>
-    </tr>
-    <tr>
-      <td class="bold center">筑波研究学園都市</td>
-      <td class="center">茨城県</td>
-      <td>東京への一極集中緩和を目的に国主導で建設　<span class="important">研究・学術都市として構想（「田園都市」は誤り）</span>　研究機関・大学が集積　歩車分離のペデストリアンデッキが特徴</td>
-    </tr>
-    <tr>
-      <td class="bold center">多摩ニュータウン</td>
-      <td class="center">東京都</td>
-      <td>1960年代計画・日本最大規模　近隣住区論を採用　現在は高齢化・空洞化が課題</td>
-    </tr>
-    <tr>
-      <td class="bold center">くまもとアートポリス</td>
-      <td class="center">熊本県</td>
-      <td>1988年〜　<span class="important">コミッショナー制度：コミッショナーが設計者を推薦・選定</span>　建築文化の向上を目的　磯崎新・伊東豊雄・安藤忠雄等が関与</td>
-    </tr>
-  </table>
-
-  <div class="trap-box">
-    <div class="trap-title">⚠ 引っかけポイント</div>
-    <div>・<strong>タピオラ＝高密度</strong>は誤り → 低密度・自然共生型が正しい</div>
-    <div>・<strong>筑波研究学園都市＝田園都市</strong>は誤り → 研究学園都市（田園都市はレッチワース・ウェリン）</div>
-    <div>・ミルトン・ケインズは<strong>近隣住区論を採用していない</strong>（格子状グリッドで自動車優先設計）</div>
-  </div>
-
-  <div class="section-title" style="margin-top:14px">近隣住区論（C.A.ペリー, 1929年）</div>
-  <table>
-    <tr>
-      <th style="width:30%">構成原則</th>
-      <th>内容</th>
-    </tr>
-    <tr>
-      <td class="bold center">規模</td>
-      <td><span class="important">小学校1校が成立する程度の人口規模</span>（5,000〜6,000人程度）を住区単位とする</td>
-    </tr>
-    <tr>
-      <td class="bold center">境界</td>
-      <td>幹線道路を境界とし、通過交通を住区内に引き込まない</td>
-    </tr>
-    <tr>
-      <td class="bold center">オープンスペース</td>
-      <td>住区面積の10%以上の公園・緑地を確保</td>
-    </tr>
-    <tr>
-      <td class="bold center">公共施設</td>
-      <td>学校・教会など公共施設を中心に配置し、歩いてアクセスできる距離</td>
-    </tr>
-    <tr>
-      <td class="bold center">地区商業施設</td>
-      <td>日常的な商業施設は周辺部・幹線道路沿いに配置（通過客も利用可能）</td>
-    </tr>
-    <tr>
-      <td class="bold center">内部街路</td>
-      <td>通過交通を排除した歩行者優先の内部街路体系（曲線道路・T字路等）</td>
-    </tr>
-  </table>
-</div>
-
-<!-- ⑧ 交通計画用語・歩行者空間 -->
-<div class="page">
-  <div class="page-header">⑧ 交通計画用語・歩行者空間</div>
-
-  <div class="section-title">交通計画用語（頻出）</div>
-  <table>
-    <tr>
-      <th style="width:28%">用語</th>
-      <th>定義・ポイント</th>
-    </tr>
-    <tr>
-      <td class="bold center">キスアンドライド<br><span style="font-size:0.8em">Kiss &amp; Ride</span></td>
-      <td><span class="important">家族・知人が自動車で駅・バス停まで送迎し、そこで別れる方式</span>　駐車は不要で短時間停車のみ　パークアンドライドより駐車場用地が小さくて済む</td>
-    </tr>
-    <tr>
-      <td class="bold center">パークアンドライド<br><span style="font-size:0.8em">Park &amp; Ride</span></td>
-      <td>郊外の駐車場に自動車を駐車し、公共交通機関に乗り換えて都心へ向かう方式　都心の交通渋滞・駐車場不足の緩和が目的</td>
-    </tr>
-    <tr>
-      <td class="bold center">タウンモビリティシステム</td>
-      <td><span class="important">中心市街地で車椅子・電動カート等の移動補助機器を貸し出す</span>制度　高齢者・障害者の外出支援・市街地活性化が目的</td>
-    </tr>
-    <tr>
-      <td class="bold center">セミモール</td>
-      <td><span class="important">歩行者を優先しながらも一般車両の通行を認めた歩行者優先道路</span>　完全な歩行者専用ではなく、一部または時間帯限定で車両通行可</td>
-    </tr>
-    <tr>
-      <td class="bold center">トランジットモール<br><span style="font-size:0.8em">Transit Mall</span></td>
-      <td><span class="important">一般車両の乗り入れを禁止し、路面電車・バス等の公共交通のみ通行させる道路</span>　歩行者と公共交通が共存　ポートランド（米）が有名</td>
-    </tr>
-    <tr>
-      <td class="bold center">ペデストリアンデッキ</td>
-      <td>地上から持ち上げた歩行者専用の連絡通路・デッキ　歩車分離の代表的手法　新宿・横浜・筑波に事例</td>
-    </tr>
-    <tr>
-      <td class="bold center">コミュニティ道路</td>
-      <td>住宅地内の生活道路でクランク・ハンプ（段差）等を設け歩行者優先にした道路</td>
-    </tr>
-    <tr>
-      <td class="bold center">ゾーン30</td>
-      <td>住宅地内の区域全体の最高速度を30km/hに制限し歩行者安全を確保する面的交通規制</td>
-    </tr>
-  </table>
-
-  <div class="trap-box">
-    <div class="trap-title">⚠ セミモール vs トランジットモール（最頻出の引っかけ）</div>
-    <table style="margin:4px 0 6px;border:none">
-      <tr>
-        <th style="width:35%">種別</th>
-        <th>一般車両</th>
-        <th>公共交通</th>
-        <th>歩行者</th>
-      </tr>
-      <tr>
-        <td class="bold center">セミモール</td>
-        <td class="center" style="color:#27ae60">○ 通行可</td>
-        <td class="center">○</td>
-        <td class="center">○（優先）</td>
-      </tr>
-      <tr>
-        <td class="bold center">トランジットモール</td>
-        <td class="center"><span class="important">× 禁止</span></td>
-        <td class="center">○（路面電車・バス）</td>
-        <td class="center">○</td>
-      </tr>
-      <tr>
-        <td class="bold center">歩行者専用道路</td>
-        <td class="center"><span class="important">× 禁止</span></td>
-        <td class="center"><span class="important">× 禁止</span></td>
-        <td class="center">○（専用）</td>
-      </tr>
+  <h2>集合住宅の特殊形態・SI住宅</h2>
+  <div class="two">
+    <table>
+      <tr><th>形態</th><th>概要・ポイント</th></tr>
+      <tr><td class="c bold">コレクティブハウス</td><td><span class="r">居住者が共用スペース（コモンダイニング等）を共有</span>しながら各住戸は独立。スウェーデン発祥。</td></tr>
+      <tr><td class="c bold">コーポラティブハウス</td><td>入居予定者が組合を結成し<span class="r">設計段階から参加して共同建設</span>。</td></tr>
+      <tr><td class="c bold">コンバージョン</td><td>既存建築の用途変更（事務所→住宅等）。床<span class="r">200㎡超</span>は確認申請必要。</td></tr>
     </table>
-    <div>「一般車両を禁止・路面電車バスのみ通行」→ <strong>トランジットモール</strong>の説明（セミモールではない）</div>
+    <div>
+      <div class="nt">
+        <span class="bold">SI住宅（スケルトン・インフィル）</span><br>
+        スケルトン：躯体・共用設備　長寿命（100年超）<br>
+        インフィル：内装・専有設備　短寿命（15〜30年）・可変<br>
+        → 間取り変更・設備更新が容易。長期優良住宅の「可変性」基準に関連。
+      </div>
+    </div>
   </div>
 
-  <div class="section-title" style="margin-top:14px">公共交通システム</div>
+  <h2>バリアフリー・UD の基本寸法</h2>
   <table>
-    <tr>
-      <th style="width:28%">用語</th>
-      <th>内容</th>
-    </tr>
-    <tr>
-      <td class="bold center">TOD<br><span style="font-size:0.8em">Transit Oriented Development</span></td>
-      <td>公共交通機関の駅・停留所を中心に高密度の複合的土地利用を図る開発手法　徒歩圏内に商業・住宅・業務を集積</td>
-    </tr>
-    <tr>
-      <td class="bold center">LRT<br><span style="font-size:0.8em">Light Rail Transit</span></td>
-      <td>低床型路面電車を中心とした次世代型路面電車システム　富山市・宇都宮市（ライトライン）が国内事例</td>
-    </tr>
-    <tr>
-      <td class="bold center">BRT<br><span style="font-size:0.8em">Bus Rapid Transit</span></td>
-      <td>専用レーン・連節バスにより鉄道並みの輸送力を持つバス高速輸送システム</td>
-    </tr>
-    <tr>
-      <td class="bold center">モビリティ・マネジメント</td>
-      <td>個人の移動手段を自動車から公共交通・自転車等へ転換を促すソフト施策（TDM）</td>
-    </tr>
+    <tr><th style="width:42%">部位・項目</th><th>基準寸法</th></tr>
+    <tr><td>廊下有効幅（車椅子使用者）</td><td><span class="r">800mm以上（推奨850mm以上）</span></td></tr>
+    <tr><td>廊下有効幅（車椅子同士すれ違い）</td><td><span class="r">1,800mm以上</span></td></tr>
+    <tr><td>出入口有効幅（車椅子）</td><td><span class="r">800mm以上（推奨850mm）</span></td></tr>
+    <tr><td>スロープ勾配（屋外・車椅子）</td><td><span class="r">1/12以下（推奨1/15以下）</span></td></tr>
+    <tr><td>手摺高さ</td><td>750〜850mm</td></tr>
+    <tr><td>車椅子転回スペース</td><td>直径<span class="r">1,500mm以上</span></td></tr>
+    <tr><td>駐車場（車椅子使用者）</td><td>幅<span class="r">3,500mm以上</span></td></tr>
+    <tr><td>視覚障害者誘導ブロック</td><td>線状（誘導用）・点状（警告・注意用）</td></tr>
   </table>
+</div>
+
+<!-- ④ 各種施設計画 -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">④</div>
+    <div class="page-title">各種施設計画 ― 病院・高齢者施設・図書館・美術館・学校・オフィス</div>
+  </div>
+
+  <h2>病院・医療施設</h2>
+  <table>
+    <tr><th style="width:28%">部門・スペース</th><th>計画ポイント・寸法</th></tr>
+    <tr><td class="c bold">ナースステーション</td><td>病棟の中央付近に配置・視認性確保。<span class="r">準清潔ゾーン</span>。</td></tr>
+    <tr><td class="c bold">手術室</td><td><span class="r">陽圧管理</span>（外部より気圧を高め汚染空気の侵入防止）・外来や病棟から遮断</td></tr>
+    <tr><td class="c bold">ICU・CCU</td><td>手術室に近接・<span class="r">オープン型</span>（個室ではなく見渡せる配置）が標準</td></tr>
+    <tr><td class="c bold">ゾーニング</td><td>清潔（手術室）→準清潔（処置室）→汚染（汚物処理）を<span class="r">明確に分離・一方向動線</span></td></tr>
+    <tr><td class="c bold">病室</td><td>1床当たり<span class="r">6.4㎡以上</span>（建築基準法）。南向き・自然採光推奨。</td></tr>
+  </table>
+
+  <h2>高齢者施設</h2>
+  <table>
+    <tr><th style="width:30%">施設種別</th><th>概要・特徴</th></tr>
+    <tr><td class="c bold">特別養護老人ホーム（特養）</td><td>要介護3以上が入所対象。<span class="r">ユニット型</span>（10人以下小グループ・個室）が主流。</td></tr>
+    <tr><td class="c bold">グループホーム</td><td>認知症高齢者が5〜9人で共同生活。<span class="r">家庭的な環境・小規模</span>が重要。</td></tr>
+    <tr><td class="c bold">サービス付き高齢者向け住宅</td><td>安否確認・生活相談付き賃貸住宅。比較的自立した方向け。</td></tr>
+  </table>
+
+  <h2>図書館・美術館</h2>
+  <div class="two">
+    <table>
+      <tr><th>図書館</th><th>計画ポイント</th></tr>
+      <tr><td class="c bold">開架閲覧</td><td>利用者が自由に手にとるブラウジングスペース</td></tr>
+      <tr><td class="c bold">書庫</td><td><span class="r">閉架式</span>・積層書架は床荷重<span class="r">10kN/㎡以上</span>に対応</td></tr>
+      <tr><td class="c bold">書架モジュール</td><td>奥行<span class="r">900mm基準</span>・通路900mm以上</td></tr>
+      <tr><td class="c bold">自然採光</td><td>直射日光は<span class="r">禁止</span>（資料劣化防止）</td></tr>
+    </table>
+    <table>
+      <tr><th>美術館</th><th>計画ポイント</th></tr>
+      <tr><td class="c bold">採光</td><td>北面採光または天窓（<span class="r">直射日光回避</span>）・均一光</td></tr>
+      <tr><td class="c bold">動線</td><td><span class="r">鑑賞動線と搬入動線を分離</span></td></tr>
+      <tr><td class="c bold">収蔵庫</td><td>温度20℃前後・湿度<span class="r">50〜60%</span>が目安</td></tr>
+      <tr><td class="c bold">床荷重</td><td>彫刻展示室は<span class="r">強化</span>（重量物対応）</td></tr>
+    </table>
+  </div>
+
+  <h2>学校・オフィス</h2>
+  <div class="two">
+    <div>
+      <h3>学校</h3>
+      <table>
+        <tr><th>項目</th><th>ポイント</th></tr>
+        <tr><td class="c bold">普通教室</td><td><span class="r">64㎡程度</span>（8m×8m）・南面配置</td></tr>
+        <tr><td class="c bold">廊下幅</td><td>両側教室：<span class="r">2,700mm以上</span>　片側：1,800mm以上</td></tr>
+        <tr><td class="c bold">音楽室</td><td><span class="r">遮音</span>対策・他室から離す</td></tr>
+        <tr><td class="c bold">オープンスクール</td><td>可動間仕切りでAV・グループ学習に対応</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>オフィス</h3>
+      <table>
+        <tr><th>項目</th><th>ポイント</th></tr>
+        <tr><td class="c bold">コアの種類</td><td>センターコア・サイドコア・アウトコア</td></tr>
+        <tr><td class="c bold">貸室効率</td><td>貸室面積÷延床面積　高いほど効率良</td></tr>
+        <tr><td class="c bold">ABW</td><td>固定席なし・業務内容で席を選ぶ（フリーアドレス）</td></tr>
+        <tr><td class="c bold">基準階</td><td>コア（EV・階段・設備）＋無柱大空間</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ⑤ 室内環境（光・熱・音・空気） -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">⑤</div>
+    <div class="page-title">室内環境（光・熱・音・空気） ― 採光・断熱・音響・換気</div>
+  </div>
+
+  <h2>採光・日照</h2>
+  <div class="two">
+    <table>
+      <tr><th>指標</th><th>定義・基準</th></tr>
+      <tr><td class="c bold">昼光率</td><td><span class="r">室内照度 ÷ 屋外水平面照度 × 100（%）</span>。直射光を除く全天空光で算定。</td></tr>
+      <tr><td class="c bold">照度</td><td>lx（ルクス）：単位面積当たりの光束量<br>執務室：750lx、廊下：200lx程度</td></tr>
+      <tr><td class="c bold">輝度</td><td>cd/m²：面の明るさ。グレア（眩しさ）の原因。</td></tr>
+      <tr><td class="c bold">採光補正係数</td><td>採光有効面積算出に使用。用途地域・隣地距離による。</td></tr>
+    </table>
+    <div>
+      <div class="nt">
+        <span class="bold">向きによる採光特性</span><br>
+        北面：安定した均一光（美術館・製図室に最適）<br>
+        南面：日照最大・直射光が入る<br>
+        東・西面：朝・夕に低角度直射光
+      </div>
+      <div class="nt" style="margin-top:4px">
+        <span class="bold">日影規制</span><br>
+        冬至日の真太陽時8〜16時の日影時間で規制<br>
+        永久日影：建物が終日影をつくる範囲
+      </div>
+    </div>
+  </div>
+
+  <h2>熱環境・断熱</h2>
+  <table>
+    <tr><th style="width:26%">指標・現象</th><th>定義・ポイント</th></tr>
+    <tr><td class="c bold">熱貫流率（U値）</td><td><span class="r">小さいほど断熱性能が高い</span>　W/(m²·K)。省エネ基準では屋根・外壁・窓ごとに基準値あり。</td></tr>
+    <tr><td class="c bold">熱容量</td><td>大きいほど蓄熱性が高く室温変動が小さい（コンクリート等）</td></tr>
+    <tr><td class="c bold">内部結露</td><td>壁内部で発生。防湿層（気密シート）を<span class="r">断熱層の室内側</span>に設置して防止。</td></tr>
+    <tr><td class="c bold">PMV（予測平均申告）</td><td>温熱快適指標。<span class="r">−3〜+3</span>のスケールで0が快適。6要素：気温・湿度・輻射・気流・着衣量・代謝量。</td></tr>
+    <tr><td class="c bold">ヒートアイランド対策</td><td>緑化・保水性舗装・高反射率塗装・地中熱利用等</td></tr>
+  </table>
+
+  <h2>音響</h2>
+  <div class="two">
+    <table>
+      <tr><th>指標</th><th>内容・ポイント</th></tr>
+      <tr><td class="c bold">残響時間</td><td>音が60dB減衰するまでの時間。<span class="r">室容積に比例・吸音面積に反比例</span>。コンサートホール：1.5〜2.0秒、会議室：0.4〜0.8秒</td></tr>
+      <tr><td class="c bold">NC値</td><td>室内騒音許容レベル。<span class="r">小さいほど静か</span>。スタジオ：NC-15〜20、事務室：NC-35〜45</td></tr>
+      <tr><td class="c bold">遮音（Dr値）</td><td><span class="r">大きいほど遮音性能が高い</span>。集合住宅界壁：Dr-50以上推奨</td></tr>
+      <tr><td class="c bold">吸音材</td><td>多孔質（グラスウール）→高音に効果　板振動型→低音に効果</td></tr>
+    </table>
+    <div>
+      <h3>空気環境・換気</h3>
+      <table>
+        <tr><th>項目</th><th>基準・ポイント</th></tr>
+        <tr><td class="c bold">CO₂濃度</td><td><span class="r">1,000ppm以下</span>（特定建築物）</td></tr>
+        <tr><td class="c bold">必要換気量</td><td>成人1人<span class="r">30m³/h以上</span></td></tr>
+        <tr><td class="c bold">第1種換気</td><td>給排気とも機械。最も制御性高い。病院等。</td></tr>
+        <tr><td class="c bold">第2種換気</td><td>給気のみ機械→<span class="r">正圧</span>。手術室・クリーンルーム等。</td></tr>
+        <tr><td class="c bold">第3種換気</td><td>排気のみ機械→<span class="r">負圧</span>。トイレ・浴室・台所等。</td></tr>
+        <tr><td class="c bold">24時間換気</td><td>2003年義務化。<span class="r">0.5回/h以上</span>確保。</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ⑥ 環境評価・省エネ・LCA -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">⑥</div>
+    <div class="page-title">環境評価・省エネ・LCA ― CASBEE / BELS / ZEB / LEED / LCA / ISO14001</div>
+  </div>
+
+  <h2>環境性能評価制度の比較</h2>
+  <table>
+    <tr><th style="width:16%">制度</th><th style="width:18%">運営主体</th><th>評価軸・ランク</th><th>引っかけポイント</th></tr>
+    <tr><td class="c bold"><span class="r">CASBEE</span></td><td class="c">国土交通省・建築系学会</td><td>BEE＝<span class="b">Q（環境品質）÷ L（環境負荷）</span>　S＞A＞B+＞B-＞C</td><td><span class="r">BEEは大きいほど高性能</span>（Qを大きく・Lを小さく）</td></tr>
+    <tr><td class="c bold"><span class="r">BELS</span></td><td class="c">第三者評価機関</td><td>BEI＝設計一次E÷基準一次E　BEI≦1.0で適合　★1〜5</td><td><span class="r">BEIは小さいほど省エネ・星が増える</span></td></tr>
+    <tr><td class="c bold"><span class="r">LEED</span></td><td class="c">USGBC（米国）</td><td>Platinum＞Gold＞Silver＞Certified（ポイント制）</td><td>健康・ウェルネス特化は<span class="r">WELL認証</span>（LEEDではない）</td></tr>
+    <tr><td class="c bold"><span class="r">eマーク</span></td><td class="c">所管行政庁</td><td>省エネ基準適合の認定マーク</td><td>BELSは第三者機関・eマークは行政庁</td></tr>
+  </table>
+  <div class="pt">BEE（CASBEE）＝大きいほど◎ ／ BEI（BELS）＝小さいほど◎　この対比は必須</div>
+
+  <h2>ZEB・ZEH区分</h2>
+  <table>
+    <tr><th style="width:22%">区分</th><th>再エネ込み削減率</th><th>再エネ除き削減率</th><th>対象</th></tr>
+    <tr><td class="c bold">ZEB</td><td class="c g bold">100%以上</td><td class="c">50%以上</td><td class="c">非住宅</td></tr>
+    <tr><td class="c bold">Nearly ZEB</td><td class="c">75%以上</td><td class="c">50%以上</td><td class="c">非住宅</td></tr>
+    <tr><td class="c bold">ZEB Ready</td><td class="c">―</td><td class="c g bold">50%以上</td><td class="c">非住宅</td></tr>
+    <tr><td class="c bold">ZEH（住宅）</td><td class="c g bold">正味ゼロ以下（100%以上）</td><td class="c">20%以上（外皮強化）</td><td class="c">住宅</td></tr>
+  </table>
+  <div class="pt">ZEBはエネルギー性能の概念（建設リサイクル法とは無関係）　ZEB実現には省エネ＋再エネの両方が必要</div>
+
+  <h2>LCA・環境マネジメント</h2>
+  <div class="two">
+    <table>
+      <tr><th>LCA 4段階</th><th>内容</th></tr>
+      <tr><td class="c bold">① 目的・調査範囲</td><td>評価目的・機能単位（FU）・システム境界を設定</td></tr>
+      <tr><td class="c bold">② インベントリ分析</td><td><span class="r">全ライフサイクルのINPUT・OUTPUTを物理量で定量化</span></td></tr>
+      <tr><td class="c bold">③ 影響評価</td><td>物理量を<span class="r">地球温暖化・酸性化等の環境影響カテゴリに変換</span></td></tr>
+      <tr><td class="c bold">④ 解釈</td><td>結果を目的に照らして解釈・改善策提案</td></tr>
+    </table>
+    <div>
+      <div class="pt" style="margin-bottom:5px"><span class="bold r">インベントリ分析＝物理量リストアップ</span><br>影響評価への変換ではない（変換は③影響評価）</div>
+      <div class="nt">
+        <span class="bold">ISO14001 / EMS</span><br>
+        PDCAで環境負荷の継続的改善を行う仕組み<br>
+        <span class="r">環境負荷ゼロを保証するものではない</span>
+      </div>
+      <div class="nt" style="margin-top:4px">
+        <span class="bold">環境効率</span> ＝ 生活の質（価値）÷ 環境負荷<br>
+        環境負荷が増えると環境効率は<span class="r">下がる</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑦ 建築マネジメント -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">⑦</div>
+    <div class="page-title">建築マネジメント ― FM/CRE/PM/AM・PFI/BOT・BCP・コミッショニング・ECI</div>
+  </div>
+
+  <h2>マネジメント手法の比較</h2>
+  <table>
+    <tr><th style="width:12%">略称</th><th style="width:28%">正式名称</th><th style="width:34%">定義・内容</th><th>視点・混同注意</th></tr>
+    <tr><td class="c bold"><span class="r">FM</span></td><td class="c">ファシリティマネジメント</td><td>自社の施設・環境を<span class="b">経営的視点</span>から総合管理する経営活動</td><td>自社施設の最適化</td></tr>
+    <tr><td class="c bold"><span class="r">CRE</span></td><td class="c">企業不動産戦略</td><td>保有不動産を<span class="b">企業価値向上・投資効率最大化</span>の観点で経営戦略的に見直す</td><td>不動産投資効率→PFIとの混同注意</td></tr>
+    <tr><td class="c bold"><span class="r">PM</span></td><td class="c">プロパティマネジメント</td><td>オーナーから委託を受け賃貸管理・テナント管理で収益最大化</td><td>受託管理（FMは自社）</td></tr>
+    <tr><td class="c bold"><span class="r">AM</span></td><td class="c">アセットマネジメント</td><td>投資家代行で資産運用戦略レベルの業務（PMの上位）</td><td>「投資価値算出の調査」→デューデリジェンス</td></tr>
+  </table>
+  <div class="pt">「CRE戦略＝民間資金で公共施設整備」→誤り。それは<span class="r">PFI</span>。CREは<span class="r">企業</span>の不動産戦略。</div>
+
+  <h2>公民連携手法（PFI等）の比較</h2>
+  <table>
+    <tr><th style="width:16%">手法</th><th style="width:38%">定義・内容</th><th style="width:22%">所有権</th><th>運営主体</th></tr>
+    <tr><td class="c bold">PPP</td><td>公共サービスへの民間参画の総称。PFIを包含。</td><td>公共</td><td>官民連携</td></tr>
+    <tr><td class="c bold"><span class="r">PFI</span></td><td>公共施設の設計・建設・維持管理・運営を民間へ委ねる手法。VFM重視。SPCを設立。</td><td>公共or民間</td><td>民間（SPC）</td></tr>
+    <tr><td class="c bold"><span class="r">コンセッション</span></td><td>料金徴収施設で<span class="r">所有権は公共のまま</span>・運営権のみ民間へ設定（空港・水道等）</td><td class="c b bold">公共のまま</td><td>民間（運営権）</td></tr>
+    <tr><td class="c bold"><span class="r">BOT</span></td><td>民間が建設・運営し、<span class="r">期間満了後</span>に所有権を公共に移管</td><td>民間→満了後公共</td><td>民間</td></tr>
+    <tr><td class="c bold"><span class="r">BTO</span></td><td>民間が建設し、<span class="r">完成直後</span>に所有権を公共に移転、その後民間が運営</td><td>完成直後に公共</td><td>民間</td></tr>
+    <tr><td class="c bold">BOO</td><td>民間が建設・所有・運営し移管なし</td><td class="c r bold">民間（移管なし）</td><td>民間</td></tr>
+  </table>
+  <div class="pt">コンセッション＝<span class="r">所有権は公共・運営権のみ民間</span>　BOT（期間満了後移管）vs BTO（完成直後移管）</div>
+
+  <h2>BCP・コミッショニング・ECI・ストック活用</h2>
+  <div class="two">
+    <div>
+      <div class="card">
+        <div class="card-h" style="background:#cc0000">BCP（事業継続計画）</div>
+        <div class="card-b">災害・事故時に重要業務が中断しない・早期復旧するための計画。<br>
+        <span class="r">防災計画とは異なる</span>：防災は被害軽減、BCPは業務継続・復旧。<br>
+        BCM＝BCPの継続的維持・改善の経営管理活動（BCPの上位概念）</div>
+      </div>
+      <div class="card" style="margin-top:4px">
+        <div class="card-h" style="background:#2e6da4">コミッショニング</div>
+        <div class="card-b">オーナーの要求性能を把握し、<span class="r">設計・施工・運用の全段階</span>で実現を検証・確認するプロセス。「施工段階のみ」→誤り。</div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-h" style="background:#27ae60">ECI方式（Early Contractor Involvement）</div>
+        <div class="card-b"><span class="r">設計段階から施工者が技術協力</span>し、仕様確定後に工事契約する方式。施工段階での設計変更リスク低減が目的。「施工段階から参加」→誤り。</div>
+      </div>
+      <div class="card" style="margin-top:4px">
+        <div class="card-h" style="background:#8e44ad">スケルトン・インフィル / ストック活用</div>
+        <div class="card-b">スケルトン（躯体）：長寿命　インフィル（内装）：短寿命・可変<br>
+        ストックマネジメント：既存施設の長期管理計画<br>
+        LCM（ライフサイクルマネジメント）：企画〜解体まで管理実行</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⑧ 都市計画・まちづくり -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">⑧</div>
+    <div class="page-title">都市計画・まちづくり ― 都市問題・TOD・DID・エネルギー管理</div>
+  </div>
+
+  <h2>都市問題・概念</h2>
+  <table>
+    <tr><th style="width:24%">概念</th><th>定義</th><th style="width:30%">引っかけ</th></tr>
+    <tr><td class="c bold"><span class="r">インナーシティ問題</span></td><td>都市の<span class="b">中心部・内側</span>における人口減少・産業衰退・地域荒廃の問題</td><td>「郊外部の問題」→誤り。中心部・内側の問題</td></tr>
+    <tr><td class="c bold"><span class="r">スプロール現象</span></td><td>都市が<span class="b">無秩序・無計画に郊外へ拡大</span>（虫食い状市街地）</td><td>「自然災害からの回復」→それはレジリエンス</td></tr>
+    <tr><td class="c bold"><span class="r">レジリエンス</span></td><td>自然災害等で社会基盤がダメージを受けても<span class="b">速やかに復活・回復</span>できる都市の性質</td><td>BCPは個別企業、レジリエンスは都市・地域スケール</td></tr>
+    <tr><td class="c bold"><span class="r">コンパクトシティ</span></td><td>都市機能を中心部に集積し郊外への無秩序な拡大を抑制。超高齢化・人口減少社会の対策として推進。</td><td>TOD（公共交通指向型）と組み合わせて推進</td></tr>
+    <tr><td class="c bold"><span class="r">ジェントリフィケーション</span></td><td>低所得者層の住む地区が再開発で高級化し元の住民が追い出される現象</td><td>社会問題として出題あり</td></tr>
+  </table>
+
+  <h2>都市計画の略語・制度</h2>
+  <table>
+    <tr><th style="width:12%">略語</th><th style="width:14%">対象</th><th>定義・ポイント</th></tr>
+    <tr><td class="c bold">TOD</td><td class="c">開発手法</td><td>公共交通の駅・停留所を中心に徒歩圏内に複合機能を集積する開発手法。「自動車優先」→誤り。</td></tr>
+    <tr><td class="c bold">DID</td><td class="c">統計地区</td><td>密度<span class="r">4,000人/km²以上</span>の地区が隣接し<span class="r">5,000人以上</span>の地域。国勢調査で5年毎。</td></tr>
+    <tr><td class="c bold">TMO</td><td class="c">民間組織</td><td>中心市街地活性化を推進する<span class="r">民間主体</span>の組織（行政主体→誤り）</td></tr>
+    <tr><td class="c bold">BID</td><td class="c">地区</td><td>地区内不動産所有者等から負担金を徴収し地区マネジメントを行う制度（米英発祥）</td></tr>
+    <tr><td class="c bold">エリアマネジメント</td><td class="c">地区</td><td>地域の不動産所有者・事業者・住民が<span class="r">主体</span>となって地域価値を維持・向上させる自発的取り組み。BIDの日本版。</td></tr>
+    <tr><td class="c bold">GIS</td><td class="c">情報技術</td><td>空間データを管理・可視化・分析。都市計画・防災・インフラ管理に活用。</td></tr>
+  </table>
+
+  <h2>エネルギー管理システム（混同注意）</h2>
+  <table>
+    <tr><th style="width:14%">略語</th><th>正式名称</th><th style="width:14%">対象規模</th><th>内容・引っかけ</th></tr>
+    <tr><td class="c bold r">HEMS</td><td>Home Energy Management System</td><td class="c b bold">住宅</td><td>住宅内のエネルギー設備（太陽光・蓄電池・家電等）を一元管理・制御</td></tr>
+    <tr><td class="c bold r">BEMS</td><td>Building and Energy Management System</td><td class="c g bold">建物</td><td>建築物の空調・照明・熱源等を管理・制御。<span class="r">「ペリメーターゾーン空調」→誤り</span>（それはエアフローウィンドウ）</td></tr>
+    <tr><td class="c bold r">CEMS</td><td>Community Energy Management System</td><td class="c r bold">地区</td><td>通信回線で複数建築物を<span class="b">地区単位</span>で集中管理</td></tr>
+  </table>
+  <div class="pt">規模の小さい順：HEMS（住宅）→ BEMS（建物）→ CEMS（地区・コミュニティ）</div>
+</div>
+
+<!-- ⑨ ニュータウン・近隣住区・交通計画 -->
+<div class="page">
+  <div class="page-header">
+    <div class="page-num">⑨</div>
+    <div class="page-title">ニュータウン・近隣住区論・交通計画 ― 頻出事例と引っかけ</div>
+  </div>
+
+  <h2>ニュータウン事例比較</h2>
+  <table>
+    <tr><th style="width:22%">事例</th><th style="width:11%">国・地域</th><th>特徴・試験ポイント</th></tr>
+    <tr><td class="c bold">レッチワース</td><td class="c">イギリス</td><td>世界初の田園都市（1903年）。E.ハワードの構想をアンウィン・パーカーが設計。</td></tr>
+    <tr><td class="c bold">ウェリン</td><td class="c">イギリス</td><td>第2の田園都市（1920年）。レッチワースより職住近接。</td></tr>
+    <tr><td class="c bold">ミルトン・ケインズ</td><td class="c">イギリス</td><td>ロンドン北西約80km（バッキンガムシャー）。<span class="r">近隣住区論ではなく格子状グリッド道路・ラウンドアバウト・自動車優先</span>設計。</td></tr>
+    <tr><td class="c bold">タピオラ</td><td class="c">フィンランド</td><td>ヘルシンキ郊外。<span class="r">低密度・森と湖に囲まれた住宅地（「高密度」は誤り）</span>。中央に商業・アイスリンク。</td></tr>
+    <tr><td class="c bold">筑波研究学園都市</td><td class="c">茨城県</td><td>東京一極集中緩和を目的に国主導で建設。<span class="r">研究・学術都市（「田園都市」は誤り）</span>。ペデストリアンデッキで歩車分離。</td></tr>
+    <tr><td class="c bold">多摩ニュータウン</td><td class="c">東京都</td><td>日本最大規模。近隣住区論を採用。高齢化・空洞化が現在の課題。</td></tr>
+    <tr><td class="c bold">くまもとアートポリス</td><td class="c">熊本県</td><td>1988年〜。<span class="r">コミッショナー制度</span>：コミッショナーが設計者を推薦・選定。建築文化向上が目的。</td></tr>
+  </table>
+  <div class="trap"><span class="bold" style="color:#cc6600">田園都市＝レッチワース・ウェリン　筑波・多摩は田園都市ではない　タピオラ＝低密度　ミルトン・ケインズ＝近隣住区論を採用していない</span></div>
+
+  <h2>近隣住区論（C.A.ペリー, 1929年）と田園都市論</h2>
+  <div class="two">
+    <table>
+      <tr><th>原則</th><th>内容</th></tr>
+      <tr><td class="c bold">規模</td><td><span class="r">小学校1校が成立する人口規模</span>（約5,000〜6,000人）を住区単位とする</td></tr>
+      <tr><td class="c bold">境界</td><td>幹線道路を境界とし通過交通を住区内に引き込まない</td></tr>
+      <tr><td class="c bold">オープンスペース</td><td>住区面積の10%以上の公園・緑地を確保</td></tr>
+      <tr><td class="c bold">公共施設</td><td>学校・公共施設を住区の中心に配置</td></tr>
+      <tr><td class="c bold">地区商業</td><td>商業施設は周辺部・幹線道路沿いに配置</td></tr>
+      <tr><td class="c bold">内部街路</td><td>通過交通を排除した歩行者優先の内部街路体系</td></tr>
+    </table>
+    <div>
+      <div class="nt">
+        <span class="bold">田園都市論（E.ハワード, 1898年）</span><br>
+        都市と農村の長所を統合した「第三の磁石」構想。<br>
+        人口3万人・農業用グリーンベルトで囲む・職住近接。<br>
+        実現：レッチワース（1903）・ウェリン（1920）
+      </div>
+      <div class="nt" style="margin-top:4px">
+        <span class="bold">ラドバーンシステム（1928年・米）</span><br>
+        スーパーブロック＋歩車完全分離。<br>
+        歩行者専用道でクルドサック（袋小路）を構成。
+      </div>
+    </div>
+  </div>
+
+  <h2>交通計画・歩行者空間用語</h2>
+  <table>
+    <tr><th style="width:24%">用語</th><th style="width:16%">一般車両</th><th style="width:16%">公共交通</th><th>定義・ポイント</th></tr>
+    <tr><td class="c bold">歩行者専用道路</td><td class="c r">× 禁止</td><td class="c r">× 禁止</td><td>全ての車両を排除した歩行者専用空間</td></tr>
+    <tr><td class="c bold"><span class="r">セミモール</span></td><td class="c g">○ 通行可</td><td class="c">○</td><td><span class="r">歩行者優先だが一般車両も通行可能</span>な道路（時間帯制限も）</td></tr>
+    <tr><td class="c bold"><span class="r">トランジットモール</span></td><td class="c r">× 禁止</td><td class="c">○（路面電車・バス）</td><td><span class="r">一般車両を禁止・公共交通のみ通行</span>（ポートランド等）</td></tr>
+    <tr><td class="c bold">キスアンドライド</td><td colspan="2" class="c">短時間送迎のみ</td><td>家族・知人が車で駅・停留所まで送迎して別れる方式。駐車場不要。</td></tr>
+    <tr><td class="c bold">パークアンドライド</td><td colspan="2" class="c">郊外駐車→乗換</td><td>郊外駐車場に駐車し公共交通に乗り換えて都心へ。渋滞・駐車場不足緩和。</td></tr>
+    <tr><td class="c bold">タウンモビリティ</td><td colspan="2" class="c">―</td><td>中心市街地で車椅子・電動カート等を貸し出す制度。高齢者・障害者の外出支援。</td></tr>
+    <tr><td class="c bold">ゾーン30</td><td colspan="2" class="c">30km/h制限</td><td>住宅地区域の最高速度を30km/hに制限する面的交通規制</td></tr>
+    <tr><td class="c bold">LRT / BRT</td><td colspan="2" class="c">公共交通</td><td>LRT：低床型路面電車（富山・宇都宮）　BRT：専用レーン・連節バスによる高速バス</td></tr>
+  </table>
+  <div class="trap">「一般車両を禁止し路面電車・バスのみ通行」→ <span class="r bold">トランジットモール</span>の説明（セミモールではない）</div>
 </div>
 
 </body>
