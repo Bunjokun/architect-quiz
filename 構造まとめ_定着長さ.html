@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>必要定着長さ 影響因子まとめ</title>
+<style>
+  @page { size: A4 portrait; margin: 14mm 11mm 14mm 11mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif; font-size: 8.5pt; line-height: 1.5; color: #111; }
+
+  .page { width: 100%; padding: 6px 0; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+
+  h1 { font-size: 13pt; font-weight: bold; text-align: center; border-bottom: 2.5px solid #1a237e; padding-bottom: 4px; margin-bottom: 8px; color: #1a237e; }
+  h2 { font-size: 9.5pt; font-weight: bold; background: #1a237e; color: #fff; padding: 3px 7px; margin: 10px 0 5px; border-radius: 2px; }
+  h3 { font-size: 8.5pt; font-weight: bold; color: #1a237e; border-left: 3px solid #1a237e; padding-left: 5px; margin: 7px 0 3px; }
+
+  .formula-box { background: #e8eaf6; border: 1.5px solid #3949ab; border-radius: 4px; padding: 7px 10px; margin: 6px 0; font-size: 8.5pt; }
+  .formula { font-size: 10pt; font-weight: bold; text-align: center; letter-spacing: 1px; margin: 4px 0; color: #1a237e; }
+  .formula sub { font-size: 7pt; }
+
+  table { width: 100%; border-collapse: collapse; margin: 4px 0; font-size: 8pt; }
+  th { background: #3949ab; color: #fff; padding: 4px 6px; text-align: center; font-weight: bold; font-size: 8pt; }
+  td { border: 1px solid #c5cae9; padding: 3px 6px; vertical-align: top; }
+  tr:nth-child(even) td { background: #f5f5ff; }
+
+  .up { color: #c62828; font-weight: bold; }
+  .down { color: #1565c0; font-weight: bold; }
+  .r { color: #c62828; font-weight: bold; }
+  .b { color: #1565c0; font-weight: bold; }
+  .g { color: #2e7d32; font-weight: bold; }
+  .bold { font-weight: bold; }
+  .c { text-align: center; }
+  .s { font-size: 7.5pt; color: #555; }
+
+  .pt { border: 1.5px solid #c62828; background: #fff8f8; padding: 5px 8px; margin: 5px 0; border-radius: 3px; }
+  .nt { border: 1.5px solid #1565c0; background: #f0f4ff; padding: 5px 8px; margin: 5px 0; border-radius: 3px; }
+  .trap { border: 1.5px solid #e65100; background: #fff8f0; padding: 5px 8px; margin: 5px 0; border-radius: 3px; }
+
+  .tag-up { display: inline-block; background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; border-radius: 10px; padding: 1px 7px; font-size: 7.5pt; font-weight: bold; }
+  .tag-dn { display: inline-block; background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; border-radius: 10px; padding: 1px 7px; font-size: 7.5pt; font-weight: bold; }
+
+  .two { display: flex; gap: 8px; }
+  .two > div { flex: 1; }
+
+  .arrow-up::before { content: "▲ "; color: #c62828; }
+  .arrow-dn::before { content: "▼ "; color: #1565c0; }
+
+  ul { padding-left: 14px; }
+  li { margin: 1px 0; }
+</style>
+</head>
+<body>
+
+<div class="page">
+<h1>必要定着長さ（L₀）影響因子まとめ</h1>
+
+<!-- 基本公式 -->
+<div class="formula-box">
+  <div class="formula">L₀ = (φ ÷ 4) × (f<sub>t</sub> ÷ f<sub>b</sub>)</div>
+  <div style="text-align:center; margin-top:4px;" class="s">
+    φ：鉄筋径（mm）　　f<sub>t</sub>：鉄筋の許容引張応力度（≒鉄筋強度に比例）　　f<sub>b</sub>：コンクリートの許容付着応力度（≒√Fc に比例）
+  </div>
+  <div style="margin-top:5px; font-size:8pt;">
+    実用式（RC規準）: <strong>L₀ = α × (σ<sub>y</sub> / 4τ<sub>a</sub>) × φ</strong>　←必要定着長さは <span class="r">鉄筋径に比例・コンクリート付着強度に反比例</span>
+  </div>
+</div>
+
+<div class="trap">
+  <strong>⚠ 覚え方の原則：</strong>「鉄筋が引っ張られる力 ÷ コンクリートが鉄筋を掴む力 × 径」<br>
+  　→ 引っ張られる力（鉄筋強度）<span class="r">↑大きいほど長く</span>必要、掴む力（コンクリート強度）<span class="b">↑大きいほど短くて済む</span>
+</div>
+
+<!-- メインテーブル -->
+<h2>① 定着長さが変わる主な要因一覧</h2>
+
+<table>
+  <tr>
+    <th style="width:20%">要因</th>
+    <th style="width:12%">変化</th>
+    <th style="width:28%">定着長さへの影響</th>
+    <th>理由・メカニズム</th>
+  </tr>
+
+  <!-- コンクリート -->
+  <tr>
+    <td colspan="4" style="background:#e8eaf6; font-weight:bold; padding:3px 6px;">■ コンクリート関係</td>
+  </tr>
+  <tr>
+    <td>コンクリート強度（Fc）</td>
+    <td class="c"><span class="tag-up">強度↑高い</span></td>
+    <td><span class="down arrow-dn">定着長さ 短くなる</span></td>
+    <td>付着応力度 f<sub>b</sub> ≒ √Fc に比例して増大 → 分母↑ → L₀↓</td>
+  </tr>
+  <tr>
+    <td>コンクリート強度（Fc）</td>
+    <td class="c"><span class="tag-dn">強度↓低い</span></td>
+    <td><span class="up arrow-up">定着長さ 長くなる</span></td>
+    <td>付着応力度↓ → L₀↑。低強度コンクリートでは特に注意</td>
+  </tr>
+  <tr>
+    <td>軽量コンクリート</td>
+    <td class="c">—</td>
+    <td><span class="up arrow-up">定着長さ 長くなる</span></td>
+    <td>骨材が軽量多孔質で付着力が普通コンクリートより低い → 補正係数×1.3程度</td>
+  </tr>
+  <tr>
+    <td>上端筋位置（打設上端）</td>
+    <td class="c">—</td>
+    <td><span class="up arrow-up">定着長さ 長くなる</span></td>
+    <td>コンクリート打設時の沈降・ブリーディングにより上部の付着力低下 → 割増係数×1.3</td>
+  </tr>
+
+  <!-- 鉄筋 -->
+  <tr>
+    <td colspan="4" style="background:#e8eaf6; font-weight:bold; padding:3px 6px;">■ 鉄筋関係</td>
+  </tr>
+  <tr>
+    <td>鉄筋強度（SD種別）</td>
+    <td class="c"><span class="tag-up">強度↑高い</span></td>
+    <td><span class="up arrow-up">定着長さ 長くなる</span></td>
+    <td>f<sub>t</sub>↑（分子↑）→ L₀↑。SD295→SD345→SD390 と強度↑で必要定着長さも↑</td>
+  </tr>
+  <tr>
+    <td>鉄筋径（φ）</td>
+    <td class="c"><span class="tag-up">径↑大きい</span></td>
+    <td><span class="up arrow-up">定着長さ 長くなる</span></td>
+    <td>L₀はφに正比例（d数で表すと同じだが絶対長さmm↑）。太い筋は単位長さ当たりの付着面積の割合が小さい</td>
+  </tr>
+  <tr>
+    <td>鉄筋径（φ）</td>
+    <td class="c"><span class="tag-dn">径↓細い</span></td>
+    <td><span class="down arrow-dn">定着長さ 短くなる</span></td>
+    <td>絶対長さmm↓。ただしd数（径の倍数）で表した場合は変わらない点に注意</td>
+  </tr>
+  <tr>
+    <td>異形鉄筋（節・リブ）</td>
+    <td class="c">—</td>
+    <td><span class="down arrow-dn">定着長さ 短くなる</span></td>
+    <td>節・リブによる機械的噛み合い効果で付着強度↑。丸鋼より大幅に短くできる</td>
+  </tr>
+
+  <!-- 端部処理 -->
+  <tr>
+    <td colspan="4" style="background:#e8eaf6; font-weight:bold; padding:3px 6px;">■ 端部処理・形状</td>
+  </tr>
+  <tr>
+    <td>フック（折り曲げ端部）</td>
+    <td class="c">あり</td>
+    <td><span class="down arrow-dn">定着長さ 短くなる</span></td>
+    <td>フック効果として5d相当を直線定着長さから控除できる（丸鋼は必須）</td>
+  </tr>
+  <tr>
+    <td>フックなし（直線定着）</td>
+    <td class="c">なし</td>
+    <td><span class="up arrow-up">定着長さ 長くなる</span></td>
+    <td>フック低減なし → 全て直線長さで確保必要</td>
+  </tr>
+  <tr>
+    <td>機械式定着（ナット・プレート）</td>
+    <td class="c">—</td>
+    <td><span class="down arrow-dn">定着長さ 大幅短縮</span></td>
+    <td>端部の支圧機構で定着 → 直線長さを大幅に短縮可。狭小梁幅での柱への定着に有効</td>
+  </tr>
+
+  <!-- かぶり・横補強筋 -->
+  <tr>
+    <td colspan="4" style="background:#e8eaf6; font-weight:bold; padding:3px 6px;">■ かぶり・横補強筋</td>
+  </tr>
+  <tr>
+    <td>かぶり厚さ</td>
+    <td class="c"><span class="tag-up">大きい</span></td>
+    <td><span class="down arrow-dn">定着長さ 短くなる</span>（割裂方向）</td>
+    <td>割裂破壊が起きにくくなり付着強度↑。補正係数で低減可能</td>
+  </tr>
+  <tr>
+    <td>横補強筋（スターラップ等）</td>
+    <td class="c"><span class="tag-up">多い</span></td>
+    <td><span class="down arrow-dn">定着長さ 短くなる</span></td>
+    <td>割裂クラックを拘束 → 付着強度の低下を防止。補正係数で低減可能</td>
+  </tr>
+  <tr>
+    <td>鉄筋のあき・間隔</td>
+    <td class="c"><span class="tag-up">広い</span></td>
+    <td><span class="down arrow-dn">定着長さ 短くなる</span></td>
+    <td>密集していると割裂破壊しやすい。適切なあき確保で付着強度を維持</td>
+  </tr>
+</table>
+
+<!-- 使用条件による補足 -->
+<h2>② 特殊条件・適用場面ごとの注意点</h2>
+
+<div class="two">
+<div>
+<h3>柱への梁主筋定着</h3>
+<ul>
+  <li>柱幅が小さい場合 → 直線定着長さが不足しやすい</li>
+  <li>対策：<span class="b">機械式定着</span>または<span class="b">フック付き定着</span></li>
+  <li>梁幅ではなく<span class="r">柱幅</span>が定着可能長さを決める</li>
+  <li>梁せい・梁幅は定着長さの計算式には直接入らない</li>
+</ul>
+
+<h3>スラブ筋の定着</h3>
+<ul>
+  <li>梁天端へのスラブ筋定着：梁幅内に定着</li>
+  <li>端部：フック付きが基本</li>
+  <li>連続スラブ中間支点：上端筋の上端筋割増（×1.3）に注意</li>
+</ul>
+</div>
+<div>
+<h3>梁主筋の継手位置</h3>
+<ul>
+  <li>継手長さ ≒ 1.3 × L₀（引張継手の場合）</li>
+  <li>圧縮継手：L₀より短くできる</li>
+  <li>スパン中央（引張力小）が継手の適切な位置</li>
+</ul>
+
+<h3>耐震設計上の扱い</h3>
+<ul>
+  <li>塑性ヒンジ発生部位（梁端・柱脚）近傍は<span class="r">定着長さを割り増す</span></li>
+  <li>靭性確保のため付着・定着の早期破壊を防止</li>
+  <li>SD390以上の高強度筋は要特別検討</li>
+</ul>
+</div>
+</div>
+
+<!-- 梁せいと幅の注意 -->
+<h2>③ 梁せい・梁幅は定着長さに直接影響しないが…</h2>
+
+<div class="nt">
+  <strong>梁せい（D）・梁幅（B）は定着長さの計算式に直接入らない。</strong>ただし以下の間接的影響あり：
+  <table style="margin-top:5px;">
+    <tr><th style="width:25%">項目</th><th>影響の内容</th></tr>
+    <tr><td class="bold">梁幅（B）↑大きい</td><td>柱内での水平定着長さ確保しやすい / 鉄筋あきを広くとれる → 実質的に定着が有利</td></tr>
+    <tr><td class="bold">梁幅（B）↓小さい</td><td>鉄筋が密集 → 付着強度が低下しやすい・機械式定着が必要になることも</td></tr>
+    <tr><td class="bold">梁せい（D）↑大きい</td><td>スラブからの連続筋の折り下げ距離↑ → 折り下げ定着が取りやすい</td></tr>
+    <tr><td class="bold">柱幅（梁接合面の寸法）↑</td><td><span class="b">定着長さを取れる距離が直接増加 → 最重要</span>（梁幅よりこちらが重要）</td></tr>
+  </table>
+</div>
+
+<!-- 引っかけポイント -->
+<h2>④ 試験頻出 引っかけポイント</h2>
+
+<table>
+  <tr><th style="width:50%">誤りやすい記述</th><th>正しい知識</th></tr>
+  <tr>
+    <td><span class="r">「コンクリート強度が高いほど定着長さは長くなる」</span></td>
+    <td>逆。強度↑ → 付着応力度↑ → <span class="b">定着長さ↓短くなる</span></td>
+  </tr>
+  <tr>
+    <td><span class="r">「鉄筋の強度が高いほど定着長さは短くなる」</span></td>
+    <td>逆。強度↑ → 必要引張力↑ → <span class="b">定着長さ↑長くなる</span></td>
+  </tr>
+  <tr>
+    <td><span class="r">「軽量コンクリートは普通コンクリートと同じ定着長さでよい」</span></td>
+    <td>軽量は付着力低下 → 補正係数を乗じて<span class="b">長くする</span>必要あり</td>
+  </tr>
+  <tr>
+    <td><span class="r">「上端筋と下端筋で定着長さは同じ」</span></td>
+    <td>上端筋はブリーディング影響で付着↓ → <span class="b">割増（×1.3程度）が必要</span></td>
+  </tr>
+  <tr>
+    <td><span class="r">「フックをつけると定着長さは変わらない」</span></td>
+    <td>フックにより直線定着長さを5d相当<span class="b">短縮できる</span></td>
+  </tr>
+  <tr>
+    <td><span class="r">「梁せいが大きいほど定着長さは長くなる」</span></td>
+    <td>梁せいは定着長さ計算式に直接関係しない（柱幅が支配的）</td>
+  </tr>
+  <tr>
+    <td><span class="r">「鉄筋径が大きいほどd数（倍率）での定着長さも長くなる」</span></td>
+    <td>d数で表した必要定着長さは径に関係なく一定。<span class="b">絶対長さ（mm）は径に比例して増大</span></td>
+  </tr>
+</table>
+
+<div class="pt" style="margin-top:6px;">
+  <strong>🔑 まとめの一言：</strong>
+  定着長さは「<span class="r">鉄筋が引っ張られる力（鉄筋強度↑・径↑）で長くなり</span>」「<span class="b">コンクリートの掴む力（強度↑・異形筋・かぶり↑・横補強筋↑）で短くなる</span>」。フック・機械式定着は端部機構で補う。
+</div>
+
+</div><!-- page -->
+
+</body>
+</html>
