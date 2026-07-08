@@ -70,6 +70,9 @@ header a:hover{color:#fff}
 .finish-card .big{font-size:48px;font-weight:700;color:#1a2744;margin-bottom:8px}
 .finish-card .sub{color:#888;font-size:14px;margin-bottom:20px}
 .hidden{display:none}
+.hist-stat{font-size:12px;font-weight:700;background:#f8f8f8;border:1px solid #e8e8e8;border-radius:10px;padding:2px 8px}
+.hist-o{color:#e74c3c}
+.hist-x{color:#3498db}
 </style>
 </head>
 <body>
@@ -317,6 +320,27 @@ const ALL_Q = [
 let queue = [], current = 0, correct = 0, answered = 0;
 let selectedSubjects = new Set(), selectedTopics = new Set();
 
+// ─── 問題別履歴（localStorage）───
+const HIST_KEY = 'mb_question_history';
+function getHistory() {
+  try { return JSON.parse(localStorage.getItem(HIST_KEY) || '{}'); } catch(e) { return {}; }
+}
+function saveHistory(h) {
+  localStorage.setItem(HIST_KEY, JSON.stringify(h));
+}
+function qKey(q) { return q.q.slice(0, 40); }
+function recordAnswer(q, isCorrect) {
+  const h = getHistory();
+  const k = qKey(q);
+  if (!h[k]) h[k] = {o:0, x:0};
+  if (isCorrect) h[k].o++; else h[k].x++;
+  saveHistory(h);
+}
+function getQStats(q) {
+  const h = getHistory();
+  return h[qKey(q)] || {o:0, x:0};
+}
+
 // ─── 初期化 ───
 const subjects = [...new Set(ALL_Q.map(q => q.subject))];
 const topics   = [...new Set(ALL_Q.map(q => q.topic))];
@@ -390,11 +414,17 @@ function renderQuestion() {
   if (current >= queue.length) { showFinish(); return; }
   updateScore();
   const q = queue[current];
+  const st = getQStats(q);
+  const hasHistory = st.o + st.x > 0;
+  const histHtml = hasHistory
+    ? `<span class="hist-stat"><span class="hist-o">○${st.o}</span> <span class="hist-x">×${st.x}</span></span>`
+    : `<span class="hist-stat" style="color:#ccc">初回</span>`;
   area.innerHTML = `
     <div class="q-card" id="current-card">
       <div class="q-meta">
         <span>${q.subject}</span><span>${q.topic}</span>
         <span>${current+1} / ${queue.length}</span>
+        ${histHtml}
       </div>
       <div class="q-text">${q.q}</div>
       <div class="ans-row">
@@ -411,6 +441,7 @@ function answer(selected, btn) {
   const isCorrect = (selected === q.ans);
   answered++;
   if (isCorrect) correct++;
+  recordAnswer(q, isCorrect);
 
   document.getElementById('btn-maru').disabled = true;
   document.getElementById('btn-batsu').disabled = true;
