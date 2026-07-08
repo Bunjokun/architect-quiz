@@ -3,803 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>法規まとめ 概念・考え方 学科Ⅲ（法規）</title>
+<title>法規 頻出暗記</title>
 <style>
-  @page { size: A4 portrait; margin: 15mm 12mm 15mm 12mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
     font-size: 9.5pt;
     color: #111;
     background: #fff;
-    width: 210mm;
+    max-width: 210mm;
     margin: 0 auto;
     padding: 10mm 12mm;
-    overflow-x: hidden;
   }
-  .page { width: 186mm; page-break-after: always; padding-bottom: 6mm; }
-  .page:last-child { page-break-after: auto; }
-  .page-header {
-    display: flex; align-items: center; gap: 8px;
-    margin-bottom: 8px;
+  nav {
+    display: flex; gap: 4px; flex-wrap: wrap;
+    margin-bottom: 12px; padding-bottom: 8px;
+    border-bottom: 2px solid #1a3a5c;
   }
-  .page-num {
-    font-size: 15pt; font-weight: bold;
-    background: #1a3a5c; color: #fff;
-    width: 30px; height: 30px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+  nav button {
+    padding: 4px 12px; border: 1px solid #aac4de;
+    background: #f4f9ff; color: #1a3a5c;
+    border-radius: 3px; cursor: pointer; font-size: 8.5pt;
+    font-family: inherit;
   }
-  .page-title-text {
-    font-size: 12pt; font-weight: bold;
-    background: #1a3a5c; color: #fff;
-    padding: 4px 10px; flex: 1;
-  }
-  h2 {
-    font-size: 10pt; font-weight: bold; color: #fff;
-    background: #2e6da4; padding: 3px 8px; margin: 8px 0 4px 0;
-  }
-  h3 {
-    font-size: 9.5pt; font-weight: bold; color: #1a3a5c;
-    border-left: 4px solid #2e6da4; padding-left: 6px;
-    margin: 7px 0 3px 0;
-  }
-  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 6px; }
-  th {
-    background: #dbe8f5; font-weight: bold;
-    border: 1px solid #7aaacf; padding: 3px 5px;
-    text-align: center; vertical-align: middle;
-  }
+  nav button.active { background: #1a3a5c; color: #fff; border-color: #1a3a5c; }
+  .sec { display: none; }
+  .sec.active { display: block; }
+  h1 { font-size: 13pt; font-weight: bold; background: #1a3a5c; color: #fff; padding: 4px 10px; margin-bottom: 10px; }
+  h2 { font-size: 10pt; font-weight: bold; color: #fff; background: #2e6da4; padding: 3px 8px; margin: 10px 0 5px; }
+  h3 { font-size: 9.5pt; font-weight: bold; color: #1a3a5c; border-left: 4px solid #2e6da4; padding-left: 6px; margin: 8px 0 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 8px; }
+  th { background: #dbe8f5; font-weight: bold; border: 1px solid #7aaacf; padding: 4px 6px; text-align: left; vertical-align: middle; }
   td { border: 1px solid #aac4de; padding: 3px 6px; vertical-align: top; }
   tr:nth-child(even) td { background: #f4f9ff; }
-  .red   { color: #cc0000; font-weight: bold; }
-  .blue  { color: #0055aa; font-weight: bold; }
-  .green { color: #006600; font-weight: bold; }
-  .bold  { font-weight: bold; }
-  .center { text-align: center; }
-  .small { font-size: 7.5pt; }
-  .point-box {
-    border: 1.5px solid #cc0000; background: #fff8f8;
-    border-radius: 3px; padding: 5px 8px; margin: 5px 0; font-size: 8.5pt;
-  }
-  .point-box .label { font-weight: bold; color: #cc0000; margin-right: 4px; }
-  .note-box {
-    border: 1px solid #2e6da4; background: #f0f6ff;
-    border-radius: 3px; padding: 5px 8px; margin: 4px 0; font-size: 8.5pt;
-  }
-  .concept-box {
-    border: 1.5px solid #27ae60; background: #f0fff4;
-    border-radius: 3px; padding: 5px 8px; margin: 4px 0; font-size: 8.5pt;
-  }
-  .concept-box .label { font-weight: bold; color: #006600; margin-right: 4px; }
-  .two-col { display: flex; gap: 8px; margin-bottom: 5px; }
+  .red  { color: #cc0000; font-weight: bold; }
+  .blue { color: #0055aa; font-weight: bold; }
+  .grn  { color: #006600; font-weight: bold; }
+  .bold { font-weight: bold; }
+  .point-box { border: 1.5px solid #cc0000; background: #fff8f8; border-radius: 3px; padding: 4px 8px; margin: 5px 0; font-size: 8.5pt; }
+  .point-box .lbl { font-weight: bold; color: #cc0000; margin-right: 4px; }
+  .note-box { border: 1px solid #2e6da4; background: #f0f6ff; border-radius: 3px; padding: 4px 8px; margin: 4px 0; font-size: 8.5pt; }
+  ul { margin: 3px 0 6px 16px; }
+  li { margin-bottom: 2px; font-size: 8.5pt; line-height: 1.5; }
+  .two-col { display: flex; gap: 10px; margin-bottom: 6px; }
   .two-col > div { flex: 1; }
-  ul { margin: 3px 0 4px 16px; }
-  li { margin-bottom: 2px; font-size: 8.5pt; line-height: 1.45; }
-  .compare-table td { font-size: 8.5pt; }
-  .compare-table .head-cell {
-    background: #dbe8f5; font-weight: bold; text-align: center;
-  }
-  .cross-ref {
-    display: inline-block; background: #fff3cd; border: 1px solid #f0ad4e;
-    border-radius: 3px; padding: 1px 5px; font-size: 7.5pt;
-    font-weight: bold; color: #7d4e00; margin-left: 4px;
-  }
 </style>
 </head>
 <body>
+<h1>⚖️ 法規 頻出暗記</h1>
+<nav>
+  <button class="active" onclick="show('def')">① 定義</button>
+  <button onclick="show('kakunin')">② 確認申請</button>
+  <button onclick="show('boka')">③ 防火区画</button>
+  <button onclick="show('hinan')">④ 避難</button>
+  <button onclick="show('yoto')">⑤ 用途・高さ</button>
+  <button onclick="show('kankei')">⑥ 関係法規</button>
+</nav>
 
-<!-- ======================== PAGE 1: 定義・概念の整理 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <div class="page-num">①</div>
-    <div class="page-title-text">混同しやすい定義ペア ― 「何が違うか」を理解して複数問題に対応</div>
-  </div>
+<!-- ① 定義 -->
+<section id="def" class="sec active">
 
-  <h2>▶ 主要構造部 vs 構造耐力上主要な部分（毎年定義問題で出題）</h2>
-  <div class="concept-box">
-    <span class="label">【原則】</span>この2つは全く別の概念。混同すると誤答直結。
-  </div>
-  <table class="compare-table">
+  <h2>主要構造部 vs 構造耐力上主要な部分</h2>
+  <table>
     <tr>
-      <th style="width:22%">用語</th>
-      <th style="width:38%">定義・内容</th>
-      <th style="width:40%">代表的な具体例・ポイント</th>
+      <th style="width:50%">主要構造部（法2条5号）</th>
+      <th>構造耐力上主要な部分（令1条3号）</th>
     </tr>
     <tr>
-      <td class="bold">主要構造部（法2条5号）</td>
-      <td>壁・柱・床・はり・屋根・階段。<span class="red">防火上</span>重要な部分。耐火・内装制限などに使う概念。</td>
-      <td>「最下階の床版」は含まない。「間仕切壁」「間柱」「附け柱」「局部的な小ばり」「ひさし」「局部的な小階段」は除外。階段は含む。</td>
-    </tr>
-    <tr>
-      <td class="bold">構造耐力上主要な部分（令1条3号）</td>
-      <td>基礎・基礎ぐい・壁・柱・小屋組・土台・斜材・床版・<span class="blue">屋根版・横架材</span>。<span class="blue">構造耐力</span>上重要な部分。</td>
-      <td>最下階の床版は含む（←主要構造部との差）。基礎・土台が含まれる点が特徴。構造計算・仕様規定の適用に使う。</td>
+      <td><span class="bold">壁・柱・床・はり・屋根・階段</span><br>→ <span class="red">防火上</span>重要。耐火・内装制限に使う</td>
+      <td><span class="bold">基礎・基礎ぐい・壁・柱・小屋組・土台・斜材・床版・屋根版・横架材</span><br>→ <span class="blue">構造耐力上</span>重要。構造計算・仕様規定に使う</td>
     </tr>
   </table>
   <div class="point-box">
-    <span class="label">【引っかけ】</span>「建築物の自重・積載荷重等を支える最下階の床版」→ <span class="red">構造耐力上主要な部分○ ／ 主要構造部×</span>（2020年・2023年No.1で繰り返し出題）
+    <span class="lbl">【引っかけ】</span><span class="bold">最下階の床版</span>：構造耐力上主要な部分に含む・<span class="red">主要構造部には含まない</span>（毎年出題）<br>
+    主要構造部から除かれる：間仕切壁・間柱・局部的な小ばり・ひさし・局部的な小階段・附け柱・最下階の床
   </div>
 
-  <h2>▶ 耐火建築物・準耐火建築物・防火構造の序列と使い分け</h2>
-  <table class="compare-table">
-    <tr>
-      <th>レベル</th><th>定義のポイント</th><th>いつ使われるか（適用場面）</th>
-    </tr>
-    <tr>
-      <td class="bold red">耐火建築物</td>
-      <td>主要構造部が耐火構造 + 延焼のおそれのある部分の開口部に特定防火設備（火災終了まで耐える）</td>
-      <td>防火地域の100m²超・3階以上建築物、法27条の特殊建築物（劇場・病院・高層等）</td>
-    </tr>
-    <tr>
-      <td class="bold blue">準耐火建築物</td>
-      <td>主要構造部が準耐火構造 + 開口部に防火設備（45分・1時間）。または外壁耐火＋軒裏防火</td>
-      <td>準防火地域の一定規模建築物、法27条の一部特殊建築物。耐火建築物で代替不可のケースあり</td>
-    </tr>
-    <tr>
-      <td class="bold green">防火構造</td>
-      <td>外壁・軒裏のみが対象。30分間、屋内側が可燃物燃焼温度以上に上がらない構造</td>
-      <td>22条区域（法22条）の外壁。延焼のおそれのある部分の外壁・軒裏に適用</td>
-    </tr>
-  </table>
-  <div class="note-box">
-    <span class="bold">「同等以上の延焼防止時間となる建築物」（法2条9号の2ロ等）</span>：近年の改正で追加された概念。耐火・準耐火でなくても、延焼防止性能が同等以上なら認められる。試験では「耐火建築物 <span class="red">または</span> これと同等以上の延焼防止時間となる建築物」というセットで出題される。
-  </div>
-
-  <h2>▶ 防火設備 vs 特定防火設備（頻出の定義問題）</h2>
-  <table class="compare-table">
-    <tr><th style="width:30%">名称</th><th style="width:35%">性能基準</th><th style="width:35%">どこに使うか</th></tr>
-    <tr>
-      <td class="bold red">特定防火設備（法2条9号の2ロ）</td>
-      <td>通常の火災による火熱が加えられた場合に、加熱開始後<span class="red">1時間</span>、加熱面以外の面に火炎を出さない</td>
-      <td>面積区画・異種用途区画・防火地域内の開口部、法27条の特殊建築物の開口部</td>
-    </tr>
-    <tr>
-      <td class="bold blue">防火設備（法2条9号の2ロ）</td>
-      <td>加熱開始後<span class="blue">20分間</span>、加熱面以外の面に火炎を出さない</td>
-      <td>竪穴区画（遮煙性能付き）・22条区域の開口部・一般的な防火区画</td>
-    </tr>
-  </table>
-  <div class="point-box">
-    <span class="label">【引っかけ】</span>竪穴区画の防火設備には<span class="red">「遮煙性能」</span>が必要（令112条11項）。「防火設備＋遮煙」は普通の防火設備より厳しい要件。屋内避難階段の出入口は「加熱開始後10分間火炎を出さないもの」でよい（令123条1項6号）。
-  </div>
-
-  <h2>▶ 特殊建築物・建築設備・建築物 ― 定義の確認</h2>
-  <div class="two-col">
-    <div>
-      <h3>特殊建築物（法2条2号）の考え方</h3>
-      <ul>
-        <li>多数の人が利用 or 危険・衛生上問題のある用途の建築物</li>
-        <li>代表例：劇場・映画館・病院・ホテル・百貨店・共同住宅・幼稚園・学校・工場・倉庫・自動車車庫</li>
-        <li><span class="red">確認申請</span>：用途部分が200m²超で全国で必要</li>
-        <li><span class="red">用途変更</span>：200m²超の特殊建築物への変更で確認申請必要（類似用途間は不要）</li>
-        <li><span class="red">定期報告</span>：特定の特殊建築物は特定行政庁へ定期報告義務</li>
-      </ul>
-    </div>
-    <div>
-      <h3>建築設備（法2条3号）に含まれるもの</h3>
-      <ul>
-        <li>電気設備・ガス設備・給排水・換気・暖冷房・昇降機・避雷針・消火・排煙・汚物処理設備</li>
-        <li><span class="red">含まれない</span>：防火戸（建築物本体扱い）</li>
-        <li>消火用の貯水槽は建築設備（2024年No.1）</li>
-        <li>昇降機は定期検査報告義務あり（所有者または管理者が特定行政庁に報告）</li>
-      </ul>
-      <h3>「居室」の考え方</h3>
-      <ul>
-        <li>居住・執務・作業・集会・娯楽等の目的で継続的に使用する室</li>
-        <li>レストランの調理室・病院の談話室は<span class="red">居室に該当</span>する</li>
-        <li>廊下・便所・浴室・更衣室・倉庫は居室ではない</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== PAGE 2: 確認申請 ― 不要なケースのパターン ======================== -->
-<div class="page">
-  <div class="page-header">
-    <div class="page-num">②</div>
-    <div class="page-title-text">確認申請が「必要なケース」「不要なケース」― パターン思考で整理</div>
-  </div>
-
-  <h2>▶ 考え方のフレーム：確認申請の要否は「行為×規模×区域」の組み合わせで決まる</h2>
-  <div class="concept-box">
-    <span class="label">【原則】</span>法6条1項の1号〜4号のいずれかに該当すれば確認申請が必要。<br>
-    1号＝特殊建築物（200m²超）、2号＝大規模木造、3号＝大規模非木造、4号＝その他（都市計画区域等のみ）
-  </div>
-
-  <h2>▶ 確認申請が「不要」になる代表パターン（過去問で繰り返し登場）</h2>
+  <h2>耐火建築物・準耐火建築物・防火構造</h2>
   <table>
-    <tr><th style="width:40%">行為・状況</th><th style="width:60%">なぜ不要か・注意点</th></tr>
+    <tr><th>レベル</th><th>主要構造部</th><th>開口部</th><th>主な適用</th></tr>
     <tr>
-      <td>類似用途間の用途変更（例：劇場→映画館、ホテル→旅館）</td>
-      <td>令137条の18が定める類似用途グループ内での変更は確認不要。ただし規模・構造の規制は従う必要あり。</td>
+      <td><span class="red">耐火建築物</span></td>
+      <td>耐火構造</td>
+      <td>特定防火設備（1時間）</td>
+      <td>防火地域100m²超・3階以上、法27条の劇場・病院等</td>
     </tr>
     <tr>
-      <td>博物館→図書館の用途変更（第一種低層住居専用地域内）</td>
-      <td>両方とも法別表第1の特殊建築物ではない＆用途地域の制限もなし→確認不要（2020年No.3）</td>
+      <td><span class="blue">準耐火建築物</span></td>
+      <td>準耐火構造</td>
+      <td>防火設備（20分）</td>
+      <td>準防火地域の一定規模、法27条の一部</td>
     </tr>
     <tr>
-      <td>4号建築物（小規模木造等）の大規模修繕・模様替</td>
-      <td>4号建築物（都市計画区域外）の大規模修繕等→確認不要。都市計画区域内でも修繕は「大規模」でなければ不要。</td>
-    </tr>
-    <tr>
-      <td>現場に設ける仮設工事管理事務所</td>
-      <td>法85条5項：工事に必要な仮設建築物は確認不要。ただし<span class="red">現場以外に設ける</span>場合は必要（2019年No.3）。</td>
-    </tr>
-    <tr>
-      <td>重要文化財に指定・仮指定された建築物の移転</td>
-      <td>法3条1項1号により建築基準法の規定が適用除外→確認不要（2023年No.3）</td>
-    </tr>
-    <tr>
-      <td>確認済証の軽微な変更（高さ減少・設備材料変更など）</td>
-      <td>法6条1項ただし書き：変更後も基準に適合することが明らかなものは再確認不要。ただし容積率最低限度地域の床面積減少は<span class="red">再確認必要</span>（2025年No.3）。</td>
-    </tr>
-    <tr>
-      <td>水泳場→体育館への用途変更（2,000m²・準防火地域内）</td>
-      <td>どちらも法別表第1の「集会場等」同グループ→類似用途で確認不要（2021年No.3）</td>
+      <td><span class="grn">防火構造</span></td>
+      <td>外壁・軒裏のみ</td>
+      <td>—</td>
+      <td>22条区域の延焼のおそれのある外壁</td>
     </tr>
   </table>
 
-  <h2>▶ 用途変更の「考え方」― 何が問われているかを把握する</h2>
-  <div class="two-col">
-    <div>
-      <h3>確認申請が必要になる用途変更</h3>
-      <ul>
-        <li>「特殊建築物でない用途」→「特殊建築物の用途（200m²超）」への変更</li>
-        <li>例：事務所（非特殊）→ホテル（特殊）で200m²超 → 確認必要</li>
-        <li>例：診療所（有床）→有料老人ホームへの変更：<span class="red">双方が法別表第1の同類型でなければ要確認</span></li>
-      </ul>
-      <div class="concept-box" style="margin-top:5px;">
-        <span class="label">【考え方】</span>用途変更は「変更後の用途で200m²超の特殊建築物になるか」を考える。
-      </div>
-    </div>
-    <div>
-      <h3>用途変更後の完了届・検査</h3>
-      <ul>
-        <li>確認済証を<span class="red">指定確認検査機関</span>から受けた場合も、工事完了後の届け出先は<span class="red">建築主事（建築主事等）</span></li>
-        <li>完了検査の申請：確認を受けた機関へ申請（指定確認検査機関から受けた場合は当該機関へ）</li>
-        <li>用途変更の確認は<span class="red">完了検査申請が不要</span>（法87条4項で準用除外）→ただし工事完了届は必要</li>
-      </ul>
-    </div>
-  </div>
-
-  <h2>▶ 建築手続きの全体像 ― どの段階でなにをするか</h2>
+  <h2>特定防火設備 vs 防火設備</h2>
   <table>
-    <tr><th>段階</th><th>行為・手続き</th><th>試験で問われるポイント</th></tr>
+    <tr><th>名称</th><th>性能</th><th>使う場所</th></tr>
     <tr>
-      <td class="bold">着工前</td>
-      <td>確認申請 → 確認済証交付</td>
-      <td>確認済証の交付前に着工してはならない。構造計算適合性判定（ルート2・3等）は確認申請と並行して行われる。</td>
+      <td><span class="red">特定防火設備</span></td>
+      <td>加熱開始後 <span class="red">1時間</span> 火炎を出さない</td>
+      <td>面積区画・異種用途区画・防火地域内開口部・法27条開口部</td>
     </tr>
     <tr>
-      <td class="bold">工事中</td>
-      <td>中間検査（特定工程）、仮使用認定</td>
-      <td>RC造共同住宅の2階床・梁の鉄筋配置が特定工程→<span class="red">中間検査申請が義務</span>。避難施設工事中の使用は<span class="red">仮使用認定＋措置計画の届出</span>が必要。</td>
+      <td><span class="blue">防火設備</span></td>
+      <td>加熱開始後 <span class="blue">20分</span> 火炎を出さない</td>
+      <td>竪穴区画（＋遮煙性能）・22条区域開口部・一般的な防火区画</td>
+    </tr>
+  </table>
+  <div class="point-box"><span class="lbl">【引っかけ】</span>竪穴区画の防火設備には<span class="bold">遮煙性能</span>が別途必要（令112条）</div>
+
+  <h2>特殊建築物 / 建築設備 / 居室</h2>
+  <ul>
+    <li><span class="bold">特殊建築物（法2条2号）</span>：劇場・病院・ホテル・百貨店・共同住宅・学校・工場・倉庫など。用途部分200m²超で確認申請必要。</li>
+    <li><span class="bold">建築設備（法2条3号）</span>：電気・ガス・給排水・換気・昇降機・避雷針・消火・排煙・汚物処理。<span class="red">防火戸は含まない</span>（建築物本体）。消火用の貯水槽は含む。</li>
+    <li><span class="bold">居室</span>：居住・執務・作業・集会・娯楽等で継続的に使用する室。廊下・便所・浴室・倉庫は居室ではない。レストランの調理室・病院の談話室は居室。</li>
+  </ul>
+</section>
+
+<!-- ② 確認申請 -->
+<section id="kakunin" class="sec">
+
+  <h2>確認申請が不要なケース（毎年No.3）</h2>
+  <table>
+    <tr><th style="width:45%">ケース</th><th>理由・注意点</th></tr>
+    <tr>
+      <td>工事施工のために<span class="bold">現場に設ける</span>仮設事務所</td>
+      <td>法85条1項2号。<span class="red">現場以外に設けるもの</span>（延べ200m²・2階建て等）は必要。</td>
     </tr>
     <tr>
-      <td class="bold">完了後</td>
-      <td>完了検査申請 → 検査済証交付</td>
-      <td>検査済証交付前の使用は原則禁止（法7条6項）。ただし完了検査申請が受理された日から7日経過後は仮使用可（工事管理事務所等の小規模は除く）。</td>
+      <td>重要文化財として指定・<span class="bold">仮指定</span>された建築物の移転等</td>
+      <td>法3条1項1号の適用除外。</td>
+    </tr>
+    <tr>
+      <td>類似の用途間の用途変更（例：水泳場→体育館）</td>
+      <td>令137条の18。200m²超でも類似グループ内は不要。</td>
+    </tr>
+    <tr>
+      <td>都市計画区域等の<span class="bold">いずれにも非該当</span>の区域で木造2階100m²の住宅</td>
+      <td>法6条1項4号の対象外。</td>
+    </tr>
+    <tr>
+      <td>確認済証の軽微変更（高さ減少・設備材料変更等）</td>
+      <td>変更後も基準に明らかに適合するもの。<span class="red">容積率最低限度地域での床面積減少</span>は再確認必要。</td>
     </tr>
   </table>
 
-  <div class="point-box">
-    <span class="label">【他科目との関連】</span>
-    施工科目でも「確認申請が必要な工程変更」「仮設建築物の扱い」が出る。計画科目では「定期報告制度」の対象建築物が問われる。同じ制度が複数科目から問われると理解しておくと得点につながる。
-  </div>
-</div>
-
-<!-- ======================== PAGE 3: 防火・防火構造の考え方 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <div class="page-num">③</div>
-    <div class="page-title-text">防火区画・防火壁 ― 「なぜ区画するか」から理解する</div>
-  </div>
-
-  <h2>▶ 防火区画の「目的」と種類の整理</h2>
-  <div class="concept-box">
-    <span class="label">【原則】</span>火災が起きたとき、延焼・煙の拡大を「区画」によって閉じ込めるのが防火区画の目的。区画の種類によって「何を区切るか」が違う。
-  </div>
+  <h2>確認申請が必要なケース（引っかけ頻出）</h2>
   <table>
-    <tr><th style="width:20%">区画の種類</th><th style="width:40%">何を区切るか</th><th style="width:40%">試験でのポイント</th></tr>
+    <tr><th style="width:55%">ケース</th><th>根拠</th></tr>
+    <tr><td>原動機を使用する<span class="bold">観覧車</span></td><td>令138条2項1号の工作物</td></tr>
+    <tr><td>既存建築物への<span class="bold">エレベーター設置</span></td><td>建築設備として法6条の確認対象</td></tr>
+    <tr><td>防火地域・準防火地域内の増築等（<span class="bold">規模不問</span>）</td><td>法6条1項（10m²以下の増築のみ例外）</td></tr>
+    <tr><td>RC造3階建て事務所の<span class="bold">屋根の過半の修繕</span></td><td>3号建築物の大規模修繕</td></tr>
+    <tr><td>診療所（有床）→有料老人ホーム（500m²・2階建て）</td><td>類似用途でなく200m²超特殊建築物への変更</td></tr>
+  </table>
+
+  <h2>用途変更のルール</h2>
+  <ul>
+    <li>200m²超の<span class="bold">特殊建築物へ</span>の用途変更 → 確認申請必要</li>
+    <li><span class="bold">類似用途</span>間（令137条の18）→ 不要。例：体育館↔水泳場、劇場↔映画館</li>
+    <li>完了後の届出先：指定確認検査機関から確認を受けても、<span class="red">工事完了届は建築主事へ</span>（完了検査申請は不要）</li>
+  </ul>
+
+  <h2>建築手続きの要点</h2>
+  <ul>
+    <li>RC造共同住宅の<span class="bold">2階床・梁の鉄筋配置</span>が特定工程 → 中間検査申請義務</li>
+    <li>避難施設等の工事中使用：<span class="bold">仮使用認定＋特定行政庁へ措置計画の届出</span></li>
+    <li>検査済証交付前の仮使用：完了検査申請受理から<span class="bold">7日経過後</span>に可</li>
+  </ul>
+</section>
+
+<!-- ③ 防火区画 -->
+<section id="boka" class="sec">
+
+  <h2>防火区画の種類と要点</h2>
+  <table>
+    <tr><th style="width:22%">種類</th><th style="width:38%">対象・目的</th><th>試験ポイント</th></tr>
     <tr>
-      <td class="bold">面積区画</td>
-      <td>一定の面積ごとに区切る。建物全体に火が広がらないようにする。</td>
-      <td>スプリンクラーがあると面積を2倍まで拡大可。11階以上は特に厳しい区画が求められる。</td>
+      <td><span class="bold">面積区画</span></td>
+      <td>一定面積ごとに区画</td>
+      <td>スプリンクラーがあると面積を<span class="bold">2倍</span>まで拡大可。11階以上は100m²以内ごとに区画。</td>
     </tr>
     <tr>
-      <td class="bold">竪穴区画</td>
-      <td>吹抜け・階段室・EVシャフト等、上下階を貫通する空間を区切る。煙が上方へ一気に広がるのを防ぐ。</td>
-      <td>準耐火構造の建築物で3階以上に居室がある建築物が対象。区画設備には<span class="red">遮煙性能</span>が必要（令112条11項）。主要構造部が<span class="red">耐火構造</span>の場合、メゾネット住戸の各戸内の吹抜け等は竪穴区画が緩和される場合あり。</td>
+      <td><span class="bold">竪穴区画</span></td>
+      <td>吹抜け・階段室・EVシャフト等</td>
+      <td>準耐火構造の3階以上に居室がある建築物が対象。区画設備に<span class="red">遮煙性能</span>が必要（令112条）。</td>
     </tr>
     <tr>
-      <td class="bold">異種用途区画</td>
-      <td>用途の異なる部分を区切る。例：1階車庫＋上階事務所。</td>
-      <td>法27条が適用される特殊建築物の部分と他の用途とを区画する。区画設備は<span class="red">特定防火設備</span>。「車庫130m²＋上階事務所」の組み合わせが頻出（2019年No.6）。</td>
+      <td><span class="bold">異種用途区画</span></td>
+      <td>例：1階車庫＋上階事務所</td>
+      <td>法27条適用の特殊建築物部分と他を区画。区画設備は<span class="red">特定防火設備</span>。</td>
     </tr>
     <tr>
-      <td class="bold">防火上主要な間仕切壁</td>
-      <td>学校・病院・ホテル等の内部を区切る（令114条）。防火区画とは別の概念。</td>
-      <td>準耐火構造で小屋裏・天井裏まで達することが必要。<span class="red">共同住宅の各戸の界壁</span>も同様（準耐火構造で小屋裏・天井裏に達する）。強化天井の場合は天井裏に達しなくてよい。</td>
+      <td><span class="bold">防火上主要な間仕切壁（令114条）</span></td>
+      <td>学校・病院・ホテル等の内部</td>
+      <td>準耐火構造で<span class="bold">小屋裏・天井裏まで達する</span>必要。強化天井の場合は不要。共同住宅の界壁も同様。</td>
     </tr>
   </table>
 
-  <h2>▶ 防火壁・防火床（法26条）― 防火区画との違い</h2>
-  <div class="two-col">
-    <div>
-      <h3>防火壁が必要な建築物</h3>
-      <ul>
-        <li>耐火・準耐火建築物<span class="red">以外</span>の建築物で延べ面積が<span class="red">1,000m²超</span>のもの</li>
-        <li>1,000m²以内ごとに防火壁（または防火床）で有効に区画</li>
-        <li>学校・木造小学校（延べ面積1,000m²超）も対象（2024年No.6）</li>
-      </ul>
-      <div class="concept-box" style="margin-top:5px;">
-        <span class="label">【区別】</span>「防火区画」は法112条（主に耐火・準耐火建築物内部を区画）、「防火壁」は法26条（木造等の大規模建築物を分断）。目的・対象が違う。
-      </div>
-    </div>
-    <div>
-      <h3>防火壁の構造要件</h3>
-      <ul>
-        <li>耐火構造とし、自立できること（建物が倒壊しても防火壁が残る）</li>
-        <li>開口部：幅・高さそれぞれ2.5m以下、特定防火設備設置</li>
-        <li>建築物の外壁面から50cm以上突出させる（ひさし状）</li>
-      </ul>
-      <h3>防火壁・防火床を貫通する管</h3>
-      <ul>
-        <li>給水管・配電管等が防火壁を貫通する場合：隙間を<span class="red">モルタル等の不燃材料</span>で埋める</li>
-        <li>防火区画貫通の場合は国土交通大臣認定品での対応も可（令129条の2の5）</li>
-      </ul>
-    </div>
-  </div>
+  <h2>防火壁（法26条）</h2>
+  <div class="note-box">耐火・準耐火建築物<span class="bold">以外</span>で延べ面積<span class="bold">1,000m²超</span>の建築物 → 1,000m²以内ごとに防火壁（または防火床）で区画</div>
+  <ul>
+    <li>耐火構造・自立できること</li>
+    <li>開口部：幅・高さそれぞれ<span class="bold">2.5m以下</span>、特定防火設備設置</li>
+    <li>外壁面から<span class="bold">50cm以上</span>突出</li>
+    <li>貫通管：隙間を<span class="red">モルタル等の不燃材料</span>で埋める</li>
+  </ul>
 
-  <h2>▶ 防火地域・準防火地域での建築の「考え方」</h2>
-  <div class="concept-box">
-    <span class="label">【原則】</span>防火地域・準防火地域の規制は、<span class="bold">「建物の規模が大きいほど」「高い防火性能」</span>が求められる段階的な仕組み。規模が閾値を超えると一段上の性能が必要になる。
-  </div>
-  <div class="two-col">
-    <div>
-      <h3>防火地域（法61条）の思考フロー</h3>
-      <ul>
-        <li>延べ面積100m²超 または 地上3階以上 → <span class="red">耐火建築物（同等以上含む）</span></li>
-        <li>それ以下の規模 → 耐火 or <span class="red">準耐火建築物（同等以上含む）</span></li>
-        <li>看板・広告塔（屋上または高さ3m超）→ <span class="red">主要部分を不燃材料</span>で造るか覆う</li>
-      </ul>
-    </div>
-    <div>
-      <h3>地域にまたがる建築物の扱い（法61条ただし書き）</h3>
-      <ul>
-        <li>建築物が複数の防火規制区域にまたがる場合→<span class="red">より厳しい地域の規定</span>が全体に適用</li>
-        <li>ただし防火地域と指定なし区域にまたがり、<span class="red">防火壁で区画</span>されている場合は、防火壁外の部分に防火地域の規定は不適用</li>
-        <li>区域の境界が「防火壁」かどうか→試験頻出の引っかけ</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="point-box">
-    <span class="label">【他科目との関連】</span><span class="cross-ref">計画</span>バリアフリー法・景観法など関係法規も法規科目で出る。防火地域の規定は「計画」科目の都市計画・建築計画でも前提知識として登場する。施工科目では「準防火地域での仮設建築物」などが出る。
-  </div>
-
-  <h2>▶ 内装制限（令128条の5）― 考え方で理解する</h2>
-  <div class="two-col">
-    <div>
-      <h3>内装制限の目的</h3>
-      <ul>
-        <li>火災時に内装が燃えて延焼拡大するのを防ぐ</li>
-        <li>壁・天井の室内面仕上げを<span class="red">不燃・準不燃・難燃材料</span>のいずれかに制限</li>
-        <li>制限の厳しさ：不燃＞準不燃＞難燃</li>
-      </ul>
-    </div>
-    <div>
-      <h3>どのような場合に何が要求されるか</h3>
-      <ul>
-        <li>地階の集会場客席・劇場：<span class="red">準不燃以上</span></li>
-        <li>耐火建築物の15階以上の居室・非常用EV乗降ロビー：<span class="red">準不燃以上</span></li>
-        <li>火を使用する調理室（一定規模以上）：<span class="red">準不燃以上</span>（耐火建築物の小規模住宅は緩和あり）</li>
-        <li>耐火建築物の図書室（3階）、通常の居室：難燃材料で可（緩和あり）</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== PAGE 4: 避難規定の考え方 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <div class="page-num">④</div>
-    <div class="page-title-text">避難規定 ― 「なぜその規定があるか」を理解して応用する</div>
-  </div>
-
-  <h2>▶ 避難規定の全体構造 ― 3つのレイヤーで考える</h2>
-  <div class="concept-box">
-    <span class="label">【フレーム】</span>
-    避難規定は①<span class="bold">経路の確保</span>（廊下・階段）②<span class="bold">出口の確保</span>（幅・数）③<span class="bold">安全の確保</span>（耐火・防煙・照明）の3層構造。法令はこの3層を具体化している。
-  </div>
-
-  <h2>▶ 「2以上の直通階段」が必要な理由と判断パターン</h2>
-  <div class="two-col">
-    <div>
-      <h3>なぜ2つ必要か</h3>
-      <ul>
-        <li>1か所の階段が火災や煙で使えなくなったとき、代替ルートが必要</li>
-        <li>特に多数の人が在籍する用途（劇場・百貨店・病院・ホテル）や高層建築物で厳しく規制</li>
-        <li>バルコニー等が代替手段になる場合は緩和がある（令121条2項）</li>
-      </ul>
-    </div>
-    <div>
-      <h3>判断の着眼点（過去問パターン）</h3>
-      <ul>
-        <li>共同住宅で「各住戸の居室床面積合計が100m²超か」で判断（耐火の場合）</li>
-        <li>物品販売業店舗の「売場が2階以上にあるか」で判断</li>
-        <li>バルコニーがあれば「6階・屋外避難階段がある側」は1つでよい（令121条2項）</li>
-        <li>事務所は一般的規定適用：耐火構造で居室床面積合計200m²超なら2以上必要</li>
-      </ul>
-    </div>
-  </div>
-
-  <h2>▶ 避難階段・特別避難階段 ― 何が「加わるか」で理解する</h2>
+  <h2>防火地域・準防火地域</h2>
   <table>
-    <tr><th style="width:25%">種類</th><th style="width:35%">直通階段にプラスされる要件</th><th style="width:40%">いつ必要か</th></tr>
+    <tr><th>地域・条件</th><th>要求性能</th></tr>
+    <tr><td>防火地域内：延べ100m²超 または 地上3階以上</td><td><span class="red">耐火建築物</span>（同等以上含む）</td></tr>
+    <tr><td>防火地域内：それ以下の規模</td><td>耐火 or <span class="red">準耐火建築物</span>（同等以上含む）</td></tr>
+    <tr><td>地域にまたがる場合</td><td><span class="red">より厳しい地域</span>の規定が全体に適用。防火壁で区画されている場合は防火壁外の部分に不適用。</td></tr>
+  </table>
+
+  <h2>内装制限（令128条の5）</h2>
+  <table>
+    <tr><th>用途・部位</th><th>要求材料</th></tr>
+    <tr><td>地階の集会場客席・劇場</td><td><span class="red">準不燃以上</span></td></tr>
+    <tr><td>耐火建築物15階以上の居室・非常用EV乗降ロビー</td><td><span class="red">準不燃以上</span></td></tr>
+    <tr><td>火を使用する調理室（一定規模以上）</td><td><span class="red">準不燃以上</span></td></tr>
+    <tr><td>耐火建築物の図書室（3階）・通常居室</td><td>難燃材料で可（緩和あり）</td></tr>
+  </table>
+</section>
+
+<!-- ④ 避難 -->
+<section id="hinan" class="sec">
+
+  <h2>直通階段・避難階段・特別避難階段</h2>
+  <table>
+    <tr><th style="width:25%">種類</th><th style="width:40%">直通階段に追加される要件</th><th>いつ必要か</th></tr>
     <tr>
-      <td class="bold">直通階段（基本）</td>
-      <td>居室から避難階・地上まで直接至れる階段</td>
+      <td><span class="bold">直通階段</span></td>
+      <td>居室から避難階・地上まで直接至れる</td>
       <td>すべての建築物の原則</td>
     </tr>
     <tr>
-      <td class="bold blue">避難階段</td>
-      <td>直通階段＋①耐火構造の壁・床で区画 ②開口部に防火設備 ③屋内なら排煙設備不要（告示）</td>
-      <td>5階以上に居室のある建築物・物品販売店（1,500m²超）の2〜4階</td>
+      <td><span class="blue">避難階段</span></td>
+      <td>耐火構造の壁・床で区画＋開口部に防火設備</td>
+      <td>5階以上に居室がある建築物、物品販売店（1,500m²超）の2〜4階</td>
     </tr>
     <tr>
-      <td class="bold red">特別避難階段</td>
-      <td>避難階段＋①付室またはバルコニー（排煙・加圧設備） ②付室の壁・天井を不燃仕上げ</td>
-      <td>15階以上に居室のある建築物（15階以上の直通階段はすべて特別避難階段が必要）</td>
+      <td><span class="red">特別避難階段</span></td>
+      <td>避難階段＋付室またはバルコニー（排煙・加圧）＋付室の壁・天井を不燃仕上げ</td>
+      <td><span class="red">15階以上</span>に居室がある建築物</td>
     </tr>
   </table>
+  <div class="point-box"><span class="lbl">【引っかけ】</span>屋外避難階段：出入口以外の開口部から<span class="bold">2m以上</span>離す（令123条2項）</div>
 
+  <h2>2以上の直通階段が必要なケース</h2>
+  <ul>
+    <li>共同住宅：各住戸の居室床面積合計が<span class="bold">100m²超</span>（耐火の場合）</li>
+    <li>物品販売業店舗：売場が<span class="bold">2階以上</span>にある場合</li>
+    <li>バルコニーが代替手段になる場合は1つで可（令121条2項）</li>
+  </ul>
+
+  <h2>排煙設備（令126条の2）が不要な代表条件</h2>
+  <ul>
+    <li>100m²以内に防火区画された室</li>
+    <li>床面積100m²以下で有効開口部（床面積の1/50以上）がある居室</li>
+    <li>避難階段の階段室・付室</li>
+    <li>体育館・水泳場等の天井の高い施設</li>
+  </ul>
+
+  <h2>全館避難安全検証法（令129条）</h2>
   <div class="point-box">
-    <span class="label">【引っかけ】</span>屋外の避難階段は、階段につながる出入口以外の開口部から<span class="red">2m以上</span>離す必要がある（令123条2項）。屋外に設けても「避難階段としての要件」は満たさなければならない。
+    <span class="lbl">【最重要】</span><span class="red">非常用の照明装置（令126条の4）→ 緩和不可</span>（2022年No.10）<br>
+    非常用エレベーター（令129条の13の2）→ 緩和不可
   </div>
+  <ul>
+    <li>確認方法：①避難に要する時間に基づく検証　②煙またはガスの高さに基づく検証</li>
+    <li>階避難安全検証法で確かめた場合も、特別避難階段の付室・階段室の仕上げ：<span class="bold">不燃材料＋下地を準不燃材料</span>（緩和されない）</li>
+  </ul>
+</section>
 
-  <h2>▶ 排煙設備（令126条の2）― 設置免除のロジックを理解する</h2>
-  <div class="concept-box">
-    <span class="label">【原則】</span>排煙設備は火災時の煙から人命を守るための設備。原則として特殊建築物の居室等に設置義務があるが、「煙が問題にならない条件」なら免除される。
-  </div>
-  <div class="two-col">
-    <div>
-      <h3>排煙設備が不要になる代表的な条件</h3>
-      <ul>
-        <li>100m²以内に防火区画（耐火構造の床・壁・所定の防火設備）された室</li>
-        <li>床面積100m²以下の居室で開放できる開口部（床面積の1/50以上）があるもの</li>
-        <li>体育館・水泳場等（天井が高い施設）は非常用照明・排煙設備ともに免除あり</li>
-        <li>避難階段の階段室・付室には排煙設備不要</li>
-      </ul>
-    </div>
-    <div>
-      <h3>他の設備との関係</h3>
-      <ul>
-        <li>非常用の照明装置：排煙設備の設置義務とは別規定。採光・通風が確保されている廊下・階段（地上に通ずるもの）は不要。</li>
-        <li>非常用の進入口（令126条の6）：3階以上の各階の道等に面する外壁に設置。非常用エレベーターがある場合は不要。</li>
-        <li>全館避難安全検証法（法施行令）：検証法でOKが出れば多くの避難関連規定が緩和される。ただし<span class="red">非常用照明は緩和されない</span>。</li>
-      </ul>
-    </div>
-  </div>
+<!-- ⑤ 用途・高さ -->
+<section id="yoto" class="sec">
 
-  <h2>▶ 接道義務と道路の「考え方」― 敷地と道路の関係</h2>
-  <div class="concept-box">
-    <span class="label">【原則】</span>建築物の敷地は<span class="bold">建築基準法上の道路に2m以上接する</span>ことが必要（法43条）。これを「接道義務」という。道路でない道に接しているだけでは建築できない。
-  </div>
+  <h2>用途地域の頻出用途</h2>
   <table>
-    <tr><th style="width:30%">道路の種類</th><th style="width:70%">ポイント・試験での出題</th></tr>
-    <tr>
-      <td>道路法の道路（国道・都道府県道・市町村道）</td>
-      <td>幅員4m以上で建築基準法上の道路（2項道路・みなし道路を除く）</td>
-    </tr>
-    <tr>
-      <td>位置指定道路（法42条1項5号）</td>
-      <td>特定行政庁が位置を指定した幅員4m以上の私道。縦断勾配<span class="red">12%以下</span>、延長35m超は転回広場必要。</td>
-    </tr>
-    <tr>
-      <td>農道・河川管理道路等</td>
-      <td>それ自体は建築基準法上の道路ではない。ただし<span class="red">特定行政庁が認めた場合</span>（法43条2項2号）に例外的に建築可。</td>
-    </tr>
-    <tr>
-      <td>2項道路（みなし道路）</td>
-      <td>幅員4m未満でも法施行時に建築物が建ち並んでいた道。中心線から2mセットバックで「道路」扱い。</td>
-    </tr>
+    <tr><th>用途</th><th>建築できる最も低い用途地域</th></tr>
+    <tr><td>診療所</td><td><span class="grn">すべての用途地域でOK</span>（工業専用も含む）</td></tr>
+    <tr><td>保育所・こども園</td><td>工業専用<span class="red">以外</span>はすべてOK</td></tr>
+    <tr><td>幼保連携型こども園</td><td>工業専用<span class="red">では建てられない</span></td></tr>
+    <tr><td>病院</td><td>第二種中高層住居専用地域以上</td></tr>
+    <tr><td>ホテル・旅館</td><td>第二種住居地域以上</td></tr>
+    <tr><td>大学・専修学校</td><td>第一種中高層住居専用地域以上</td></tr>
+    <tr><td>カラオケボックス（10,000m²以下）</td><td>第二種住居地域以上（第一種住居では不可）</td></tr>
+    <tr><td>田園住居地域の飲食店</td><td>地域産農産物を使う一定規模以下のみOK。一般の飲食店はNG。</td></tr>
   </table>
-  <div class="point-box">
-    <span class="label">【引っかけ】</span>農道・河川管理道路のみに接する敷地は、原則として建築不可。特定行政庁の<span class="red">「認定」（法43条2項1号）または「許可」（同2号）</span>を受けた場合のみ建築可。「許可を受けなければ建築できない」という表現で出題される。
-  </div>
-</div>
+  <div class="note-box">2用途地域にまたがる場合：<span class="bold">用途制限</span>は各部分に各地域の制限が適用（過半ルールではない）。<span class="bold">建蔽率・容積率</span>は面積で加重平均。</div>
 
-<!-- ======================== PAGE 5: 用途地域の考え方 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <div class="page-num">⑤</div>
-    <div class="page-title-text">用途制限・建蔽率・容積率 ― 「ルール」を理解して計算問題以外も解く</div>
-  </div>
-
-  <h2>▶ 用途地域の規制の「仕組み」を理解する</h2>
-  <div class="concept-box">
-    <span class="label">【原則】</span>用途地域は「住環境の保護」から「工業の利用」までのグラデーション。住居系は規制が厳しく、工業系は規制が緩い。ただし「工業専用」は逆に居住系施設を排除する。
-  </div>
-  <div class="two-col">
-    <div>
-      <h3>「どの地域まで建てられるか」の思考法</h3>
-      <ul>
-        <li>病院：<span class="red">第二種中高層以上</span>（1中高では不可）</li>
-        <li>ホテル・旅館：<span class="red">第二種住居以上</span>（1住では不可）</li>
-        <li>大学・専修学校：<span class="red">第一種中高層以上</span>（低層2種では不可）</li>
-        <li>診療所：<span class="red">すべての用途地域でOK</span>（工業専用も含む）</li>
-        <li>保育所・こども園：工業専用<span class="red">以外</span>ですべてOK</li>
-      </ul>
-    </div>
-    <div>
-      <h3>引っかけ頻出の用途</h3>
-      <ul>
-        <li>「病院 vs 診療所」：1中高に病院は建てられないが診療所は建てられる</li>
-        <li>「田園住居地域の飲食店」：地域産農産物を使うものは一定規模以下でOK、一般の飲食店はNG</li>
-        <li>「工業地域の展示場」：工業地域では可（工業専用では不可）</li>
-        <li>「工業専用地域の幼保連携型こども園」：建てられない（2025年No.15）</li>
-        <li>「第二種住居のカラオケボックス」：10,000m²以下なら可。第一種住居では不可。</li>
-      </ul>
-    </div>
-  </div>
-
-  <h2>▶ 敷地が2用途地域にまたがる場合の原則（2019年No.20・2025年No.15等で頻出）</h2>
-  <div class="two-col">
-    <div>
-      <h3>用途制限の適用ルール</h3>
-      <ul>
-        <li>各地域に属する<span class="red">各部分に、各地域の用途制限</span>が適用される</li>
-        <li>一方の地域でNGな用途は、その地域に属する部分には建てられない</li>
-        <li>例：2中高700m²＋近商600m²の敷地にホテル→ 2中高部分にホテル不可→<span class="red">建てられない</span></li>
-      </ul>
-    </div>
-    <div>
-      <h3>建蔽率・容積率は「過半」ルールではなく「按分」</h3>
-      <ul>
-        <li>2用途地域にまたがる場合の建蔽率・容積率：各用途地域の数値を面積で加重平均</li>
-        <li>例：地域A（建蔽率60%）に400m²、地域B（建蔽率80%）に600m²の敷地→(60%×400＋80%×600)÷1000＝72%</li>
-        <li>「過半の地域の規定を全体に適用」は<span class="red">誤り</span>（引っかけ注意）</li>
-      </ul>
-    </div>
-  </div>
-
-  <h2>▶ 容積率・建蔽率の「緩和と除外」の考え方</h2>
+  <h2>建蔽率・容積率の緩和</h2>
   <table>
-    <tr><th>テーマ</th><th>ルール・考え方</th><th>試験での出題パターン</th></tr>
+    <tr><th>条件</th><th>緩和内容</th></tr>
+    <tr><td>角地指定</td><td>＋10%</td></tr>
+    <tr><td>防火地域内の耐火建築物</td><td>＋10%</td></tr>
+    <tr><td>準防火地域内の耐火または準耐火建築物</td><td>＋10%</td></tr>
+    <tr><td>商業地域等（建蔽率80%）＋防火地域内耐火建築物</td><td>制限なし（10/10）</td></tr>
+    <tr><td>容積率：共用廊下・階段・EV昇降路</td><td>延べ面積の<span class="bold">1/3</span>まで除外</td></tr>
+    <tr><td>容積率：車庫</td><td>延べ面積の<span class="bold">1/5</span>まで除外</td></tr>
+    <tr><td>前面道路幅員による容積率制限</td><td>住居系：幅員(m)×4/10、商業・工業系：×6/10（指定容積率と<span class="red">小さい方</span>が有効）</td></tr>
+  </table>
+
+  <h2>高さ制限</h2>
+  <table>
+    <tr><th>制限</th><th>対象地域</th><th>引っかけ</th></tr>
+    <tr><td>絶対高さ（10m/12m）</td><td>1低専・2低専・田園住居のみ</td><td>隣地斜線は適用されない</td></tr>
+    <tr><td>北側斜線</td><td>1低専・2低専・田園住居・1中高・2中高のみ</td><td>商業・工業系には不適用</td></tr>
+    <tr><td>日影規制</td><td>商業・工業・工業専用は<span class="red">対象外</span></td><td>都市計画で指定した場合を除く</td></tr>
+    <tr><td>隣地斜線</td><td>全地域（1低専・2低専・田園住居を除く）</td><td>住居系：20m立ち上がり、その他：31m</td></tr>
+  </table>
+  <div class="point-box"><span class="lbl">【引っかけ】</span>屋上階段室等（建築面積の1/8以下・12m以下）の高さ不算入特例：道路斜線・隣地斜線には適用されるが、<span class="red">北側斜線・高度地区には適用されない</span>（2019年・2023年で出題）</div>
+
+  <h2>採光</h2>
+  <ul>
+    <li>住宅：床面積の<span class="bold">1/7以上</span>、学校：<span class="bold">1/5以上</span>の有効採光面積が必要</li>
+    <li>地階の居室は採光規定の適用除外</li>
+    <li>天窓の採光補正係数：<span class="bold">3倍</span>（令20条3項）</li>
+    <li>住居系地域で補正係数がマイナス → <span class="bold">0</span>（マイナスにはならない）</li>
+  </ul>
+</section>
+
+<!-- ⑥ 関係法規 -->
+<section id="kankei" class="sec">
+
+  <h2>建築士法</h2>
+  <table>
+    <tr><th style="width:30%">テーマ</th><th>ルール・引っかけ</th></tr>
     <tr>
-      <td class="bold">建蔽率の緩和</td>
-      <td>①角地指定で＋10%、②防火地域内耐火建築物で＋10%。両方で＋20%。商業地域等の建蔽率80%地域で耐火建築物は<span class="red">制限なし（10/10）</span>。</td>
-      <td>準防火地域内の耐火・準耐火建築物も＋10%緩和あり（2020年・2022年のNo.16等）。「準防火地域内の準耐火建築物」は緩和対象→引っかけに注意。</td>
+      <td>構造設計一級建築士の関与義務</td>
+      <td>一定規模以上の構造設計には関与が必要。<span class="red">設計自体は一級建築士でよい</span>が、適合確認を構造設計一級建築士に求めなければならない。工事監理は構造設計一級建築士以外でも可。</td>
     </tr>
     <tr>
-      <td class="bold">容積率の算定除外</td>
-      <td>共同住宅等の共用廊下・階段・EV昇降路は延べ面積の1/3まで除外。車庫は1/5まで除外。地下住居は1/3まで除外。</td>
-      <td>「1/3を限度に算入しない」という表現で出題。「1/3を超えた部分は算入する」→算入しない面積に上限がある点を問われる。</td>
+      <td>定期講習</td>
+      <td>建築士事務所に属する一級建築士は、<span class="red">設計業務に従事しなくても</span>定期講習が必要。構造設計一級建築士は一級建築士定期講習と構造設計一級建築士定期講習の<span class="red">両方</span>受ける必要あり。</td>
     </tr>
     <tr>
-      <td class="bold">前面道路幅員による制限</td>
-      <td>住居系は前面道路幅員(m)×4/10が容積率の上限。商業・工業系は×6/10。指定容積率と比べ<span class="red">小さい方</span>が有効。</td>
-      <td>2つの道路に接する敷地は「幅員が大きい方」を前面道路とする。斜め計算は試験の計算問題（No.16・17等）で毎年出る。</td>
+      <td>管理建築士</td>
+      <td><span class="bold">3年以上</span>の設計等業務従事後、管理建築士講習修了が必要。二級建築士として3年従事後に一級取得 → 改めて管理建築士講習が必要。</td>
     </tr>
     <tr>
-      <td class="bold">敷地面積算入・不算入</td>
-      <td>前面道路後退で壁面線指定がある場合、後退部分は敷地面積に不算入。計画道路を前面道路とみなす場合も計画道路部分は不算入。</td>
-      <td>「敷地面積から除く→容積率の分子は同じでも分母が小さくなる→容積率は有利になる」という連鎖を問われる。</td>
+      <td>一括再委託の禁止</td>
+      <td>設計・工事監理業務の全部を他事務所に一括再委託は<span class="red">禁止</span>。工事監理の全部の一括再委託も禁止（委託者の許諾があっても不可）。</td>
+    </tr>
+    <tr>
+      <td>設計図書の保存期間</td>
+      <td><span class="red">15年間</span>（法24条の4）</td>
     </tr>
   </table>
 
-  <div class="point-box">
-    <span class="label">【他科目との関連】</span><span class="cross-ref">計画</span>都市計画・建築計画の科目で用途地域の考え方・建蔽率・容積率が前提知識として問われる。法規での理解が他科目の得点に直結する。<span class="cross-ref">施工</span>仮設計画で敷地の制限（接道・建蔽率）を理解している前提で問題が作られることがある。
-  </div>
-</div>
+  <h2>バリアフリー法</h2>
+  <ul>
+    <li><span class="bold">特別特定建築物</span>：新築・2,000m²以上の増築で移動等円滑化基準への<span class="red">適合義務</span></li>
+    <li><span class="bold">特定建築物</span>（一般）：<span class="red">努力義務</span>のみ</li>
+    <li>条例で基準を強化した場合は建築基準関係規定とみなされる</li>
+  </ul>
 
-<!-- ======================== PAGE 6: 構造計算適合性判定・建築士法の考え方 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <div class="page-num">⑥</div>
-    <div class="page-title-text">構造計算・建築士法・関係法規 ― 「制度の目的」から理解する</div>
-  </div>
-
-  <h2>▶ 構造計算適合性判定 ― なぜ存在するか・何を問われるか</h2>
-  <div class="concept-box">
-    <span class="label">【背景】</span>構造計算書偽装問題（2005年）を受けて、建築主事とは独立した第三者機関（指定構造計算適合性判定機関等）が構造計算の内容を確認する制度。<span class="bold">計算の種類と規模</span>によって判定の要否が決まる。
-  </div>
+  <h2>その他の関係法規（数値を確実に）</h2>
   <table>
-    <tr><th style="width:40%">構造計算の種類（規模）</th><th style="width:30%">判定の要否</th><th style="width:30%">試験で問われるポイント</th></tr>
-    <tr>
-      <td>超高層（高さ60m超）→ 国土交通大臣認定</td>
-      <td class="red center bold">判定不要</td>
-      <td>大臣が直接認定するので判定は要らない（2020年No.13）</td>
-    </tr>
-    <tr>
-      <td>許容応力度等計算（ルート2）で特定建築基準適合判定資格者の建築主事が審査</td>
-      <td class="red center bold">判定不要</td>
-      <td>資格者の建築主事が審査する場合は第三者判定が不要（2020年No.13）</td>
-    </tr>
-    <tr>
-      <td>保有水平耐力計算（ルート3）・限界耐力計算</td>
-      <td class="blue center bold">判定必要</td>
-      <td>上記以外の多くのケースで必要。毎年出題される。</td>
-    </tr>
-    <tr>
-      <td>高さ20m超のRC造で許容応力度等計算（ルート2）</td>
-      <td class="blue center bold">判定必要</td>
-      <td>ルート2でも一定規模以上では判定が必要（特定建築基準適合判定資格者審査でなければ）</td>
-    </tr>
+    <tr><th style="width:28%">法律</th><th>数値・キーポイント</th></tr>
+    <tr><td>建築物省エネ法</td><td>300m²以上の非住宅：届出義務（着手<span class="bold">21日前</span>）。建築士は設計時に適合性評価・書面交付義務。</td></tr>
+    <tr><td>住宅品確法</td><td>新築住宅の構造耐力上主要な部分等の瑕疵担保責任：引渡しから<span class="bold">10年間</span>（最長20年まで特約可）</td></tr>
+    <tr><td>建設リサイクル法</td><td>解体工事の届出：床面積<span class="bold">80m²以上</span>で着手<span class="bold">7日前</span>までに都道府県知事へ</td></tr>
+    <tr><td>景観法</td><td>景観計画区域内の建築外観変更：<span class="red">許可ではなく届出</span></td></tr>
+    <tr><td>都市計画法（施設区域内）</td><td><span class="bold">地上3階建て以上</span>の建築には知事等の許可が必要。地階なし・木造・2階以下は許可不要。</td></tr>
+    <tr><td>消防法</td><td>特定防火対象物（ホテル・病院等）は既存建築物にも改正後の規定が適用。非特定（図書館・事務所等）は既存に適用除外あり。</td></tr>
   </table>
+</section>
 
-  <h2>▶ 建築士の「制度の論理」を理解する</h2>
-  <div class="concept-box">
-    <span class="label">【原則】</span>建築士制度は「設計できる建築物の規模・種類と、建築士の資格が一致していること」を求める。資格の上位互換はある（一級は何でもできる）が、設計とは別に「構造設計一級建築士」「設備設計一級建築士」という専門資格者の関与が必要なケースがある。
-  </div>
-
-  <div class="two-col">
-    <div>
-      <h3>構造設計一級建築士・設備設計一級建築士の関与義務</h3>
-      <ul>
-        <li>一定規模以上の建築物（高さ60m超、または規模による）の新築では、<span class="red">構造設計一級建築士の関与</span>（構造設計または確認）が必要</li>
-        <li>3階以上かつ5,000m²超等の建築物では設備設計一級建築士の関与も必要</li>
-        <li><span class="red">設計自体は一級建築士がおこなってよい</span>が、構造規定への適合確認を構造設計一級建築士に求めなければならない（2022年No.21）</li>
-        <li>工事監理は構造設計一級建築士以外の一級建築士でも行える（2022年No.21）</li>
-      </ul>
-    </div>
-    <div>
-      <h3>定期講習・管理建築士に関する引っかけ</h3>
-      <ul>
-        <li>建築士事務所に属する一級建築士は、設計・工事監理業務に<span class="red">従事しなくても</span>定期講習を受けなければならない（2019年No.23肢2）</li>
-        <li>構造設計一級建築士は、一級建築士定期講習と構造設計一級建築士定期講習の<span class="red">両方</span>を受けなければならない（2020年No.21）</li>
-        <li>管理建築士：<span class="red">3年以上</span>の設計等業務従事後、管理建築士講習を修了した者。一級建築士事務所では一級建築士が管理建築士になる必要がある。</li>
-        <li>「二級建築士として3年以上従事後に管理建築士講習を修了→一級建築士免許取得→一級事務所の管理建築士になる」場合は<span class="red">改めて講習が必要</span>（2019年No.23）</li>
-      </ul>
-    </div>
-  </div>
-
-  <h2>▶ 建築士事務所の業務ルール ― 再委託・書面交付・帳簿保存</h2>
-  <table>
-    <tr><th>テーマ</th><th>ルールの内容</th><th>引っかけポイント</th></tr>
-    <tr>
-      <td class="bold">一括再委託の禁止</td>
-      <td>設計・工事監理業務の全部を他の建築士事務所に一括して再委託することは<span class="red">禁止</span>（法24条の3）</td>
-      <td>一部の再委託はOK（委託者の許諾があれば）。「工事監理業務の全部の一括再委託」は許諾があっても禁止（2019年No.22）</td>
-    </tr>
-    <tr>
-      <td class="bold">書面交付（重要事項説明）</td>
-      <td>設計受託契約等の締結前に、管理建築士等が建築主に重要事項を説明・書面交付</td>
-      <td>2021年改正で義務化。口頭だけではNG。</td>
-    </tr>
-    <tr>
-      <td class="bold">帳簿・図書の保存期間</td>
-      <td>設計図書・工事監理報告書等：<span class="red">15年間</span>保存（法24条の4）</td>
-      <td>「5年間」「10年間」等の数値も出るが、設計図書は15年。住宅の品質確保法の瑕疵担保は10年（引渡しから）。</td>
-    </tr>
-  </table>
-
-  <h2>▶ 関係法規のポイント（毎年No.27〜30で出題）</h2>
-  <div class="two-col">
-    <div>
-      <h3>バリアフリー法（高齢者・障害者等移動等円滑化促進法）</h3>
-      <ul>
-        <li>特別特定建築物：新築・2,000m²以上の増築で<span class="red">移動等円滑化基準への適合義務</span></li>
-        <li>特定建築物（一般）：適合するよう<span class="red">努力義務</span>（義務ではない）</li>
-        <li>敷地内通路：幅120cm以上、50m以内ごとに転回スペース</li>
-        <li>条例で基準を強化した場合は<span class="red">建築基準関係規定とみなす</span>（2021年No.27）</li>
-      </ul>
-    </div>
-    <div>
-      <h3>建築物省エネ法・住宅品確法・建設リサイクル法</h3>
-      <ul>
-        <li>省エネ法：300m²以上の非住宅の届出義務（着手21日前）。建築士は設計時に適合性評価・書面交付義務（2022年No.27）</li>
-        <li>住宅品確法：新築住宅の構造耐力上主要な部分等の瑕疵担保責任は<span class="red">引渡しから10年間</span>（義務）。最長20年まで特約可。</li>
-        <li>建設リサイクル法：解体工事の届出：床面積<span class="red">80m²以上</span>で着手7日前までに都道府県知事へ。</li>
-        <li>景観法：景観計画区域内の建築外観変更は<span class="red">届出が必要</span>（許可ではなく届出）（2020年No.29）</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== PAGE 7: 高さ制限・採光・避難規定の数値を「なぜ」で理解 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <div class="page-num">⑦</div>
-    <div class="page-title-text">高さ制限・採光・用途変更の「考え方」 ― 数値より原則を理解する</div>
-  </div>
-
-  <h2>▶ 高さ制限の「体系」を理解する</h2>
-  <div class="concept-box">
-    <span class="label">【原則】</span>高さ制限は複数の規定が重なって適用される。どれか一つではなく、<span class="bold">すべての制限をクリアした高さ</span>が実際の限度となる（厳しい方が常に適用）。
-  </div>
-
-  <table>
-    <tr><th style="width:25%">制限の種類</th><th style="width:40%">目的と考え方</th><th style="width:35%">適用地域・引っかけ</th></tr>
-    <tr>
-      <td class="bold">道路斜線制限</td>
-      <td>前面道路の採光・通風を確保するために、道路側に向かって建物が高くなりすぎないようにする。道路の反対側の境界線を起点に斜線を引く。</td>
-      <td>全用途地域に適用。住居系は1.25勾配、その他は1.5勾配。後退距離がある場合は算定起点が後退する（令130条の12）。</td>
-    </tr>
-    <tr>
-      <td class="bold">隣地斜線制限</td>
-      <td>隣地の採光・通風を確保するために、隣地境界線から一定高さを超えて斜線制限を設ける。</td>
-      <td>1低専・2低専・田園住居<span class="red">には適用されない</span>（絶対高さ制限があるため）。住居系は20m立ち上がり、その他は31m立ち上がり。</td>
-    </tr>
-    <tr>
-      <td class="bold">北側斜線制限</td>
-      <td>北側の隣地の日照を確保するために、北側境界線から斜線で制限する。</td>
-      <td>1低専・2低専・田園住居・1中高・2中高のみ。商業・工業系<span class="red">には適用されない</span>。</td>
-    </tr>
-    <tr>
-      <td class="bold">日影規制</td>
-      <td>中高層建築物が周囲に落とす日影の時間を制限して、日照を確保する。</td>
-      <td>商業地域・工業地域・工業専用地域<span class="red">は対象外</span>（都市計画で指定した場合を除く）。対象は用途地域ごとに異なる軒高・高さの建築物。</td>
-    </tr>
-    <tr>
-      <td class="bold">絶対高さ制限</td>
-      <td>低層住居地域の良好な住環境を守るため、10mまたは12mの絶対的な高さ上限を設ける。</td>
-      <td>1低専・2低専・田園住居のみ。斜線制限の代わりに絶対値で制限するので、斜線制限の「立ち上がり」概念が不要。</td>
-    </tr>
-  </table>
-
-  <div class="point-box">
-    <span class="label">【引っかけ：屋上部分の算入/非算入】</span>
-    道路斜線・隣地斜線の高さ算定：階段室等の屋上部分が建築面積の1/8以下かつ12m以下なら算入しない。<br>
-    <span class="red">北側斜線・高度地区の場合：この特例は適用されない（常に算入する）</span>。2019年No.2肢3・2023年No.2肢2で繰り返し出題。
-  </div>
-
-  <h2>▶ 採光の「考え方」 ― 補正係数のロジックを理解する</h2>
-  <div class="concept-box">
-    <span class="label">【原則】</span>採光規定は「日光が室内に入るかどうか」で居住環境を守る規定。窓の物理的な面積だけでなく、建物の配置や周辺環境によって実際に採光できる量（有効採光面積）が決まる。
-  </div>
-  <div class="two-col">
-    <div>
-      <h3>採光補正係数の考え方</h3>
-      <ul>
-        <li>窓が道に面するか、隣地との距離が遠いほど採光しやすい→補正係数が大きくなる</li>
-        <li>採光関係比率＝（水平距離÷高さ差）が大きいほど補正係数が大きい</li>
-        <li>用途地域によって係数の算定式が異なる（住居系は係数6、商業系は係数10等の数値が式に入る）</li>
-        <li>商業系地域の開口部が道に面しない場合でも、補正係数が1.0未満になれば<span class="red">1.0とみなす</span>（最低保証）</li>
-        <li>住居系では補正係数がマイナスでも0（マイナスにはなれない）</li>
-      </ul>
-    </div>
-    <div>
-      <h3>採光規定が必要な用途と不要な用途</h3>
-      <ul>
-        <li>必要：住宅・学校・病院・有料老人ホーム・保育所の居室（床面積の1/5〜1/7以上）</li>
-        <li>地階の居室は採光規定の適用除外（令20条の2）</li>
-        <li>職員室・調理室・便所等の「居室でない室」は採光規定なし</li>
-      </ul>
-      <div class="note-box" style="margin-top:5px;">
-        天窓の採光補正係数は<span class="red">3倍</span>とする（令20条3項）。近隣商業地域の天窓も同様。高い採光効果があるため。
-      </div>
-    </div>
-  </div>
-
-  <h2>▶ 都市計画法との関係 ― 確認申請と開発許可の違い</h2>
-  <div class="two-col">
-    <div>
-      <h3>開発許可（都市計画法29条）の考え方</h3>
-      <ul>
-        <li>「土地の区画形質の変更」＝<span class="red">開発行為</span>に許可が必要</li>
-        <li>建築物を建てるだけでは開発行為にならない（宅地造成等を伴う場合が対象）</li>
-        <li>市街化区域内の規模による判断：一般的に1,000m²（三大都市圏は500m²）超で許可が必要</li>
-        <li>学校・病院等の公益施設は市街化調整区域でも許可を受けられる場合がある</li>
-      </ul>
-    </div>
-    <div>
-      <h3>都市計画施設区域内での建築（都計法53条）</h3>
-      <ul>
-        <li>都市計画施設の区域内では建築に都道府県知事等の<span class="red">許可</span>が必要</li>
-        <li>例外：地階なし・木造・軽量鉄骨等の2階以下建築物は許可不要（移転・除却が容易なため）</li>
-        <li><span class="red">地上3階建て以上は許可が必要</span>（2022年No.24）</li>
-      </ul>
-      <h3>消防法との関係</h3>
-      <ul>
-        <li>消防法は「現に存する建築物」にも改正後の規定が適用される施設（特定防火対象物：ホテル・病院等）がある→既存でもスプリンクラー等の設置義務が生じる</li>
-        <li>非特定防火対象物（図書館・事務所等）は既存建築物には適用除外あり（2019年No.25肢2）</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
+<script>
+function show(id) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
 </body>
 </html>

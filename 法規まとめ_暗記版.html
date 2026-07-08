@@ -5,784 +5,325 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>法規 暗記版 – 道路・適判・避難検証・確認済証</title>
 <style>
-  :root {
-    --bg: #f8f9fa;
-    --card: #ffffff;
-    --border: #dee2e6;
-    --text: #212529;
-    --muted: #6c757d;
-    --red: #c0392b;
-    --blue: #1a6fc4;
-    --green: #196f3d;
-    --orange: #a04000;
-    --yellow-bg: #fffde7;
-    --red-bg: #fff5f5;
-    --blue-bg: #eff6ff;
-    --green-bg: #f0fff4;
-    --tag-h: #1a6fc4;
-    --tag-s: #196f3d;
-    --tag-w: #7d3c98;
-    --tag-c: #a04000;
-    --accent: #e74c3c;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1a1a2e;
-      --card: #16213e;
-      --border: #2d3561;
-      --text: #e0e0e0;
-      --muted: #9e9e9e;
-      --red: #e74c3c;
-      --blue: #5dade2;
-      --green: #58d68d;
-      --orange: #f0b27a;
-      --yellow-bg: #2d2a1e;
-      --red-bg: #2d1a1a;
-      --blue-bg: #1a2030;
-      --green-bg: #1a2d20;
-      --tag-h: #5dade2;
-      --tag-s: #58d68d;
-      --tag-w: #c39bd3;
-      --tag-c: #f0b27a;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #1a1a2e; --card: #16213e; --border: #2d3561; --text: #e0e0e0;
-    --muted: #9e9e9e; --red: #e74c3c; --blue: #5dade2; --green: #58d68d;
-    --orange: #f0b27a; --yellow-bg: #2d2a1e; --red-bg: #2d1a1a;
-    --blue-bg: #1a2030; --green-bg: #1a2d20; --tag-h: #5dade2;
-    --tag-s: #58d68d; --tag-w: #c39bd3; --tag-c: #f0b27a;
-  }
-  :root[data-theme="light"] {
-    --bg: #f8f9fa; --card: #ffffff; --border: #dee2e6; --text: #212529;
-    --muted: #6c757d; --red: #c0392b; --blue: #1a6fc4; --green: #196f3d;
-    --orange: #a04000; --yellow-bg: #fffde7; --red-bg: #fff5f5;
-    --blue-bg: #eff6ff; --green-bg: #f0fff4; --tag-h: #1a6fc4;
-    --tag-s: #196f3d; --tag-w: #7d3c98; --tag-c: #a04000;
-  }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.7;
-    padding-bottom: 40px;
+    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
+    font-size: 9.5pt;
+    color: #111;
+    background: #fff;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 10mm 12mm;
   }
-  header {
-    background: var(--card);
-    border-bottom: 2px solid var(--border);
-    padding: 16px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  nav {
+    display: flex; gap: 4px; flex-wrap: wrap;
+    margin-bottom: 12px; padding-bottom: 8px;
+    border-bottom: 2px solid #1a3a5c;
   }
-  header h1 { font-size: 16px; font-weight: 700; }
-  .nav-tabs {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-    margin-left: auto;
+  nav button {
+    padding: 4px 12px; border: 1px solid #aac4de;
+    background: #f4f9ff; color: #1a3a5c;
+    border-radius: 3px; cursor: pointer; font-size: 8.5pt;
+    font-family: inherit;
   }
-  .nav-tabs button {
-    padding: 5px 12px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text);
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.2s;
-  }
-  .nav-tabs button.active {
-    background: var(--blue);
-    color: #fff;
-    border-color: var(--blue);
-  }
-  main { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
-
-  .section { display: none; }
-  .section.active { display: block; }
-
-  h2 {
-    font-size: 18px;
-    margin-bottom: 4px;
-    color: var(--blue);
-    border-left: 4px solid var(--blue);
-    padding-left: 10px;
-  }
-  .section-sub { color: var(--muted); font-size: 12px; margin-bottom: 16px; padding-left: 14px; }
-
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-bottom: 12px;
-  }
-  .card-title {
-    font-weight: 700;
-    font-size: 14px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .tag {
-    font-size: 11px;
-    padding: 2px 7px;
-    border-radius: 10px;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  .tag-ho { background: rgba(26,111,196,0.15); color: var(--tag-h); }
-  .tag-re { background: rgba(192,57,43,0.15); color: var(--red); }
-  .tag-ye { background: rgba(160,64,0,0.15); color: var(--tag-c); }
-
-  .rule-box {
-    background: var(--blue-bg);
-    border-left: 3px solid var(--blue);
-    padding: 8px 12px;
-    border-radius: 0 6px 6px 0;
-    margin: 8px 0;
-    font-size: 13px;
-  }
-  .warn-box {
-    background: var(--red-bg);
-    border-left: 3px solid var(--red);
-    padding: 8px 12px;
-    border-radius: 0 6px 6px 0;
-    margin: 8px 0;
-    font-size: 13px;
-  }
-  .ok-box {
-    background: var(--green-bg);
-    border-left: 3px solid var(--green);
-    padding: 8px 12px;
-    border-radius: 0 6px 6px 0;
-    margin: 8px 0;
-    font-size: 13px;
-  }
-  .note-box {
-    background: var(--yellow-bg);
-    border-left: 3px solid var(--orange);
-    padding: 8px 12px;
-    border-radius: 0 6px 6px 0;
-    margin: 8px 0;
-    font-size: 13px;
-  }
-  .red { color: var(--red); font-weight: 700; }
-  .blue { color: var(--blue); font-weight: 700; }
-  .green { color: var(--green); font-weight: 700; }
-  .orange { color: var(--orange); font-weight: 700; }
-  .bold { font-weight: 700; }
-
-  .year-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 6px;
-  }
-  .year-badge {
-    font-size: 10px;
-    padding: 1px 6px;
-    background: var(--border);
-    border-radius: 3px;
-    color: var(--muted);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    margin: 8px 0;
-  }
-  th {
-    background: var(--border);
-    padding: 6px 10px;
-    text-align: left;
-    font-weight: 600;
-  }
-  td {
-    padding: 6px 10px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-  }
-  tr:last-child td { border-bottom: none; }
-
-  .check-list {
-    list-style: none;
-    padding: 0;
-    margin: 4px 0;
-  }
-  .check-list li {
-    padding: 3px 0 3px 20px;
-    position: relative;
-  }
-  .check-list li::before {
-    position: absolute;
-    left: 0;
-    top: 3px;
-  }
-  .check-list li.o::before { content: "○"; color: var(--green); }
-  .check-list li.x::before { content: "✕"; color: var(--red); }
-  .check-list li.tri::before { content: "△"; color: var(--orange); }
-  .check-list li.arrow::before { content: "→"; color: var(--blue); }
-
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 16px 0;
-  }
-
-  .q-block {
-    margin: 6px 0;
-    padding: 8px 12px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-size: 13px;
-  }
-  .q-block .q-year {
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 3px;
-  }
-  .q-block .q-text { margin-bottom: 4px; }
-  .q-block .q-ans {
-    font-size: 12px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-  .q-block .q-ans.o { background: var(--green-bg); color: var(--green); }
-  .q-block .q-ans.x { background: var(--red-bg); color: var(--red); }
-
-  .collapse-toggle {
-    cursor: pointer;
-    color: var(--blue);
-    font-size: 12px;
-    margin-top: 6px;
-    display: inline-block;
-    text-decoration: underline;
-  }
-  .collapse-body { display: none; margin-top: 8px; }
-  .collapse-body.open { display: block; }
-
-  @media (max-width: 600px) {
-    header { flex-wrap: wrap; }
-    .nav-tabs { margin-left: 0; width: 100%; }
-  }
+  nav button.active { background: #1a3a5c; color: #fff; border-color: #1a3a5c; }
+  .sec { display: none; }
+  .sec.active { display: block; }
+  h1 { font-size: 13pt; font-weight: bold; background: #1a3a5c; color: #fff; padding: 4px 10px; margin-bottom: 10px; }
+  h2 { font-size: 10pt; font-weight: bold; color: #fff; background: #2e6da4; padding: 3px 8px; margin: 10px 0 5px; }
+  h3 { font-size: 9.5pt; font-weight: bold; color: #1a3a5c; border-left: 4px solid #2e6da4; padding-left: 6px; margin: 8px 0 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 8px; }
+  th { background: #dbe8f5; font-weight: bold; border: 1px solid #7aaacf; padding: 4px 6px; text-align: left; vertical-align: middle; }
+  td { border: 1px solid #aac4de; padding: 3px 6px; vertical-align: top; }
+  tr:nth-child(even) td { background: #f4f9ff; }
+  .red  { color: #cc0000; font-weight: bold; }
+  .blue { color: #0055aa; font-weight: bold; }
+  .grn  { color: #006600; font-weight: bold; }
+  .bold { font-weight: bold; }
+  .point-box { border: 1.5px solid #cc0000; background: #fff8f8; border-radius: 3px; padding: 4px 8px; margin: 5px 0; font-size: 8.5pt; }
+  .point-box .lbl { font-weight: bold; color: #cc0000; margin-right: 4px; }
+  .note-box { border: 1px solid #2e6da4; background: #f0f6ff; border-radius: 3px; padding: 4px 8px; margin: 4px 0; font-size: 8.5pt; }
+  ul { margin: 3px 0 6px 16px; }
+  li { margin-bottom: 2px; font-size: 8.5pt; line-height: 1.5; }
+  .yr { font-size: 7.5pt; color: #666; }
 </style>
 </head>
 <body>
-<header>
-  <h1>📖 法規 暗記版</h1>
-  <div class="nav-tabs">
-    <button class="active" onclick="showTab('road')">🛣 道路</button>
-    <button onclick="showTab('tekihan')">🏗 構造適判</button>
-    <button onclick="showTab('hinan')">🚪 避難検証</button>
-    <button onclick="showTab('kakunin')">📋 確認済証</button>
+<h1>📖 法規 暗記版（過去問ベース）</h1>
+<nav>
+  <button class="active" onclick="show('road')">① 道路</button>
+  <button onclick="show('tekihan')">② 構造適判</button>
+  <button onclick="show('hinan')">③ 避難検証</button>
+  <button onclick="show('kakunin')">④ 確認済証</button>
+</nav>
+
+<!-- ① 道路 -->
+<section id="road" class="sec active">
+
+  <h2>① 地盤面下の建築物（法44条1項1号）</h2>
+  <div class="note-box">
+    <span class="bold">建築物に附属する地下通路</span>を道路の地盤面下に設ける場合 → 特定行政庁の許可は<span class="grn">不要</span>
   </div>
-</header>
-<main>
-
-<!-- ========== 道路 ========== -->
-<section id="road" class="section active">
-  <h2>🛣 道路（法42・43・44・45条）</h2>
-  <p class="section-sub">毎年 No.14 に出題。法条文の番号と「許可／認定／不要」の区別が最重要。</p>
-
-  <div class="card">
-    <div class="card-title">① 地盤面下の建築物（法44条1項1号）<span class="tag tag-ho">頻出</span></div>
-    <div class="ok-box">
-      <span class="green">建築物に附属する地下通路</span>を道路の地盤面下に設ける場合<br>
-      → <span class="green">特定行政庁の許可は不要</span>（法44条1項1号）
-    </div>
-    <div class="warn-box">
-      ⚠ <span class="red">地下街の部分</span>（地下通路に附属する商業施設等）を設ける場合<br>
-      → 許可が<span class="red">必要</span>（法44条1項1号の対象外）
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2016 No.14 選4（誤り選択肢：「許可必要」→実際は不要）</span>
-      <span class="year-badge">2017 No.14 選4（同上）</span>
-      <span class="year-badge">2024 No.14 選3（正しい選択肢として出題）</span>
-    </div>
+  <div class="point-box">
+    <span class="lbl">【引っかけ】</span>「地下通路を設けるには特定行政庁の許可が必要」→ <span class="red">誤り</span>（2016・2017 No.14で繰り返し出題）<br>
+    ただし<span class="bold">地下街の商業施設部分</span>を設ける場合は許可が<span class="red">必要</span>
   </div>
 
-  <div class="card">
-    <div class="card-title">② 仮設事務所の接道義務（法43条・法85条）<span class="tag tag-ho">頻出</span></div>
-    <div class="ok-box">
-      工事施工のために<span class="green">現場に設ける</span>事務所<br>
-      → 接道義務の<span class="green">適用除外</span>（道路に接していなくてよい）
-    </div>
-    <div class="warn-box">
-      ⚠ 「現場<span class="red">以外の場所</span>に設けるもの」→ 接道義務あり・確認も必要
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2016 No.14 選2（正しい：接道不要）</span>
-      <span class="year-badge">2017 No.14 選2（正しい）</span>
-      <span class="year-badge">2018 No.14 選3（誤り選択肢：「2m以上接しなければ」→実際は不要）</span>
-      <span class="year-badge">2023 No.14 選2（誤り選択肢：同上）</span>
-    </div>
+  <h2>② 仮設事務所の接道義務（法43条・法85条）</h2>
+  <div class="note-box">
+    工事施工のために<span class="bold">現場に設ける</span>事務所 → 接道義務の<span class="grn">適用除外</span>（道路に接していなくてよい）
+  </div>
+  <div class="point-box">
+    <span class="lbl">【引っかけ】</span>「工事のために現場に設ける事務所は道路に2m以上接しなければならない」→ <span class="red">誤り</span><br>
+    <span class="yr">2016・2017 No.14（正しい選択肢）/ 2018・2023 No.14（誤り選択肢として出題）</span><br>
+    ただし<span class="red">現場以外の場所</span>に設けるもの → 接道義務あり・確認申請も必要
   </div>
 
-  <div class="card">
-    <div class="card-title">③ 建基法外の道（農道・河川管理者の道）への接道（法43条2項）<span class="tag tag-ho">頻出</span></div>
-    <table>
-      <tr>
-        <th>道の種類</th>
-        <th>手続き</th>
-        <th>根拠</th>
-      </tr>
-      <tr>
-        <td>農道・私有地の道（位置指定なし）</td>
-        <td><span class="orange">特定行政庁の<span class="bold">許可</span></span>（交通上・安全上・防火上・衛生上支障なし）</td>
-        <td>法43条2項2号</td>
-      </tr>
-      <tr>
-        <td>河川管理者が管理する公共の道</td>
-        <td><span class="blue">特定行政庁の<span class="bold">認定</span></span></td>
-        <td>法43条2項1号</td>
-      </tr>
-    </table>
-    <div class="note-box">
-      📝 「許可」と「認定」の違いで出題される。河川等の公共の道 → <span class="bold">認定</span>、農道等 → <span class="bold">許可</span>
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2019 No.14 選2（農道→許可で建築可）</span>
-      <span class="year-badge">2022 No.14 選1（河川管理者の道→認定で建築可）</span>
-      <span class="year-badge">2025 No.14 選1（農道→認定で建築可）</span>
-    </div>
+  <h2>③ 建基法外の道への接道（法43条2項）</h2>
+  <table>
+    <tr><th>道の種類</th><th>必要な手続き</th><th>根拠</th></tr>
+    <tr>
+      <td>農道・私有地の道（位置指定なし）</td>
+      <td>特定行政庁の<span class="bold">許可</span>（交通上・安全上・防火上・衛生上支障なし）</td>
+      <td>法43条2項2号</td>
+    </tr>
+    <tr>
+      <td>河川管理者が管理する公共の道</td>
+      <td>特定行政庁の<span class="bold">認定</span></td>
+      <td>法43条2項1号</td>
+    </tr>
+  </table>
+  <div class="point-box">
+    <span class="lbl">【引っかけ】</span>「許可」と「認定」の違いで出題。河川等の公共の道 → <span class="bold">認定</span>、農道等 → <span class="bold">許可</span><br>
+    <span class="yr">2019 No.14（農道→許可）/ 2022 No.14（河川管理者の道→認定）/ 2025 No.14（農道→認定）</span>
   </div>
 
-  <div class="card">
-    <div class="card-title">④ 道路上空の建築（法44条1項）<span class="tag tag-ho">頻出</span></div>
-    <table>
-      <tr><th>状況</th><th>結論</th><th>根拠</th></tr>
-      <tr>
-        <td>地区計画区域内の道路上空<br>（地区計画内容に適合＋安全等支障なし）</td>
-        <td><span class="green">許可で建築可</span></td>
-        <td>法44条1項2号</td>
-      </tr>
-      <tr>
-        <td>高度利用地区内の<br>自動車のみの道路の上空</td>
-        <td><span class="red">特定行政庁の許可が必要</span></td>
-        <td>法44条1項3号</td>
-      </tr>
-      <tr>
-        <td>地区計画等区域内の予定道路の上空<br>（渡り廊下等）</td>
-        <td><span class="red">特定行政庁の許可が必要</span>（「予定道路」も道路扱い）</td>
-        <td>法44条</td>
-      </tr>
-      <tr>
-        <td>道路上空の渡り廊下（許可取得後）<br>側面壁の規定</td>
-        <td>床面から<span class="bold">1.5m以上の壁</span>を設置、<br>1.5m以下に開口部→<span class="bold">はめごろし戸</span></td>
-        <td>令145条</td>
-      </tr>
-    </table>
-    <div class="year-badges">
-      <span class="year-badge">2019 No.14 選1（地区計画区域→許可で可）</span>
-      <span class="year-badge">2022 No.14 選2（渡り廊下→1.5m壁・はめごろし戸）</span>
-      <span class="year-badge">2023 No.14 選1（高度利用地区→許可必要）</span>
-      <span class="year-badge">2024 No.14 選4（予定道路上空→許可必要なのに「不要」→誤り）</span>
-    </div>
+  <h2>④ 道路上空の建築（法44条1項）</h2>
+  <table>
+    <tr><th>状況</th><th>結論</th></tr>
+    <tr>
+      <td>地区計画区域内の道路上空（地区計画内容に適合＋安全等支障なし）</td>
+      <td>特定行政庁の<span class="grn">許可で建築可</span>（法44条1項2号）</td>
+    </tr>
+    <tr>
+      <td>高度利用地区内の自動車のみの道路の上空</td>
+      <td>特定行政庁の<span class="red">許可が必要</span>（法44条1項3号）</td>
+    </tr>
+    <tr>
+      <td>地区計画等区域内の予定道路上空の渡り廊下</td>
+      <td>特定行政庁の<span class="red">許可が必要</span>（「許可不要」→ 誤り）</td>
+    </tr>
+    <tr>
+      <td>道路上空の渡り廊下（許可取得後）の側面壁</td>
+      <td>床面から<span class="bold">1.5m以上の壁</span>を設置、1.5m以下に開口部 → <span class="bold">はめごろし戸</span>（令145条）</td>
+    </tr>
+  </table>
+  <div class="point-box">
+    <span class="lbl">【引っかけ】</span>2024 No.14：「予定道路上空の渡り廊下は許可を受けることなく新築できる」→ <span class="red">誤り</span>
   </div>
 
-  <div class="card">
-    <div class="card-title">⑤ 自動車のみの道路</div>
-    <div class="rule-box">
-      自動車のみの交通の用に供する道路にのみ接している敷地<br>
-      → 原則として建築物を<span class="red">新築できない</span>（法43条1項ただし書き）
-    </div>
-    <div class="rule-box">
-      自動車のみの道路<span class="bold">内</span>に休憩所等を新築<br>
-      → 特定行政庁の<span class="red">許可が必要</span>（法44条）
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2024 No.14 選2（道路のみ接→新築不可）</span>
-      <span class="year-badge">2025 No.14 選4（道路内に休憩所→許可必要）</span>
-    </div>
+  <h2>⑤ その他の頻出ポイント</h2>
+  <table>
+    <tr><th>テーマ</th><th>ルール</th><th>出題年</th></tr>
+    <tr>
+      <td>自動車のみの道路にのみ接する敷地</td>
+      <td>原則として建築物を<span class="red">新築できない</span>（法43条1項）</td>
+      <td class="yr">2024 No.14</td>
+    </tr>
+    <tr>
+      <td>自動車のみの道路内に休憩所を新築</td>
+      <td>特定行政庁の<span class="red">許可が必要</span>（法44条）</td>
+      <td class="yr">2025 No.14</td>
+    </tr>
+    <tr>
+      <td>道路内の建築物と道路高さ制限</td>
+      <td>高架の道路の<span class="bold">路面下</span>を除き、道路内の建築物には道路高さ制限は<span class="grn">適用されない</span></td>
+      <td class="yr">2022 No.14</td>
+    </tr>
+    <tr>
+      <td>位置指定道路（法42条1項5号）の廃止</td>
+      <td>特定行政庁の<span class="red">許可が必要</span>（法45条1項）</td>
+      <td class="yr">2022 No.14</td>
+    </tr>
+    <tr>
+      <td>袋路状道路の位置指定の基準</td>
+      <td>幅員<span class="bold">4m以上</span>・延長<span class="bold">35m以下</span>（令144条の4）</td>
+      <td class="yr">2019 No.14</td>
+    </tr>
+    <tr>
+      <td>道路幅員の区域指定</td>
+      <td>気候等により必要な場合、特定行政庁は<span class="bold">6m以上</span>とする区域を指定できる</td>
+      <td class="yr">2024 No.14</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ② 構造適判 -->
+<section id="tekihan" class="sec">
+
+  <h2>適判が必要か不要かの判断</h2>
+  <table>
+    <tr><th>ケース</th><th>適判</th><th>理由</th></tr>
+    <tr>
+      <td>高さ<span class="bold">60m超</span>の建築物</td>
+      <td><span class="grn">不要</span></td>
+      <td>時刻歴応答解析（令81条1項）＋国土交通<span class="bold">大臣の認定</span>が必要。適判は不要。</td>
+    </tr>
+    <tr>
+      <td>ルート1（許容応力度計算のみ）</td>
+      <td><span class="grn">不要</span></td>
+      <td>適判対象外</td>
+    </tr>
+    <tr>
+      <td>高さ<span class="bold">20m以下</span>のRC造で保有水平耐力計算</td>
+      <td><span class="grn">不要</span></td>
+      <td>RC造の適判閾値は高さ20m超のため</td>
+    </tr>
+    <tr>
+      <td>高さ<span class="bold">20m超</span>のRC造で保有水平耐力計算（ルート3）</td>
+      <td><span class="red">必要</span></td>
+      <td>令9条の3第1号</td>
+    </tr>
+    <tr>
+      <td>高さ<span class="bold">13m超</span>の鉄骨造で保有水平耐力計算</td>
+      <td><span class="red">必要</span></td>
+      <td>令9条の3</td>
+    </tr>
+  </table>
+
+  <div class="point-box">
+    <span class="lbl">【引っかけ】</span>「高さ15mのRC造で保有水平耐力計算を行ったものは適合性判定の対象とならない」→ <span class="grn">正しい</span>（20m以下なので対象外）<br>
+    「高さ60mを超える建築物は適判が不要」→ <span class="grn">正しい</span>（大臣認定を受ける）<br>
+    <span class="yr">2023 No.11 / 2024 No.3 で繰り返し出題</span>
   </div>
 
-  <div class="card">
-    <div class="card-title">⑥ 道路高さ制限（法56条）</div>
-    <div class="ok-box">
-      道路内にある建築物（<span class="bold">高架の道路の路面下</span>に設けるものを<span class="bold">除く</span>）<br>
-      → 道路高さ制限は<span class="green">適用されない</span>
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2022 No.14 選3（高架路面下を除き適用なし → 正しい）</span>
-    </div>
+  <h2>構造計算の種類と適判の関係</h2>
+  <table>
+    <tr><th>高さ</th><th>計算方法</th><th>適判</th></tr>
+    <tr>
+      <td>60m超</td>
+      <td>時刻歴応答解析（令81条1項）</td>
+      <td><span class="grn">不要</span>（大臣認定）</td>
+    </tr>
+    <tr>
+      <td>60m以下（一定規模超）</td>
+      <td>保有水平耐力計算（ルート3）・許容応力度等計算（ルート2）</td>
+      <td><span class="red">必要</span></td>
+    </tr>
+    <tr>
+      <td>60m以下（小規模・ルート1）</td>
+      <td>許容応力度計算のみ</td>
+      <td><span class="grn">不要</span></td>
+    </tr>
+  </table>
+
+  <h2>適判の構造種別ごとの閾値</h2>
+  <table>
+    <tr><th>構造種別</th><th>適判対象となる閾値</th></tr>
+    <tr><td>鉄筋コンクリート造（RC）</td><td>高さ <span class="red">20m超</span></td></tr>
+    <tr><td>鉄骨造（S）</td><td>高さ <span class="red">13m超</span></td></tr>
+    <tr><td>木造</td><td>高さ13m超 または 軒高9m超</td></tr>
+    <tr><td>組積造・無筋コンクリート造</td><td>高さ4m超</td></tr>
+  </table>
+</section>
+
+<!-- ③ 避難検証 -->
+<section id="hinan" class="sec">
+
+  <h2>全館避難安全検証法で緩和できないもの（最重要）</h2>
+  <div class="point-box">
+    <span class="lbl">【最重要】</span><span class="red">非常用の照明装置（令126条の4）→ 緩和不可</span><br>
+    全館避難安全検証法で安全性が確かめられても、非常用照明の設置は省略できない。<br>
+    <span class="yr">2022 No.10 選4：「全館避難安全検証法により…確かめられた場合であっても、非常用の照明装置を設けなければならない」→ 正しい</span>
+  </div>
+  <ul>
+    <li>非常用エレベーター（令129条の13の2）→ 緩和<span class="red">不可</span></li>
+    <li>特別避難階段の設置義務そのもの → 緩和<span class="red">不可</span></li>
+  </ul>
+
+  <h2>全館避難安全検証法の確認方法</h2>
+  <div class="note-box">
+    ① 建築物からの<span class="bold">避難に要する時間</span>に基づく検証<br>
+    ② 火災により生じた<span class="bold">煙またはガスの高さ</span>に基づく検証<br>
+    <span class="yr">2025 No.6 選4（正しい選択肢として出題）</span>
   </div>
 
-  <div class="card">
-    <div class="card-title">⑦ 道路の種別（法42条1項）と廃止（法45条）</div>
-    <table>
-      <tr><th>道路の種類</th><th>ポイント</th></tr>
-      <tr>
-        <td>都市再開発法等による新設事業計画の道路<br>（2年以内執行予定として特定行政庁が指定）</td>
-        <td>建基法上の道路（法42条1項4号）</td>
-      </tr>
-      <tr>
-        <td>密集市街地整備法による新設事業計画の道路<br>（3年以内執行予定として特定行政庁が指定）</td>
-        <td>建基法上の道路</td>
-      </tr>
-      <tr>
-        <td>幅員6m以上の<span class="red">地下道</span></td>
-        <td><span class="red">建基法の道路に非該当</span>（法42条1項は地下を除く）</td>
-      </tr>
-      <tr>
-        <td>位置指定道路（法42条1項5号）の廃止</td>
-        <td><span class="red">特定行政庁の許可が必要</span>（法45条1項）</td>
-      </tr>
-    </table>
-    <div class="note-box">
-      📝 袋路状道路の位置指定：幅員<span class="bold">4m以上</span>・延長<span class="bold">35m以下</span>（令144条の4）<br>
-      ※「6m以上にしなければ」という選択肢は誤り
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2019 No.14（都市再開発法→2年以内→法42条1項4号）</span>
-      <span class="year-badge">2022 No.14 選4（位置指定道路廃止→許可必要）</span>
-      <span class="year-badge">2025 No.14 選3（密集市街地整備法→3年以内→法42条1項4号）</span>
-    </div>
+  <h2>階避難安全検証法と特別避難階段の仕上げ</h2>
+  <div class="note-box">
+    階避難安全検証法で確かめた場合であっても、特別避難階段の<span class="bold">階段室・付室</span>の天井・壁の室内面仕上げ：<br>
+    → <span class="bold">不燃材料</span>で仕上げ ＋ <span class="bold">下地を準不燃材料</span>で造る（令123条3項6号）<br>
+    <span class="yr">2021 No.7 選2（地上20階建て共同住宅→不燃材料＋準不燃下地 → 正しい）</span>
   </div>
 
-  <div class="card">
-    <div class="card-title">⑧ 道路幅員の区域指定</div>
-    <div class="rule-box">
-      特定行政庁はその地方の気候・風土・地形等により必要な場合、道路の幅員を<span class="bold">6m以上</span>とする区域を指定できる
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2024 No.14 選1（正しい選択肢）</span>
-    </div>
+  <h2>避難施設等の工事中使用（法7条の6）</h2>
+  <ul>
+    <li>避難施設等に関する工事を含む建築物を工事中に使用する場合 → 建築主は<span class="bold">あらかじめ特定行政庁に届け出る</span>（施工中の安全措置計画）</li>
+    <li>原則として<span class="bold">検査済証の交付を受けた後</span>でなければ使用不可</li>
+  </ul>
+  <div class="point-box">
+    <span class="yr">2024 No.3 選2（3,000m²病院→工事中→特定行政庁に届出）/ 選4（8階建て共同住宅増築→検査済証後に使用）</span>
   </div>
 </section>
 
-<!-- ========== 構造計算適合性判定 ========== -->
-<section id="tekihan" class="section">
-  <h2>🏗 構造計算適合性判定（法6条の3）</h2>
-  <p class="section-sub">「適判が必要か不要か」の判断軸を明確にする。高さ60m超と高さ20m以下RCが頻出。</p>
+<!-- ④ 確認済証 -->
+<section id="kakunin" class="sec">
 
-  <div class="card">
-    <div class="card-title">① 適判が<span style="color:var(--red)">不要</span>なケース<span class="tag tag-re">重要</span></div>
-    <ul class="check-list">
-      <li class="x"><span class="bold">高さ60m超</span>の建築物<br>
-        → 時刻歴応答解析（令81条1項）＋ <span class="bold">国土交通大臣の認定</span>が必要<br>
-        → 適判（都道府県知事または指定機関）は不要
-      </li>
-      <li class="x"><span class="bold">ルート1（許容応力度計算のみ）</span>で構造計算した建築物<br>
-        → 適判対象外
-      </li>
-      <li class="x"><span class="bold">高さ20m以下</span>のRC造で保有水平耐力計算を行ったもの<br>
-        → 適判対象外（RC造の閾値：20m超）
-      </li>
-    </ul>
-    <div class="year-badges">
-      <span class="year-badge">2023 No.11 選3（高さ60m超→大臣認定→適判不要 → 正しい）</span>
-      <span class="year-badge">2023 No.11 選2（高さ15mRC造→保有水平耐力計算→適判対象外 → 正しい）</span>
-      <span class="year-badge">2024 No.3 選3（高さ60m超→大臣認定→適判不要 → 正しい）</span>
-    </div>
-  </div>
+  <h2>確認申請が不要なケース（毎年 No.3）</h2>
+  <table>
+    <tr><th style="width:48%">ケース</th><th>注意点</th></tr>
+    <tr>
+      <td>工事施工のために<span class="bold">現場に設ける</span>仮設事務所</td>
+      <td>法85条1項2号。<span class="red">現場以外</span>（延べ200m²・2階建て等）は確認必要。</td>
+    </tr>
+    <tr>
+      <td>重要文化財として指定・<span class="bold">仮指定</span>された建築物の移転等</td>
+      <td>法3条1項1号の適用除外。</td>
+    </tr>
+    <tr>
+      <td>類似の用途間の用途変更（例：水泳場→体育館）</td>
+      <td>令137条の18。200m²超でも類似グループ内は不要。</td>
+    </tr>
+    <tr>
+      <td>都市計画区域等の<span class="bold">いずれにも非該当</span>の区域で木造2階100m²の住宅</td>
+      <td>法6条1項4号の対象外。<span class="yr">（2025 No.3 選3）</span></td>
+    </tr>
+    <tr>
+      <td>確認済証の軽微変更（高さ減少・設備材料変更等）</td>
+      <td><span class="red">容積率最低限度地域での床面積減少</span>は再確認必要。<span class="yr">（2025 No.3 選4）</span></td>
+    </tr>
+  </table>
 
-  <div class="card">
-    <div class="card-title">② 適判が<span style="color:var(--green)">必要</span>なケース<span class="tag tag-re">重要</span></div>
-    <div class="rule-box">
-      以下のいずれかに該当する建築物で<span class="bold">ルート2・ルート3</span>（保有水平耐力計算等）を行う場合：
-    </div>
-    <table>
-      <tr><th>構造種別</th><th>適判対象の閾値</th></tr>
-      <tr><td>鉄筋コンクリート造（RC）</td><td>高さ <span class="red bold">20m超</span></td></tr>
-      <tr><td>鉄骨造（S）</td><td>高さ <span class="red bold">13m超</span></td></tr>
-      <tr><td>木造</td><td>高さ13m超 または 軒高9m超</td></tr>
-      <tr><td>組積造・無筋コンクリート造</td><td>高さ4m超</td></tr>
-    </table>
-    <div class="note-box">
-      📝 高さ31mのRC造で保有水平耐力計算 → 20m超 → <span class="bold">適判必要</span><br>
-      　 高さ15mのRC造で保有水平耐力計算 → 20m以下 → <span class="bold">適判不要</span>
-    </div>
-  </div>
+  <h2>確認申請が必要なケース（引っかけ頻出）</h2>
+  <table>
+    <tr><th style="width:55%">ケース</th><th>根拠</th></tr>
+    <tr><td>原動機を使用する<span class="bold">観覧車</span></td><td>令138条2項1号の工作物<br><span class="yr">2024 No.3 選1</span></td></tr>
+    <tr><td>既存建築物への<span class="bold">エレベーター設置</span></td><td>建築設備として法6条の確認対象<br><span class="yr">2021 No.3 選4</span></td></tr>
+    <tr><td>防火地域・準防火地域内の増築等（<span class="bold">規模不問</span>）</td><td>法6条1項（10m²以下の増築は例外）</td></tr>
+    <tr><td>RC造3階建て事務所の<span class="bold">屋根の過半の修繕</span></td><td>3号建築物の大規模修繕<br><span class="yr">2019 No.3 選1</span></td></tr>
+    <tr><td>診療所（有床）→有料老人ホーム（500m²・2階建て）の用途変更</td><td>類似用途でなく200m²超特殊建築物への変更<br><span class="yr">2019 No.3 選4</span></td></tr>
+  </table>
 
-  <div class="card">
-    <div class="card-title">③ 構造計算の種類と適判の関係（フロー）</div>
-    <table>
-      <tr><th>高さ</th><th>構造計算の方法</th><th>適判</th></tr>
-      <tr>
-        <td>60m超</td>
-        <td>時刻歴応答解析（令81条1項）</td>
-        <td><span class="green bold">不要</span>（大臣認定）</td>
-      </tr>
-      <tr>
-        <td>60m以下<br>（一定規模超）</td>
-        <td>保有水平耐力計算（ルート3）<br>許容応力度等計算（ルート2）</td>
-        <td><span class="red bold">必要</span>（都道府県知事または指定機関）</td>
-      </tr>
-      <tr>
-        <td>60m以下<br>（小規模・ルート1）</td>
-        <td>許容応力度計算のみ</td>
-        <td><span class="green bold">不要</span></td>
-      </tr>
-    </table>
-  </div>
+  <h2>用途変更の類似用途グループ（よく出る組み合わせ）</h2>
+  <table>
+    <tr><th>変更内容</th><th>確認申請</th><th>出題年</th></tr>
+    <tr><td>水泳場 → 体育館（2,000m²・準防火地域内）</td><td><span class="grn">不要</span>（類似用途）</td><td class="yr">2021 No.3</td></tr>
+    <tr><td>ホテル → 共同住宅（800m²・3階建て）防火地域内</td><td><span class="red">必要</span></td><td class="yr">2022 No.3</td></tr>
+    <tr><td>事務所（500m²・平家）→ 診療所（200m²部分）</td><td><span class="red">必要</span>（診療所＝特殊建築物）</td><td class="yr">2023 No.3</td></tr>
+    <tr><td>劇場 → 公会堂（800m²）</td><td><span class="red">必要</span>（グループが異なる）</td><td class="yr">2024 No.4</td></tr>
+  </table>
+
+  <h2>その他の重要ルール</h2>
+  <ul>
+    <li>用途変更の完了後：指定確認検査機関から確認を受けても、<span class="red">工事完了届は建築主事へ</span>（完了検査申請は不要）<span class="yr">（2024 No.4・2025 No.4 で繰り返し出題）</span></li>
+    <li>都道府県が建築主の場合：<span class="bold">指定確認検査機関に通知</span>することができる（法18条の3）<span class="yr">（2025 No.3 選1）</span></li>
+    <li>検査済証交付前の仮使用：完了検査申請受理から<span class="bold">7日経過後</span>に可（法7条の6）<span class="yr">（2022 No.4）</span></li>
+  </ul>
 </section>
-
-<!-- ========== 避難安全検証法 ========== -->
-<section id="hinan" class="section">
-  <h2>🚪 避難安全検証法（令128条の6・129条）</h2>
-  <p class="section-sub">「適用しても緩和できないもの」が毎年問われる。非常用照明・非常用エレベーターは緩和不可。</p>
-
-  <div class="card">
-    <div class="card-title">① 全館避難安全検証法（令129条）で<span style="color:var(--red)">緩和できない</span>もの<span class="tag tag-re">最重要</span></div>
-    <ul class="check-list">
-      <li class="x"><span class="bold">非常用の照明装置</span>（令126条の4）<br>
-        → 全館避難検証で安全性が確かめられても設置省略<span class="red">不可</span></li>
-      <li class="x"><span class="bold">非常用エレベーター</span>（令129条の13の2）<br>
-        → 緩和<span class="red">不可</span></li>
-      <li class="x"><span class="bold">特別避難階段の設置義務そのもの</span>（令122条）<br>
-        → 緩和<span class="red">不可</span>（ただし付室・バルコニーの仕様は緩和できる場合あり）</li>
-    </ul>
-    <div class="warn-box">
-      ⚠ 全館避難安全検証法を用いても<span class="red bold">非常用照明は省略できない</span>
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2022 No.10 選4（全館検証でも非常用照明は必要 → 正しい）</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">② 階避難安全検証法（令128条の6）の特別避難階段仕様</div>
-    <div class="ok-box">
-      階避難安全検証法で確かめた場合であっても、<br>
-      特別避難階段の<span class="bold">階段室・付室</span>の天井及び壁の室内面仕上げ：<br>
-      → <span class="bold green">不燃材料</span>で仕上げ＋<span class="bold green">下地を準不燃材料</span>で造る（令123条3項6号）
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2021 No.7 選2（地上20階建て共同住宅 → 不燃材料＋準不燃下地 → 正しい）</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">③ 全館避難安全検証法の確認方法</div>
-    <div class="rule-box">
-      以下のいずれかの方法で確認：<br>
-      A. 建築物からの<span class="bold">避難に要する時間</span>に基づく検証<br>
-      B. 火災により生じた<span class="bold">煙又はガスの高さ</span>に基づく検証
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2025 No.6 選4（正しい選択肢として出題）</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">④ 避難施設等の工事中使用（法7条の6）</div>
-    <div class="rule-box">
-      避難施設等に関する工事を含む建築物を工事中に使用する場合：<br>
-      → 建築主は<span class="bold">あらかじめ特定行政庁に届け出る</span>（施工中の安全措置計画）<br>
-      → 原則として<span class="bold">検査済証の交付を受けた後</span>でなければ使用不可
-    </div>
-    <div class="note-box">
-      📝 病院・共同住宅の増築等で避難施設等の工事を含む場合に頻出
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2024 No.3 選2（3,000m²病院→工事中→特定行政庁に届出）</span>
-      <span class="year-badge">2024 No.3 選4（8階建て共同住宅増築→検査済証後に使用）</span>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 確認済証 ========== -->
-<section id="kakunin" class="section">
-  <h2>📋 確認済証の交付（法6条・85条・87条）</h2>
-  <p class="section-sub">毎年 No.3 に「必要がないもの／あるもの」を問う出題。判断の軸を整理する。</p>
-
-  <div class="card">
-    <div class="card-title">判断フロー<span class="tag tag-ho">基本</span></div>
-    <table>
-      <tr>
-        <th>確認<span class="green bold">不要</span>（省略できる）</th>
-        <th>確認<span class="red bold">必要</span>（省略不可）</th>
-      </tr>
-      <tr>
-        <td>
-          ・工事施工のために<span class="bold">現場に設ける</span>仮設事務所<br>
-          ・重要文化財等に指定または<span class="bold">仮指定</span>された建築物<br>
-          ・都市計画区域等の<span class="bold">指定区域外</span>の小規模建築物<br>
-          ・<span class="bold">類似の用途</span>への用途変更<br>
-          ・都市計画法29条の開発許可が必要な擁壁築造<br>
-          ・容積率最低限度区域で<span class="bold">床面積が減少</span>する変更（計画変更申請も不要の場合）
-        </td>
-        <td>
-          ・原動機を使用する<span class="bold">観覧車</span>（令138条2項1号）<br>
-          ・防火地域・準防火地域内の<span class="bold">規模不問の増築等</span><br>
-          ・<span class="bold">エレベーターの設置</span>（建築設備として法6条対象）<br>
-          ・類似用途<span class="bold">でない</span>用途変更（200m²超特殊建築物）<br>
-          ・現場<span class="bold">以外</span>の場所の仮設建築物
-        </td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="card">
-    <div class="card-title">① 仮設建築物（法85条）<span class="tag tag-ho">頻出</span></div>
-    <div class="ok-box">
-      工事施工のために<span class="bold">現場に設ける</span>仮設建築物<br>
-      → 確認済証<span class="green bold">不要</span>（法85条1項2号）
-    </div>
-    <div class="warn-box">
-      ⚠ 「現場<span class="red bold">以外の場所</span>に設けるもの（延べ200m², 2階建て）」<br>
-      → 確認<span class="red bold">必要</span>（法85条の適用外）
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2019 No.3（現場以外の仮設事務所 → 確認必要）</span>
-      <span class="year-badge">2022 No.3 選3（現場に設ける50m²工事管理事務所 → 不要 → 正解肢）</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">② 文化財の建築物（法3条1項1号）</div>
-    <div class="ok-box">
-      文化財保護法により重要文化財として指定または<span class="bold">仮指定</span>された建築物<br>
-      → 建基法の適用除外 → 確認済証<span class="green bold">不要</span>
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2023 No.3 選2（重要文化財仮指定の美術館の移転 → 不要、ただし正解は選4）</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">③ 工作物（令138条）<span class="tag tag-re">要注意</span></div>
-    <div class="warn-box">
-      <span class="bold">原動機を使用する観覧車</span>（高さに関わらず）<br>
-      → 令138条2項1号 → 確認済証<span class="red bold">必要</span>
-    </div>
-    <div class="rule-box">
-      ゴルフ練習場のネット支柱（高さ20m超）→ 令138条1項3号 → <span class="bold">確認必要</span>
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2022 No.3 選2（高さ20mの鉄柱 → 確認必要）</span>
-      <span class="year-badge">2024 No.3 選1（原動機使用の観覧車 → 確認必要 → 正しい）</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">④ 用途変更（法87条）<span class="tag tag-ho">頻出</span></div>
-    <div class="rule-box">
-      200m²超の<span class="bold">特殊建築物</span>への用途変更 → 確認必要<br>
-      ただし<span class="bold">類似の用途</span>相互間 → 確認<span class="bold">不要</span>（令137条の18）
-    </div>
-    <div class="note-box">
-      📝 類似の用途グループ（一部抜粋）：<br>
-      ・劇場・映画館・演芸場 ↔ 公会堂・集会場 → <span class="red">グループが異なる</span>場合あり・要注意<br>
-      ・ホテル ↔ 共同住宅 → <span class="red">類似でない</span> → 確認必要<br>
-      ・体育館 ↔ 水泳場 → <span class="green">類似</span> → 確認不要<br>
-      ・診療所 ↔ 有料老人ホーム → 規模・構造次第
-    </div>
-    <table>
-      <tr><th>変更前 → 変更後</th><th>判断</th><th>年度</th></tr>
-      <tr>
-        <td>診療所（収容施設あり）→ 有料老人ホーム<br>（RC, 延べ面積500m², 2階建て）</td>
-        <td><span class="red">確認必要</span>（2019）</td>
-        <td>2019 No.3 選4</td>
-      </tr>
-      <tr>
-        <td>水泳場 → 体育館<br>（RC, 延べ面積2,000m², 2階建て）準防火地域内</td>
-        <td><span class="green">確認不要</span>（類似用途）→ 正解肢</td>
-        <td>2021 No.3 選3</td>
-      </tr>
-      <tr>
-        <td>ホテル → 共同住宅<br>（RC, 延べ面積800m², 3階建て）防火地域内</td>
-        <td><span class="red">確認必要</span></td>
-        <td>2022 No.3 選4</td>
-      </tr>
-      <tr>
-        <td>事務所（500m², 平家）→ 診療所（200m²部分）</td>
-        <td><span class="red">確認必要</span>（診療所=特殊建築物）</td>
-        <td>2023 No.3 選4 → 正解肢</td>
-      </tr>
-    </table>
-    <div class="note-box">
-      📝 用途変更の完了後の届出：<br>
-      ・指定確認検査機関から確認済証の交付を受けた場合 → 完了時は<span class="bold">建築主事</span>に届け出（指定機関ではない）<br>
-      &nbsp;&nbsp;（2024 No.4 選4 / 2025 No.4 選3 で繰り返し出題）
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">⑤ 防火地域・準防火地域内の確認<span class="tag tag-re">要注意</span></div>
-    <div class="warn-box">
-      防火地域・準防火地域内 → <span class="red bold">規模に関わらず</span>増築等の確認が必要<br>
-      ※準防火地域でも10m²以下の増築を除き確認が必要（法6条1項）
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2021 No.3 選1（準防火地域内 住宅8m²増築 → 確認必要）</span>
-      <span class="year-badge">2022 No.3 選1（防火地域内 事務所10m²増築 → 確認必要）</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">⑥ 大規模修繕・大規模模様替え</div>
-    <div class="rule-box">
-      確認が必要な建築物（法6条1項1〜3号）で大規模修繕・模様替え → 確認必要
-    </div>
-    <table>
-      <tr><th>建築物</th><th>確認対象</th></tr>
-      <tr>
-        <td>木造 3階以上／延べ500m²超／高さ13m超／軒高9m超</td>
-        <td>2号建築物 → 大規模修繕等も確認必要</td>
-      </tr>
-      <tr>
-        <td>非木造 2階以上／延べ200m²超</td>
-        <td>3号建築物 → 大規模修繕等も確認必要</td>
-      </tr>
-    </table>
-    <div class="year-badges">
-      <span class="year-badge">2015 No.3 選3（木造500m²・高さ9m・平家→屋根の大規模修繕）</span>
-      <span class="year-badge">2019 No.3 選1（鉄骨造300m²・平家→屋根の過半の修繕 → 確認必要）</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">⑦ エレベーター設置</div>
-    <div class="warn-box">
-      既存建築物への<span class="bold">エレベーター（昇降機）の設置</span><br>
-      → 建築設備として法6条の確認対象 → 確認<span class="red bold">必要</span>
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2021 No.3 選4（RC3階建て事務所へのエレベーター設置 → 確認必要）</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">⑧ 都市計画区域外の建築物・その他</div>
-    <div class="ok-box">
-      都市計画区域・準都市計画区域・準景観地区等<span class="bold">いずれにも該当しない区域</span>の<br>
-      木造2階建て100m²の住宅 → 確認<span class="green bold">不要</span>
-    </div>
-    <div class="rule-box">
-      都道府県が建築主の場合：<br>
-      → <span class="bold">指定確認検査機関</span>に通知することができる（法18条の3）
-    </div>
-    <div class="rule-box">
-      検査済証交付前の仮使用：<br>
-      完了検査申請が受理された日から<span class="bold">7日経過</span>した場合、仮使用可（法7条の6）
-    </div>
-    <div class="year-badges">
-      <span class="year-badge">2025 No.3 選3（指定区域外の木造2階100m² → 確認不要 → 正しい）</span>
-      <span class="year-badge">2025 No.3 選1（都道府県が建築主 → 指定確認検査機関に通知可 → 正しい）</span>
-      <span class="year-badge">2022 No.4 選4（7日経過後の仮使用 → 正しい）</span>
-    </div>
-  </div>
-</section>
-
-</main>
 
 <script>
-function showTab(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-tabs button').forEach(b => b.classList.remove('active'));
+function show(id) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   event.target.classList.add('active');
 }
