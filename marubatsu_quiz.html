@@ -23,12 +23,28 @@ header a:hover{color:#fff}
 .tag.topic-tag.active{background:#4f8ef7;border-color:#4f8ef7;color:#fff}
 
 /* スタート */
-.start-row{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.start-row{display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
 .btn{padding:10px 20px;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
 .btn-primary{background:#1a2744;color:#fff}
 .btn-primary:hover{background:#243057}
 .btn-ghost{background:#f0f2f7;color:#1a2744}
 .count-badge{font-size:13px;color:#666}
+
+/* モード・問題数セレクター */
+.mode-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
+.mode-label{font-size:12px;color:#888;font-weight:600;white-space:nowrap}
+.seg-btn{padding:5px 14px;border:2px solid #dde2ee;border-radius:20px;font-size:12px;font-weight:700;background:#fff;color:#555;cursor:pointer;transition:all .15s}
+.seg-btn.active{background:#1a2744;border-color:#1a2744;color:#fff}
+.seg-btn.warn.active{background:#e67e22;border-color:#e67e22;color:#fff}
+
+/* 全体正答率バー */
+.acc-row{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#f8faff;border:1px solid #dde8ff;border-radius:8px;margin-top:10px;flex-wrap:wrap}
+.acc-title{font-size:12px;color:#555;font-weight:700;white-space:nowrap}
+.acc-pct{font-size:20px;font-weight:700;color:#1a2744}
+.acc-detail{font-size:11px;color:#888}
+.acc-bar-wrap{flex:1;min-width:80px}
+.acc-bar-bg{height:6px;background:#e8ecf5;border-radius:3px;overflow:hidden}
+.acc-bar-fill{height:100%;background:#27ae60;border-radius:3px;transition:width .4s}
 
 /* カード */
 .q-card{background:#fff;border-radius:12px;padding:22px;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,0,.1)}
@@ -89,6 +105,22 @@ header a:hover{color:#fff}
     <div class="tag-row" id="subject-tags"></div>
     <h2 style="margin-top:12px">分野</h2>
     <div class="tag-row" id="topic-tags"></div>
+    <!-- モード選択 -->
+    <div class="mode-row" style="margin-top:12px">
+      <span class="mode-label">モード：</span>
+      <button class="seg-btn active" id="mode-all" onclick="setMode('all',this)">通常</button>
+      <button class="seg-btn warn" id="mode-wrong" onclick="setMode('wrong',this)">苦手のみ ✗</button>
+    </div>
+    <!-- 問題数選択 -->
+    <div class="mode-row">
+      <span class="mode-label">問題数：</span>
+      <button class="seg-btn" id="cnt-10" onclick="setCount(10,this)">10問</button>
+      <button class="seg-btn" id="cnt-20" onclick="setCount(20,this)">20問</button>
+      <button class="seg-btn" id="cnt-30" onclick="setCount(30,this)">30問</button>
+      <button class="seg-btn active" id="cnt-all" onclick="setCount(0,this)">全問</button>
+    </div>
+    <!-- 全体正答率 -->
+    <div class="acc-row" id="acc-row"></div>
     <div class="start-row">
       <button class="btn btn-primary" onclick="startQuiz()">スタート</button>
       <button class="btn btn-ghost" onclick="selectAll()">全選択</button>
@@ -101,6 +133,10 @@ header a:hover{color:#fff}
     <div>
       <div class="score-num" id="score-disp">0 / 0</div>
       <div class="score-sub">正解 / 回答済み</div>
+    </div>
+    <div>
+      <div class="score-num" style="font-size:20px;color:#27ae60" id="acc-disp">－</div>
+      <div class="score-sub">正答率</div>
     </div>
     <div class="progress-wrap">
       <div style="font-size:12px;color:#888;margin-bottom:4px" id="progress-label">0 / 0 問</div>
@@ -319,6 +355,8 @@ const ALL_Q = [
 // ─── State ───
 let queue = [], current = 0, correct = 0, answered = 0;
 let selectedSubjects = new Set(), selectedTopics = new Set();
+let quizMode = 'all';   // 'all' | 'wrong'
+let quizCount = 0;      // 0 = 全問
 
 // ─── 問題別履歴（localStorage）───
 const HIST_KEY = 'mb_question_history';
@@ -345,6 +383,47 @@ function getQStats(q) {
 const subjects = [...new Set(ALL_Q.map(q => q.subject))];
 const topics   = [...new Set(ALL_Q.map(q => q.topic))];
 
+function setMode(mode, btn) {
+  quizMode = mode;
+  document.querySelectorAll('[id^="mode-"]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateCount();
+}
+
+function setCount(n, btn) {
+  quizCount = n;
+  document.querySelectorAll('[id^="cnt-"]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateCount();
+}
+
+function getTotalAccuracy() {
+  const h = getHistory();
+  let totalO = 0, totalX = 0;
+  ALL_Q.forEach(q => {
+    const s = h[qKey(q)];
+    if (s) { totalO += s.o; totalX += s.x; }
+  });
+  return { o: totalO, x: totalX, total: totalO + totalX };
+}
+
+function renderAccRow() {
+  const { o, x, total } = getTotalAccuracy();
+  const pct = total ? Math.round(o / total * 100) : null;
+  const el = document.getElementById('acc-row');
+  if (total === 0) {
+    el.innerHTML = '<span class="acc-title">全体正答率</span><span class="acc-detail" style="color:#bbb">まだ解いた問題がありません</span>';
+    return;
+  }
+  el.innerHTML = `
+    <span class="acc-title">全体正答率</span>
+    <span class="acc-pct">${pct}%</span>
+    <div class="acc-bar-wrap">
+      <div class="acc-bar-bg"><div class="acc-bar-fill" style="width:${pct}%"></div></div>
+    </div>
+    <span class="acc-detail">○${o} / ×${x} (計${total}回答)</span>`;
+}
+
 function init() {
   const st = document.getElementById('subject-tags');
   const tt = document.getElementById('topic-tags');
@@ -364,6 +443,7 @@ function init() {
   });
 
   selectAll();
+  renderAccRow();
 }
 
 function toggleSubject(s, btn) {
@@ -385,9 +465,20 @@ function selectAll() {
   updateCount();
 }
 
+function getFilteredQ() {
+  let qs = ALL_Q.filter(q => selectedSubjects.has(q.subject) && selectedTopics.has(q.topic));
+  if (quizMode === 'wrong') {
+    const h = getHistory();
+    qs = qs.filter(q => { const s = h[qKey(q)]; return s && s.x > 0; });
+  }
+  return qs;
+}
+
 function updateCount() {
-  const n = ALL_Q.filter(q => selectedSubjects.has(q.subject) && selectedTopics.has(q.topic)).length;
-  document.getElementById('count-badge').textContent = n + '問';
+  const qs = getFilteredQ();
+  const n = quizCount > 0 ? Math.min(quizCount, qs.length) : qs.length;
+  const modeNote = quizMode === 'wrong' ? '（苦手）' : '';
+  document.getElementById('count-badge').textContent = n + '問' + modeNote;
 }
 
 function shuffle(arr) {
@@ -400,9 +491,15 @@ function shuffle(arr) {
 }
 
 function startQuiz() {
-  const filtered = ALL_Q.filter(q => selectedSubjects.has(q.subject) && selectedTopics.has(q.topic));
-  if (!filtered.length) { alert('問題がありません。分野を選択してください。'); return; }
-  queue = shuffle(filtered);
+  const filtered = getFilteredQ();
+  if (!filtered.length) {
+    if (quizMode === 'wrong') alert('苦手問題がありません。まず通常モードで問題を解いてください。');
+    else alert('問題がありません。分野を選択してください。');
+    return;
+  }
+  let shuffled = shuffle(filtered);
+  if (quizCount > 0) shuffled = shuffled.slice(0, quizCount);
+  queue = shuffled;
   current = 0; correct = 0; answered = 0;
   document.getElementById('filter-section').classList.add('hidden');
   document.getElementById('score-bar').classList.remove('hidden');
@@ -471,6 +568,8 @@ function nextQ() {
 
 function updateScore() {
   document.getElementById('score-disp').textContent = `${correct} / ${answered}`;
+  const accPct = answered ? Math.round(correct / answered * 100) : null;
+  document.getElementById('acc-disp').textContent = accPct !== null ? accPct + '%' : '－';
   const pct = queue.length ? Math.round(current / queue.length * 100) : 0;
   document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('progress-label').textContent = `${current} / ${queue.length} 問`;
@@ -487,8 +586,14 @@ function showFinish() {
   const fc = document.getElementById('finish-card');
   fc.classList.remove('hidden');
   const pct = answered ? Math.round(correct/answered*100) : 0;
+  const { o, x, total } = getTotalAccuracy();
+  const allPct = total ? Math.round(o/total*100) : 0;
   document.getElementById('finish-score').textContent = `${correct} / ${answered}`;
-  document.getElementById('finish-sub').textContent = `正答率 ${pct}%　（${queue.length}問中 ${answered}問回答）`;
+  document.getElementById('finish-sub').innerHTML =
+    `今回の正答率 <strong>${pct}%</strong>　（${queue.length}問中 ${answered}問回答）<br>
+     <span style="font-size:12px;color:#aaa;margin-top:4px;display:block">
+       累計正答率 ${allPct}%（○${o} / ×${x}、計${total}回）
+     </span>`;
 }
 
 init();
