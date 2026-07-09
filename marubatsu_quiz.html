@@ -990,9 +990,15 @@ function renderAccRow() {
     <span class="acc-detail">○${o} / ×${x} (計${total}回答)</span>`;
 }
 
+// 科目→トピック のマップ
+const subjectTopics = {};
+ALL_Q.forEach(q => {
+  if (!subjectTopics[q.subject]) subjectTopics[q.subject] = new Set();
+  subjectTopics[q.subject].add(q.topic);
+});
+
 function init() {
   const st = document.getElementById('subject-tags');
-  const tt = document.getElementById('topic-tags');
 
   subjects.forEach(s => {
     const btn = document.createElement('button');
@@ -1001,20 +1007,42 @@ function init() {
     st.appendChild(btn);
   });
 
-  topics.forEach(t => {
-    const btn = document.createElement('button');
-    btn.className = 'tag topic-tag'; btn.textContent = t; btn.dataset.val = t;
-    btn.onclick = () => { toggleTopic(t, btn); };
-    tt.appendChild(btn);
-  });
-
   selectAll();
   renderAccRow();
 }
 
+function rebuildTopicTags() {
+  const tt = document.getElementById('topic-tags');
+  tt.innerHTML = '';
+  // 選択中の科目に属するトピックだけ表示
+  const visibleTopics = new Set();
+  selectedSubjects.forEach(s => {
+    (subjectTopics[s] || new Set()).forEach(t => visibleTopics.add(t));
+  });
+  // ALL_Q の順序に合わせて並べる
+  topics.forEach(t => {
+    if (!visibleTopics.has(t)) return;
+    const btn = document.createElement('button');
+    btn.className = 'tag topic-tag'; btn.textContent = t; btn.dataset.val = t;
+    if (selectedTopics.has(t)) btn.classList.add('active');
+    btn.onclick = () => { toggleTopic(t, btn); };
+    tt.appendChild(btn);
+  });
+}
+
 function toggleSubject(s, btn) {
-  if (selectedSubjects.has(s)) { selectedSubjects.delete(s); btn.classList.remove('active'); }
-  else { selectedSubjects.add(s); btn.classList.add('active'); }
+  if (selectedSubjects.has(s)) {
+    selectedSubjects.delete(s);
+    btn.classList.remove('active');
+    // その科目のトピックを選択解除
+    (subjectTopics[s] || new Set()).forEach(t => selectedTopics.delete(t));
+  } else {
+    selectedSubjects.add(s);
+    btn.classList.add('active');
+    // その科目のトピックを全選択
+    (subjectTopics[s] || new Set()).forEach(t => selectedTopics.add(t));
+  }
+  rebuildTopicTags();
   updateCount();
 }
 
@@ -1027,7 +1055,8 @@ function toggleTopic(t, btn) {
 function selectAll() {
   subjects.forEach(s => { selectedSubjects.add(s); });
   topics.forEach(t => { selectedTopics.add(t); });
-  document.querySelectorAll('.tag').forEach(b => b.classList.add('active'));
+  document.querySelectorAll('#subject-tags .tag').forEach(b => b.classList.add('active'));
+  rebuildTopicTags();
   updateCount();
 }
 
