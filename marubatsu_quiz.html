@@ -142,7 +142,7 @@ header a:hover{color:#fff}
       <div style="font-size:12px;color:#888;margin-bottom:4px" id="progress-label">0 / 0 問</div>
       <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
     </div>
-    <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px" onclick="endQuiz()">終了</button>
+    <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px" onclick="endQuiz()">中断</button>
   </div>
 
   <!-- 問題エリア -->
@@ -152,7 +152,10 @@ header a:hover{color:#fff}
   <div class="finish-card hidden" id="finish-card">
     <div class="big" id="finish-score"></div>
     <div class="sub" id="finish-sub"></div>
-    <button class="btn btn-primary" onclick="location.reload()">もう一度</button>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="backToFilter()">分野選択に戻る</button>
+      <button class="btn btn-ghost" onclick="location.reload()">最初からやり直す</button>
+    </div>
   </div>
 
 </div>
@@ -576,8 +579,16 @@ function updateScore() {
 }
 
 function endQuiz() {
-  if (current > 0 && !confirm('途中終了しますか？')) return;
   showFinish();
+}
+
+function backToFilter() {
+  document.getElementById('finish-card').classList.add('hidden');
+  document.getElementById('score-bar').classList.add('hidden');
+  document.getElementById('quiz-area').innerHTML = '';
+  document.getElementById('filter-section').classList.remove('hidden');
+  renderAccRow();
+  updateCount();
 }
 
 function showFinish() {
