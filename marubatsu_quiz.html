@@ -966,31 +966,37 @@ function setCount(n, btn) {
   updateCount();
 }
 
-function getTotalAccuracy() {
+function getSubjectAccuracy(subject) {
   const h = getHistory();
-  let totalO = 0, totalX = 0;
-  ALL_Q.forEach(q => {
+  let o = 0, x = 0;
+  ALL_Q.filter(q => q.subject === subject).forEach(q => {
     const s = h[qKey(q)];
-    if (s) { totalO += s.o; totalX += s.x; }
+    if (s) { o += s.o; x += s.x; }
   });
-  return { o: totalO, x: totalX, total: totalO + totalX };
+  return { o, x, total: o + x };
 }
 
 function renderAccRow() {
-  const { o, x, total } = getTotalAccuracy();
-  const pct = total ? Math.round(o / total * 100) : null;
   const el = document.getElementById('acc-row');
-  if (total === 0) {
-    el.innerHTML = '<span class="acc-title">全体正答率</span><span class="acc-detail" style="color:#bbb">まだ解いた問題がありません</span>';
-    return;
-  }
-  el.innerHTML = `
-    <span class="acc-title">全体正答率</span>
-    <span class="acc-pct">${pct}%</span>
-    <div class="acc-bar-wrap">
-      <div class="acc-bar-bg"><div class="acc-bar-fill" style="width:${pct}%"></div></div>
-    </div>
-    <span class="acc-detail">○${o} / ×${x} (計${total}回答)</span>`;
+  // 選択中の科目ごとに正答率を表示
+  if (selectedSubjects.size === 0) { el.innerHTML = ''; return; }
+  let html = '';
+  selectedSubjects.forEach(subj => {
+    const { o, x, total } = getSubjectAccuracy(subj);
+    const pct = total ? Math.round(o / total * 100) : null;
+    if (total === 0) {
+      html += `<span class="acc-title">${subj}</span><span class="acc-detail" style="color:#bbb;margin-right:12px">まだ解いた問題がありません</span>`;
+    } else {
+      html += `
+        <span class="acc-title">${subj}</span>
+        <span class="acc-pct">${pct}%</span>
+        <div class="acc-bar-wrap">
+          <div class="acc-bar-bg"><div class="acc-bar-fill" style="width:${pct}%"></div></div>
+        </div>
+        <span class="acc-detail">○${o} / ×${x} (計${total}回答)</span>`;
+    }
+  });
+  el.innerHTML = html;
 }
 
 // 科目→トピック のマップ
@@ -1044,6 +1050,7 @@ function toggleSubject(s, btn) {
   btn.classList.add('active');
   (subjectTopics[s] || new Set()).forEach(t => selectedTopics.add(t));
   rebuildTopicTags();
+  renderAccRow();
   updateCount();
 }
 
