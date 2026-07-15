@@ -92,6 +92,26 @@ header a:hover{color:#fff}
 .hist-stat{font-size:12px;font-weight:700;background:#f8f8f8;border:1px solid #e8e8e8;border-radius:10px;padding:2px 8px}
 .hist-o{color:#e74c3c}
 .hist-x{color:#3498db}
+
+/* マイリスト */
+.mylist-overlay{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:1000;display:flex;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto}
+.mylist-panel{background:#fff;border-radius:12px;max-width:700px;width:100%;max-height:calc(100vh - 32px);overflow:hidden;display:flex;flex-direction:column}
+.mylist-header{display:flex;align-items:center;padding:14px 18px;border-bottom:1px solid #eee;gap:10px;flex-shrink:0}
+.mylist-header h2{flex:1;font-size:15px;font-weight:700;color:#1a2744}
+.mylist-tabs{display:flex;gap:6px;padding:10px 16px;border-bottom:1px solid #eee;flex-wrap:wrap;flex-shrink:0;background:#fafafa}
+.mylist-tab{padding:4px 12px;border-radius:16px;font-size:12px;font-weight:600;border:2px solid #dde2ee;background:#fff;color:#555;cursor:pointer;transition:all .15s}
+.mylist-tab.active{background:#1a2744;border-color:#1a2744;color:#fff}
+.mylist-body{overflow-y:auto;padding:0 0 12px}
+.mylist-subject-head{font-size:12px;font-weight:700;color:#fff;background:#1a2744;padding:6px 16px;position:sticky;top:0;z-index:1}
+.mylist-item{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;border-bottom:1px solid #f2f2f2}
+.mylist-item:hover{background:#f8faff}
+.mylist-q{flex:1;font-size:13px;line-height:1.7;color:#222}
+.mylist-topic{font-size:10px;color:#999;background:#f0f2f7;padding:1px 6px;border-radius:8px;display:inline-block;margin-bottom:3px}
+.mylist-ans{font-size:24px;font-weight:700;flex-shrink:0;width:30px;text-align:center;line-height:1}
+.mylist-ans.maru{color:#e74c3c}
+.mylist-ans.batsu{color:#3498db}
+.mylist-stat{font-size:11px;color:#888;flex-shrink:0;text-align:right;white-space:nowrap;line-height:1.6;padding-top:2px}
+.mylist-empty{padding:48px 20px;text-align:center;color:#aaa;font-size:14px;line-height:1.8}
 </style>
 </head>
 <body>
@@ -112,6 +132,7 @@ header a:hover{color:#fff}
     <div class="mode-row" style="margin-top:12px">
       <span class="mode-label">モード：</span>
       <button class="seg-btn active" id="mode-all" onclick="setMode('all',this)">通常</button>
+      <button class="seg-btn warn" id="mode-weighted" onclick="setMode('weighted',this)">苦手優先 ⚡</button>
       <button class="seg-btn warn" id="mode-wrong" onclick="setMode('wrong',this)">苦手のみ ✗</button>
       <button class="seg-btn" id="mode-new" onclick="setMode('new',this)">未回答のみ ★</button>
     </div>
@@ -128,6 +149,7 @@ header a:hover{color:#fff}
     <div class="start-row">
       <button class="btn btn-primary" onclick="startQuiz()">スタート</button>
       <button class="btn btn-ghost" onclick="selectAll()">全選択</button>
+      <button class="btn btn-ghost" style="border:2px solid #e67e22;color:#e67e22;background:#fff" onclick="showMylist()">マイリスト 📋</button>
       <span class="count-badge" id="count-badge">0問</span>
     </div>
   </div>
@@ -151,6 +173,18 @@ header a:hover{color:#fff}
 
   <!-- 問題エリア -->
   <div id="quiz-area"></div>
+
+  <!-- マイリスト -->
+  <div class="mylist-overlay hidden" id="mylist-overlay" onclick="closeMylistOnBg(event)">
+    <div class="mylist-panel" onclick="event.stopPropagation()">
+      <div class="mylist-header">
+        <h2>マイリスト — 2回以上間違えた問題</h2>
+        <button class="btn btn-ghost" style="padding:5px 14px;font-size:12px" onclick="closeMylist()">✕ 閉じる</button>
+      </div>
+      <div class="mylist-tabs" id="mylist-tabs"></div>
+      <div class="mylist-body" id="mylist-body"></div>
+    </div>
+  </div>
 
   <!-- 完了 -->
   <div class="finish-card hidden" id="finish-card">
@@ -2712,7 +2746,7 @@ const ALL_Q = [
 // ─── State ───
 let queue = [], current = 0, correct = 0, answered = 0;
 let selectedSubjects = new Set(), selectedTopics = new Set();
-let quizMode = 'all';   // 'all' | 'wrong'
+let quizMode = 'all';   // 'all' | 'weighted' | 'wrong' | 'new'
 let quizCount = 0;      // 0 = 全問
 
 // ─── 問題別履歴（localStorage）───
@@ -2752,6 +2786,16 @@ function setCount(n, btn) {
   document.querySelectorAll('[id^="cnt-"]').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   updateCount();
+}
+
+function getTotalAccuracy() {
+  const h = getHistory();
+  let o = 0, x = 0;
+  ALL_Q.forEach(q => {
+    const s = h[qKey(q)];
+    if (s) { o += s.o; x += s.x; }
+  });
+  return { o, x, total: o + x };
 }
 
 function getSubjectAccuracy(subject) {
@@ -2866,14 +2910,22 @@ function getFilteredQ() {
     const h = getHistory();
     qs = qs.filter(q => { const s = h[qKey(q)]; return !s || (s.o === 0 && s.x === 0); });
   }
+  // 'weighted' は全問対象（startQuiz 内で比率調整）
   return qs;
 }
 
 function updateCount() {
   const qs = getFilteredQ();
-  const n = quizCount > 0 ? Math.min(quizCount, qs.length) : qs.length;
-  const modeNote = quizMode === 'wrong' ? '（苦手）' : quizMode === 'new' ? '（未回答）' : '';
-  document.getElementById('count-badge').textContent = n + '問' + modeNote;
+  if (quizMode === 'weighted') {
+    const h = getHistory();
+    const weak = qs.filter(q => { const s = h[qKey(q)]; return s && s.x > 0; }).length;
+    const n = quizCount > 0 ? Math.min(quizCount, qs.length) : qs.length;
+    document.getElementById('count-badge').textContent = `${n}問（苦手優先 / 苦手${weak}問）`;
+  } else {
+    const n = quizCount > 0 ? Math.min(quizCount, qs.length) : qs.length;
+    const modeNote = quizMode === 'wrong' ? '（苦手）' : quizMode === 'new' ? '（未回答）' : '';
+    document.getElementById('count-badge').textContent = n + '問' + modeNote;
+  }
 }
 
 function shuffle(arr) {
@@ -2885,6 +2937,26 @@ function shuffle(arr) {
   return a;
 }
 
+function buildWeightedQueue(allQ, targetCount) {
+  const h = getHistory();
+  const weak   = allQ.filter(q => { const s = h[qKey(q)]; return s && s.x > 0; });
+  const normal = allQ.filter(q => { const s = h[qKey(q)]; return !s || s.x === 0; });
+  if (weak.length === 0) return shuffle(allQ).slice(0, targetCount);
+  // 苦手 70% / その他 30%（端数は stochastic rounding で処理）
+  const weakTarget   = Math.round(targetCount * 0.7);
+  const normalTarget = targetCount - weakTarget;
+  const weakPicked   = shuffle(weak).slice(0, Math.min(weakTarget, weak.length));
+  const normalPicked = shuffle(normal).slice(0, Math.min(normalTarget, normal.length));
+  // 足りない分を補完
+  const picked = [...weakPicked, ...normalPicked];
+  if (picked.length < targetCount) {
+    const used = new Set(picked.map(q => qKey(q)));
+    const rest = shuffle(allQ).filter(q => !used.has(qKey(q)));
+    picked.push(...rest.slice(0, targetCount - picked.length));
+  }
+  return shuffle(picked); // 順番をランダム化
+}
+
 function startQuiz() {
   const filtered = getFilteredQ();
   if (!filtered.length) {
@@ -2893,8 +2965,14 @@ function startQuiz() {
     else alert('問題がありません。分野を選択してください。');
     return;
   }
-  let shuffled = shuffle(filtered);
-  if (quizCount > 0) shuffled = shuffled.slice(0, quizCount);
+  let shuffled;
+  if (quizMode === 'weighted') {
+    const target = quizCount > 0 ? Math.min(quizCount, filtered.length) : filtered.length;
+    shuffled = buildWeightedQueue(filtered, target);
+  } else {
+    shuffled = shuffle(filtered);
+    if (quizCount > 0) shuffled = shuffled.slice(0, quizCount);
+  }
   queue = shuffled.map(q => {
     if (q.alt && Math.random() < 0.5) {
       return {...q, q: q.alt.q, ans: q.alt.ans, _origQ: q.q};
@@ -3003,6 +3081,99 @@ function showFinish() {
      <span style="font-size:12px;color:#aaa;margin-top:4px;display:block">
        累計正答率 ${allPct}%（○${o} / ×${x}、計${total}回）
      </span>`;
+}
+
+// ─── マイリスト ───
+let mylistActiveSubject = null;
+
+function showMylist() {
+  const h = getHistory();
+  // 2回以上間違えた問題を抽出（base question を使用）
+  const weak2 = ALL_Q.filter(q => {
+    const s = h[qKey(q)];
+    return s && s.x >= 2;
+  });
+
+  const overlay = document.getElementById('mylist-overlay');
+  const tabsEl  = document.getElementById('mylist-tabs');
+  const bodyEl  = document.getElementById('mylist-body');
+
+  // 科目タブ生成
+  const subjectsInList = [...new Set(weak2.map(q => q.subject))];
+  // 初期タブ：選択中科目が含まれていればそちら、なければ最初
+  if (!mylistActiveSubject || !subjectsInList.includes(mylistActiveSubject)) {
+    mylistActiveSubject = subjectsInList.length > 0 ? subjectsInList[0] : null;
+  }
+
+  function renderTabs() {
+    tabsEl.innerHTML = subjectsInList.length === 0 ? '' :
+      subjectsInList.map(s =>
+        `<button class="mylist-tab${s === mylistActiveSubject ? ' active' : ''}"
+          onclick="mylistSelectSubject('${s}')">${s}
+          <span style="font-size:10px;opacity:.7">${weak2.filter(q=>q.subject===s).length}問</span>
+        </button>`
+      ).join('');
+  }
+
+  function renderBody() {
+    if (weak2.length === 0) {
+      bodyEl.innerHTML = `<div class="mylist-empty">まだ2回以上間違えた問題はありません。<br>問題を解いていくとここに追加されます。</div>`;
+      return;
+    }
+    const target = mylistActiveSubject
+      ? weak2.filter(q => q.subject === mylistActiveSubject)
+      : weak2;
+    if (target.length === 0) {
+      bodyEl.innerHTML = `<div class="mylist-empty">この科目には該当問題がありません。</div>`;
+      return;
+    }
+    // トピックごとにグループ化
+    const byTopic = {};
+    target.forEach(q => {
+      if (!byTopic[q.topic]) byTopic[q.topic] = [];
+      byTopic[q.topic].push(q);
+    });
+    let html = '';
+    Object.entries(byTopic).forEach(([topic, qs]) => {
+      html += `<div class="mylist-subject-head">${topic}</div>`;
+      qs.forEach(q => {
+        const s = h[qKey(q)] || {o:0,x:0};
+        const ansLabel = q.ans ? '○' : '×';
+        const ansCls   = q.ans ? 'maru' : 'batsu';
+        html += `<div class="mylist-item">
+          <div class="mylist-ans ${ansCls}">${ansLabel}</div>
+          <div class="mylist-q">
+            <div class="mylist-topic">${q.topic}</div>
+            ${q.q}
+          </div>
+          <div class="mylist-stat"><span style="color:#e74c3c">○${s.o}</span> <span style="color:#3498db">×${s.x}</span></div>
+        </div>`;
+      });
+    });
+    bodyEl.innerHTML = html;
+  }
+
+  // グローバルに公開（タブクリック用）
+  window.mylistSelectSubject = function(s) {
+    mylistActiveSubject = s;
+    renderTabs();
+    renderBody();
+    bodyEl.scrollTop = 0;
+  };
+
+  renderTabs();
+  renderBody();
+  overlay.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMylist() {
+  document.getElementById('mylist-overlay').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function closeMylistOnBg(e) {
+  if (e.target === document.getElementById('mylist-overlay')) closeMylist();
 }
 
 init();
