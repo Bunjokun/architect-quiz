@@ -3093,14 +3093,19 @@ function getSubjectAccuracy(subject) {
 
 function renderAccRow() {
   const el = document.getElementById('acc-row');
-  // 選択中の科目ごとに正答率を表示
   if (selectedSubjects.size === 0) { el.innerHTML = ''; return; }
+  const h = getHistory();
   let html = '';
   selectedSubjects.forEach(subj => {
     const { o, x, total } = getSubjectAccuracy(subj);
     const pct = total ? Math.round(o / total * 100) : null;
+    const subjQs = ALL_Q.filter(q => q.subject === subj);
+    const totalQ = subjQs.length;
+    const answered = subjQs.filter(q => h[qKey(q)]).length;
+    const unanswered = totalQ - answered;
+    const unansweredStr = `<span style="color:#e67e22;font-weight:700">未回答 ${unanswered}問</span><span style="color:#888;font-size:11px"> / 全${totalQ}問</span>`;
     if (total === 0) {
-      html += `<span class="acc-title">${subj}</span><span class="acc-detail" style="color:#bbb;margin-right:12px">まだ解いた問題がありません</span>`;
+      html += `<span class="acc-title">${subj}</span><div style="margin-bottom:4px">${unansweredStr}</div>`;
     } else {
       html += `
         <span class="acc-title">${subj}</span>
@@ -3108,7 +3113,8 @@ function renderAccRow() {
         <div class="acc-bar-wrap">
           <div class="acc-bar-bg"><div class="acc-bar-fill" style="width:${pct}%"></div></div>
         </div>
-        <span class="acc-detail">○${o} / ×${x} (計${total}回答)</span>`;
+        <span class="acc-detail">○${o} / ×${x} (計${total}回答)</span>
+        <div style="margin-bottom:6px">${unansweredStr}</div>`;
     }
   });
   el.innerHTML = html;
