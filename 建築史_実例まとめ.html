@@ -3,1520 +3,317 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>建築史・建築実例まとめ</title>
+<title>建築史 実例まとめ ― 一級建築士</title>
 <style>
-  @page { size: A4 portrait; margin: 15mm 12mm 15mm 12mm; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif;
-    font-size: 9.5pt;
-    color: #111;
-    background: #fff;
-    width: 210mm;
-    margin: 0 auto;
-    padding: 10mm 12mm;
-    overflow-x: hidden;
+  :root{
+    color-scheme:light;
+    --ink:#141414; --sub:#555; --line:#aac4de; --line-hd:#7aaacf;
+    --navy:#1a3a5c; --blue:#2e6da4; --blue-hd:#dbe8f5; --row:#f4f9ff;
+    --red:#c0392b; --red-bg:#fbece9; --chip:#e7f0fa;
+    --sans:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",YuGothic,"Meiryo","Noto Sans JP",sans-serif;
   }
-  .page { width: 186mm; page-break-after: always; padding-bottom: 6mm; }
-  .page:last-child { page-break-after: auto; }
-  .page-header {
-    display: flex; align-items: center;
-    background: #1a3a5c; color: #fff;
-    padding: 4px 10px; margin-bottom: 8px;
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#fff;color:var(--ink);font-family:var(--sans);line-height:1.55;
+    -webkit-font-smoothing:antialiased}
+  .container{max-width:1060px;margin:0 auto;padding:0 20px}
+
+  /* 見出しバー(資料タイトル) */
+  .doctitle{background:var(--navy);color:#fff;margin-top:26px;border-radius:4px;
+    padding:15px 20px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .doctitle h1{font-size:22px;font-weight:700;letter-spacing:.04em}
+  .doctitle .tag{font-size:12px;color:#cdddee;letter-spacing:.06em}
+  .lead{margin:14px 0 0;color:var(--sub);font-size:13.5px;max-width:66ch}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;margin:14px 0 4px;
+    padding:11px 14px;border:1px solid var(--line);border-radius:5px;background:#fafcff;font-size:12.5px;color:var(--sub)}
+  .legend .li{display:flex;align-items:center;gap:7px}
+
+  /* ナビ */
+  nav.jump{position:sticky;top:0;z-index:9;background:rgba(255,255,255,.92);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-top:16px}
+  nav.jump .inner{max-width:1060px;margin:0 auto;padding:9px 20px;display:flex;flex-wrap:wrap;gap:7px}
+  nav.jump a{text-decoration:none;font-size:12.5px;font-weight:700;color:var(--navy);
+    padding:6px 12px;border:1px solid var(--line-hd);border-radius:4px;background:#fff;
+    display:inline-flex;gap:7px;align-items:center;transition:background .12s}
+  nav.jump a:hover{background:var(--blue-hd)}
+  nav.jump a .ct{color:var(--blue);font-weight:700;font-variant-numeric:tabular-nums}
+
+  /* セクション見出し(紺バー) */
+  section.sec{padding-top:30px;scroll-margin-top:52px}
+  .pagebar{background:var(--navy);color:#fff;padding:7px 13px;border-radius:3px;
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .pagebar .no{font-size:12px;font-weight:700;color:#9dc0e0;letter-spacing:.14em}
+  .pagebar h2{font-size:16px;font-weight:700;letter-spacing:.04em}
+  .pagebar .sub{font-size:12px;color:#cdddee;margin-left:auto}
+
+  /* グループ見出し(青バー) */
+  h3.grp{font-size:13.5px;font-weight:700;color:#fff;background:var(--blue);
+    padding:4px 11px;margin:16px 0 0;border-radius:3px;letter-spacing:.03em;
+    display:flex;align-items:baseline;gap:9px}
+  h3.grp .en{font-size:11px;font-weight:600;color:#d5e6f4;letter-spacing:.1em;text-transform:uppercase}
+
+  /* 表 */
+  .tw{overflow-x:auto;margin-top:6px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead th{background:var(--blue-hd);color:var(--navy);font-weight:700;font-size:12px;
+    border:1px solid var(--line-hd);padding:5px 8px;text-align:left;white-space:nowrap}
+  tbody td{border:1px solid var(--line);padding:6px 9px;vertical-align:top}
+  tbody tr:nth-child(even) td{background:var(--row)}
+  td.name{font-weight:700;white-space:nowrap;color:var(--ink)}
+  td.meta{color:var(--sub);font-size:12px;white-space:nowrap}
+  .kw1{display:inline-block;background:var(--chip);color:var(--navy);border:1px solid var(--line-hd);
+    border-radius:4px;padding:1px 7px;font-weight:700;font-size:12.5px;margin-right:5px}
+  .kwrest{color:#333;font-size:12.5px}
+  td.warn{color:var(--red);font-size:12.5px;background:var(--red-bg)!important}
+  td.warn::before{content:"⚠ ";font-weight:700}
+  td.warn.empty{background:transparent!important}
+  td.warn.empty::before{content:""}
+
+  /* 列幅 */
+  col.c-name{width:16%} col.c-meta{width:14%} col.c-kw{width:40%} col.c-warn{width:30%}
+
+  footer{margin:36px 0 60px;padding-top:16px;border-top:1px solid var(--line);
+    color:var(--sub);font-size:12px;text-align:center}
+  footer a{color:var(--blue)}
+
+  @media(max-width:640px){
+    .doctitle h1{font-size:19px}
+    table{font-size:12px;min-width:660px}
   }
-  .page-num {
-    font-size: 14pt; font-weight: bold;
-    margin-right: 10px; min-width: 24px; text-align: center;
+  @media print{
+    nav.jump{display:none} tbody tr{page-break-inside:avoid}
   }
-  .page-title { font-size: 12pt; font-weight: bold; }
-  h2 {
-    font-size: 10.5pt; font-weight: bold; color: #fff;
-    background: #2e6da4; padding: 3px 8px; margin: 10px 0 5px 0;
-  }
-  h3 {
-    font-size: 9.5pt; font-weight: bold; color: #1a3a5c;
-    border-left: 4px solid #2e6da4; padding-left: 6px;
-    margin: 8px 0 4px 0;
-  }
-  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-bottom: 6px; }
-  th {
-    background: #dbe8f5; font-weight: bold;
-    border: 1px solid #7aaacf; padding: 4px 5px;
-    text-align: center; vertical-align: middle;
-  }
-  td { border: 1px solid #aac4de; padding: 3px 6px; vertical-align: middle; }
-  tr:nth-child(even) td { background: #f4f9ff; }
-  .red   { color: #cc0000; font-weight: bold; }
-  .blue  { color: #0055aa; font-weight: bold; }
-  .green { color: #006600; font-weight: bold; }
-  .bold  { font-weight: bold; }
-  .center { text-align: center; }
-  .small { font-size: 7.5pt; }
-  .point-box {
-    border: 1.5px solid #cc0000; background: #fff8f8;
-    border-radius: 3px; padding: 4px 8px; margin: 5px 0; font-size: 8.5pt;
-  }
-  .point-box .label { font-weight: bold; color: #cc0000; margin-right: 4px; }
-  .note-box {
-    border: 1px solid #2e6da4; background: #f0f6ff;
-    border-radius: 3px; padding: 4px 8px; margin: 4px 0; font-size: 8pt;
-  }
-  .two-col { display: flex; gap: 8px; margin-bottom: 6px; }
-  .two-col > div { flex: 1; }
-  .section-card {
-    border: 1.5px solid #aac4de; border-radius: 4px;
-    overflow: hidden; margin-bottom: 6px;
-  }
-  .section-card-head {
-    font-size: 9pt; font-weight: bold; color: #fff;
-    padding: 3px 8px;
-  }
-  .section-card-body { padding: 5px 8px; font-size: 8.5pt; }
-  .tag {
-    display: inline-block; font-size: 7.5pt; font-weight: bold;
-    border-radius: 3px; padding: 1px 6px; margin-bottom: 3px;
-  }
-  ul { padding-left: 16px; margin: 3px 0 5px 0; }
-  li { margin-bottom: 2px; font-size: 8.5pt; line-height: 1.5; }
-  .star { color: #cc6600; font-weight: bold; }
 </style>
 </head>
 <body>
 
-<!-- ======================== PAGE 1: 日本建築史（古代〜江戸） ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">①</span>
-    <span class="page-title">日本建築史（古代〜江戸）― 神社・仏教建築・城郭・住宅</span>
+<div class="container">
+  <div class="doctitle">
+    <h1>建築史 実例まとめ</h1>
+    <span class="tag">一級建築士 計画 ／ 日本・西洋・近代・保全活用</span>
   </div>
-
-  <h2>1. 神社建築の様式</h2>
-  <table>
-    <colgroup><col style="width:14%"><col style="width:40%"><col style="width:46%"></colgroup>
-    <thead>
-      <tr><th>様式</th><th>特徴</th><th>代表例</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="red">神明造</span></td>
-        <td>切妻・<span class="red">平入</span>・棟持柱・高床</td>
-        <td>伊勢神宮内宮（三重）</td>
-      </tr>
-      <tr>
-        <td><span class="red">大社造</span></td>
-        <td>切妻・<span class="red">妻入</span>・棟持柱・高床</td>
-        <td>出雲大社（島根）</td>
-      </tr>
-      <tr>
-        <td><span class="red">住吉造</span></td>
-        <td>切妻・妻入・<span class="red">内部2分割</span></td>
-        <td>住吉大社（大阪）</td>
-      </tr>
-      <tr>
-        <td><span class="red">春日造</span></td>
-        <td>切妻・妻入・<span class="red">向拝付</span></td>
-        <td>春日大社（奈良）</td>
-      </tr>
-      <tr>
-        <td><span class="red">流造</span></td>
-        <td>切妻・<span class="red">平入</span>・向拝付・<span class="red">前面庇延長</span></td>
-        <td>宇治上神社（京都）、上賀茂神社（京都）</td>
-      </tr>
-      <tr>
-        <td><span class="red">八幡造</span></td>
-        <td>切妻<span class="red">2棟連結</span>（相の間でつなぐ）</td>
-        <td>宇佐神宮（大分）、石清水八幡宮（京都）</td>
-      </tr>
-      <tr>
-        <td><span class="red">権現造</span></td>
-        <td>本殿＋拝殿を<span class="red">石の間</span>で連結</td>
-        <td>日光東照宮（栃木）</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="point-box">
-    <span class="label">★ 混同注意</span>
-    <span class="red">神明造は平入</span>、<span class="red">大社造・住吉造・春日造は妻入</span>。
-    流造は平入だが前面庇が延長。八幡造は唯一2棟連結。
-  </div>
-
-  <h2>2. 仏教建築の様式</h2>
-  <table>
-    <colgroup><col style="width:18%"><col style="width:42%"><col style="width:40%"></colgroup>
-    <thead>
-      <tr><th>様式</th><th>特徴</th><th>代表例</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="red">和様（大和様）</span></td>
-        <td>木鼻なし・<span class="red">扇垂木</span>・引き戸・柔らかい曲線</td>
-        <td>法隆寺（奈良・飛鳥）、唐招提寺金堂（奈良・奈良時代）</td>
-      </tr>
-      <tr>
-        <td><span class="red">大仏様（天竺様）</span></td>
-        <td><span class="red">挿し肘木</span>・<span class="red">貫多用</span>・桟唐戸・豪快な構造</td>
-        <td>東大寺南大門（奈良・<span class="blue">鎌倉再建</span>）</td>
-      </tr>
-      <tr>
-        <td><span class="red">禅宗様（唐様）</span></td>
-        <td><span class="red">詰組</span>・<span class="red">海老虹梁</span>・<span class="red">花頭窓</span>・桟唐戸・扇垂木</td>
-        <td>円覚寺舎利殿（神奈川）、永保寺開山堂（岐阜）</td>
-      </tr>
-      <tr>
-        <td><span class="red">折衷様</span></td>
-        <td>和様＋禅宗様・大仏様を<span class="red">混在</span></td>
-        <td>観心寺金堂（大阪）、石山寺多宝塔（滋賀）</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="point-box">
-    <span class="label">★ 混同注意</span>
-    <span class="red">東大寺南大門＝大仏様（天竺様）</span>。和様ではない。挿し肘木・貫多用が大仏様の最大特徴。
-    禅宗様は詰組（肘木が密に組まれる）と花頭窓がセット。
-  </div>
-
-  <h2>3. 城郭・住宅・茶室</h2>
-  <div class="two-col">
-    <div>
-      <h3>書院造・数寄屋造</h3>
-      <ul>
-        <li><span class="red">書院造</span>：二条城二の丸御殿（京都）、慈照寺東求堂（京都・室町時代）</li>
-        <li><span class="red">数寄屋造</span>：桂離宮（京都・江戸初期）、修学院離宮（京都）</li>
-      </ul>
-      <h3>茶室</h3>
-      <ul>
-        <li><span class="red">待庵</span>（山崎・千利休）― 現存最古の茶室 <span class="star">★</span></li>
-        <li><span class="red">如庵</span>（愛知・織田有楽斎）</li>
-        <li>曼殊院書院（京都）</li>
-      </ul>
-    </div>
-    <div>
-      <h3>天守・城郭</h3>
-      <ul>
-        <li><span class="red">姫路城</span>（兵庫）― 現存12天守の中で最大・世界遺産 <span class="star">★</span></li>
-        <li><span class="red">犬山城</span>（愛知）― 現存最古の木造天守（説あり）<span class="star">★</span></li>
-        <li>松本城（長野）・彦根城（滋賀）・高知城・松山城なども現存天守</li>
-      </ul>
-      <div class="note-box">
-        <span class="bold">現存12天守</span>：弘前・松本・丸岡・犬山・彦根・姫路・備中松山・松江・丸亀・伊予松山・宇和島・高知
-      </div>
-    </div>
+  <p class="lead">代表的建築と歴史的建造物の保全・活用事例を、時代・様式で整理。選択肢で狙われる識別キーワードを抜き出しています。</p>
+  <div class="legend">
+    <span class="li"><span class="kw1">第一キーワード</span>その建物を一発で識別する語</span>
+    <span class="li"><span class="kwrest">通常表記</span>＝付随キーワード</span>
+    <span class="li"><span style="color:var(--red);font-weight:700">⚠ ひっかけ</span>＝入れ替え・混同注意</span>
   </div>
 </div>
 
-<!-- ======================== PAGE 2: 西洋建築史（古代〜近世） ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">②</span>
-    <span class="page-title">西洋建築史（古代〜近世）― 様式・時代・特徴・代表建築</span>
-  </div>
+<nav class="jump"><div class="inner" id="nav"></div></nav>
 
-  <h2>1. 西洋建築の様式と時代</h2>
-  <table>
-    <colgroup><col style="width:16%"><col style="width:10%"><col style="width:34%"><col style="width:40%"></colgroup>
-    <thead>
-      <tr><th>様式</th><th>時代</th><th>構造的特徴</th><th>代表建築</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="red">古代ギリシャ</span></td>
-        <td class="center">〜前3c</td>
-        <td><span class="red">柱梁構造</span>・ドリス式／イオニア式／コリント式</td>
-        <td>パルテノン神殿（アテネ・<span class="blue">ドリス式</span>）・エレクテイオン（<span class="blue">イオニア式</span>）</td>
-      </tr>
-      <tr>
-        <td><span class="red">古代ローマ</span></td>
-        <td class="center">前3c〜5c</td>
-        <td><span class="red">アーチ・ドーム</span>・コンクリート・ヴォールト</td>
-        <td>パンテオン（ローマ）・コロッセウム（ローマ）・カラカラ浴場</td>
-      </tr>
-      <tr>
-        <td><span class="red">ビザンチン</span></td>
-        <td class="center">4c〜15c</td>
-        <td><span class="red">ペンデンティブドーム</span>・モザイク装飾・集中式</td>
-        <td>ハギア・ソフィア（イスタンブール・6c）</td>
-      </tr>
-      <tr>
-        <td><span class="red">ロマネスク</span></td>
-        <td class="center">11c〜12c</td>
-        <td><span class="red">半円アーチ・厚壁・小窓</span>・バシリカ式</td>
-        <td>ピサ大聖堂（イタリア）・クリュニー修道院</td>
-      </tr>
-      <tr>
-        <td><span class="red">ゴシック</span></td>
-        <td class="center">12c〜15c</td>
-        <td><span class="red">尖頭アーチ・フライングバットレス</span>・ステンドグラス・垂直性</td>
-        <td>ノートルダム大聖堂（パリ・13c）・ケルン大聖堂（独）・シャルトル大聖堂</td>
-      </tr>
-      <tr>
-        <td><span class="red">ルネサンス</span></td>
-        <td class="center">15c〜16c</td>
-        <td><span class="red">古典復興・ドーム・左右対称</span>・比例重視</td>
-        <td>サン・ピエトロ大聖堂（ローマ・ブラマンテ→ミケランジェロ）・フィレンツェ大聖堂（ブルネレスキ）</td>
-      </tr>
-      <tr>
-        <td><span class="red">バロック</span></td>
-        <td class="center">17c〜18c</td>
-        <td><span class="red">曲線・動感・光と影</span>の劇的演出</td>
-        <td>ヴェルサイユ宮殿（フランス）・サン・カルロ教会（ボッロミーニ）</td>
-      </tr>
-      <tr>
-        <td><span class="red">新古典主義</span></td>
-        <td class="center">18c〜19c</td>
-        <td>古典復興・理性強調・装飾排除</td>
-        <td>パンテオン（パリ）・大英博物館（ロンドン）・ベルリン旧美術館（シンケル）</td>
-      </tr>
-      <tr>
-        <td><span class="red">ゴシック・リバイバル</span></td>
-        <td class="center">19c</td>
-        <td>ゴシック様式の<span class="red">復興・折衷主義</span></td>
-        <td>ウェストミンスター宮殿（ロンドン・バリー＋ピュージン）</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container" id="root"></div>
 
-  <h2>2. 柱頭の種類（ギリシャの三様式）</h2>
-  <div class="two-col">
-    <div class="section-card">
-      <div class="section-card-head" style="background:#8b4513;">ドリス式</div>
-      <div class="section-card-body">
-        <span class="bold">最も簡素</span>・柱頭に装飾なし・エキヌスとアバクス<br>
-        代表：パルテノン神殿
-      </div>
-    </div>
-    <div class="section-card">
-      <div class="section-card-head" style="background:#2e6da4;">イオニア式</div>
-      <div class="section-card-body">
-        <span class="bold">渦巻状（ヴォリュート）</span>の柱頭<br>
-        代表：エレクテイオン
-      </div>
-    </div>
-    <div class="section-card">
-      <div class="section-card-head" style="background:#27ae60;">コリント式</div>
-      <div class="section-card-body">
-        <span class="bold">最も豪華</span>・アカンサスの葉の柱頭<br>
-        代表：パンテオン内部
-      </div>
-    </div>
-  </div>
+<div class="container"><footer>
+  キーワードは出題選択肢で問われやすい識別点を抜粋。年代・設計者は代表値。 &nbsp;<a href="#">▲ 先頭へ</a>
+</footer></div>
 
-  <h2>3. 重要建築の詳細メモ</h2>
-  <div class="two-col">
-    <div>
-      <div class="note-box">
-        <span class="bold red">パンテオン（ローマ）</span>：紀元後125年頃・ハドリアヌス帝。<br>
-        直径43.3mのドーム・オキュラス（天窓）。<br>
-        <span class="star">★</span> 「パンテオン（パリ）」とは別物。
-      </div>
-      <div class="note-box">
-        <span class="bold red">ハギア・ソフィア</span>：537年・ユスティニアヌス帝。<br>
-        ペンデンティブドームにより正方形平面にドームを架ける。<br>
-        <span class="star">★</span> ビザンチン建築の最高傑作。
-      </div>
-    </div>
-    <div>
-      <div class="note-box">
-        <span class="bold red">フィレンツェ大聖堂ドーム</span>：<span class="blue">ブルネレスキ</span>（15c）。<br>
-        型枠なしで施工・二重殻ドーム。ルネサンス建築の幕開け。
-      </div>
-      <div class="note-box">
-        <span class="bold red">ウェストミンスター宮殿</span>：<span class="blue">バリー＋ピュージン</span>（1840年代）。<br>
-        ゴシック・リバイバルの代表。<span class="star">★</span> バリーが設計、ピュージンが内装担当。
-      </div>
-    </div>
-  </div>
-</div>
+<script>
+const K = (t)=>[t,1]; // 第一キーワード
+const DATA = [
+{id:"jp",title:"日本建築史",sub:"神社・寺院・城郭・書院・茶室",hue:"jp",groups:[
+  {name:"神社建築 ―「造(づくり)」の識別",en:"Shrines",items:[
+    {n:"伊勢神宮 内宮正殿",meta:"三重県／式年遷宮",tags:[K("神明造"),"掘立柱","棟持柱2本","平入り・切妻","素木・茅葺"],note:"棟持柱をもつ平入り。妻入りの大社造とペアで狙われる"},
+    {n:"出雲大社 本殿",meta:"島根県",tags:[K("大社造"),"妻入り・切妻","桁行2間×梁間2間","入口が左右非対称","高床・宇豆柱"],note:"最古の神社形式。『妻入り・正方形平面・入口が中心からずれる』"},
+    {n:"住吉大社 本殿",meta:"大阪府",tags:[K("住吉造"),"妻入り・切妻","直線的な屋根","縁なし","内陣／外陣に二分","朱塗"],note:"『縁を設けず内外陣に分ける』が住吉造の決め手"},
+    {n:"春日大社 本殿",meta:"奈良県",tags:[K("春日造"),"妻入り・切妻","正面に向拝","小規模・朱塗"],note:"妻入り＋向拝が春日造。平入り＋前流れの流造と対比"},
+    {n:"賀茂別雷/賀茂御祖 本殿",meta:"京都府(上賀茂・下鴨)",tags:[K("流造"),"平入り・切妻","前面の屋根が長く流れる","最も普及した形式"],note:"『前の屋根だけ長い』が流造。八幡造・住吉造と入替出題"},
+    {n:"宇佐神宮 本殿",meta:"大分県",tags:[K("八幡造"),"前殿＋後殿","切妻・平入り","相の間で連結","谷に陸樋(ろくとい)"],note:"前後2棟を相の間で繋ぐ＝八幡造(石清水八幡宮も同じ)"},
+    {n:"厳島神社 社殿",meta:"広島県／平清盛",tags:[K("両流造(本殿)"),"寝殿造風","海上の回廊・舞台","檜皮葺"],note:"海上に展開する寝殿造風の複合社殿。出雲大社と入替注意"},
+  ]},
+  {name:"古代寺院(飛鳥〜平安)",en:"Ancient Temples",items:[
+    {n:"法隆寺 金堂",meta:"奈良県／飛鳥様式",tags:[K("飛鳥様式"),"現存最古の木造","エンタシス柱","雲斗・雲肘木","卍崩し高欄・人字束","裳階付"],note:"『雲形組物・エンタシス』は飛鳥。世界最古の木造建築"},
+    {n:"薬師寺 東塔",meta:"奈良県／白鳳〜奈良",tags:[K("三重塔"),"各層に裳階(もこし)","六重に見える","凍れる音楽"],note:"⚠六重に見えるが三重塔。裳階を数えない"},
+    {n:"新薬師寺 本堂",meta:"奈良県／奈良",tags:[K("和様"),"一重寄棟","正面1間を吹放し"],note:"奈良時代の和様。寄棟＋吹放し"},
+    {n:"法隆寺 東院伝法堂",meta:"奈良県／奈良",tags:[K("住宅を仏堂に改造"),"切妻","橘夫人邸の遺構"],note:"『住宅→仏堂』が識別点"},
+    {n:"唐招提寺 金堂",meta:"奈良県／奈良・鑑真",tags:[K("寄棟"),"正面前面1列を吹放し","列柱(エンタシス)","天平の量感"],note:"『前面吹放しの列柱』。新薬師寺と混同注意"},
+    {n:"東大寺 二月堂",meta:"奈良県／江戸再建",tags:[K("懸造(舞台造)"),"お水取り(修二会)"],note:"斜面にせり出す懸造。清水寺・投入堂と同系"},
+    {n:"三仏寺 投入堂",meta:"鳥取県／平安",tags:[K("懸造(懸崖造)"),"断崖に建つ","役行者伝説"],note:"平安期の懸造の代表"},
+    {n:"清水寺 本堂",meta:"京都府／江戸",tags:[K("懸造の舞台"),"寄棟・檜皮葺","舞台造"],note:"『清水の舞台』＝懸造"},
+  ]},
+  {name:"中世寺院 ― 大仏様・禅宗様・和様",en:"Medieval Temples",items:[
+    {n:"東大寺 南大門",meta:"奈良県／鎌倉・重源",tags:[K("大仏様(天竺様)"),"挿肘木","貫を多用","豪快・力強い"],note:"『挿肘木・貫の多用』＝大仏様。重源が再建に導入"},
+    {n:"浄土寺 浄土堂",meta:"兵庫県／鎌倉",tags:[K("大仏様"),"阿弥陀三尊","背面から差す光の演出"],note:"大仏様の数少ない遺構。南大門とセット"},
+    {n:"円覚寺 舎利殿",meta:"神奈川県／室町",tags:[K("禅宗様(唐様)"),"詰組","扇垂木","弓欄間・花頭窓","裳階付"],note:"『扇垂木・詰組・花頭窓』＝禅宗様"},
+    {n:"東福寺 龍吟庵方丈",meta:"京都府／室町",tags:[K("現存最古の方丈"),"住宅風仏堂"],note:"方丈建築の最古例"},
+  ]},
+  {name:"室町 ― 金閣・銀閣",en:"Muromachi",items:[
+    {n:"鹿苑寺 舎利殿(金閣)",meta:"京都府／北山文化",tags:[K("三層"),"1層 寝殿造風","2層 武家造","3層 禅宗様","金箔・宝形造"],note:"⚠金閣＝三層。各層で様式が違う"},
+    {n:"慈照寺 観音殿(銀閣)",meta:"京都府／東山文化",tags:[K("二層"),"1層 心空殿(書院風)","2層 潮音閣(禅宗様)","宝形造・こけら葺"],note:"⚠銀閣＝二層(金閣の三層と混同注意)"},
+    {n:"慈照寺 東求堂 同仁斎",meta:"京都府／室町",tags:[K("書院造の源流"),"四畳半","付書院・違棚"],note:"『四畳半・付書院』＝書院造のはじまり"},
+  ]},
+  {name:"城郭・書院・寝殿",en:"Castle & Shoin",items:[
+    {n:"姫路城 大天守",meta:"兵庫県／桃山",tags:[K("白漆喰総塗籠"),"連立式天守","白鷺城","世界遺産"],note:"⚠白漆喰＝姫路(白)。黒板張りの松本城と対比"},
+    {n:"二条城 二の丸御殿",meta:"京都府／江戸",tags:[K("書院造"),"遠侍〜大広間の雁行配置","車寄","障壁画"],note:"書院造の大規模遺構。雁行プラン"},
+    {n:"園城寺 光浄院客殿",meta:"滋賀県／桃山",tags:[K("書院造"),"『匠明』主殿の図に類似","武家住宅の標準形"],note:"『匠明・主殿の図』とくれば光浄院客殿"},
+    {n:"東三条殿",meta:"平安／復元研究",tags:[K("寝殿造"),"左右対称","寝殿＋対屋＋釣殿","南庭・池"],note:"寝殿造の典型プラン(現存せず復元)"},
+  ]},
+  {name:"茶室・数寄屋",en:"Tea House",items:[
+    {n:"妙喜庵 待庵",meta:"京都府／千利休",tags:[K("千利休"),"二畳","にじり口","国宝茶室(現存最古)"],note:"『二畳・利休』＝待庵"},
+    {n:"如庵",meta:"愛知県(犬山)／織田有楽斎",tags:[K("織田有楽斎"),"二畳半台目","有楽窓","国宝茶室"],note:"『有楽窓』＝如庵"},
+    {n:"大徳寺 孤篷庵 忘筌",meta:"京都府／小堀遠州",tags:[K("小堀遠州"),"書院式茶室","綺麗さび"],note:"遠州の書院茶室(＝画像No.30 忘筌)"},
+    {n:"大徳寺 龍光院 密庵",meta:"京都府／江戸",tags:[K("書院式茶室"),"密庵床(みったんどこ)"],note:"書院茶室の名席"},
+    {n:"桂離宮",meta:"京都府／江戸",tags:[K("数寄屋"),"雁行配置","古書院/中書院/新御殿","回遊式庭園"],note:"『数寄屋＋雁行＋回遊式庭園』の到達点"},
+    {n:"臨春閣",meta:"横浜・三溪園／江戸",tags:[K("数寄屋風書院"),"雁行配置","移築"],note:"数寄屋風書院の遺構"},
+    {n:"日光東照宮 社殿",meta:"栃木県／江戸",tags:[K("権現造"),"本殿と拝殿を石の間で連結","陽明門","彫刻装飾"],note:"『石の間で本殿・拝殿を繋ぐ』＝権現造"},
+  ]},
+]},
 
-<!-- ======================== PAGE 3: 近代建築史（19c末〜20c中） ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">③</span>
-    <span class="page-title">近代建築史（19c末〜20c中）― 五巨匠・バウハウス・アール・デコ</span>
-  </div>
+{id:"we",title:"西洋建築史",sub:"古代〜新古典主義",hue:"we",groups:[
+  {name:"古代 ― ギリシャ・ローマ",en:"Classical",items:[
+    {n:"パルテノン神殿",meta:"アテネ／BC5C",tags:[K("ドリス式"),"ペリプテロス(周柱式)","エンタシス","視覚補正"],note:"『ドリス式・周柱式』。装飾少なく荘重"},
+    {n:"パンテオン(ローマ)",meta:"ローマ／2C",tags:[K("無筋コンクリートのドーム"),"直径≒天井高43m","オクルス(頂部円窓)"],note:"⚠ローマのパンテオン(ドーム)とパリのパンテオン(新古典)を混同注意"},
+    {n:"コロセウム",meta:"ローマ／1C",tags:[K("円形闘技場"),"3層で異なるオーダー重層","アーチ＋オーダー"],note:"下からドリス→イオニア→コリント"},
+  ]},
+  {name:"ビザンチン・イスラム・初期中世",en:"Byzantine & Islam",items:[
+    {n:"ハギア・ソフィア",meta:"イスタンブール／6C",tags:[K("ビザンチン"),"ペンデンティブドーム","大ドーム＋半ドーム"],note:"『ペンデンティブ』でドームを方形上に載せる"},
+    {n:"サン・マルコ大聖堂",meta:"ヴェネツィア",tags:[K("ビザンチン"),"ギリシャ十字","5つのドーム","モザイク"],note:"ギリシャ十字＋5ドーム"},
+    {n:"コルドバの大モスク",meta:"スペイン／イスラム",tags:[K("イスラム"),"多柱式","二重の馬蹄形アーチ","紅白の縞"],note:"馬蹄形アーチの多柱空間"},
+    {n:"アルハンブラ宮殿",meta:"グラナダ／イスラム",tags:[K("イスラム宮殿"),"ライオンの中庭","鍾乳石飾(ムカルナス)","水と幾何学"],note:"イスラム宮殿建築の頂点"},
+    {n:"アーヘンの宮廷礼拝堂",meta:"独／カロリング朝",tags:[K("八角形集中式"),"シャルルマーニュ","ビザンチンの影響"],note:"カロリング・ルネサンスの中心堂"},
+  ]},
+  {name:"ロマネスク",en:"Romanesque",items:[
+    {n:"ピサ大聖堂",meta:"イタリア",tags:[K("ロマネスク"),"小アーケードの重層装飾","洗礼堂・斜塔と一群","白大理石"],note:"『小アーケード＋斜塔』。ゴシックではない"},
+    {n:"シュパイヤー大聖堂",meta:"ドイツ",tags:[K("ロマネスク"),"交差ヴォールト","厚い壁・小開口"],note:"独ロマネスクの大聖堂"},
+    {n:"ダラム大聖堂",meta:"イギリス",tags:[K("ロマネスク"),"リブヴォールトの先駆","太い柱"],note:"ゴシックの萌芽たるリブヴォールト"},
+    {n:"ヴォルムス大聖堂",meta:"ドイツ",tags:[K("ロマネスク"),"双塔・多塔","重厚"],note:"独ロマネスク"},
+    {n:"ル・トロネ修道院",meta:"仏／シトー会",tags:[K("ロマネスク"),"シトー会","装飾を排した簡素","石造・回廊"],note:"『無装飾・簡素』＝シトー会。ゴシックと入替注意"},
+  ]},
+  {name:"ゴシック",en:"Gothic",items:[
+    {n:"パリ・ノートルダム大聖堂",meta:"パリ",tags:[K("ゴシック"),"フライングバットレス","尖頭アーチ","バラ窓","双塔ファサード"],note:"『飛梁・尖頭アーチ・バラ窓』＝ゴシック3点"},
+    {n:"シャルトル大聖堂",meta:"仏",tags:[K("ゴシック"),"ステンドグラス","シャルトルブルー"],note:"ステンドグラスの代表"},
+    {n:"ランス大聖堂",meta:"仏",tags:[K("ゴシック"),"歴代国王の戴冠式","彫刻装飾"],note:"戴冠式の大聖堂"},
+    {n:"アミアン大聖堂",meta:"仏",tags:[K("ゴシック"),"フランス最大級の身廊高","整った盛期ゴシック"],note:"盛期ゴシックの完成形"},
+    {n:"ケルン大聖堂",meta:"独",tags:[K("ゴシック"),"巨大な双塔","19C完成"],note:"独ゴシックの双塔"},
+    {n:"ミラノ大聖堂",meta:"伊",tags:[K("後期ゴシック"),"白大理石","無数の小尖塔","フランボワイヤン風"],note:"伊の後期ゴシック(装飾過多)"},
+  ]},
+  {name:"ルネサンス",en:"Renaissance",items:[
+    {n:"フィレンツェ大聖堂",meta:"伊／ブルネレスキ",tags:[K("二重殻ドーム"),"型枠なしで施工","初期ルネサンスの端緒","ファサードは19C新ゴシック"],note:"ドーム＝ブルネレスキ。ピサ大聖堂と入替注意"},
+    {n:"バシリカ・パラディアーナ",meta:"ヴィチェンツァ／パラーディオ",tags:[K("パラディアン・モチーフ"),"アーチ＋2小開口"],note:"『パラディアンモチーフ』の名の由来"},
+    {n:"テンピエット",meta:"ローマ／ブラマンテ",tags:[K("集中式"),"円形・ドーム","小規模で厳格な古典"],note:"盛期ルネサンス集中式の理想"},
+    {n:"サン・ピエトロ大聖堂",meta:"ヴァチカン",tags:[K("ルネサンス〜バロック"),"ミケランジェロの大ドーム","ベルニーニの楕円列柱廊","ラテン十字"],note:"⚠ビザンチン/ゴシックとする選択肢は誤り"},
+  ]},
+  {name:"バロック",en:"Baroque",items:[
+    {n:"ヴェルサイユ宮殿",meta:"仏",tags:[K("バロック"),"鏡の間","左右対称の壮大","幾何学式庭園(ル・ノートル)"],note:"バロック宮殿＋整形庭園"},
+    {n:"サン・カルロ・アッレ・クァットロ・フォンターネ",meta:"ローマ／ボッロミーニ",tags:[K("バロック"),"楕円形ドーム","波打つ曲面ファサード"],note:"⚠ルネサンスとする選択肢は誤り(曲面＝バロック)"},
+    {n:"セント・ポール大聖堂",meta:"ロンドン／レン",tags:[K("バロック(英)"),"二重殻ドーム","クリストファー・レン"],note:"英バロックのドーム"},
+  ]},
+  {name:"新古典主義・歴史主義",en:"Neoclassical",items:[
+    {n:"サント・ジュヌヴィエーヴ聖堂(パリのパンテオン)",meta:"パリ／スフロ",tags:[K("新古典主義"),"ギリシャ十字＋ドーム","コリント式ポルティコ"],note:"⚠ローマのパンテオンと別物。こちらは18C新古典"},
+    {n:"大英博物館",meta:"ロンドン",tags:[K("新古典主義"),"イオニア式列柱","ギリシャ復興"],note:"ギリシャ・リバイバル"},
+    {n:"エトワールの凱旋門",meta:"パリ／ナポレオン",tags:[K("新古典主義"),"古代ローマ凱旋門の再現"],note:"新古典の記念建築"},
+    {n:"イギリス国会議事堂",meta:"ロンドン／バリー＋ピュージン",tags:[K("ゴシック・リバイバル"),"19C再建","ネオ・ゴシック"],note:"⚠中世ゴシックではなく19Cのゴシック復興"},
+    {n:"ドレスデン歌劇場(ゼンパーオーパー)",meta:"独／ゼンパー",tags:[K("ネオ・ルネサンス／新バロック"),"ゼンパー"],note:"19C歴史主義の劇場"},
+    {n:"ドイツ国会議事堂(ライヒスターク)",meta:"ベルリン",tags:[K("新バロック"),"フォスターによるガラスドーム改修","歴史主義＋現代"],note:"旧＝新バロック／改修でガラスドーム(N.フォスター)"},
+  ]},
+]},
 
-  <h2>1. アーツ＆クラフツ〜アール・ヌーヴォー</h2>
-  <table>
-    <colgroup><col style="width:22%"><col style="width:28%"><col style="width:50%"></colgroup>
-    <thead>
-      <tr><th>建築家・運動</th><th>年代</th><th>代表作・特徴</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="red">ウィリアム・モリス</span></td>
-        <td class="center">英・19c後半</td>
-        <td>アーツ＆クラフツ運動・工芸美術の復興。<span class="blue">レッド・ハウス</span>（1859・ウェッブ設計）</td>
-      </tr>
-      <tr>
-        <td><span class="red">アントニ・ガウディ</span></td>
-        <td class="center">西・1852〜1926</td>
-        <td><span class="blue">サグラダ・ファミリア</span>（バルセロナ・1882〜）、カサ・ミラ、グエル公園。曲線・自然形態</td>
-      </tr>
-      <tr>
-        <td><span class="red">ヴィクトール・オルタ</span></td>
-        <td class="center">白・19c末</td>
-        <td><span class="blue">タッセル邸</span>（ブリュッセル・1893）。植物的曲線・鉄骨露出。アール・ヌーヴォーの先駆</td>
-      </tr>
-      <tr>
-        <td><span class="red">オットー・ワーグナー</span></td>
-        <td class="center">墺・1841〜1918</td>
-        <td>ウィーン郵便貯金局（1906）。分離派（ゼツェッション）への橋渡し</td>
-      </tr>
-    </tbody>
-  </table>
+{id:"mo",title:"近代建築史",hue:"mo",sub:"産業革命〜20世紀",groups:[
+  {name:"鉄とガラス／アール・ヌーヴォー",en:"Iron & Art Nouveau",items:[
+    {n:"クリスタル・パレス",meta:"ロンドン／パクストン・1851",tags:[K("鉄骨＋ガラス"),"プレファブ","第1回万博"],note:"温室技術の博覧会建築。近代の幕開け"},
+    {n:"エッフェル塔",meta:"パリ／1889",tags:[K("錬鉄の塔"),"パリ万博","構造美"],note:"鉄構造の記念塔"},
+    {n:"タッセル邸",meta:"ブリュッセル／オルタ",tags:[K("アール・ヌーヴォー"),"鉄の曲線","植物模様"],note:"『鉄の有機的曲線』＝アール・ヌーヴォー"},
+    {n:"ウィーン郵便貯金局",meta:"ウィーン／ワグナー",tags:[K("ゼツェッション"),"アルミ鋲","即物的表現"],note:"ワグナー。装飾からの脱却"},
+    {n:"カーソン・ピリー・スコット百貨店",meta:"シカゴ／サリヴァン",tags:[K("シカゴ派"),"鉄骨高層","シカゴ窓","低層部に装飾"],note:"『形態は機能に従う』のサリヴァン"},
+  ]},
+  {name:"RC・表現主義",en:"RC & Expressionism",items:[
+    {n:"フランクリン街のアパート",meta:"パリ／ペレ・1903",tags:[K("RC造の初期"),"構造フレームを外観に表現"],note:"⚠設計はペレ(サリヴァンではない)。初期RC集合住宅"},
+    {n:"ランシーのノートルダム寺院",meta:"仏／ペレ・1922",tags:[K("RC造教会"),"細柱で壁面を開放","一面ステンドグラス"],note:"⚠ロンシャン(コルビュジエ)と混同注意。こちらはペレ"},
+    {n:"サグラダ・ファミリア",meta:"バルセロナ／ガウディ",tags:[K("ガウディ"),"カタルーニャ・モダニズム","有機的・曲線"],note:"ガウディの未完の聖堂"},
+    {n:"アインシュタイン塔",meta:"ポツダム／メンデルゾーン",tags:[K("表現主義"),"塑造的な塊","天文台"],note:"『流動的な塊』＝表現主義"},
+  ]},
+  {name:"モダニズム(機能主義・国際様式)",en:"Modernism",items:[
+    {n:"バウハウス校舎",meta:"デッサウ／グロピウス",tags:[K("インターナショナル・スタイル"),"ガラスのカーテンウォール","機能主義","造形教育"],note:"近代デザイン教育＋国際様式"},
+    {n:"パイミオのサナトリウム",meta:"フィンランド／アアルト",tags:[K("機能主義"),"アアルト","療養環境への配慮"],note:"北欧モダニズム"},
+    {n:"イリノイ工科大学(IIT)",meta:"シカゴ／ミース",tags:[K("ミース"),"鉄骨＋ガラス","ユニバーサル・スペース","less is more"],note:"ミースの均質空間"},
+    {n:"ロンシャンの教会",meta:"仏／ル・コルビュジエ",tags:[K("後期コルビュジエ"),"彫塑的な造形","分厚い曲面壁","小さな窓"],note:"⚠ランシー(ペレ)と混同注意。こちらはコルビュジエ"},
+    {n:"ユネスコ本部",meta:"パリ／ブロイヤー・ネルヴィ他",tags:[K("Y字平面"),"CIAM系巨匠の協働","ピロティ"],note:"戦後モダニズムの国際協働"},
+  ]},
+  {name:"戦後 ― シェル・吊り・ドーム",en:"Shell & Tensile",items:[
+    {n:"レヴァー・ハウス",meta:"NY／SOM",tags:[K("ガラスカーテンウォール高層"),"ピロティ","戦後オフィスの原型"],note:"ガラス箱の高層オフィス"},
+    {n:"モントリオール万博 西ドイツ館",meta:"1967／フライ・オットー",tags:[K("吊り屋根(サスペンション)"),"ケーブル＋膜","テント構造"],note:"⚠西独館＝吊り屋根(オットー)／米国館＝ドーム(フラー)"},
+    {n:"モントリオール万博 アメリカ館",meta:"1967／フラー",tags:[K("ジオデシック・ドーム"),"三角形の骨組","軽量球体"],note:"⚠米国館＝ジオデシックドーム(フラー)"},
+    {n:"TWAターミナル(JFK空港)",meta:"NY／サーリネン・1962",tags:[K("RCシェル"),"4枚のシェル","Y字柱脚","翼を広げた鳥"],note:"⚠Y字柱脚＋4枚シェルはTWA。ダレスと入替注意"},
+    {n:"ダレス国際空港",meta:"米／サーリネン・1962",tags:[K("懸垂屋根"),"外傾した柱列","RCの曲面屋根"],note:"⚠外傾柱＋懸垂屋根はダレス。TWAと入替注意"},
+    {n:"シドニー・オペラハウス",meta:"豪／ウツソン",tags:[K("シェル(貝殻)屋根"),"プレキャスト","湾に建つ"],note:"貝殻状シェルの象徴建築"},
+    {n:"東京カテドラル聖マリア大聖堂",meta:"東京／丹下健三",tags:[K("HPシェル"),"ステンレス外装","上から見ると十字"],note:"丹下のHPシェル"},
+  ]},
+  {name:"日本の近代化 ― 擬洋風・官庁",en:"Japan Modern",items:[
+    {n:"旧開智学校校舎",meta:"長野(松本)／明治",tags:[K("擬洋風"),"大工棟梁の洋風解釈","文明開化"],note:"擬洋風の代表(学校建築)"},
+    {n:"豊平館",meta:"札幌／明治",tags:[K("擬洋風"),"アメリカ様式のホテル","開拓使"],note:"擬洋風の洋風ホテル"},
+    {n:"迎賓館赤坂離宮",meta:"東京／片山東熊・明治",tags:[K("ネオ・バロック"),"旧東宮御所","本格洋風宮殿"],note:"⚠擬洋風ではなく本格西洋様式(片山東熊)"},
+  ]},
+]},
 
-  <h2>2. 近代建築の五巨匠</h2>
-  <table>
-    <colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
-    <thead>
-      <tr><th>建築家</th><th>代表作</th><th>キーワード・特徴</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="red">フランク・ロイド・ライト</span><br><span class="small">米・1867〜1959</span></td>
-        <td>落水荘（PA・1936）、グッゲンハイム美術館（NY・1959）、<span class="blue">旧帝国ホテル（東京・1923）</span></td>
-        <td><span class="red">有機的建築</span>・プレーリースタイル（水平線強調）・浮き基礎（耐震）</td>
-      </tr>
-      <tr>
-        <td><span class="red">ル・コルビュジエ</span><br><span class="small">仏・1887〜1965</span></td>
-        <td>サヴォア邸（ポワシー・1931）、ユニテ・ダビタシオン（マルセイユ・1952）、チャンディガール都市計画、<span class="blue">国立西洋美術館（東京）</span></td>
-        <td><span class="red">近代建築の5原則</span>（ピロティ／屋上庭園／自由な平面／水平連続窓／自由な立面）</td>
-      </tr>
-      <tr>
-        <td><span class="red">ミース・ファン・デル・ローエ</span><br><span class="small">独→米・1886〜1969</span></td>
-        <td>バルセロナ・パビリオン（1929）、ファンズワース邸（IL・1951）、<span class="blue">シーグラムビル（NY・1958）</span></td>
-        <td><span class="red">Less is more</span>・ユニバーサルスペース・鉄骨＋ガラスの均質空間</td>
-      </tr>
-      <tr>
-        <td><span class="red">ヴァルター・グロピウス</span><br><span class="small">独・1883〜1969</span></td>
-        <td><span class="blue">バウハウス校舎（デッサウ・1926）</span>、ファグス靴型工場（1911）</td>
-        <td>バウハウス創設（1919）・工業化・教育改革・カーテンウォール先駆</td>
-      </tr>
-      <tr>
-        <td><span class="red">アルヴァ・アアルト</span><br><span class="small">芬・1898〜1976</span></td>
-        <td><span class="blue">パイミオのサナトリウム（1933）</span>、フィンランディアホール（ヘルシンキ）、ヴュオクセンニスカ教会</td>
-        <td>人間中心主義・有機的曲線・北欧モダニズム・木と自然素材</td>
-      </tr>
-    </tbody>
-  </table>
+{id:"pr",title:"歴史的建造物の保全・活用",hue:"pr",sub:"コンバージョン・保存再生",groups:[
+  {name:"国内 ― 産業遺産・倉庫の再生",en:"Japan / Industrial",items:[
+    {n:"サッポロファクトリー",meta:"札幌",tags:[K("ビール工場→商業複合"),"ガラス屋根アトリウム"],note:"工場の商業転用"},
+    {n:"倉敷アイビースクエア",meta:"岡山",tags:[K("紡績工場→ホテル・文化"),"ツタの赤レンガ"],note:"『ツタ＋紡績工場』＝アイビースクエア"},
+    {n:"横浜赤レンガ倉庫",meta:"神奈川",tags:[K("倉庫→商業・文化"),"煉瓦造(明治末〜大正)"],note:"港湾倉庫の文化商業転用"},
+    {n:"犬島精錬所美術館",meta:"岡山／三分一博志",tags:[K("銅製錬所の遺構→美術館"),"煙突・カラミ煉瓦","自然エネルギー活用"],note:"産業遺産＋環境建築"},
+    {n:"金沢市民芸術村",meta:"石川",tags:[K("紡績倉庫→芸術文化"),"24時間利用","レンガ・木造トラス"],note:"倉庫群を市民の創作拠点に"},
+  ]},
+  {name:"国内 ― 近代建築の保存",en:"Japan / Heritage",items:[
+    {n:"首里城 復元事業",meta:"沖縄",tags:[K("復元"),"焼失後の再建","琉球建築"]},
+    {n:"同潤会青山アパート",meta:"東京",tags:[K("→表参道ヒルズ"),"安藤忠雄","一部を再現保存"],note:"同潤会アパートの建替再生"},
+    {n:"アートプラザ",meta:"大分／磯崎新",tags:[K("旧大分県立図書館→文化施設"),"磯崎新の初期作を活用"]},
+    {n:"京都文化博物館 別館",meta:"京都",tags:[K("旧日本銀行京都支店"),"辰野金吾","煉瓦造"],note:"辰野の銀行建築の保存活用"},
+    {n:"旧東京国立近代美術館 工芸館",meta:"東京／旧近衛師団司令部庁舎",tags:[K("赤煉瓦造"),"ゴシック風","重要文化財","2020年に金沢へ移転"],note:"旧近衛師団司令部庁舎(1910)を活用。工芸館は2020年に金沢へ移転した"},
+    {n:"国立西洋美術館",meta:"東京／ル・コルビュジエ",tags:[K("世界遺産"),"免震レトロフィット","ピロティ・無限成長美術館"],note:"耐震改修＝免震レトロフィット"},
+    {n:"名古屋市市政資料館",meta:"愛知",tags:[K("旧名古屋控訴院"),"ネオ・バロック","煉瓦造"]},
+    {n:"中京郵便局",meta:"京都",tags:[K("ファサード保存"),"外壁を残し内部新築"],note:"『外壁(ファサード)保存』の代表例"},
+    {n:"横浜の歴史的建造物",meta:"神奈川",tags:[K("歴史を生かしたまちづくり"),"認定・登録制度"],note:"面的な保全施策"},
+    {n:"自由学園明日館",meta:"東京／F.L.ライト",tags:[K("ライト"),"動態保存","重要文化財を使いながら保存"],note:"『使いながら残す』動態保存"},
+    {n:"東京駅 丸の内駅舎",meta:"東京／辰野金吾",tags:[K("復原"),"特例容積率適用地区","未利用容積の移転"],note:"⚠総合設計制度ではなく特例容積率適用地区"},
+    {n:"旧大社駅舎",meta:"島根県出雲市／1924年",tags:[K("木造・和風の駅舎"),"旧国鉄大社線","社寺風の意匠","2004年 重要文化財"],note:"社寺風の木造駅舎。2004年に国の重要文化財に指定された"},
+    {n:"山梨県庁舎 東棟",meta:"山梨",tags:[K("庁舎の保存活用"),"耐震改修"]},
+    {n:"目黒区総合庁舎",meta:"東京／村野藤吾",tags:[K("旧千代田生命本社→庁舎"),"村野藤吾の名作を転用"],note:"本社ビル→区庁舎"},
+    {n:"旧神奈川県立近代美術館",meta:"鎌倉／坂倉準三",tags:[K("坂倉準三"),"日本初期の近代美術館","保存"],note:"『鎌倉近美(カマキン)』の保存"},
+    {n:"3331 Arts Chiyoda",meta:"東京",tags:[K("旧練成中学校→アートセンター"),"廃校活用"],note:"学校のコンバージョン"},
+    {n:"石巻市庁舎",meta:"宮城",tags:[K("百貨店→庁舎"),"既存エスカレーター活用","震災後の代替庁舎"],note:"⚠売場→執務室／映画館→議場"},
+    {n:"大田区役所 本庁舎",meta:"東京",tags:[K("事務所ビル(旧ダイエー)→庁舎"),"内外装を継承"]},
+    {n:"千葉市美術館",meta:"千葉",tags:[K("鞘堂(さやどう)方式"),"旧川崎銀行千葉支店","新築で既存を包む"],note:"『鞘堂＝新築で包み込む』"},
+    {n:"ロームシアター京都",meta:"京都",tags:[K("旧京都会館→ホール"),"前川國男の意匠を継承","増築＋一部建替"],note:"⚠全面解体ではなく保存+増築"},
+  ]},
+  {name:"海外",en:"Overseas",items:[
+    {n:"アイアンブリッジ渓谷博物館",meta:"英",tags:[K("世界初の鉄橋"),"産業革命遺産","世界遺産"],note:"産業考古学の原点"},
+    {n:"リンゴット工場再開発",meta:"トリノ／レンゾ・ピアノ",tags:[K("フィアット自動車工場→複合"),"屋上の試走路","モール・ホール・ホテル"],note:"⚠現代美術館単独への転用は誤り(複合施設)"},
+    {n:"テイト・モダン",meta:"ロンドン／H&deM",tags:[K("火力発電所→美術館"),"タービンホール","バンクサイド"],note:"⚠発電所(駅ではない)。オルセーと入替注意"},
+    {n:"オルセー美術館",meta:"パリ",tags:[K("鉄道駅舎→美術館"),"印象派","19C末の駅"],note:"⚠駅舎(発電所ではない)。テイトと入替注意"},
+    {n:"カステルヴェッキオ美術館",meta:"ヴェローナ／スカルパ",tags:[K("中世の城→美術館"),"スカルパの展示デザイン","新旧の対比"],note:"改修デザインの名作(スカルパ)"},
+    {n:"ジェミニ・レジデンス",meta:"コペンハーゲン／MVRDV",tags:[K("穀物サイロ→集合住宅"),"円筒外周に住戸","産業構築物の転用"],note:"サイロのコンバージョン"},
+  ]},
+]},
+];
 
-  <div class="point-box">
-    <span class="label">★ ル・コルビュジエの近代建築5原則</span>
-    ①ピロティ ②屋上庭園 ③自由な平面 ④水平連続窓（横長窓） ⑤自由な立面。
-    サヴォア邸（1931）がその体現。<span class="red">「屋上テラス」ではなく「屋上庭園」</span>と記述。
-  </div>
+const root=document.getElementById("root"), nav=document.getElementById("nav");
+DATA.forEach((sec,si)=>{
+  let cnt=0; sec.groups.forEach(g=>cnt+=g.items.length);
+  const a=document.createElement("a");
+  a.href="#sec-"+sec.id;
+  a.innerHTML=`${sec.title}<span class="ct">${cnt}</span>`;
+  nav.appendChild(a);
 
-  <h2>3. バウハウスとアール・デコ</h2>
-  <div class="two-col">
-    <div>
-      <h3>バウハウス</h3>
-      <ul>
-        <li><span class="red">1919年</span>：<span class="blue">ワイマール</span>にてグロピウスが創立</li>
-        <li><span class="red">1925年</span>：<span class="blue">デッサウ</span>に移転（校舎グロピウス設計）</li>
-        <li><span class="red">1932年</span>：<span class="blue">ベルリン</span>に移転</li>
-        <li><span class="red">1933年</span>：ナチスにより<span class="red">閉校</span> <span class="star">★</span></li>
-        <li>教師：クレー、カンディンスキー、モホイ＝ナジ、ブロイヤーなど</li>
-      </ul>
-    </div>
-    <div>
-      <h3>アール・デコ（1920〜30年代）</h3>
-      <ul>
-        <li>幾何学的・直線的・装飾性・機械美学</li>
-        <li><span class="red">クライスラービル</span>（NY・1930・ヴァン＝アレン）<span class="star">★</span></li>
-        <li><span class="red">エンパイア・ステート・ビル</span>（NY・1931）</li>
-        <li>ロックフェラーセンター（NY・1939）</li>
-      </ul>
-      <div class="note-box">
-        <span class="bold">アール・ヌーヴォー vs アール・デコ：</span>
-        ヌーヴォー＝曲線・植物的（19c末〜20c初）、デコ＝直線・幾何学（1920〜30年代）
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== PAGE 4: 現代建築・日本の近代建築（難易度高め） ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">④</span>
-    <span class="page-title">現代建築・日本の近代建築（やや難しめ）― 問われやすいが迷う建築家</span>
-  </div>
-
-  <h2>1. 海外の現代建築家（難易度高め）</h2>
-  <table>
-    <colgroup><col style="width:22%"><col style="width:34%"><col style="width:44%"></colgroup>
-    <thead><tr><th>建築家</th><th>代表作</th><th>キーワード・迷いやすい点</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">エーロ・サーリネン</span><br><span class="small">芬→米・1910〜1961</span></td>
-        <td>TWAターミナル（NY・1962）、ゲートウェイ・アーチ（セントルイス）、<span class="blue">ノール社チューリップチェア</span></td>
-        <td>父<span class="red">エリエル・サーリネン</span>（ヘルシンキ駅）と混同注意 <span class="star">★</span>。コンクリートシェル・有機的形態</td>
-      </tr>
-      <tr>
-        <td><span class="red">カルロ・スカルパ</span><br><span class="small">伊・1906〜1978</span></td>
-        <td><span class="blue">カステルヴェッキオ美術館</span>改修（ヴェローナ）、ブリオン・ヴェガ墓地（1978）</td>
-        <td><span class="red">細部へのこだわり・マテリアル</span>。既存建物の改修で評価。イタリア地方主義</td>
-      </tr>
-      <tr>
-        <td><span class="red">ルイス・バラガン</span><br><span class="small">墨・1902〜1988</span></td>
-        <td><span class="blue">バラガン邸</span>（メキシコシティ・世界遺産）、ロス・クルベス（1958）</td>
-        <td><span class="red">鮮やかな色彩の壁・水・光・静寂</span>。プリツカー賞1980年。メキシコ地域主義</td>
-      </tr>
-      <tr>
-        <td><span class="red">アドルフ・ロース</span><br><span class="small">墺・1870〜1933</span></td>
-        <td>シュタイナー邸（ウィーン・1910）、<span class="blue">ロース・ハウス</span>（ウィーン・1911）</td>
-        <td>「<span class="red">装飾は犯罪である</span>」・近代合理主義の先駆。ウィーン分離派への反発 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">アルネ・ヤコブセン</span><br><span class="small">丁・1902〜1971</span></td>
-        <td><span class="blue">SASロイヤルホテル</span>（コペンハーゲン・1960）、蟻の椅子・スワンチェア</td>
-        <td>北欧モダニズム・デザインと建築の統合。<span class="red">建築から食器・家具まで一体</span>でデザイン</td>
-      </tr>
-      <tr>
-        <td><span class="red">ヨゼフ・ホフマン</span><br><span class="small">墺・1870〜1956</span></td>
-        <td><span class="blue">ストックレー邸</span>（ブリュッセル・1911）、ウィーン工房設立</td>
-        <td><span class="red">ウィーン分離派（ゼツェッション）</span>・クリムトと協働。総合芸術としての建築</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>2. 日本の近代建築家（難易度高め）</h2>
-  <table>
-    <colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
-    <thead><tr><th>建築家</th><th>代表作</th><th>キーワード</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">アントニン・レーモンド</span><br><span class="small">チェコ→日・1888〜1976</span></td>
-        <td>旧草津聖パウロ教会、東京女子大学礼拝堂、<span class="blue">自邸兼事務所</span>（東京）</td>
-        <td>ライトの旧帝国ホテル建設に参加→日本に定住。<span class="red">日本の伝統と近代の融合</span>。吉村順三を育てた <span class="star">★</span>（前川國男はコルビュジエに師事）</td>
-      </tr>
-      <tr>
-        <td><span class="red">吉田鉄郎</span><br><span class="small">1894〜1956</span></td>
-        <td><span class="blue">旧東京中央郵便局</span>（1931）、大阪中央郵便局（1939）</td>
-        <td>逓信省の建築家。<span class="red">モダニズムの合理的外観</span>を官庁建築に導入。保存問題で話題 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">白井晟一</span><br><span class="small">1905〜1983</span></td>
-        <td><span class="blue">松濤美術館</span>（東京・1981）、親和銀行本店（長崎）、NOAビル（東京）</td>
-        <td><span class="red">孤高の建築家</span>。石・煉瓦・重厚感。モダニズムと相容れない独自の精神性</td>
-      </tr>
-      <tr>
-        <td><span class="red">吉村順三</span><br><span class="small">1908〜1997</span></td>
-        <td><span class="blue">軽井沢の山荘</span>（1962）、奈良国立博物館新館（1972）、四季の住宅</td>
-        <td>レーモンドに師事。<span class="red">木造・自然との調和・繊細な納まり</span>。「美しい建築は美しく老いる」</td>
-      </tr>
-      <tr>
-        <td><span class="red">菊竹清訓</span><br><span class="small">1928〜2011</span></td>
-        <td><span class="blue">スカイハウス</span>（1958）、島根県立美術館、都城市民会館</td>
-        <td><span class="red">メタボリズム</span>の中心人物。スカイハウスは4枚の壁で空中に浮かせた住宅</td>
-      </tr>
-      <tr>
-        <td><span class="red">渡辺仁</span><br><span class="small">1887〜1973</span></td>
-        <td><span class="blue">旧服部時計店（和光）</span>（東京・1932）、東京国立博物館本館（1938）、旧第一生命館</td>
-        <td>様式建築の名手。<span class="red">和光のネオ・ルネサンス様式の時計塔</span>は銀座の象徴 <span class="star">★</span></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="two-col" style="margin-top:6px;">
-    <div>
-      <div class="point-box">
-        <span class="label">★ レーモンドの師弟系譜</span>
-        ライト → <span class="red">レーモンド</span>（日本定住）→ <span class="red">吉村順三</span><br>
-        レーモンドは「日本近代建築の父」的存在<br>
-        <span class="small">※前川國男はレーモンドではなくコルビュジエに直接師事（1928〜1930年パリ）</span>
-      </div>
-    </div>
-    <div>
-      <div class="note-box">
-        <span class="bold red">渡辺仁と東京国立博物館本館</span><br>
-        帝冠様式（和風屋根＋洋風躯体）の代表作。<br>
-        同博物館内の<span class="red">東洋館＝谷口吉郎</span>（1968）、<span class="red">法隆寺宝物館＝谷口吉生</span>（1999）と混同しない <span class="star">★</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ======================== PAGE 5: やや難易度高めの建築実例 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">⑤</span>
-    <span class="page-title">やや難しい建築実例（計画）― 問われやすいが迷いやすい作品</span>
-  </div>
-
-  <h2>1. 住宅・集合住宅</h2>
-  <table>
-    <colgroup><col style="width:26%"><col style="width:18%"><col style="width:56%"></colgroup>
-    <thead><tr><th>建物名</th><th>建築家（年）</th><th>試験ポイント・迷いやすい点</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">シュレーダー邸</span></td>
-        <td>リートフェルト（1924）</td>
-        <td>オランダ・<span class="red">デ・ステイル運動</span>の代表作。水平・垂直の面と線のみで構成。世界遺産</td>
-      </tr>
-      <tr>
-        <td><span class="red">シュタイナー邸</span></td>
-        <td>アドルフ・ロース（1910）</td>
-        <td>ウィーン・<span class="red">装飾＝犯罪</span>を唱えたロースの代表作。白い外壁・装飾なし</td>
-      </tr>
-      <tr>
-        <td><span class="red">ユニテ・ダビタシオン</span></td>
-        <td>ル・コルビュジエ（1952）</td>
-        <td>マルセイユ・<span class="red">337戸・ピロティ・内部に商店街・屋上に保育所</span>。集合住宅の原型 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">ハビタ'67</span></td>
-        <td>モシェ・サフディ（1967）</td>
-        <td>モントリオール万博・<span class="red">プレキャストコンクリートの箱を積み重ねた</span>集合住宅。各戸に庭</td>
-      </tr>
-      <tr>
-        <td><span class="red">から傘の家</span></td>
-        <td>篠原一男（1961）</td>
-        <td>東京・<span class="red">傘状の屋根（方形屋根）</span>を1本の柱と壁で支持。白の家より10年早い</td>
-      </tr>
-      <tr>
-        <td><span class="red">スカイハウス</span></td>
-        <td>菊竹清訓（1958）</td>
-        <td>東京・<span class="red">4枚の壁（コア）で空中に浮かせた</span>正方形の住宅。メタボリズムの先駆</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>2. 美術館・文化施設（難易度高め）</h2>
-  <table>
-    <colgroup><col style="width:26%"><col style="width:18%"><col style="width:56%"></colgroup>
-    <thead><tr><th>建物名</th><th>建築家（年）</th><th>試験ポイント</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">サルク研究所</span></td>
-        <td>ルイス・カーン（1963）</td>
-        <td>カリフォルニア・2棟の研究棟が<span class="red">中庭（水路）</span>を挟み対称配置。設備層を構造体に組込み</td>
-      </tr>
-      <tr>
-        <td><span class="red">バルセロナ・パビリオン</span></td>
-        <td>ミース（1929）</td>
-        <td>万博のドイツ館。<span class="red">十字形の鉄柱・大理石の壁・ガラス</span>。「流れる空間」。翌年解体・後に復元 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">パイミオのサナトリウム</span></td>
-        <td>アアルト（1933）</td>
-        <td>フィンランド・<span class="red">結核療養所</span>。患者の動線・採光・換気を徹底的に配慮した人間工学的設計</td>
-      </tr>
-      <tr>
-        <td><span class="red">ヴィトラ消防署</span></td>
-        <td>ザハ・ハディド（1993）</td>
-        <td>ドイツ・<span class="red">解体主義（デコンストラクティビズム）</span>。斜めの壁・鋭角の平面。ザハ初の実作</td>
-      </tr>
-      <tr>
-        <td><span class="red">神奈川県立近代美術館</span></td>
-        <td>坂倉準三（1951）</td>
-        <td>鎌倉・<span class="red">ル・コルビュジエの影響</span>（師事）。日本初の近代美術館。ピロティ・水盤</td>
-      </tr>
-      <tr>
-        <td><span class="red">東京国立博物館法隆寺宝物館</span></td>
-        <td>谷口吉生（1999）</td>
-        <td>上野・<span class="red">ガラスのファサード・水盤・石造りのルーバー</span>。静謐な空間。父・吉郎と混同注意 <span class="star">★</span></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>3. 公共・都市・宗教建築</h2>
-  <table>
-    <colgroup><col style="width:26%"><col style="width:18%"><col style="width:56%"></colgroup>
-    <thead><tr><th>建物名</th><th>建築家（年）</th><th>試験ポイント</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">ロンシャンの礼拝堂</span></td>
-        <td>ル・コルビュジエ（1955）</td>
-        <td>フランス・<span class="red">白い湾曲した壁・ランダムな小窓・厚い屋根</span>。5原則とは対極の彫刻的作品 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">TWAターミナル（JFKエアポート）</span></td>
-        <td>エーロ・サーリネン（1962）</td>
-        <td>ニューヨーク・<span class="red">鳥の翼のような曲面シェル屋根</span>。コンクリートシェル構造の代表</td>
-      </tr>
-      <tr>
-        <td><span class="red">シドニー・オペラハウス</span></td>
-        <td>ヨーン・ウッツォン（1973）</td>
-        <td>オーストラリア・<span class="red">貝殻形のシェル屋根</span>・プレキャスト・世界遺産。設計変更で建築家降板 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">豊平館</span></td>
-        <td>安達喜幸（1880）</td>
-        <td>北海道・<span class="red">明治期の洋風木造建築</span>。国の重要文化財。コンドルとは無関係 <span class="star">★</span></td>
-      </tr>
-      <tr>
-        <td><span class="red">旧前川國男邸</span></td>
-        <td>前川國男（1942）</td>
-        <td>東京・江戸東京たてもの園に移築。戦時下の<span class="red">資材制限の中で伝統的和風外観</span>に近代を融合</td>
-      </tr>
-      <tr>
-        <td><span class="red">国際会議場（京都）</span></td>
-        <td>大谷幸夫（1966）</td>
-        <td>京都・<span class="red">逆梁構造・逆V形の外観</span>。RC造・打放しコンクリートで日本的を表現</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="point-box">
-    <span class="label">★ 混同しやすい「ル・コルビュジエ作品」の落とし穴</span>
-    サヴォア邸（1931・5原則の体現）と<span class="red">ロンシャンの礼拝堂（1955・彫刻的・5原則とは別）</span>は同じ建築家でも性格が全く異なる。<br>
-    「ロンシャンはコルビュジエ晩年の転換点」と押さえる。
-  </div>
-</div>
-
-
-<!-- ======================== PAGE 6: 覚え方・語呂合わせ集 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">⑥</span>
-    <span class="page-title">建築史 覚え方・語呂合わせ集</span>
-  </div>
-
-  <h2>1. 神社様式：平入・妻入の語呂合わせ</h2>
-  <div class="point-box">
-    <span class="label">語呂</span>
-    <span class="red">「神と流れは平らに（平入）、大住春八は妻に聞け（妻入）」</span><br>
-    　平入：<span class="blue">神</span>明造・<span class="blue">流</span>造<br>
-    　妻入：<span class="blue">大</span>社造・<span class="blue">住</span>吉造・<span class="blue">春</span>日造・<span class="blue">八</span>幡造
-  </div>
-  <table>
-    <colgroup><col style="width:18%"><col style="width:22%"><col style="width:60%"></colgroup>
-    <thead><tr><th>様式</th><th>入り</th><th>追加の連想</th></tr></thead>
-    <tbody>
-      <tr><td><span class="red">神明造</span></td><td class="center">平入</td><td>伊勢神宮＝「神様が<span class="red">平ら</span>に出迎える」</td></tr>
-      <tr><td><span class="red">流造</span></td><td class="center">平入</td><td>「<span class="red">流れは平らに</span>流れる」。前の庇が長く流れ落ちる形状が名前の由来</td></tr>
-      <tr><td><span class="red">大社造</span></td><td class="center">妻入</td><td>出雲大社＝「大きい社は<span class="red">妻（端）</span>から入る」。日本最古の神社建築様式</td></tr>
-      <tr><td><span class="red">春日造</span></td><td class="center">妻入</td><td>「<span class="red">春日（カスガ）</span>→向拝（カワラバイ）付き」。向拝があるから庇を追加したと覚える</td></tr>
-      <tr><td><span class="red">八幡造</span></td><td class="center">妻入</td><td>「<span class="red">八幡＝2つ並ぶ</span>」。2棟が<span class="red">相の間</span>でつながる＝八幡（ハチ）の字の二本線（※石の間は権現造）</td></tr>
-      <tr><td><span class="red">権現造</span></td><td class="center">—</td><td>「<span class="red">権現＝つなぐ</span>」。本殿＋石の間（つなぎ）＋拝殿の3部構成。日光東照宮</td></tr>
-    </tbody>
-  </table>
-
-  <h2>2. 仏教建築の様式：キーワード連想</h2>
-  <div class="two-col">
-    <div>
-      <div class="note-box" style="margin-bottom:5px;">
-        <span class="bold red">大仏様（天竺様）</span>の覚え方<br>
-        「<span class="red">大仏は貫（つらぬ）く</span>」→ <span class="red">貫多用・挿し肘木</span><br>
-        東大寺南大門は鎌倉時代に<span class="red">重源（ちょうげん）</span>が再建。<br>
-        「大仏様を作った大仏の門」と覚える。
-      </div>
-      <div class="note-box">
-        <span class="bold red">禅宗様（唐様）</span>の覚え方<br>
-        「<span class="red">禅の花は詰まって咲く</span>」→ <span class="red">花頭窓・詰組</span><br>
-        円覚寺舎利殿（鎌倉）＝禅宗のお寺→禅宗様と紐付ける。
-      </div>
-    </div>
-    <div>
-      <div class="note-box" style="margin-bottom:5px;">
-        <span class="bold red">和様</span>の覚え方<br>
-        「<span class="red">和やか・扇型・優しい</span>」→ <span class="red">扇垂木・木鼻なし</span><br>
-        法隆寺（飛鳥）＝日本最古の木造建築。飛鳥時代から続く<span class="red">「古くて和やか」</span>が和様。
-      </div>
-      <div class="point-box">
-        <span class="label">試験の罠</span>
-        東大寺南大門を「和様」と言わせる問題が頻出！<br>
-        → <span class="red">大仏様（天竺様）</span>が正解。
-      </div>
-    </div>
-  </div>
-
-  <h2>3. 西洋建築様式：時代順の覚え方</h2>
-  <div class="point-box">
-    <span class="label">語呂</span>
-    <span class="red">「古（ギ）古（ロ）ビ（ザ）ロ（マネ）ゴ（シック）ル（ネサ）バ（ロック）新（古典）ゴ（シック復興）」</span><br>
-    ギリシャ→ローマ→ビザンチン→ロマネスク→ゴシック→ルネサンス→バロック→新古典→ゴシック・リバイバル
-  </div>
-  <table>
-    <colgroup><col style="width:20%"><col style="width:40%"><col style="width:40%"></colgroup>
-    <thead><tr><th>様式</th><th>一番の特徴（試験頻出）</th><th>連想キーワード</th></tr></thead>
-    <tbody>
-      <tr><td><span class="red">ゴシック</span></td><td><span class="red">尖頭アーチ＋フライングバットレス</span>で窓を大きく</td><td>「尖ってバット（バットレス）で飛ぶ」</td></tr>
-      <tr><td><span class="red">ロマネスク</span></td><td><span class="red">半円アーチ＋厚壁＋小窓</span>で重厚</td><td>「ロマン（ロマネスク）は重い厚壁・丸窓」</td></tr>
-      <tr><td><span class="red">ビザンチン</span></td><td><span class="red">ペンデンティブドーム</span>（四角にドームを乗せる）</td><td>「ペンデンティブ＝ペンダントを四角に吊るす」</td></tr>
-      <tr><td><span class="red">バロック</span></td><td>曲線・劇的な光と影</td><td>「バロック＝歪んだ真珠」（語源）。ベルサイユが典型</td></tr>
-      <tr><td><span class="red">ルネサンス</span></td><td>古典復興・ドーム・左右対称</td><td>「<span class="red">再（ルネサンス）生</span>」＝ギリシャ・ローマの復活</td></tr>
-    </tbody>
-  </table>
-
-  <h2>4. 五巨匠と代表作：連想で覚える</h2>
-  <table>
-    <colgroup><col style="width:22%"><col style="width:28%"><col style="width:50%"></colgroup>
-    <thead><tr><th>建築家</th><th>代表作</th><th>連想・覚え方</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">ライト</span></td>
-        <td>落水荘・旧帝国ホテル</td>
-        <td>「<span class="red">ライト（水）の上</span>に落水荘」。水平線強調＝プレーリー（大草原）</td>
-      </tr>
-      <tr>
-        <td><span class="red">ル・コルビュジエ</span></td>
-        <td>サヴォア邸・国立西洋美術館</td>
-        <td>「<span class="red">5原則をコル（コルビュジエ）に暗記</span>」：ピ・屋・平・横・立（ピクヨコタテ）<br>ピロティ・屋上庭園・自由な平面・横長窓・自由な立面</td>
-      </tr>
-      <tr>
-        <td><span class="red">ミース</span></td>
-        <td>バルセロナP・ファンズワース邸</td>
-        <td>「<span class="red">ミース＝シンプルLess</span>」。ガラスと鉄だけの箱。「Less is more」</td>
-      </tr>
-      <tr>
-        <td><span class="red">グロピウス</span></td>
-        <td>バウハウス校舎</td>
-        <td>「<span class="red">グロピウスが1919年にバウハウスを作った</span>」。デッサウ→ベルリン→閉校1933</td>
-      </tr>
-      <tr>
-        <td><span class="red">アアルト</span></td>
-        <td>パイミオのサナトリウム</td>
-        <td>「<span class="red">アアルト＝あたたかい北欧</span>」。フィンランド・木・人間中心。パイミオ＝結核療養所</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>5. 日本建築家と師弟関係・代表作の連想</h2>
-  <div class="point-box">
-    <span class="label">師弟の流れ</span>
-    <span class="red">コンドル</span>（英・お雇い外国人）→ <span class="red">辰野金吾</span>（東京駅・日本銀行）<br>
-    <span class="red">ル・コルビュジエ</span> → <span class="red">前川國男</span>（東京文化会館・京都会館）→ <span class="red">丹下健三</span>（代々木競技場・広島）<br>
-    <span class="red">ル・コルビュジエ</span> → <span class="red">坂倉準三</span>（神奈川県立近代美術館）
-  </div>
-  <div class="two-col">
-    <div>
-      <div class="note-box" style="margin-bottom:5px;">
-        <span class="bold red">丹下健三の3大作品</span>（試験頻出）<br>
-        ①<span class="red">広島平和記念資料館</span>（1955）＝ピロティ＋軸線<br>
-        ②<span class="red">国立代々木競技場</span>（1964）＝吊り屋根・東京五輪<br>
-        ③<span class="red">東京都庁</span>（1991）＝双塔・ゴシック的<br>
-        「<span class="red">広（ヒロ）・代（ヨヨ）・都（ト）</span>」で3作品セット
-      </div>
-    </div>
-    <div>
-      <div class="note-box">
-        <span class="bold red">安藤忠雄の連想</span><br>
-        「<span class="red">コンクリート打放し＋光＋水</span>」がすべての作品に共通<br>
-        住吉の長屋（中庭・都市）、光の教会（十字の光）、<br>
-        地中美術館（地下・自然光・モネ）<br>
-        「<span class="red">安藤は光と水をコンクリートで切り取る</span>」
-      </div>
-    </div>
-  </div>
-
-  <h2>6. 混同しやすい実例の整理</h2>
-  <table>
-    <colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup>
-    <thead><tr><th>紛らわしいペア</th><th>A</th><th>B</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><span class="red">グッゲンハイム</span><br>（2つある！）</td>
-        <td><span class="blue">NY</span>＝<span class="red">ライト</span>設計・螺旋スロープ</td>
-        <td><span class="blue">ビルバオ</span>＝<span class="red">ゲーリー</span>設計・チタン外装・解体主義</td>
-      </tr>
-      <tr>
-        <td><span class="red">パンテオン</span><br>（2つある！）</td>
-        <td><span class="blue">ローマ</span>＝古代ローマ・ドーム・オキュラス（紀元後125年）</td>
-        <td><span class="blue">パリ</span>＝新古典主義・フランス偉人廟（18c末）</td>
-      </tr>
-      <tr>
-        <td><span class="red">谷口</span>親子</td>
-        <td><span class="blue">谷口吉郎（父）</span>＝東京国立博物館東洋館・迎賓館和風別館</td>
-        <td><span class="blue">谷口吉生（子）</span>＝豊田市美術館・東京国立博物館法隆寺宝物館</td>
-      </tr>
-      <tr>
-        <td><span class="red">倉敷の建物</span></td>
-        <td><span class="blue">倉敷アイビースクエア</span>＝<span class="red">浦辺鎮太郎</span>（工場転用・1974）</td>
-        <td><span class="blue">大原美術館</span>＝薛田清（1930）。倉敷の歴史的建物群</td>
-      </tr>
-      <tr>
-        <td><span class="red">ポストモダン</span><br>建築家</td>
-        <td><span class="blue">磯崎新</span>（日）＝つくばセンタービル。引用と折衷</td>
-        <td><span class="blue">ヴェンチューリ</span>（米）＝母の家。「Less is a bore」</td>
-      </tr>
-      <tr>
-        <td><span class="red">懸垂屋根</span></td>
-        <td><span class="blue">国立代々木競技場</span>（丹下・1964）</td>
-        <td>代々木は<span class="red">「吊り（懸垂）」屋根</span>。折板屋根や膜屋根と混同しない</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-<!-- ======================== PAGE 7: 2026年出題予測 建築実例マトリクス ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">⑦</span>
-    <span class="page-title">2026年度 出題予測 ― 建築実例・建築史 過去7年分析と狙い目</span>
-  </div>
-
-  <h2>1. 過去7年間 出題実例マトリクス（学科Ⅰ 計画 No.1〜No.20）</h2>
-  <p style="font-size:7.5pt;margin-bottom:4px;color:#555;">※<span style="background:#c8e6c9;padding:1px 4px;border-radius:2px;">緑</span>=出題あり　<span style="background:#fff9c4;border:1px solid #f0c000;padding:1px 4px;border-radius:2px;">黄</span>=最近3年未出・2026狙い目</p>
-
-  <!-- 日本建築史 -->
-  <h3>【日本建築史】神社・仏教・近世建築</h3>
-  <table style="font-size:7.5pt;">
-    <colgroup>
-      <col style="width:26%">
-      <col style="width:10%"><col style="width:10%"><col style="width:10%">
-      <col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:10%">
-      <col style="width:4%">
-    </colgroup>
-    <thead>
-      <tr>
-        <th>建物名・建築家</th>
-        <th>2019</th><th>2020</th><th>2021</th>
-        <th>2022</th><th>2023</th><th>2024</th><th>2025</th>
-        <th>狙</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><b>神明造（伊勢神宮内宮正殿）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>大社造（出雲大社本殿）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>流造（賀茂別雷神社本殿）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>権現造（春日大社←誤：日光東照宮が正解）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>八幡造（宇佐神宮本殿）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>大仏様（東大寺南大門）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>禅宗様（円覚寺舎利殿・東福寺三門）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>懸造（三徳山三仏寺投入堂）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>数寄屋造（妙喜庵待庵・桂離宮）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>寝殿造（東三条殿・本願寺飛雲閣）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>書院造（光浄院客殿・臨春閣）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>擬洋風（旧開智学校校舎）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- 西洋建築史 -->
-  <h3>【西洋建築史】古代〜近代</h3>
-  <table style="font-size:7.5pt;">
-    <colgroup>
-      <col style="width:26%">
-      <col style="width:10%"><col style="width:10%"><col style="width:10%">
-      <col style="width:10%"><col style="width:10%"><col style="width:10%"><col style="width:10%">
-      <col style="width:4%">
-    </colgroup>
-    <thead>
-      <tr>
-        <th>建物名・様式</th>
-        <th>2019</th><th>2020</th><th>2021</th>
-        <th>2022</th><th>2023</th><th>2024</th><th>2025</th>
-        <th>狙</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><b>サン・ピエトロ大聖堂（ルネサンス）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>バロック（サン・カルロ聖堂・ボッロミーニ）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>パンテオン（古代ローマ）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>ハギア・ソフィア（ビザンツ様式）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>ゴシック（ノートルダム大聖堂）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>ロマネスク（シュパイヤー大聖堂）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>新古典主義（大英博物館）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>アール・ヌーヴォー（タッセル邸・オルタ）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>デ・ステイル（シュレーダー邸・リートフェルト）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>フィレンツェ大聖堂（ブルネレスキ）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- 現代建築 -->
-  <h3>【現代建築実例】美術館・図書館・事務所・住宅（No.12〜No.17系）</h3>
-  <table style="font-size:7.5pt;">
-    <colgroup>
-      <col style="width:30%">
-      <col style="width:9%"><col style="width:9%"><col style="width:9%">
-      <col style="width:9%"><col style="width:9%"><col style="width:9%"><col style="width:9%">
-      <col style="width:7%">
-    </colgroup>
-    <thead>
-      <tr>
-        <th>建物名・設計者</th>
-        <th>2019</th><th>2020</th><th>2021</th>
-        <th>2022</th><th>2023</th><th>2024</th><th>2025</th>
-        <th>狙い</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><b>ニューヨーク近代美術館（谷口吉生）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>ロサンゼルス現代美術館（磯崎新）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>フォートワース現代美術館（安藤忠雄）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>アスペン美術館（坂茂）</b></td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>ジョンソン・ワックス・ビル（F.L.ライト）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>フォード財団本部ビル（ロッシュ＆ディンカルー）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>ぎふメディアコスモス（伊東豊雄）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">★</td>
-      </tr>
-      <tr>
-        <td><b>倉敷アイビースクエア（浦辺鎮太郎）工場転用</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>千葉市美術館（鞘堂方式）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>国立子ども図書館（東京都、2002）重要文化財転用</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>フランス国立図書館（ペロー、パリ 1995）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>住吉の長屋（安藤忠雄）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>中野本町の家（伊東豊雄）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>富弘美術館（群馬県）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>豊島美術館（香川県・西沢立衛）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#fff9c4;text-align:center;font-weight:bold;">△</td>
-      </tr>
-      <tr>
-        <td><b>東京駅丸の内駅舎（免震改修・辰野金吾）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-      <tr>
-        <td><b>京都駅ビル（原広司）</b></td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="text-align:center;">—</td>
-        <td style="background:#c8e6c9;text-align:center;">○</td>
-        <td style="text-align:center;">—</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p style="font-size:7.5pt;color:#555;margin-top:2px;">★=高確率（5年以上前に出題・基本事項）　△=中確率（2〜4年前に出題・周期的）　※2021年No.3は図版問題（建物特定が必要）</p>
-</div>
-
-<!-- ======================== PAGE 7B: 2026予測詳細 ======================== -->
-<div class="page">
-  <div class="page-header">
-    <span class="page-num">⑦</span>
-    <span class="page-title">2026年度 出題予測 ― 確度別リストと今すぐ覚えるべきポイント</span>
-  </div>
-
-  <h2>2. 2026年度 出題予測（確度別）</h2>
-
-  <!-- 高確率 -->
-  <div style="border:2px solid #cc0000;border-radius:4px;margin-bottom:6px;overflow:hidden;">
-    <div style="background:#cc0000;color:#fff;padding:3px 8px;font-weight:bold;font-size:9pt;">
-      【高確率】直近5年以上未出題 または 周期的な出題が確認できる基本事項
-    </div>
-    <div style="padding:5px 8px;font-size:8.5pt;">
-
-      <div style="margin-bottom:6px;border-left:3px solid #cc0000;padding-left:8px;">
-        <b>① 新古典主義 / アール・ヌーヴォー / デ・ステイル（2020年以降未出題）</b><br>
-        <span style="color:#555;">根拠：2020年No.3で3様式セットで出題。5年が経過し再出しやすい周期。近代建築史は毎年度 No.2〜No.3 付近で1問出る。</span><br>
-        <span style="color:#0055aa;">▶ 大英博物館（スマーク、新古典主義）、タッセル邸（オルタ、アール・ヌーヴォー）、シュレーダー邸（リートフェルト、デ・ステイル）をセットで整理。</span><br>
-        <span style="color:#cc0000;">誤肢になりやすい：ウィーン郵便貯金局（ワグナー）→アーツ＆クラフツではなく分離派（ゼツェッシオン）系。2020年No.3の正解はこれ。</span>
-      </div>
-
-      <div style="margin-bottom:6px;border-left:3px solid #cc0000;padding-left:8px;">
-        <b>② 書院造・寝殿造（2024年No.2で出題→2026周期？）＋大仏様・禅宗様</b><br>
-        <span style="color:#555;">根拠：日本建築史（No.2）は毎年出題。2024に寝殿造・書院造が出たが2025は神社建築（権現造・大社造）に移行。2026は仏教建築系（大仏様・禅宗様）に戻る可能性大。</span><br>
-        <span style="color:#0055aa;">▶ 東大寺南大門（大仏様・貫・挿肘木）、円覚寺舎利殿（禅宗様・詰組・海老虹梁）の違いを確認。</span><br>
-        <span style="color:#cc0000;">誤肢：円覚寺舎利殿＝禅宗様（大仏様ではない）。2023年No.2で誤記が問われた。</span>
-      </div>
-
-      <div style="margin-bottom:6px;border-left:3px solid #cc0000;padding-left:8px;">
-        <b>③ 近代美術館・文化施設（2019年No.17以来の美術館問題 → 2024No.17で復活）</b><br>
-        <span style="color:#555;">根拠：美術館問題は2019・2024年に出題。2024年に出たが内容が異なる（富弘・ポーラ・京都市京セラ・豊島）。2019年の谷口吉生・磯崎新・安藤忠雄・坂茂ラインが再出の可能性。</span><br>
-        <span style="color:#0055aa;">▶ フォートワース現代美術館（安藤忠雄・長い庇・水盤）、金沢21世紀美術館（SANAA）、直島地中美術館（安藤忠雄）を整理。</span><br>
-        <span style="color:#cc0000;">誤肢：アスペン美術館（坂茂）→「アトリウム中央＋螺旋スロープ」という構成。坂茂＝紙管建築家と混同しない。</span>
-      </div>
-
-      <div style="border-left:3px solid #cc0000;padding-left:8px;">
-        <b>④ フィレンツェ大聖堂（サンタ・マリア・デル・フィオーレ）/ ルネサンス建築</b><br>
-        <span style="color:#555;">根拠：2022年No.3に出題（選択肢3として登場）。その後未出題。ドームの構造（4本の大バットレスは西洋建築では稀な構造で誤肢にしやすい）。</span><br>
-        <span style="color:#0055aa;">▶ ブルネレスキの八角形ドーム・内外2枚の殻構造・東西の半ドームはバットレスではなく独立構造。</span><br>
-        <span style="color:#cc0000;">2022年No.3の誤答：サンタ・マリア・デル・フィオーレの選択肢2が不適当（バットレスの説明が誤り）。</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 中確率 -->
-  <div style="border:2px solid #e67e00;border-radius:4px;margin-bottom:6px;overflow:hidden;">
-    <div style="background:#e67e00;color:#fff;padding:3px 8px;font-weight:bold;font-size:9pt;">
-      【中確率】過去3〜4年前に出題・間隔が空いてきた作品
-    </div>
-    <div style="padding:5px 8px;font-size:8.5pt;">
-      <table style="font-size:8pt;">
-        <colgroup><col style="width:35%"><col style="width:20%"><col style="width:45%"></colgroup>
-        <thead><tr><th>作品名・設計者</th><th>直近出題年</th><th>試験で問われるポイント</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><b>住吉の長屋</b>（安藤忠雄）</td>
-            <td>2024年 No.12</td>
-            <td>ファサード=玄関以外開口なし。中庭が中央にある。RC造。</td>
-          </tr>
-          <tr>
-            <td><b>豊島美術館</b>（西沢立衛）</td>
-            <td>2024年 No.17</td>
-            <td>シェルRC屋根・大開口から自然光・内藤礼の作品展示</td>
-          </tr>
-          <tr>
-            <td><b>ぎふメディアコスモス</b>（伊東豊雄）</td>
-            <td>2020年 No.15</td>
-            <td>木造格子屋根。市立図書館＋市民交流センター複合。2015年竣工。</td>
-          </tr>
-          <tr>
-            <td><b>倉敷アイビースクエア</b>（浦辺鎮太郎）</td>
-            <td>2021年 No.17</td>
-            <td>明治工場を商業施設転用。「ガラス屋根アトリウム」の説明は誤り（実際は外庭中心）。</td>
-          </tr>
-          <tr>
-            <td><b>千葉市美術館</b>（鞘堂方式）</td>
-            <td>2021年 No.17</td>
-            <td>旧川崎銀行千葉支店を新築建物で丸ごと覆う「鞘堂」。日本古来の保存手法。</td>
-          </tr>
-          <tr>
-            <td><b>ロームシアター京都</b>（旧京都会館）</td>
-            <td>2021年 No.17</td>
-            <td>前川國男設計（昭和35年）→改修で保存＋増築。前川作品であることが重要。</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- 参考 -->
-  <div style="border:2px solid #2e6da4;border-radius:4px;margin-bottom:6px;overflow:hidden;">
-    <div style="background:#2e6da4;color:#fff;padding:3px 8px;font-weight:bold;font-size:9pt;">
-      【参考】過去未出題だが試験頻出候補・難易度高め
-    </div>
-    <div style="padding:5px 8px;font-size:8.5pt;">
-      <table style="font-size:8pt;">
-        <colgroup><col style="width:35%"><col style="width:65%"></colgroup>
-        <thead><tr><th>作品名・設計者</th><th>注目ポイント</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><b>金沢21世紀美術館</b><br>（SANAA・妹島和世＋西沢立衛、2004）</td>
-            <td>円形平面・展示室が島状配置・ガラス外壁。「四方向どこからも入れる」が特徴。カーテンウォールと内部展示室の対比。</td>
-          </tr>
-          <tr>
-            <td><b>直島地中美術館</b><br>（安藤忠雄、2004）</td>
-            <td>建物全体が地下埋設。採光はトップライトのみ。クロード・モネの睡蓮を展示。自然光のみで作品鑑賞。</td>
-          </tr>
-          <tr>
-            <td><b>サヴォア邸</b><br>（ル・コルビュジエ、1931）</td>
-            <td>「近代建築の5原則」の実践例。ピロティ・屋上庭園・自由な平面・水平連続窓・自由なファサード。</td>
-          </tr>
-          <tr>
-            <td><b>バルセロナ・パヴィリオン</b><br>（ミース・ファン・デル・ローエ、1929）</td>
-            <td>ユニバーサルスペース・フリープラン。十字形断面の鉄柱。大理石壁が自立する構成。</td>
-          </tr>
-          <tr>
-            <td><b>ポンピドゥー・センター</b><br>（レンゾ・ピアノ＋R.ロジャース、1977）</td>
-            <td>設備・構造を外部に露出するハイテク建築。内部は無柱の大空間。</td>
-          </tr>
-          <tr>
-            <td><b>ハンナー邸（ハニカムハウス）</b><br>（F.L.ライト、1937）</td>
-            <td>ユーソニアン住宅の代表。六角形グリッドに基づく平面。オーガニックアーキテクチャ。</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <h2>3. カテゴリ別 2026年の注目ポイント</h2>
-  <div class="two-col">
-    <div>
-      <div class="point-box">
-        <span class="label">【日本建築史 神社・仏教】</span>
-        毎年No.2で確実に出題。2025は神社（権現造・大社造・懸造・数寄屋造）。<b>2026は仏教建築（大仏様・禅宗様・和様の違い）に戻る可能性大。</b>東大寺南大門 vs 円覚寺舎利殿の比較整理が最優先。
-      </div>
-      <div class="point-box">
-        <span class="label">【西洋建築史】</span>
-        2024・2025で西洋建築史（No.3）が連続出題。2026も継続か。<b>ビザンツ（ハギア・ソフィア）・ゴシック・ロマネスクは2024〜2025で出た</b>ため、古代ギリシア（パルテノン神殿＝クリアストーリーなし）・ルネサンス（フィレンツェ大聖堂）・バロック以外の様式に注意。
-      </div>
-      <div class="point-box">
-        <span class="label">【近代建築著作・思想】</span>
-        2023年No.3「建築著作物」が新形式。<b>アドルフ・ロース「装飾と犯罪」、ヴェンチューリ「建築の複雑性と対立性」、ジークフリート・ギーディオン「空間・時間・建築」</b>などの著作と内容の対応を確認。
-      </div>
-    </div>
-    <div>
-      <div class="point-box">
-        <span class="label">【現代日本建築・美術館】</span>
-        美術館問題（No.17系）は2019・2024年と5年周期で出題。<b>2026は再出の可能性あり。</b>日本人建築家（谷口吉生・安藤忠雄・坂茂・妹島和世）の代表作と設計コンセプトの確認。特に安藤＝コンクリート・光・水のモチーフを理解。
-      </div>
-      <div class="point-box">
-        <span class="label">【保存・転用・コンバージョン系】</span>
-        2021年No.17（倉敷アイビー・千葉市美術館・ロームシアター）が出題。<b>近年の傾向として歴史建築の保存・再生事例は頻出。</b>「鞘堂（さやどう）」「EV棟増築改修」「増築と保存の一体化」など手法名と事例の対応を整理。
-      </div>
-      <div class="point-box">
-        <span class="label">【駅・交通施設（2025新形式）】</span>
-        2025年No.17は初出の「駅・駅前施設」。<b>岩見沢複合駅舎（古レール再利用）・東京駅（辰野金吾・免震改修）・京都駅ビル（原広司・アトリウム）</b>など。2026は別テーマに戻ると予測されるが、複合施設・建築家名の対応は要確認。
-      </div>
-    </div>
-  </div>
-
-  <div class="note-box" style="margin-top:6px;">
-    <b>2026年直前チェック最優先リスト：</b>
-    ①大仏様（東大寺南大門）vs 禅宗様（円覚寺舎利殿）の構造的差異
-    ②タッセル邸（アール・ヌーヴォー）・シュレーダー邸（デ・ステイル）・ウィーン郵便貯金局（分離派）の様式背景
-    ③フィレンツェ大聖堂ドームの構造（内外二重殻・八角形）
-    ④金沢21世紀美術館（SANAA・円形・四方向入口）
-    ⑤サヴォア邸の近代建築5原則の具体的内容
-  </div>
-</div>
-
+  const s=document.createElement("section");
+  s.className="sec"; s.id="sec-"+sec.id;
+  let html=`<div class="pagebar"><span class="no">${String(si+1).padStart(2,"0")}</span>
+    <h2>${sec.title}</h2><span class="sub">${sec.sub}　全${cnt}件</span></div>`;
+  sec.groups.forEach(g=>{
+    html+=`<h3 class="grp">${g.name}${g.en?`<span class="en">${g.en}</span>`:""}</h3>`;
+    html+=`<div class="tw"><table><colgroup><col class="c-name"><col class="c-meta"><col class="c-kw"><col class="c-warn"></colgroup>
+      <thead><tr><th>建築物</th><th>所在・時代</th><th>様式・キーワード</th><th>⚠ ひっかけ注意</th></tr></thead><tbody>`;
+    g.items.forEach(it=>{
+      const first=Array.isArray(it.tags[0])?it.tags[0][0]:it.tags[0];
+      const rest=it.tags.slice(1).map(t=>Array.isArray(t)?t[0]:t).join("・");
+      const kw=`<span class="kw1">${first}</span>${rest?`<span class="kwrest">${rest}</span>`:""}`;
+      const note=(it.note||"").replace(/^⚠/,"");
+      html+=`<tr><td class="name">${it.n}</td><td class="meta">${it.meta}</td>
+        <td>${kw}</td><td class="warn${note?"":" empty"}">${note}</td></tr>`;
+    });
+    html+=`</tbody></table></div>`;
+  });
+  s.innerHTML=html; root.appendChild(s);
+});
+</script>
 </body>
 </html>
