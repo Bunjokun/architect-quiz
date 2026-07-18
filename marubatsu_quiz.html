@@ -129,6 +129,10 @@ header a:hover{color:#fff}
     <div class="tag-row" id="subject-tags"></div>
     <h2 style="margin-top:12px">分野</h2>
     <div class="tag-row" id="topic-tags"></div>
+    <div class="tag-row" style="margin-top:2px">
+      <button class="btn btn-ghost" style="padding:5px 14px;font-size:12px" onclick="selectAllTopics()">分野を全選択</button>
+      <button class="btn btn-ghost" style="padding:5px 14px;font-size:12px" onclick="deselectAllTopics()">分野を全解除</button>
+    </div>
     <!-- モード選択 -->
     <div class="mode-row" style="margin-top:12px">
       <span class="mode-label">モード：</span>
@@ -149,7 +153,6 @@ header a:hover{color:#fff}
     <div class="acc-row" id="acc-row"></div>
     <div class="start-row">
       <button class="btn btn-primary" onclick="startQuiz()">スタート</button>
-      <button class="btn btn-ghost" onclick="selectAll()">全選択</button>
       <button class="btn btn-ghost" style="border:2px solid #e67e22;color:#e67e22;background:#fff" onclick="showMylist()">マイリスト 📋</button>
       <span class="count-badge" id="count-badge">0問</span>
     </div>
@@ -4186,11 +4189,17 @@ function toggleTopic(t, btn) {
   updateCount();
 }
 
-function selectAll() {
+function selectAllTopics() {
   // 現在選択中の科目のトピックをすべて選択
   selectedSubjects.forEach(s => {
     (subjectTopics[s] || new Set()).forEach(t => selectedTopics.add(t));
   });
+  rebuildTopicTags();
+  updateCount();
+}
+
+function deselectAllTopics() {
+  selectedTopics.clear();
   rebuildTopicTags();
   updateCount();
 }
