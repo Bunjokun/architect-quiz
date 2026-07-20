@@ -368,6 +368,8 @@ input.id-input{width:100%;padding:10px 12px;border:1.5px solid #d0d5e0;border-ra
 <script src="questions_data_2021.js"></script>
 <script src="questions_data_2020.js"></script>
 <script src="questions_data_2019.js"></script>
+<script src="questions_data_2018.js"></script>
+<script src="questions_data_2017.js"></script>
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
@@ -506,6 +508,8 @@ const SUB_NAMES = {"I":"学科Ⅰ 計画","II":"学科Ⅱ 環境・設備","III"
 const SUB_PASS   = {"I":11,"II":11,"III":16,"IV":16,"V":13};
 const SUB_TARGET = {"I":14,"II":14,"III":25,"IV":24,"V":18}; // 95点基準（デフォルト）
 const YEAR_SUB_TARGET = {
+  "2017":{"I":14,"II":14,"III":22,"IV":21,"V":16}, // 計87
+  "2018":{"I":14,"II":14,"III":24,"IV":23,"V":16}, // 計91
   "2019":{"I":14,"II":14,"III":24,"IV":23,"V":16}, // 計91
   "2020":{"I":14,"II":14,"III":26,"IV":25,"V":18}, // 計97
   "2021":{"I":14,"II":14,"III":26,"IV":25,"V":18}, // 計97
@@ -514,7 +518,7 @@ const YEAR_SUB_TARGET = {
   "2024":{"I":14,"II":14,"III":26,"IV":25,"V":18}, // 計97
   "2025":{"I":14,"II":14,"III":22,"IV":21,"V":17}, // 計88
 };
-const YEAR_TOTAL_PASS = {"2019":91,"2020":97,"2021":97,"2022":87,"2023":91,"2024":97,"2025":88};
+const YEAR_TOTAL_PASS = {"2017":87,"2018":91,"2019":91,"2020":97,"2021":97,"2022":87,"2023":91,"2024":97,"2025":88};
 
 // ═══════════════════════════════════════════════
 // ページ切替
