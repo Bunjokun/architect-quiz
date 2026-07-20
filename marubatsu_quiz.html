@@ -5280,7 +5280,18 @@ function recordDaily(subject, isCorrect) {
   if (isCorrect) log[today][subject].correct++;
   saveDailyLog(log);
 }
-// その科目の「今日の目標」＝100問＋今週分の未達繰越
+// その日・その科目のノルマを「繰越なしで終了」にする
+function settleToday(subject) {
+  const log = getDailyLog();
+  const today = fmtDate(new Date());
+  if (!log[today]) log[today] = {};
+  if (!log[today][subject]) log[today][subject] = {answered:0, correct:0};
+  log[today][subject].settled = true;
+  saveDailyLog(log);
+  renderAccRow(); renderDailyRow();
+}
+window.settleToday = settleToday;
+// その科目の「今日の目標」＝100問＋今週分の未達繰越（settled済みの日は繰越なし扱い）
 function getSubjectDailyTarget(subject) {
   const log = getDailyLog();
   const now = new Date();
@@ -5290,7 +5301,9 @@ function getSubjectDailyTarget(subject) {
   for (let d = new Date(monday); d < today0; d.setDate(d.getDate()+1)) {
     const ds = fmtDate(d);
     const target = DAILY_QUOTA + carry;
-    const answered = (log[ds] && log[ds][subject] && log[ds][subject].answered) || 0;
+    const rec = log[ds] && log[ds][subject];
+    if (rec && rec.settled) { carry = 0; continue; }
+    const answered = (rec && rec.answered) || 0;
     carry = Math.max(0, target - answered);
   }
   return DAILY_QUOTA + carry;
@@ -5307,13 +5320,14 @@ function renderDailyRow() {
     const rec = (log[today] && log[today][subj]) || {answered:0, correct:0};
     const carry = target - DAILY_QUOTA;
     const pct = Math.min(100, Math.round(rec.answered / target * 100));
-    const done = rec.answered >= target;
+    const done = rec.answered >= target || rec.settled;
     const accPct = rec.answered ? Math.round(rec.correct / rec.answered * 100) : null;
     html += `
       <div class="daily-item">
         <span class="daily-title">${subj}</span>
-        ${done ? '<span class="daily-badge">✓ 本日ノルマ達成</span>' : ''}
+        ${rec.settled ? '<span class="daily-badge">✓ 本日終了（繰越なし）</span>' : (done ? '<span class="daily-badge">✓ 本日ノルマ達成</span>' : '')}
         <span class="daily-detail">今日 ${rec.answered} / ${target}問${carry > 0 ? `（100問＋繰越${carry}問）` : ''}　正答 ${rec.correct}問${accPct !== null ? `（${accPct}%）` : ''}</span>
+        ${!rec.settled ? `<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;margin-left:auto" onclick="settleToday('${subj}')">今日はここで終了（繰越なし）</button>` : ''}
         <div class="daily-bar-wrap"><div class="acc-bar-bg"><div class="acc-bar-fill" style="width:${pct}%;${done ? 'background:#27ae60' : 'background:#e67e22'}"></div></div></div>
       </div>`;
   });
