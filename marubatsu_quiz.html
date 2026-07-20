@@ -48,6 +48,12 @@ header a:hover{color:#fff}
 .acc-bar-wrap{flex:1;min-width:80px}
 .acc-bar-bg{height:6px;background:#e8ecf5;border-radius:3px;overflow:hidden}
 .acc-bar-fill{height:100%;background:#27ae60;border-radius:3px;transition:width .4s}
+.daily-row{display:flex;flex-direction:column;gap:8px;padding:10px 14px;background:#fff8ec;border:1px solid #f3d9a8;border-radius:8px;margin-top:10px}
+.daily-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.daily-title{font-size:12px;color:#555;font-weight:700;white-space:nowrap;min-width:52px}
+.daily-badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#27ae60;color:#fff;white-space:nowrap}
+.daily-detail{font-size:11px;color:#777;white-space:nowrap}
+.daily-bar-wrap{flex:1;min-width:100px}
 
 /* カード */
 .q-card{background:#fff;border-radius:12px;padding:22px;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,0,.1)}
@@ -151,6 +157,7 @@ header a:hover{color:#fff}
     </div>
     <!-- 全体正答率 -->
     <div class="acc-row" id="acc-row"></div>
+    <div class="daily-row" id="daily-row"></div>
     <div class="start-row">
       <button class="btn btn-primary" onclick="startQuiz()">スタート</button>
       <button class="btn btn-ghost" style="border:2px solid #e67e22;color:#e67e22;background:#fff" onclick="showMylist()">マイリスト 📋</button>
@@ -5243,6 +5250,76 @@ function getQStats(q) {
   return h[qKey(q)] || {o:0, x:0};
 }
 
+// ─── 一日のノルマ（科目ごと100問、未達分は繰越・週で繰越リセット）───
+const DAILY_KEY = 'mb_daily_log';
+const DAILY_QUOTA = 100;
+function fmtDate(d) {
+  const y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${dd}`;
+}
+function startOfDay(d) { const n = new Date(d); n.setHours(0,0,0,0); return n; }
+function getWeekMonday(d) {
+  const n = startOfDay(d);
+  const day = n.getDay(); // 0=日,1=月,...
+  const diff = (day === 0 ? -6 : 1 - day);
+  n.setDate(n.getDate() + diff);
+  return n;
+}
+function getDailyLog() {
+  try { return JSON.parse(localStorage.getItem(DAILY_KEY) || '{}'); } catch(e) { return {}; }
+}
+function saveDailyLog(d) {
+  localStorage.setItem(DAILY_KEY, JSON.stringify(d));
+}
+function recordDaily(subject, isCorrect) {
+  const log = getDailyLog();
+  const today = fmtDate(new Date());
+  if (!log[today]) log[today] = {};
+  if (!log[today][subject]) log[today][subject] = {answered:0, correct:0};
+  log[today][subject].answered++;
+  if (isCorrect) log[today][subject].correct++;
+  saveDailyLog(log);
+}
+// その科目の「今日の目標」＝100問＋今週分の未達繰越
+function getSubjectDailyTarget(subject) {
+  const log = getDailyLog();
+  const now = new Date();
+  const monday = getWeekMonday(now);
+  const today0 = startOfDay(now);
+  let carry = 0;
+  for (let d = new Date(monday); d < today0; d.setDate(d.getDate()+1)) {
+    const ds = fmtDate(d);
+    const target = DAILY_QUOTA + carry;
+    const answered = (log[ds] && log[ds][subject] && log[ds][subject].answered) || 0;
+    carry = Math.max(0, target - answered);
+  }
+  return DAILY_QUOTA + carry;
+}
+function renderDailyRow() {
+  const el = document.getElementById('daily-row');
+  if (!el) return;
+  if (selectedSubjects.size === 0) { el.innerHTML = ''; return; }
+  const log = getDailyLog();
+  const today = fmtDate(new Date());
+  let html = '';
+  selectedSubjects.forEach(subj => {
+    const target = getSubjectDailyTarget(subj);
+    const rec = (log[today] && log[today][subj]) || {answered:0, correct:0};
+    const carry = target - DAILY_QUOTA;
+    const pct = Math.min(100, Math.round(rec.answered / target * 100));
+    const done = rec.answered >= target;
+    const accPct = rec.answered ? Math.round(rec.correct / rec.answered * 100) : null;
+    html += `
+      <div class="daily-item">
+        <span class="daily-title">${subj}</span>
+        ${done ? '<span class="daily-badge">✓ 本日ノルマ達成</span>' : ''}
+        <span class="daily-detail">今日 ${rec.answered} / ${target}問${carry > 0 ? `（100問＋繰越${carry}問）` : ''}　正答 ${rec.correct}問${accPct !== null ? `（${accPct}%）` : ''}</span>
+        <div class="daily-bar-wrap"><div class="acc-bar-bg"><div class="acc-bar-fill" style="width:${pct}%;${done ? 'background:#27ae60' : 'background:#e67e22'}"></div></div></div>
+      </div>`;
+  });
+  el.innerHTML = html;
+}
+
 // ─── 初期化 ───
 const subjects = [...new Set(ALL_Q.map(q => q.subject))];
 const topics   = [...new Set(ALL_Q.map(q => q.topic))];
@@ -5330,7 +5407,7 @@ function init() {
   // 初期表示：最初の科目を選択した状態にする
   const firstBtn = document.querySelector('#subject-tags .tag');
   if (firstBtn) toggleSubject(subjects[0], firstBtn);
-  renderAccRow();
+  renderAccRow(); renderDailyRow();
 }
 
 function rebuildTopicTags() {
@@ -5361,7 +5438,7 @@ function toggleSubject(s, btn) {
   btn.classList.add('active');
   (subjectTopics[s] || new Set()).forEach(t => selectedTopics.add(t));
   rebuildTopicTags();
-  renderAccRow();
+  renderAccRow(); renderDailyRow();
   updateCount();
 }
 
@@ -5503,6 +5580,7 @@ function answer(selected, btn) {
   answered++;
   if (isCorrect) correct++;
   recordAnswer(q, isCorrect);
+  recordDaily(q.subject, isCorrect);
 
   document.getElementById('btn-maru').disabled = true;
   document.getElementById('btn-batsu').disabled = true;
@@ -5548,7 +5626,7 @@ function backToFilter() {
   document.getElementById('score-bar').classList.add('hidden');
   document.getElementById('quiz-area').innerHTML = '';
   document.getElementById('filter-section').classList.remove('hidden');
-  renderAccRow();
+  renderAccRow(); renderDailyRow();
   updateCount();
 }
 
