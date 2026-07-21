@@ -94,6 +94,17 @@ header a:hover{color:#fff}
 .finish-card{background:#fff;border-radius:12px;padding:30px;text-align:center;box-shadow:0 1px 6px rgba(0,0,0,.1)}
 .finish-card .big{font-size:48px;font-weight:700;color:#1a2744;margin-bottom:8px}
 .finish-card .sub{color:#888;font-size:14px;margin-bottom:20px}
+.finish-list{margin-top:24px;text-align:left;display:flex;flex-direction:column;gap:8px}
+.finish-item{border:1px solid #e8e8e8;border-radius:8px;padding:10px 12px;cursor:pointer}
+.finish-item.correct{border-left:4px solid #27ae60}
+.finish-item.wrong{border-left:4px solid #e74c3c;background:#fff8f8}
+.finish-item .fi-head{display:flex;align-items:center;gap:8px;font-size:12px;color:#888}
+.finish-item .fi-mark{font-weight:700}
+.finish-item.correct .fi-mark{color:#27ae60}
+.finish-item.wrong .fi-mark{color:#e74c3c}
+.finish-item .fi-q{font-size:13px;color:#333;margin-top:4px;line-height:1.5}
+.finish-item .fi-exp{font-size:12px;color:#666;margin-top:8px;padding-top:8px;border-top:1px solid #eee;line-height:1.7;display:none}
+.finish-item.open .fi-exp{display:block}
 .hidden{display:none}
 .hist-stat{font-size:12px;font-weight:700;background:#f8f8f8;border:1px solid #e8e8e8;border-radius:10px;padding:2px 8px}
 .hist-o{color:#e74c3c}
@@ -205,6 +216,7 @@ header a:hover{color:#fff}
       <button class="btn btn-primary" onclick="backToFilter()">分野選択に戻る</button>
       <button class="btn btn-ghost" onclick="location.reload()">最初からやり直す</button>
     </div>
+    <div class="finish-list" id="finish-list"></div>
   </div>
 
 </div>
@@ -1335,10 +1347,10 @@ const ALL_Q = [
    ans:true,
    exp:"カミロ・ジッテ（1843〜1903年）は著書「芸術的原則による都市建設」（1889年）で欧州の歴史的都市広場を実測分析し、その空間的特質（閉鎖性・非対称性・有機的形態）を近代都市に活かす「芸術的都市計画」を主張した。グリッド計画には批判的だった。"},
   {subject:"計画",topic:"建築史",
-   q:"バート・ヴェンチューリ（アメリカ）は、ラスベガスの都市景観を形成する多様な要素を抽出し、大衆文化の中の象徴性について記号論的な視点から分析した。",
+   q:"チャールズ・ムーア（アメリカ）は、ラスベガスの都市景観を形成する多様な要素を抽出し、大衆文化の中の象徴性について記号論的な視点から分析した。",
    alt:{q:"ロバート・ヴェンチューリ（アメリカ）は、ラスベガスの都市景観を形成する多様な要素を抽出し、大衆文化の中の象徴性について記号論的な視点から分析した。",ans:true},
    ans:false,
-   exp:"「ラスベガスの教訓」（1972年）の著者は「ロバート・ヴェンチューリ」（Robert Venturi）であり「バート・ヴェンチューリ」は誤った名前。デニーズ・スコット・ブラウンとの共著でポストモダン建築論の出発点となった。"},
+   exp:"「ラスベガスの教訓」（1972年）の著者はロバート・ヴェンチューリ（Robert Venturi）、デニーズ・スコット・ブラウンらであり、チャールズ・ムーア（同時代のポストモダン建築家、シーランチやピアッツァ・ディ・イタリア等で知られる）はこの分析の著者ではない。"},
   {subject:"計画",topic:"建築基本計画",
    q:"「指定管理者制度」は、文化会館や保育所、公園等の公の施設の管理・運営を、ノウハウを有する民間事業者等が行うことで、住民サービスの質の向上を図り、施設設置の目的を効果的に達成するための制度である。",
    alt:{q:"「指定管理者制度」は、文化会館や保育所、公園等の公の施設の管理・運営を、公共団体や公共的団体に限定して委任し、コスト削減を主目的として施設管理を合理化するための制度である。",ans:false},
@@ -5270,6 +5282,7 @@ const ALL_Q = [
 
 // ─── State ───
 let queue = [], current = 0, correct = 0, answered = 0;
+let sessionLog = [];
 let selectedSubjects = new Set(), selectedTopics = new Set();
 let quizMode = 'all';   // 'all' | 'weighted' | 'wrong' | 'new'
 let quizCount = 0;      // 0 = 全問
@@ -5603,6 +5616,7 @@ function startQuiz() {
     return {...q, _origQ: q.q};
   });
   current = 0; correct = 0; answered = 0;
+  sessionLog = [];
   document.getElementById('filter-section').classList.add('hidden');
   document.getElementById('score-bar').classList.remove('hidden');
   renderQuestion();
@@ -5642,6 +5656,7 @@ function answer(selected, btn) {
   if (isCorrect) correct++;
   recordAnswer(q, isCorrect);
   recordDaily(q.subject, isCorrect);
+  sessionLog.push({q, selected, isCorrect});
 
   document.getElementById('btn-maru').disabled = true;
   document.getElementById('btn-batsu').disabled = true;
@@ -5705,6 +5720,26 @@ function showFinish() {
      <span style="font-size:12px;color:#aaa;margin-top:4px;display:block">
        累計正答率 ${allPct}%（○${o} / ×${x}、計${total}回）
      </span>`;
+
+  const listEl = document.getElementById('finish-list');
+  if (listEl) {
+    listEl.innerHTML = sessionLog.map((entry, i) => {
+      const { q, isCorrect } = entry;
+      const yourAns = entry.selected ? '○' : '×';
+      const correctAns = q.ans ? '○' : '×';
+      return `
+        <div class="finish-item ${isCorrect ? 'correct' : 'wrong'}" onclick="this.classList.toggle('open')">
+          <div class="fi-head">
+            <span class="fi-mark">${isCorrect ? '✓ 正解' : '✗ 不正解'}</span>
+            <span>No.${i + 1}</span>
+            <span>${q.subject} / ${q.topic}</span>
+            <span>あなた: ${yourAns}　正解: ${correctAns}</span>
+          </div>
+          <div class="fi-q">${q.q}</div>
+          <div class="fi-exp">${q.exp}</div>
+        </div>`;
+    }).join('');
+  }
 }
 
 // ─── マイリスト ───
