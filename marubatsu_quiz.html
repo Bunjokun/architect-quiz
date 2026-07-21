@@ -5537,11 +5537,14 @@ function deselectAllTopics() {
   updateCount();
 }
 
+// 正答5回以上は「得意」とみなし、苦手優先・苦手のみモードの対象から除外する
+function isWeak(s) { return !!s && s.x > 0 && s.o < 5; }
+
 function getFilteredQ() {
   let qs = ALL_Q.filter(q => selectedSubjects.has(q.subject) && selectedTopics.has(q.topic));
   if (quizMode === 'wrong') {
     const h = getHistory();
-    qs = qs.filter(q => { const s = h[qKey(q)]; return s && s.x > 0; });
+    qs = qs.filter(q => isWeak(h[qKey(q)]));
   } else if (quizMode === 'new') {
     const h = getHistory();
     qs = qs.filter(q => { const s = h[qKey(q)]; return !s || (s.o === 0 && s.x === 0); });
@@ -5554,7 +5557,7 @@ function updateCount() {
   const qs = getFilteredQ();
   if (quizMode === 'weighted') {
     const h = getHistory();
-    const weak = qs.filter(q => { const s = h[qKey(q)]; return s && s.x > 0; }).length;
+    const weak = qs.filter(q => isWeak(h[qKey(q)])).length;
     const n = quizCount > 0 ? Math.min(quizCount, qs.length) : qs.length;
     document.getElementById('count-badge').textContent = `${n}問（苦手優先 / 苦手${weak}問）`;
   } else {
@@ -5575,8 +5578,8 @@ function shuffle(arr) {
 
 function buildWeightedQueue(allQ, targetCount) {
   const h = getHistory();
-  const weak   = allQ.filter(q => { const s = h[qKey(q)]; return s && s.x > 0; });
-  const normal = allQ.filter(q => { const s = h[qKey(q)]; return !s || s.x === 0; });
+  const weak   = allQ.filter(q => isWeak(h[qKey(q)]));
+  const normal = allQ.filter(q => !isWeak(h[qKey(q)]));
   if (weak.length === 0) return shuffle(allQ).slice(0, targetCount);
   // 苦手 70% / その他 30%（端数は stochastic rounding で処理）
   const weakTarget   = Math.round(targetCount * 0.7);
