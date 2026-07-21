@@ -5445,8 +5445,11 @@ function renderAccRow() {
     const answered = subjQs.filter(q => h[qKey(q)]).length;
     const unanswered = totalQ - answered;
     const unansweredStr = `<span style="color:#e67e22;font-weight:700">未回答 ${unanswered}問</span><span style="color:#888;font-size:11px"> / 全${totalQ}問</span>`;
+    const { cleared, total: totalQ2 } = getSubjectClearStats(subj);
+    const clearPct = totalQ2 ? Math.round(cleared / totalQ2 * 100) : 0;
+    const clearStr = `<span style="color:#1a7a4c;font-weight:700">クリア ${cleared}問</span><span style="color:#888;font-size:11px"> / 全${totalQ2}問（${clearPct}%）</span>`;
     if (total === 0) {
-      html += `<span class="acc-title">${subj}</span><div style="margin-bottom:4px">${unansweredStr}</div>`;
+      html += `<span class="acc-title">${subj}</span><div style="margin-bottom:4px">${unansweredStr}</div><div style="margin-bottom:6px">${clearStr}</div>`;
     } else {
       html += `
         <span class="acc-title">${subj}</span>
@@ -5455,7 +5458,11 @@ function renderAccRow() {
           <div class="acc-bar-bg"><div class="acc-bar-fill" style="width:${pct}%"></div></div>
         </div>
         <span class="acc-detail">○${o} / ×${x} (計${total}回答)</span>
-        <div style="margin-bottom:6px">${unansweredStr}</div>`;
+        <div style="margin-bottom:2px">${unansweredStr}</div>
+        <div class="acc-bar-wrap">
+          <div class="acc-bar-bg"><div class="acc-bar-fill" style="width:${clearPct}%;background:#1a7a4c"></div></div>
+        </div>
+        <div style="margin-bottom:6px">${clearStr}</div>`;
     }
   });
   el.innerHTML = html;
@@ -5539,6 +5546,15 @@ function deselectAllTopics() {
 
 // 正答5回以上は「得意」とみなし、苦手優先・苦手のみモードの対象から除外する
 function isWeak(s) { return !!s && s.x > 0 && s.o < 5; }
+// クリア＝正答3回以上、かつ正答数が誤答数を上回っている
+function isCleared(s) { return !!s && s.o >= 3 && s.o > s.x; }
+
+function getSubjectClearStats(subject) {
+  const h = getHistory();
+  const subjQs = ALL_Q.filter(q => q.subject === subject);
+  const cleared = subjQs.filter(q => isCleared(h[qKey(q)])).length;
+  return { cleared, total: subjQs.length };
+}
 
 function getFilteredQ() {
   let qs = ALL_Q.filter(q => selectedSubjects.has(q.subject) && selectedTopics.has(q.topic));
@@ -5585,7 +5601,10 @@ function buildWeightedQueue(allQ, targetCount) {
   const weakTarget   = Math.round(targetCount * 0.7);
   const normalTarget = targetCount - weakTarget;
   const weakPicked   = shuffle(weak).slice(0, Math.min(weakTarget, weak.length));
-  const normalPicked = shuffle(normal).slice(0, Math.min(normalTarget, normal.length));
+  // 苦手以外の枠は、未クリア（正答3回未満、または誤答数が正答数以上）の問題を優先して選ぶ
+  const normalNotCleared = shuffle(normal.filter(q => !isCleared(h[qKey(q)])));
+  const normalClearedQ   = shuffle(normal.filter(q => isCleared(h[qKey(q)])));
+  const normalPicked = [...normalNotCleared, ...normalClearedQ].slice(0, Math.min(normalTarget, normal.length));
   // 足りない分を補完
   const picked = [...weakPicked, ...normalPicked];
   if (picked.length < targetCount) {
