@@ -5326,13 +5326,28 @@ function recordDaily(subject, isCorrect) {
   saveDailyLog(log);
 }
 // その科目の「今日の目標」＝100問＋今週分の未達繰越
+const CARRY_RESET_KEY = 'mb_carry_reset_date';
+function getCarryResetDate() {
+  return localStorage.getItem(CARRY_RESET_KEY) || null;
+}
+function discardCarry() {
+  localStorage.setItem(CARRY_RESET_KEY, fmtDate(new Date()));
+  renderAccRow(); renderDailyRow();
+}
+window.discardCarry = discardCarry;
 function getSubjectDailyTarget(subject) {
   const log = getDailyLog();
   const now = new Date();
   const monday = getWeekMonday(now);
   const today0 = startOfDay(now);
+  const resetStr = getCarryResetDate();
+  let start = monday;
+  if (resetStr) {
+    const resetDate = startOfDay(new Date(resetStr + 'T00:00:00'));
+    if (resetDate >= start) start = resetDate;
+  }
   let carry = 0;
-  for (let d = new Date(monday); d < today0; d.setDate(d.getDate()+1)) {
+  for (let d = new Date(start); d < today0; d.setDate(d.getDate()+1)) {
     const ds = fmtDate(d);
     const target = DAILY_QUOTA + carry;
     const answered = (log[ds] && log[ds][subject] && log[ds][subject].answered) || 0;
@@ -5362,6 +5377,7 @@ function renderDailyRow() {
         <div class="daily-bar-wrap"><div class="acc-bar-bg"><div class="acc-bar-fill" style="width:${pct}%;${done ? 'background:#27ae60' : 'background:#e67e22'}"></div></div></div>
       </div>`;
   });
+  html += `<button class="btn btn-ghost" style="font-size:11px;padding:3px 8px;align-self:flex-start" onclick="if(confirm('これまでの繰越分を破棄しますか？（今日以降は通常どおり100問ノルマ＋繰越に戻ります）'))discardCarry()">これまでの繰越を破棄</button>`;
   el.innerHTML = html;
 }
 
