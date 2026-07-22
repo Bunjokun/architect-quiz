@@ -5544,8 +5544,8 @@ function deselectAllTopics() {
   updateCount();
 }
 
-// 正答5回以上は「得意」とみなし、苦手優先・苦手のみモードの対象から除外する
-function isWeak(s) { return !!s && s.x > 0 && s.o < 5; }
+// 苦手＝誤答数が正答数を上回っている問題（苦手優先・苦手のみモードで使用。マイリストは別基準＝誤答2回以上）
+function isWeak(s) { return !!s && s.x > s.o; }
 // クリア＝正答3回以上、かつ正答数が誤答数を上回っている
 function isCleared(s) { return !!s && s.o >= 3 && s.o > s.x; }
 
