@@ -5342,13 +5342,14 @@ function qKey(q) { return (q._origQ || q.q).slice(0, 40); }
 function recordAnswer(q, isCorrect) {
   const h = getHistory();
   const k = qKey(q);
-  if (!h[k]) h[k] = {o:0, x:0};
-  if (isCorrect) h[k].o++; else h[k].x++;
+  if (!h[k]) h[k] = {o:0, x:0, streak:0};
+  if (isCorrect) { h[k].o++; h[k].streak = (h[k].streak||0) + 1; }
+  else { h[k].x++; h[k].streak = 0; }
   saveHistory(h);
 }
 function getQStats(q) {
   const h = getHistory();
-  return h[qKey(q)] || {o:0, x:0};
+  return h[qKey(q)] || {o:0, x:0, streak:0};
 }
 
 // ─── 一日のノルマ（科目ごと100問、未達分は繰越・週で繰越リセット）───
@@ -5591,6 +5592,10 @@ function deselectAllTopics() {
 function isWeak(s) { return !!s && s.x > 0 && s.x >= s.o; }
 // クリア＝正答3回以上、かつ正答数が誤答数を上回っている
 function isCleared(s) { return !!s && s.o >= 3 && s.o > s.x; }
+// 得意＝直近◯が3回以上連続（出題頻度を大きく下げる対象）
+function isMastered(s) { return !!s && (s.streak||0) >= 3; }
+// 優先＝未回答／解いたのが1回のみ／一度でも誤答したことがある問題（全モード共通で優先出題）
+function needsPriority(s) { return !s || (s.o + s.x <= 1) || s.x > 0; }
 
 function getSubjectClearStats(subject) {
   const h = getHistory();
@@ -5639,15 +5644,18 @@ function buildWeightedQueue(allQ, targetCount) {
   const h = getHistory();
   const weak   = allQ.filter(q => isWeak(h[qKey(q)]));
   const normal = allQ.filter(q => !isWeak(h[qKey(q)]));
-  if (weak.length === 0) return shuffle(allQ).slice(0, targetCount);
+  if (weak.length === 0) return buildPriorityQueue(allQ, targetCount);
   // 苦手 70% / その他 30%（端数は stochastic rounding で処理）
   const weakTarget   = Math.round(targetCount * 0.7);
   const normalTarget = targetCount - weakTarget;
   const weakPicked   = shuffle(weak).slice(0, Math.min(weakTarget, weak.length));
-  // 苦手以外の枠は、未クリア（正答3回未満、または誤答数が正答数以上）の問題を優先して選ぶ
-  const normalNotCleared = shuffle(normal.filter(q => !isCleared(h[qKey(q)])));
-  const normalClearedQ   = shuffle(normal.filter(q => isCleared(h[qKey(q)])));
-  const normalPicked = [...normalNotCleared, ...normalClearedQ].slice(0, Math.min(normalTarget, normal.length));
+  // 苦手以外の枠は、未クリア（正答3回未満、または誤答数が正答数以上）の問題を優先し、
+  // クリア済のうち◯が3連続以上（得意）の問題はさらに後回しにして出題頻度を下げる
+  const normalNotCleared         = shuffle(normal.filter(q => !isCleared(h[qKey(q)])));
+  const normalClearedNotMastered = shuffle(normal.filter(q => isCleared(h[qKey(q)]) && !isMastered(h[qKey(q)])));
+  const normalClearedMastered    = shuffle(normal.filter(q => isCleared(h[qKey(q)]) && isMastered(h[qKey(q)])));
+  const normalPicked = [...normalNotCleared, ...normalClearedNotMastered, ...normalClearedMastered]
+    .slice(0, Math.min(normalTarget, normal.length));
   // 足りない分を補完
   const picked = [...weakPicked, ...normalPicked];
   if (picked.length < targetCount) {
@@ -5655,6 +5663,17 @@ function buildWeightedQueue(allQ, targetCount) {
     const rest = shuffle(allQ).filter(q => !used.has(qKey(q)));
     picked.push(...rest.slice(0, targetCount - picked.length));
   }
+  return shuffle(picked); // 順番をランダム化
+}
+
+// 全モード共通：未回答／1回のみ回答／誤答経験ありの問題を優先し、
+// ◯が3連続以上（得意）の問題は出題頻度を大きく下げる
+function buildPriorityQueue(allQ, targetCount) {
+  const h = getHistory();
+  const priority = shuffle(allQ.filter(q => needsPriority(h[qKey(q)])));
+  const normal   = shuffle(allQ.filter(q => !needsPriority(h[qKey(q)]) && !isMastered(h[qKey(q)])));
+  const mastered = shuffle(allQ.filter(q => !needsPriority(h[qKey(q)]) && isMastered(h[qKey(q)])));
+  const picked = [...priority, ...normal, ...mastered].slice(0, targetCount);
   return shuffle(picked); // 順番をランダム化
 }
 
@@ -5670,6 +5689,9 @@ function startQuiz() {
   if (quizMode === 'weighted') {
     const target = quizCount > 0 ? Math.min(quizCount, filtered.length) : filtered.length;
     shuffled = buildWeightedQueue(filtered, target);
+  } else if (quizMode === 'all') {
+    const target = quizCount > 0 ? Math.min(quizCount, filtered.length) : filtered.length;
+    shuffled = buildPriorityQueue(filtered, target);
   } else {
     shuffled = shuffle(filtered);
     if (quizCount > 0) shuffled = shuffled.slice(0, quizCount);
