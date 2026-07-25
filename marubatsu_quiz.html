@@ -202,7 +202,7 @@ header a:hover{color:#fff}
   <div class="mylist-overlay hidden" id="mylist-overlay" onclick="closeMylistOnBg(event)">
     <div class="mylist-panel" onclick="event.stopPropagation()">
       <div class="mylist-header">
-        <h2>マイリスト — 2回以上間違えた問題</h2>
+        <h2>マイリスト — 2回以上間違えた問題（正答5回以下）</h2>
         <button class="btn btn-ghost" style="padding:5px 14px;font-size:12px" onclick="closeMylist()">✕ 閉じる</button>
       </div>
       <div class="mylist-tabs" id="mylist-tabs"></div>
@@ -7145,7 +7145,7 @@ function deselectAllTopics() {
   updateCount();
 }
 
-// 苦手＝誤答数が正答数を上回っている問題（苦手優先・苦手のみモードで使用。マイリストは別基準＝誤答2回以上）
+// 苦手＝誤答数が正答数を上回っている問題（苦手優先・苦手のみモードで使用。マイリストは別基準＝誤答2回以上かつ正答5回以下）
 function isWeak(s) { return !!s && s.x > 0 && s.x >= s.o; }
 // クリア＝正答3回以上、かつ正答数が誤答数を上回っている
 function isCleared(s) { return !!s && s.o >= 3 && s.o > s.x; }
@@ -7398,10 +7398,10 @@ let mylistActiveSubject = null;
 
 function showMylist() {
   const h = getHistory();
-  // 2回以上間違えた問題を抽出（base question を使用）
+  // 2回以上間違えていて、かつ正答数が5回以下の問題を抽出（base question を使用）
   const weak2 = ALL_Q.filter(q => {
     const s = h[qKey(q)];
-    return s && s.x >= 2;
+    return s && s.x >= 2 && s.o <= 5;
   });
 
   const overlay = document.getElementById('mylist-overlay');
@@ -7427,7 +7427,7 @@ function showMylist() {
 
   function renderBody() {
     if (weak2.length === 0) {
-      bodyEl.innerHTML = `<div class="mylist-empty">まだ2回以上間違えた問題はありません。<br>問題を解いていくとここに追加されます。</div>`;
+      bodyEl.innerHTML = `<div class="mylist-empty">まだ2回以上間違えた問題（正答5回以下）はありません。<br>問題を解いていくとここに追加されます。</div>`;
       return;
     }
     const target = mylistActiveSubject
