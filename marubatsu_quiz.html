@@ -157,6 +157,7 @@ header a:hover{color:#fff}
       <button class="seg-btn warn" id="mode-weighted" onclick="setMode('weighted',this)">苦手優先 ⚡</button>
       <button class="seg-btn warn" id="mode-wrong" onclick="setMode('wrong',this)">苦手のみ ✗</button>
       <button class="seg-btn" id="mode-new" onclick="setMode('new',this)">未回答のみ ★</button>
+      <button class="seg-btn" id="mode-middle" onclick="setMode('middle',this)">中間のみ △</button>
     </div>
     <!-- 問題数選択 -->
     <div class="mode-row">
@@ -6902,6 +6903,8 @@ function isWeak(s) { return !!s && s.x > 0 && s.x >= s.o; }
 function isCleared(s) { return !!s && s.o >= 3 && s.o > s.x; }
 // 得意＝直近◯が3回以上連続（出題頻度を大きく下げる対象）
 function isMastered(s) { return !!s && (s.streak||0) >= 3; }
+// 中間＝一度は解いたことがあるが、苦手でも得意でもなく、かつ未クリアの問題（中間のみモードで使用）
+function isMiddle(s) { return !!s && (s.o + s.x) > 0 && !isWeak(s) && !isMastered(s) && !isCleared(s); }
 // 優先＝未回答／解いたのが1回のみ／一度でも誤答したことがある問題（全モード共通で優先出題）
 function needsPriority(s) { return !s || (s.o + s.x <= 1) || s.x > 0; }
 
@@ -6920,6 +6923,9 @@ function getFilteredQ() {
   } else if (quizMode === 'new') {
     const h = getHistory();
     qs = qs.filter(q => { const s = h[qKey(q)]; return !s || (s.o === 0 && s.x === 0); });
+  } else if (quizMode === 'middle') {
+    const h = getHistory();
+    qs = qs.filter(q => isMiddle(h[qKey(q)]));
   }
   // 'weighted' は全問対象（startQuiz 内で比率調整）
   return qs;
@@ -6934,7 +6940,7 @@ function updateCount() {
     document.getElementById('count-badge').textContent = `${n}問（苦手優先 / 苦手${weak}問）`;
   } else {
     const n = quizCount > 0 ? Math.min(quizCount, qs.length) : qs.length;
-    const modeNote = quizMode === 'wrong' ? '（苦手）' : quizMode === 'new' ? '（未回答）' : '';
+    const modeNote = quizMode === 'wrong' ? '（苦手）' : quizMode === 'new' ? '（未回答）' : quizMode === 'middle' ? '（中間）' : '';
     document.getElementById('count-badge').textContent = n + '問' + modeNote;
   }
 }
@@ -6990,6 +6996,7 @@ function startQuiz() {
   if (!filtered.length) {
     if (quizMode === 'wrong') alert('苦手問題がありません。まず通常モードで問題を解いてください。');
     else if (quizMode === 'new') alert('未回答の問題がありません。すべての問題を解き終えています。');
+    else if (quizMode === 'middle') alert('中間の問題がありません。（一度は解いたことがあり、苦手でも得意でもなく、まだクリアしていない問題が対象です）');
     else alert('問題がありません。分野を選択してください。');
     return;
   }
