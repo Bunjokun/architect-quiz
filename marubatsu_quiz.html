@@ -59,6 +59,7 @@ header a:hover{color:#fff}
 .q-card{background:#fff;border-radius:12px;padding:22px;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,0,.1)}
 .q-meta{font-size:11px;color:#999;margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap}
 .q-meta span{background:#f0f2f7;padding:2px 8px;border-radius:10px}
+.q-meta span.cleared-badge{background:#27ae60;color:#fff;font-weight:700}
 .q-text{font-size:15px;line-height:1.8;margin-bottom:18px}
 
 /* ○× ボタン */
@@ -7031,7 +7032,7 @@ function renderQuestion() {
   const q = queue[current];
   const st = getQStats(q);
   const hasHistory = st.o + st.x > 0;
-  const clearedBadge = isCleared(st) ? `<span class="daily-badge">✓ クリア済み</span>` : '';
+  const clearedBadge = isCleared(st) ? `<span class="cleared-badge">✓ クリア済み</span>` : '';
   const histHtml = hasHistory
     ? `<span class="hist-stat"><span class="hist-o">○${st.o}</span> <span class="hist-x">×${st.x}</span></span>${clearedBadge}`
     : `<span class="hist-stat" style="color:#ccc">初回</span>`;
