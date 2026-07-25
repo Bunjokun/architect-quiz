@@ -28,6 +28,19 @@
     padding:11px 14px;border:1px solid var(--line);border-radius:5px;background:#fafcff;font-size:12.5px;color:var(--sub)}
   .legend .li{display:flex;align-items:center;gap:7px}
 
+  /* 検索バー */
+  .searchbar{display:flex;align-items:center;gap:10px;margin:10px 0 4px;flex-wrap:wrap}
+  .search-wrap{position:relative;flex:1;min-width:200px;max-width:420px}
+  #searchBox{width:100%;font-size:14px;padding:9px 34px 9px 12px;border:1.5px solid var(--line-hd);
+    border-radius:5px;color:var(--ink);background:#fff;font-family:var(--sans)}
+  #searchBox:focus{outline:2px solid var(--blue);outline-offset:1px}
+  #searchBox::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+  .btn-clear{position:absolute;top:50%;right:6px;transform:translateY(-50%);
+    background:none;border:none;color:var(--sub);font-size:13px;cursor:pointer;padding:4px 6px;line-height:1}
+  .btn-clear:hover{color:var(--red)}
+  .search-count{font-size:12.5px;color:var(--sub);font-variant-numeric:tabular-nums}
+  .sec.no-match,h3.grp.no-match,.tw.no-match,tr.no-match,nav.jump a.no-match{display:none!important}
+
   /* ナビ */
   nav.jump{position:sticky;top:0;z-index:9;background:rgba(255,255,255,.92);
     backdrop-filter:blur(6px);border-bottom:1px solid var(--line);margin-top:16px}
@@ -98,6 +111,13 @@
     <span class="li"><span class="kwrest">通常表記</span>＝付随キーワード</span>
     <span class="li"><span style="color:var(--red);font-weight:700">⚠ ひっかけ</span>＝入れ替え・混同注意</span>
   </div>
+  <div class="searchbar">
+    <div class="search-wrap">
+      <input type="search" id="searchBox" placeholder="実例名・設計者・キーワードで検索…" autocomplete="off">
+      <button type="button" id="searchClear" class="btn-clear" hidden>✕</button>
+    </div>
+    <span id="searchCount" class="search-count"></span>
+  </div>
 </div>
 
 <nav class="jump"><div class="inner" id="nav"></div></nav>
@@ -110,6 +130,12 @@
 
 <script>
 const K = (t)=>[t,1]; // 第一キーワード
+function normSearch(s){
+  return s.replace(/[Ａ-Ｚａ-ｚ０-９]/g, c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)).toLowerCase();
+}
+function esc(s){
+  return s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
 const DATA = [
 {id:"jp",title:"日本建築史",sub:"神社・寺院・城郭・書院・茶室",hue:"jp",groups:[
   {name:"神社建築 ―「造(づくり)」の識別",en:"Shrines",items:[
@@ -630,13 +656,54 @@ DATA.forEach((sec,si)=>{
       const rest=it.tags.slice(1).map(t=>Array.isArray(t)?t[0]:t).join("・");
       const kw=`<span class="kw1">${first}</span>${rest?`<span class="kwrest">${rest}</span>`:""}`;
       const note=(it.note||"").replace(/^⚠/,"");
-      html+=`<tr><td class="name">${it.n}</td><td class="meta">${it.meta}</td>
+      const allTags=it.tags.map(t=>Array.isArray(t)?t[0]:t).join(" ");
+      const searchText=esc(normSearch([it.n,it.meta,allTags,note,g.name].join(" ")));
+      html+=`<tr data-search="${searchText}"><td class="name">${it.n}</td><td class="meta">${it.meta}</td>
         <td>${kw}</td><td class="warn${note?"":" empty"}">${note}</td></tr>`;
     });
     html+=`</tbody></table></div>`;
   });
   s.innerHTML=html; root.appendChild(s);
 });
+
+// ─── 検索 ───
+const searchBox=document.getElementById("searchBox"),
+      searchClear=document.getElementById("searchClear"),
+      searchCount=document.getElementById("searchCount");
+
+function applyFilter(){
+  const raw=searchBox.value.trim();
+  searchClear.hidden=!raw;
+  if(!raw){
+    document.querySelectorAll(".no-match").forEach(el=>el.classList.remove("no-match"));
+    searchCount.textContent="";
+    return;
+  }
+  const q=normSearch(raw);
+  let total=0;
+  root.querySelectorAll(".sec").forEach(sec=>{
+    let secMatch=0;
+    sec.querySelectorAll(":scope > h3.grp").forEach(grp=>{
+      const tw=grp.nextElementSibling;
+      let grpMatch=0;
+      tw.querySelectorAll("tr[data-search]").forEach(tr=>{
+        const hit=tr.dataset.search.includes(q);
+        tr.classList.toggle("no-match",!hit);
+        if(hit) grpMatch++;
+      });
+      grp.classList.toggle("no-match",grpMatch===0);
+      tw.classList.toggle("no-match",grpMatch===0);
+      secMatch+=grpMatch;
+    });
+    sec.classList.toggle("no-match",secMatch===0);
+    total+=secMatch;
+    const navLink=nav.querySelector(`a[href="#${sec.id}"]`);
+    if(navLink) navLink.classList.toggle("no-match",secMatch===0);
+  });
+  searchCount.textContent=`${total}件ヒット`;
+}
+searchBox.addEventListener("input",applyFilter);
+searchClear.addEventListener("click",()=>{ searchBox.value=""; applyFilter(); searchBox.focus(); });
 </script>
 </body>
 </html>
