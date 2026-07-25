@@ -7195,6 +7195,7 @@ function recordAnswer(q, isCorrect) {
   if (!h[k]) h[k] = {o:0, x:0, streak:0};
   if (isCorrect) { h[k].o++; h[k].streak = (h[k].streak||0) + 1; }
   else { h[k].x++; h[k].streak = 0; }
+  h[k].lastVariant = q._variant || 'base';
   saveHistory(h);
 }
 function getQStats(q) {
@@ -7555,10 +7556,16 @@ function startQuiz() {
     if (quizCount > 0) shuffled = shuffled.slice(0, quizCount);
   }
   queue = shuffled.map(q => {
-    if (q.alt && Math.random() < 0.5) {
-      return {...q, q: q.alt.q, ans: q.alt.ans, _origQ: q.q};
+    if (!q.alt) return {...q, _origQ: q.q, _variant: 'base'};
+    const s = getQStats(q);
+    // 直前に正解している問題は、次は逆バリアントを優先的に出題する
+    const useAlt = ((s.o + s.x) > 0 && (s.streak||0) > 0)
+      ? (s.lastVariant !== 'alt')
+      : (Math.random() < 0.5);
+    if (useAlt) {
+      return {...q, q: q.alt.q, ans: q.alt.ans, _origQ: q.q, _variant: 'alt'};
     }
-    return {...q, _origQ: q.q};
+    return {...q, _origQ: q.q, _variant: 'base'};
   });
   current = 0; correct = 0; answered = 0;
   sessionLog = [];
