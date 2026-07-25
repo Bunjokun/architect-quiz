@@ -159,6 +159,7 @@ header a:hover{color:#fff}
       <button class="seg-btn warn" id="mode-wrong" onclick="setMode('wrong',this)">苦手のみ ✗</button>
       <button class="seg-btn" id="mode-new" onclick="setMode('new',this)">未回答のみ ★</button>
       <button class="seg-btn" id="mode-middle" onclick="setMode('middle',this)">中間のみ △</button>
+      <button class="seg-btn" id="mode-uncleared" onclick="setMode('uncleared',this)">未クリアのみ ◇</button>
     </div>
     <!-- 問題数選択 -->
     <div class="mode-row">
@@ -7470,6 +7471,9 @@ function getFilteredQ() {
   } else if (quizMode === 'middle') {
     const h = getHistory();
     qs = qs.filter(q => isMiddle(h[qKey(q)]));
+  } else if (quizMode === 'uncleared') {
+    const h = getHistory();
+    qs = qs.filter(q => !isCleared(h[qKey(q)]));
   }
   // 'weighted' は全問対象（startQuiz 内で比率調整）
   return qs;
@@ -7484,7 +7488,7 @@ function updateCount() {
     document.getElementById('count-badge').textContent = `${n}問（苦手優先 / 苦手${weak}問）`;
   } else {
     const n = quizCount > 0 ? Math.min(quizCount, qs.length) : qs.length;
-    const modeNote = quizMode === 'wrong' ? '（苦手）' : quizMode === 'new' ? '（未回答）' : quizMode === 'middle' ? '（中間）' : '';
+    const modeNote = quizMode === 'wrong' ? '（苦手）' : quizMode === 'new' ? '（未回答）' : quizMode === 'middle' ? '（中間）' : quizMode === 'uncleared' ? '（未クリア）' : '';
     document.getElementById('count-badge').textContent = n + '問' + modeNote;
   }
 }
@@ -7541,6 +7545,7 @@ function startQuiz() {
     if (quizMode === 'wrong') alert('苦手問題がありません。まず通常モードで問題を解いてください。');
     else if (quizMode === 'new') alert('未回答の問題がありません。すべての問題を解き終えています。');
     else if (quizMode === 'middle') alert('中間の問題がありません。（一度は解いたことがあり、苦手でも得意でもなく、まだクリアしていない問題が対象です）');
+    else if (quizMode === 'uncleared') alert('未クリアの問題がありません。すべての問題をクリアしています。');
     else alert('問題がありません。分野を選択してください。');
     return;
   }
