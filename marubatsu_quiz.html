@@ -6749,7 +6749,9 @@ function renderDailyRow() {
 }
 
 // ─── 初期化 ───
-const subjects = [...new Set(ALL_Q.map(q => q.subject))];
+const SUBJECT_ORDER = ['計画', '環境', '構造', '施工', '実例'];
+const subjects = [...new Set(ALL_Q.map(q => q.subject))]
+  .sort((a, b) => SUBJECT_ORDER.indexOf(a) - SUBJECT_ORDER.indexOf(b));
 const topics   = [...new Set(ALL_Q.map(q => q.topic))];
 
 function setMode(mode, btn) {
